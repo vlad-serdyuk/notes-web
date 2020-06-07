@@ -1,7 +1,10 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 
-export const Home = () => {
+import { NoteFeed } from '../../components/NoteFeed';
+
+const Home = () => {
+ 
   const { data, loading, error } = useQuery(GetNotesQuery);
 
   if (loading) {
@@ -12,15 +15,7 @@ export const Home = () => {
     return <p>Error!</p>;
   }
 
-  return (
-    <div>
-      {
-        data.notesFeed.notes.map(note =>(
-          <div key={note.id}>{note.author.username}</div>
-        ))
-      }
-    </div>
-  );
+  return <NoteFeed notes={data.notesFeed.notes} />;
 };
 
 const GetNotesQuery = gql`
@@ -42,3 +37,5 @@ const GetNotesQuery = gql`
     }
   }
 `;
+
+export default Home;
