@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const MyNotes = () => {
+const MyNotes = () => {
   return (
     <div>
       <h1>My notes</h1>
@@ -8,3 +8,5 @@ export const MyNotes = () => {
     </div>
   );
 };
+
+export default MyNotes;

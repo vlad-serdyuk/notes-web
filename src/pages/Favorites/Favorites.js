@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Favorites = () => {
+const Favorites = () => {
   return (
     <div>
       <h1>Favorites</h1>
@@ -8,3 +8,5 @@ export const Favorites = () => {
     </div>
   );
 };
+
+export default Favorites;
