@@ -3,7 +3,7 @@ import { useQuery, gql } from '@apollo/client';
 
 import { NoteFeed } from '../../components/NoteFeed';
 
-const Home = () => {
+const HomePage = () => {
  
   const { data, loading, error } = useQuery(GetNotesQuery);
 
@@ -38,4 +38,4 @@ const GetNotesQuery = gql`
   }
 `;
 
-export default Home;
+export default HomePage;

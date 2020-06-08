@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import { format } from 'date-fns';
 import ReactMarkdown from 'react-markdown';
 
 const Note = ({ note }) => {
@@ -9,7 +10,7 @@ const Note = ({ note }) => {
         alt={note.author.username}
       />
       {note.author.username}
-      {note.createdAt}
+      {format(note.createdAt, 'MMM do YYYY')}
       {note.favoriteCount}
       {' '}
       <ReactMarkdown source={note.content} />

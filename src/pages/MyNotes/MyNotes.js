@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MyNotes = () => {
+const MyNotesPage = () => {
   return (
     <div>
       <h1>My notes</h1>
@@ -9,4 +9,4 @@ const MyNotes = () => {
   );
 };
 
-export default MyNotes;
+export default MyNotesPage;
