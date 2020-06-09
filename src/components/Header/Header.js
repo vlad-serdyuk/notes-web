@@ -9,6 +9,9 @@ const Header = () => {
         <Link to="/"><Anchor label="Home" as="span" /></Link>
         <Link to="/my-notes"><Anchor label="My notes" as="span" /></Link>
       </Box>
+      <Box direction="row" gap="medium">
+        <Anchor label="Sign In" as="span" />
+      </Box>
     </GrommetHeader>
   );
 };

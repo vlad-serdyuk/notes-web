@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Main } from 'grommet';
 
 import { Header } from './Header';
 import { Navigation } from './Navigation';
@@ -7,10 +8,10 @@ export const Layout = ({ children }) => {
   return (
     <Fragment>
       <Header />
-      <div>
+      <Main>
         <Navigation />
         <main>{children}</main>
-      </div>
+      </Main>
     </Fragment>
   );
 };
