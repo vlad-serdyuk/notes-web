@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import { Layer, Box, Heading, TextInput, Button } from 'grommet';
+import React, { memo, useState } from 'react';
+import { Layer, Box, Heading, TextInput, MaskedInput, Button } from 'grommet';
+import { MailOption } from 'grommet-icons';
 
-export const SignIn = () => {
+import { emailMask } from '../../utils/validation';
+
+const SignInComponent = () => {
   const [value, setValue] = useState('');
   const [reveal, setReveal] = React.useState(false);
 
@@ -11,13 +14,21 @@ export const SignIn = () => {
         <Heading level={3} margin="none">
           Sign In
         </Heading>
+        <MaskedInput
+          reverse
+          icon={<MailOption />}
+          mask={emailMask}
+          value={value}
+          onChange={event => setValue(event.target.value)}
+        />
         <TextInput
-          plain
-          type="text"
+          type="password"
+          placeholder="password"
           value={value}
           onChange={event => setValue(event.target.value)}
         />
         <Button
+          disabled
           label="Sign In"
           onClick={() => setReveal(!reveal)}
         />
@@ -25,3 +36,5 @@ export const SignIn = () => {
     </Layer>
   );
 };
+
+export const SignIn = memo(SignInComponent);
