@@ -1,12 +1,21 @@
 import React, { memo, useState } from 'react';
+import { useMutation, useApolloClient, gql } from '@apollo/client';
 import { Layer, Box, Heading, TextInput, MaskedInput, Button } from 'grommet';
 import { MailOption } from 'grommet-icons';
 
 import { emailMask } from '../../utils/validation';
 
-const SignInComponent = () => {
-  const [value, setValue] = useState('');
-  const [reveal, setReveal] = React.useState(false);
+const SignInComponent = (props) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onChangeEmail = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const onChangePassword = (event) => {
+    setPassword(event.target.value);
+  };
 
   return (
     <Layer position="center">
@@ -18,14 +27,14 @@ const SignInComponent = () => {
           reverse
           icon={<MailOption />}
           mask={emailMask}
-          value={value}
-          onChange={event => setValue(event.target.value)}
+          value={email}
+          onChange={onChangeEmail}
         />
         <TextInput
           type="password"
           placeholder="password"
-          value={value}
-          onChange={event => setValue(event.target.value)}
+          value={password}
+          onChange={onChangePassword}
         />
         <Button
           disabled
@@ -36,5 +45,11 @@ const SignInComponent = () => {
     </Layer>
   );
 };
+
+const SIGNUP_USER = gql`
+  mutation signUp($email: String!, $username: String!, $password: String!) {
+    signUp(email: $email, username: $username, password: $password)
+  }
+`;
 
 export const SignIn = memo(SignInComponent);
