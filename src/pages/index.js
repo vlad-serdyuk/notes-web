@@ -5,6 +5,7 @@ import { HomePage } from './Home';
 import { MyNotesPage } from './MyNotes';
 import { FavoritesPage } from './Favorites';
 import { NotePage } from './Note';
+import { SignIn } from './SignIn';
 import { Layout } from '../components/Layout';
 
 export const Pages = () => {
@@ -14,6 +15,7 @@ export const Pages = () => {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/my-notes" component={MyNotesPage} />
         <Route exact path="/favorites" component={FavoritesPage} />
+        <Route exact path="/sign-up" component={SignIn} />
         
         <Route exact path="/note/:id" component={NotePage} />
       </Layout>

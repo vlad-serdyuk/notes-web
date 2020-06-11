@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { useMutation, useApolloClient, gql } from '@apollo/client';
 import { Layer, Box, Heading, TextInput, MaskedInput, Button } from 'grommet';
 import { MailOption } from 'grommet-icons';
@@ -7,15 +7,35 @@ import { emailMask } from '../../utils/validation';
 
 const SignInComponent = (props) => {
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [disabled, setDisabled] = useState(true);
+
+  const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
+    onCompleted: data => {
+      props.history.push('/');
+    }
+  });
 
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
   };
 
+  const onChangeUsername = (event) => {
+    setUsername(event.target.value);
+  };
+
   const onChangePassword = (event) => {
     setPassword(event.target.value);
   };
+
+  const onSubmit = () => {
+    signUp({ variables: { email, username, password } });
+  };
+
+  useEffect(() => {
+    setDisabled(email.length === 0 || username.length === 0 || password.length === 0);
+  }, [setDisabled, email, username, password]);
 
   return (
     <Layer position="center">
@@ -31,15 +51,21 @@ const SignInComponent = (props) => {
           onChange={onChangeEmail}
         />
         <TextInput
+          type="text"
+          placeholder="username"
+          value={username}
+          onChange={onChangeUsername}
+        />
+        <TextInput
           type="password"
           placeholder="password"
           value={password}
           onChange={onChangePassword}
         />
         <Button
-          disabled
+          disabled={disabled}
           label="Sign In"
-          onClick={() => setReveal(!reveal)}
+          onClick={onSubmit}
         />
       </Box>
     </Layer>
@@ -52,4 +78,4 @@ const SIGNUP_USER = gql`
   }
 `;
 
-export const SignIn = memo(SignInComponent);
+export default memo(SignInComponent);

@@ -10,7 +10,7 @@ const Header = () => {
         <Link to="/my-notes"><Anchor label="My notes" as="span" /></Link>
       </Box>
       <Box direction="row" gap="medium">
-        <Anchor label="Sign In" as="span" />
+        <Link to="/sign-up"><Anchor label="Sign In" as="span" /></Link>
       </Box>
     </GrommetHeader>
   );
