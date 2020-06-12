@@ -1,7 +1,8 @@
 import React, { memo, useState, useEffect } from 'react';
-import { useMutation, useApolloClient, gql } from '@apollo/client';
+import { useMutation, gql } from '@apollo/client';
 import { Layer, Box, Heading, TextInput, MaskedInput, Button } from 'grommet';
-import { MailOption } from 'grommet-icons';
+import { MailOption, Close } from 'grommet-icons';
+import { saveToken } from '../../services/SessionService';
 
 import { emailMask } from '../../utils/validation';
 
@@ -13,6 +14,7 @@ const SignInComponent = (props) => {
 
   const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
     onCompleted: data => {
+      saveToken(data.signUp);
       props.history.push('/');
     }
   });
@@ -33,16 +35,32 @@ const SignInComponent = (props) => {
     signUp({ variables: { email, username, password } });
   };
 
+  const onClose = () => {
+    props.history.push('/');
+  }
+
   useEffect(() => {
-    setDisabled(email.length === 0 || username.length === 0 || password.length === 0);
-  }, [setDisabled, email, username, password]);
+    setDisabled(
+      email.length === 0 
+      || username.length === 0
+      || password.length === 0
+      || loading
+    );
+  }, [setDisabled, email, username, password, loading]);
 
   return (
-    <Layer position="center">
+    <Layer
+      position="center"
+      onEsc={onClose}
+      onClickOutside={onClose}
+    >
       <Box pad="medium" gap="small" width="medium">
-        <Heading level={3} margin="none">
-          Sign In
-        </Heading>
+        <Box direction="row" align="center" justify="between">
+          <Heading level={3} margin="none">
+            Sign In
+          </Heading>
+          <Button icon={<Close />} onClick={onClose} />
+        </Box>
         <MaskedInput
           reverse
           icon={<MailOption />}
