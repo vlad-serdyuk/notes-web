@@ -27,9 +27,16 @@ const authLink = setContext((_, { headers }) => ({
 const client = new ApolloClient({
   uri,
   cache,
+  resolvers: {},
   link: authLink.concat(httpLink),
   connectToDevTools: true,
 });
+
+const data = {
+  isLoggedIn: !!getToken(),
+};
+
+cache.writeData({ data });
 
 const App = () => {
   return (
