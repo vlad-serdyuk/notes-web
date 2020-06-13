@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
 import { gql, useQuery } from '@apollo/client';
-import { Link } from 'react-router-dom';
-import { Anchor, Box, Header as GrommetHeader } from 'grommet';
+import { Link, withRouter } from 'react-router-dom';
+import { Anchor, Box, Button, Header as GrommetHeader } from 'grommet';
+
+import { removeToken } from '../../services/SessionService';
 
 const IS_LOGGED_IN = gql`
   {
@@ -9,8 +11,15 @@ const IS_LOGGED_IN = gql`
   }
 `;
 
-const Header = () => {
-  const { data } = useQuery(IS_LOGGED_IN);
+const Header = (props) => {
+  const { data, client } = useQuery(IS_LOGGED_IN);
+
+  const onLogOut = () => {
+    removeToken();
+    client.resetStore();
+    client.writeData({ data: { isLoggedIn: false } });
+    props.history.push('/');
+  };
 
   return (
     <GrommetHeader background="dark-1" pad="medium">
@@ -21,7 +30,7 @@ const Header = () => {
       <Box direction="row" gap="medium">
         {
           data.isLoggedIn ? (
-            <Anchor label="Log out" as="span" />
+            <Button label="Log out" onClick={onLogOut} />
           ) : (
             <Fragment>
               <Link to="/sign-in"><Anchor label="Sign In" as="span" /></Link>
@@ -34,4 +43,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withRouter(Header);

@@ -37,6 +37,7 @@ const data = {
 };
 
 cache.writeData({ data });
+client.onResetStore(() => cache.writeData({ data }));
 
 const App = () => {
   return (
