@@ -85,9 +85,10 @@ const SignInComponent = (props) => {
         />
         <Button
           disabled={disabled}
-          label="Sign In"
+          label="Sign Up"
           onClick={onSubmit}
         />
+        {error && <p>Error signing in</p>}
       </Box>
     </Layer>
   );

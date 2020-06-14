@@ -1,9 +1,9 @@
 import React, { memo, useState, useEffect } from 'react';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation, useApolloClient, gql } from '@apollo/client';
 import { Layer, Box, Heading, TextInput, MaskedInput, Button } from 'grommet';
 import { MailOption, Close } from 'grommet-icons';
-import { saveToken } from '../../services/SessionService';
 
+import { saveToken } from '../../services/SessionService';
 import { emailMask } from '../../utils/validation';
 
 const SignInComponent = (props) => {
@@ -11,9 +11,12 @@ const SignInComponent = (props) => {
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
 
-  const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
+  const client = useApolloClient();
+
+  const [signIn, { loading, error }] = useMutation(SIGNIN_USER, {
     onCompleted: data => {
-      saveToken(data.signUp);
+      saveToken(data.signIn);
+      client.writeData({ data: { isLoggedIn: true } });
       props.history.push('/');
     }
   });
@@ -27,7 +30,7 @@ const SignInComponent = (props) => {
   };
 
   const onSubmit = () => {
-    signUp({ variables: { email, password } });
+    signIn({ variables: { email, password } });
   };
 
   const onClose = () => {
@@ -73,14 +76,15 @@ const SignInComponent = (props) => {
           label="Sign In"
           onClick={onSubmit}
         />
+        {error && <p>Error signing in</p>}
       </Box>
     </Layer>
   );
 };
 
-const SIGNUP_USER = gql`
-  mutation signUp($email: String!, $password: String!) {
-    signUp(email: $email, password: $password)
+const SIGNIN_USER = gql`
+  mutation signIn($email: String!, $password: String!) {
+    signIn(email: $email, password: $password)
   }
 `;
 

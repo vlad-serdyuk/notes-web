@@ -1,18 +1,12 @@
 import React, { Fragment } from 'react';
-import { gql, useQuery } from '@apollo/client';
 import { Link, withRouter } from 'react-router-dom';
 import { Anchor, Box, Button, Header as GrommetHeader } from 'grommet';
 
+import { useIsLoggedInQuery } from '../../common/queries/auth';
 import { removeToken } from '../../services/SessionService';
 
-const IS_LOGGED_IN = gql`
-  {
-    isLoggedIn @client
-  }
-`;
-
 const Header = (props) => {
-  const { data, client } = useQuery(IS_LOGGED_IN);
+  const { data, client } = useIsLoggedInQuery();
 
   const onLogOut = () => {
     removeToken();
