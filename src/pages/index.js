@@ -8,14 +8,15 @@ import { NotePage } from './Note';
 import { SignUp } from './SignUp';
 import { SignIn } from './SignIn';
 import { Layout } from '../components/Layout';
+import { PrivateRoute } from '../common/components/PrivateRoute';
 
 export const Pages = () => {
   return (
     <Router>
       <Layout>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/my-notes" component={MyNotesPage} />
-        <Route exact path="/favorites" component={FavoritesPage} />
+        <PrivateRoute exact path="/my-notes" component={MyNotesPage} />
+        <PrivateRoute exact path="/favorites" component={FavoritesPage} />
         <Route exact path="/sign-in" component={SignIn} />
         <Route exact path="/sign-up" component={SignUp} />
         

@@ -20,6 +20,7 @@ const Header = (props) => {
       <Box direction="row" gap="medium">
         <Link to="/"><Anchor label="Home" as="span" /></Link>
         <Link to="/my-notes"><Anchor label="My notes" as="span" /></Link>
+        <Link to="/favorites"><Anchor label="Favorites" as="span" /></Link>
       </Box>
       <Box direction="row" gap="medium">
         {
