@@ -4,9 +4,10 @@ import { Anchor, Box, Button, Header as GrommetHeader } from 'grommet';
 
 import { useIsLoggedInQuery } from '../../common/queries/auth';
 import { removeToken } from '../../services/SessionService';
+import { AnchorLink, LinkWrapper } from './Header.styled';
 
 const Header = (props) => {
-  const { data, client } = useIsLoggedInQuery();
+  const { data: { isLoggedIn }, client } = useIsLoggedInQuery();
 
   const onLogOut = () => {
     removeToken();
@@ -18,13 +19,19 @@ const Header = (props) => {
   return (
     <GrommetHeader background="dark-1" pad="medium">
       <Box direction="row" gap="medium">
-        <Link to="/"><Anchor label="Home" as="span" /></Link>
-        <Link to="/my-notes"><Anchor label="My notes" as="span" /></Link>
-        <Link to="/favorites"><Anchor label="Favorites" as="span" /></Link>
+        <LinkWrapper>
+          <Link to="/"><AnchorLink label="Home" /></Link>
+        </LinkWrapper>
+        <LinkWrapper>
+          <Link to="/my-notes"><AnchorLink label="My notes" /></Link>
+        </LinkWrapper>
+        <LinkWrapper>
+          <Link to="/favorites"><AnchorLink label="Favorites" /></Link>
+        </LinkWrapper>
       </Box>
       <Box direction="row" gap="medium">
         {
-          data.isLoggedIn ? (
+          isLoggedIn ? (
             <Button label="Log out" onClick={onLogOut} />
           ) : (
             <Fragment>
