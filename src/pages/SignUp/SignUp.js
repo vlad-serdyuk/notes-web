@@ -84,6 +84,7 @@ const SignInComponent = (props) => {
           onChange={onChangePassword}
         />
         <Button
+          primary
           disabled={disabled}
           label="Sign Up"
           onClick={onSubmit}
