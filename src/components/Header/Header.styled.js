@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { Anchor, Box } from 'grommet';
+import { Anchor, Box, Header } from 'grommet';
+
+export const StyledHeader = styled(Header)`
+  height: 52px;
+  padding: 0 16px;
+`;
 
 export const AnchorLink = styled(Anchor)`
   text-decoration: none;

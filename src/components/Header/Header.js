@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { Anchor, Box, Button, Header as GrommetHeader } from 'grommet';
+import { Anchor, Box } from 'grommet';
 
 import { useIsLoggedInQuery } from '../../common/queries/auth';
 import { removeToken } from '../../services/SessionService';
-import { AnchorLink, LinkWrapper } from './Header.styled';
+import { AvatarDropButton } from './components/AvatarDropDown';
+import { StyledHeader, AnchorLink, LinkWrapper } from './Header.styled';
 
 const Header = (props) => {
   const { data: { isLoggedIn }, client } = useIsLoggedInQuery();
@@ -17,7 +18,7 @@ const Header = (props) => {
   };
 
   return (
-    <GrommetHeader background="dark-1" pad="medium">
+    <StyledHeader background="dark-1">
       <Box direction="row" gap="medium">
         <LinkWrapper>
           <Link to="/"><AnchorLink label="Home" /></Link>
@@ -32,16 +33,15 @@ const Header = (props) => {
       <Box direction="row" gap="medium">
         {
           isLoggedIn ? (
-            <Button label="Log out" onClick={onLogOut} />
+            <AvatarDropButton onLogOut={onLogOut} />
           ) : (
             <Fragment>
-              <Link to="/sign-in"><Anchor label="Sign In" as="span" /></Link>
-              <Link to="/sign-up"><Anchor label="Sign Up" as="span" /></Link>
+              <Link to="/sign-in"><Anchor label="Log In" as="span" /></Link>
             </Fragment>
           )
         }
       </Box>
-    </GrommetHeader>
+    </StyledHeader>
   );
 };
 

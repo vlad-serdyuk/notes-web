@@ -1,6 +1,7 @@
 import React, { memo, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useMutation, useApolloClient, gql } from '@apollo/client';
-import { Layer, Box, Heading, TextInput, MaskedInput, Button } from 'grommet';
+import { Anchor, Layer, Box, Heading, TextInput, Text, MaskedInput, Button } from 'grommet';
 import { MailOption, Close } from 'grommet-icons';
 
 import { saveToken } from '../../services/SessionService';
@@ -72,11 +73,18 @@ const SignInComponent = (props) => {
           onChange={onChangePassword}
         />
         <Button
+          primary
           disabled={disabled}
           label="Sign In"
           onClick={onSubmit}
         />
-        {error && <p>Error signing in</p>}
+        <Box align="center">
+          <Text>
+            Don't have an account?{' '}
+            <Link to="/sign-up"><Anchor label="Sign Up" as="span" /></Link>
+          </Text>
+          {error && <p>Error signing in</p>}
+        </Box>
       </Box>
     </Layer>
   );
