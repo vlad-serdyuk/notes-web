@@ -7,7 +7,6 @@ import {
   InMemoryCache,
   createHttpLink,
 } from '@apollo/client'; 
-import { setContext } from 'apollo-link-context';
 
 import { Pages } from './pages';
 import GlobalStyles from './styled/globalStyles';
@@ -15,25 +14,18 @@ import { getToken } from './services/SessionService';
 
 const uri = process.env.API_URI;
 const cache = new InMemoryCache();
-const httpLink = createHttpLink({ uri });
-
-const authLink = setContext((_, { headers }) => ({
-  headers: {
-    ...headers,
-    authorization: getToken() || '',
-  }
-}));
+const httpLink = createHttpLink({ uri, credentials: 'include' });
 
 const client = new ApolloClient({
   uri,
   cache,
   resolvers: {},
-  link: authLink.concat(httpLink),
+  link: httpLink,
   connectToDevTools: true,
 });
 
 const data = {
-  isLoggedIn: !!getToken(),
+  isLoggedIn: false,
 };
 
 cache.writeData({ data });
