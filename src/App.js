@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Grommet } from 'grommet';
-import { 
+import {
+  gql,
   ApolloClient,
   ApolloProvider,
   InMemoryCache,
@@ -10,7 +11,6 @@ import {
 
 import { Pages } from './pages';
 import GlobalStyles from './styled/globalStyles';
-import { getToken } from './services/SessionService';
 
 const uri = process.env.API_URI;
 const cache = new InMemoryCache();
@@ -27,6 +27,21 @@ const client = new ApolloClient({
 const data = {
   isLoggedIn: false,
 };
+
+const GetMeQuery = gql`
+  query Me {
+    me {
+      id
+      email
+    }
+  }
+`;
+
+client.query({ query: GetMeQuery }).then(({ data: userData }) => { 
+  if (userData.me) {
+    cache.writeData({ data: { isLoggedIn: true } });
+  }
+});
 
 cache.writeData({ data });
 client.onResetStore(() => cache.writeData({ data }));
