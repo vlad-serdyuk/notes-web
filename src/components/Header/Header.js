@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { gql } from '@apollo/client'; 
 import { Anchor, Box } from 'grommet';
 
 import { useIsLoggedInQuery } from '../../common/queries/auth';
-import { removeToken } from '../../services/SessionService';
 import { AvatarDropButton } from './components/AvatarDropDown';
 import { StyledHeader, AnchorLink, LinkWrapper } from './Header.styled';
 
@@ -11,10 +11,11 @@ const Header = (props) => {
   const { data: { isLoggedIn }, client } = useIsLoggedInQuery();
 
   const onLogOut = () => {
-    removeToken();
-    client.resetStore();
-    client.writeData({ data: { isLoggedIn: false } });
-    props.history.push('/');
+    client.query({ query: LogOutQuery }).then(() => {
+      client.resetStore();
+      client.writeData({ data: { isLoggedIn: false } });
+      props.history.push('/');
+    });
   };
 
   return (
@@ -44,5 +45,11 @@ const Header = (props) => {
     </StyledHeader>
   );
 };
+
+const LogOutQuery = gql`
+  query SignOut {
+    signOut 
+  }
+`;
 
 export default withRouter(Header);
