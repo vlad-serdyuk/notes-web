@@ -1,12 +1,14 @@
 import styled from 'styled-components';
-import { Anchor, Box, Header } from 'grommet';
+import { Link } from 'react-router-dom';
+import { Box, Header } from 'grommet';
 
 export const StyledHeader = styled(Header)`
   height: 52px;
   padding: 0 16px;
 `;
 
-export const AnchorLink = styled(Anchor)`
+export const LinkText = styled(Link)`
+  color: #6FFFB0;
   text-decoration: none;
   font-weight: 500;
 

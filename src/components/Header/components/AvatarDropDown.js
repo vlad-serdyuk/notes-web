@@ -2,7 +2,7 @@ import React from 'react';
 import { Anchor, Avatar, Box, Button, DropButton, Text } from 'grommet';
 
 const renderItems = (onLogOut) => (
-  <Box>
+  <Box width="80px" background="dark-2" align="center">
     <Button onClick={onLogOut}>Log out</Button>
   </Box>
 );

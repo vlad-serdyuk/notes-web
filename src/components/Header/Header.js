@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { gql } from '@apollo/client'; 
-import { Anchor, Box } from 'grommet';
+import { Box } from 'grommet';
 
 import { useIsLoggedInQuery } from '../../common/queries/auth';
 import { AvatarDropButton } from './components/AvatarDropDown';
-import { StyledHeader, AnchorLink, LinkWrapper } from './Header.styled';
+import { StyledHeader, LinkText, LinkWrapper } from './Header.styled';
 
 const Header = (props) => {
   const { data: { isLoggedIn }, client } = useIsLoggedInQuery();
@@ -22,13 +22,13 @@ const Header = (props) => {
     <StyledHeader background="dark-1">
       <Box direction="row" gap="medium">
         <LinkWrapper>
-          <Link to="/"><AnchorLink label="Home" /></Link>
+          <LinkText to="/">Home</LinkText>
         </LinkWrapper>
         <LinkWrapper>
-          <Link to="/my-notes"><AnchorLink label="My notes" /></Link>
+          <LinkText to="/my-notes">My notes</LinkText>
         </LinkWrapper>
         <LinkWrapper>
-          <Link to="/favorites"><AnchorLink label="Favorites" /></Link>
+          <LinkText to="/favorites">Favorites</LinkText>
         </LinkWrapper>
       </Box>
       <Box direction="row" gap="medium">
@@ -37,7 +37,7 @@ const Header = (props) => {
             <AvatarDropButton onLogOut={onLogOut} />
           ) : (
             <Fragment>
-              <Link to="/sign-in"><Anchor label="Log In" as="span" /></Link>
+              <LinkText to="/sign-in">Log In</LinkText>
             </Fragment>
           )
         }
