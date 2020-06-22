@@ -16,6 +16,8 @@ const CreateNotePage = ({ history }) => {
 
   return (
     <Fragment>
+      {loading && <p>loading...</p>}
+      {error && <p>Error during saving the note</p>}
       <NoteForm submitNote={onCreateNote} />
     </Fragment>
   );
