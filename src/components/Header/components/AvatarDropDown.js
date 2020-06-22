@@ -1,5 +1,5 @@
 import React from 'react';
-import { Anchor, Avatar, Box, Button, DropButton, Text } from 'grommet';
+import { Avatar, Box, Button, DropButton } from 'grommet';
 
 const renderItems = (onLogOut) => (
   <Box width="80px" background="dark-2" align="center">

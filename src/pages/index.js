@@ -7,6 +7,7 @@ import { FavoritesPage } from './Favorites';
 import { NotePage } from './Note';
 import { SignUp } from './SignUp';
 import { SignIn } from './SignIn';
+import { CreateNotePage } from './CreateNote';
 import { Layout } from '../components/Layout';
 import { PrivateRoute } from '../common/components/PrivateRoute';
 
@@ -17,6 +18,7 @@ export const Pages = () => {
         <Route exact path="/" component={HomePage} />
         <PrivateRoute exact path="/my-notes" component={MyNotesPage} />
         <PrivateRoute exact path="/favorites" component={FavoritesPage} />
+        <PrivateRoute exact path="/new" component={CreateNotePage} />
         <Route exact path="/sign-in" component={SignIn} />
         <Route exact path="/sign-up" component={SignUp} />
         
