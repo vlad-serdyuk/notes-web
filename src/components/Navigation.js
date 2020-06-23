@@ -1,20 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { Nav, Text, Button } from 'grommet';
 
-export const Navigation = () => {
+const NavigationComponent = ({ history }) => {
+
+  const onCreateNoteClick = () => {
+    history.push('/new');
+  };
+
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/my-notes">My Notes</Link>
-        </li>
-        <li>
-          <Link to="/favorites">Favorites</Link>
-        </li>
-      </ul>
-    </nav>
+    <Nav width="small" pad="small">
+      <Text>Your Notes:</Text>
+      <Button
+        primary
+        label="Create Note"
+        onClick={onCreateNoteClick}
+      />
+    </Nav>
   );
 };
+
+export const Navigation = withRouter(NavigationComponent);

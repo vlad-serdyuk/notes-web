@@ -6,7 +6,7 @@ import { NoteForm } from '../../components/NoteForm/NoteForm';
 const CreateNotePage = ({ history }) => {
   const [createNote, { loading, error }] = useMutation(CREATE_NOTE, {
     onCompleted: data => {
-      history.push(`note/${data.newNote.id}`);
+      history.push(`note/${data.createNote.id}`);
     },
   });
 
