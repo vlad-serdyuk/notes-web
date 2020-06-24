@@ -1,10 +1,11 @@
 import React, { memo, useState, useEffect } from 'react';
-import { useMutation, useApolloClient, gql } from '@apollo/client';
+import { useMutation, useApolloClient } from '@apollo/client';
 import { Layer, Box, Heading, TextInput, MaskedInput, Button } from 'grommet';
 import { MailOption, Close } from 'grommet-icons';
 
 import { saveToken } from '../../services/SessionService';
 import { emailMask } from '../../utils/validation';
+import { SIGNUP_USER } from '../../gql/mutation';
 
 const SignInComponent = (props) => {
   const [email, setEmail] = useState('');
@@ -94,11 +95,5 @@ const SignInComponent = (props) => {
     </Layer>
   );
 };
-
-const SIGNUP_USER = gql`
-  mutation signUp($email: String!, $username: String!, $password: String!) {
-    signUp(email: $email, username: $username, password: $password)
-  }
-`;
 
 export default memo(SignInComponent);

@@ -1,17 +1,17 @@
 import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import { gql } from '@apollo/client'; 
 import { Box } from 'grommet';
 
 import { useIsLoggedInQuery } from '../../common/queries/auth';
 import { AvatarDropButton } from './components/AvatarDropDown';
+import { LOG_OUT } from '../../gql/query';
 import { StyledHeader, LinkText, LinkWrapper } from './Header.styled';
 
 const Header = (props) => {
   const { data: { isLoggedIn }, client } = useIsLoggedInQuery();
 
   const onLogOut = () => {
-    client.query({ query: LogOutQuery }).then(() => {
+    client.query({ query: LOG_OUT }).then(() => {
       client.resetStore();
       client.writeData({ data: { isLoggedIn: false } });
       props.history.push('/');
@@ -45,11 +45,5 @@ const Header = (props) => {
     </StyledHeader>
   );
 };
-
-const LogOutQuery = gql`
-  query SignOut {
-    signOut 
-  }
-`;
 
 export default withRouter(Header);

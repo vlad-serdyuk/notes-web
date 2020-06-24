@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Button } from 'grommet';
 
 import { NoteFeed } from '../../components/NoteFeed';
+import { GET_NOTES } from '../../gql/query';
 
 const HomePage = () => {
-  const { data, loading, error, fetchMore } = useQuery(GetNotesQuery);
+  const { data, loading, error, fetchMore } = useQuery(GET_NOTES);
 
   const onLoadMoreClick = () => {    
     fetchMore({
@@ -54,25 +55,5 @@ const HomePage = () => {
     </Fragment>
   );
 };
-
-const GetNotesQuery = gql`
-  query NoteFeed($cursor: String) {
-    notesFeed(cursor: $cursor) {
-      cursor
-      hasNextPage
-      notes {
-        id
-        createdAt
-        content
-        favoriteCount
-        author {
-          id
-          username
-          avatar
-        }
-      }
-    }
-  }
-`;
 
 export default HomePage;

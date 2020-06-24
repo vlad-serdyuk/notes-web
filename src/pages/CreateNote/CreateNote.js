@@ -1,7 +1,8 @@
 import React, { Fragment, useCallback } from 'react';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 
 import { NoteForm } from '../../components/NoteForm/NoteForm';
+import { CREATE_NOTE } from '../../gql/query';
 
 const CreateNotePage = ({ history }) => {
   const [createNote, { loading, error }] = useMutation(CREATE_NOTE, {
@@ -22,24 +23,5 @@ const CreateNotePage = ({ history }) => {
     </Fragment>
   );
 };
-
-const CREATE_NOTE = gql`
-  mutation createNote($content: String!) {
-    createNote(content: $content) {
-      id
-      content
-      createdAt
-      favoriteCount
-      favoritedBy {
-        id
-        username
-      }
-      author {
-        username
-        id
-      }
-    }
-  }
-`;
 
 export default CreateNotePage;
