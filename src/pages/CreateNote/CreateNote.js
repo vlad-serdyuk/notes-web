@@ -1,8 +1,8 @@
 import React, { Fragment, useCallback } from 'react';
 import { useMutation } from '@apollo/client';
 
-import { NoteForm } from '~/components/NoteForm/NoteForm';
-import { CREATE_NOTE, GET_NOTES } from '~/gql/query';
+import { NoteForm } from '/components/NoteForm/NoteForm';
+import { CREATE_NOTE, GET_NOTES } from '/gql/query';
 
 const CreateNotePage = ({ history }) => {
   const [createNote, { loading, error }] = useMutation(CREATE_NOTE, {

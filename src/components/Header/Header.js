@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Box } from 'grommet';
 
-import { useIsLoggedInQuery } from '~/common/queries/auth';
+import { useIsLoggedInQuery } from '/common/queries/auth';
+import { LOG_OUT } from '/gql/query';
 import { AvatarDropButton } from './components/AvatarDropDown';
-import { LOG_OUT } from '~/gql/query';
 import { StyledHeader, LinkText, LinkWrapper } from './Header.styled';
 
 const Header = (props) => {

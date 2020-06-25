@@ -3,9 +3,8 @@ import { useMutation, useApolloClient } from '@apollo/client';
 import { Layer, Box, Heading, TextInput, MaskedInput, Button } from 'grommet';
 import { MailOption, Close } from 'grommet-icons';
 
-import { saveToken } from '~/services/SessionService';
-import { emailMask } from '~/utils/validation';
-import { SIGNUP_USER } from '~/gql/mutation';
+import { emailMask } from '/utils/validation';
+import { SIGNUP_USER } from '/gql/mutation';
 
 const SignInComponent = (props) => {
   const [email, setEmail] = useState('');
@@ -17,7 +16,6 @@ const SignInComponent = (props) => {
 
   const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
     onCompleted: data => {
-      saveToken(data.signUp);
       client.writeData({ data: { isLoggedIn: true } });
       props.history.push('/');
     }
