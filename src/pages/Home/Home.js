@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import { useQuery } from '@apollo/client';
 import { Button } from 'grommet';
 
-import { NoteFeed } from '../../components/NoteFeed';
-import { GET_NOTES } from '../../gql/query';
+import { NoteFeed } from '~/components/NoteFeed';
+import { GET_NOTES } from '~/gql/query';
 
 const HomePage = () => {
   const { data, loading, error, fetchMore } = useQuery(GET_NOTES);

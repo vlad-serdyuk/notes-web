@@ -4,9 +4,9 @@ import { useMutation, useApolloClient } from '@apollo/client';
 import { Anchor, Layer, Box, Heading, TextInput, Text, MaskedInput, Button } from 'grommet';
 import { MailOption, Close } from 'grommet-icons';
 
-import { saveToken } from '../../services/SessionService';
-import { emailMask } from '../../utils/validation';
-import { SIGNIN_USER } from '../../gql/mutation';
+import { saveToken } from '~/services/SessionService';
+import { emailMask } from '~/utils/validation';
+import { SIGNIN_USER } from '~/gql/mutation';
 
 const SignInComponent = (props) => {
   const [email, setEmail] = useState('');
