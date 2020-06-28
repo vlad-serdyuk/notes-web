@@ -6,6 +6,16 @@ export const IS_LOGGED_IN = gql`
   }
 `;
 
+export const GET_ME = gql`
+  query Me {
+    me {
+      id
+      email
+      username
+    }
+  }
+`
+
 export const CREATE_NOTE = gql`
   mutation createNote($content: String!) {
     createNote(content: $content) {
@@ -71,6 +81,20 @@ export const GET_MY_NOTES = gql`
         id
         username
         avatar
+      }
+    }
+  }
+`;
+
+export const GET_USER_FAVORITES = gql`
+  query UserFavorites($username: String!) {
+    user(username: $username) {
+      id
+      username
+      email
+      favorites {
+        id
+        content
       }
     }
   }

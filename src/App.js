@@ -10,6 +10,7 @@ import {
 } from '@apollo/client'; 
 
 import { Pages } from './pages';
+import { GET_ME } from '/gql/query';
 import GlobalStyles from './styled/globalStyles';
 
 const uri = process.env.API_URI;
@@ -28,16 +29,7 @@ const data = {
   isLoggedIn: false,
 };
 
-const GetMeQuery = gql`
-  query Me {
-    me {
-      id
-      email
-    }
-  }
-`;
-
-client.query({ query: GetMeQuery }).then(({ data: userData }) => { 
+client.query({ query: GET_ME }).then(({ data: userData }) => { 
   if (userData.me) {
     cache.writeData({ data: { isLoggedIn: true } });
   }
