@@ -18,7 +18,11 @@ const FavoritesPage = () => {
   return (
     <div>
       <h1>Favorites</h1>
-      <NoteFeed notes={data.user.favorites} />
+      {
+        data.user.favorites.length
+        ? <NoteFeed notes={data.user.favorites} />
+        : <p>No notes yet</p>
+      }
     </div>
   );
 };

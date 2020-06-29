@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { NoteForm } from '/components/NoteForm/NoteForm';
 import { CREATE_NOTE, GET_NOTES, GET_MY_NOTES } from '/gql/query';
 
-const CreateNotePage = ({ history }) => {
+const EditNotePage = ({ history }) => {
   const [createNote, { loading, error }] = useMutation(CREATE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }, { query: GET_MY_NOTES }],
     onCompleted: data => {
@@ -25,4 +25,4 @@ const CreateNotePage = ({ history }) => {
   );
 };
 
-export default CreateNotePage;
+export default EditNotePage;
