@@ -7,14 +7,14 @@ const renderItems = (onLogOut) => (
   </Box>
 );
 
-export const AvatarDropButton = ({ onLogOut }) => (
+export const AvatarDropButton = ({ name, onLogOut }) => (
   <DropButton
     alignSelf="center"
     dropContent={renderItems(onLogOut)}
     dropProps={{ align: { top: "bottom" } }}
   >
     <Box height="32px" width="32px" align="center">
-      <Avatar background="brand">V</Avatar>
+      <Avatar background="brand">{name}</Avatar>
     </Box>
   </DropButton>
 );

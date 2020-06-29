@@ -1,14 +1,16 @@
-import React, { Fragment } from 'react';
+import React, { useMemo } from 'react';
+import { useQuery } from '@apollo/client';
 import { withRouter } from 'react-router-dom';
 import { Box } from 'grommet';
 
 import { useIsLoggedInQuery } from '/common/queries/auth';
-import { LOG_OUT } from '/gql/query';
+import { GET_ME, LOG_OUT } from '/gql/query';
 import { AvatarDropButton } from './components/AvatarDropDown';
 import { StyledHeader, LinkText, LinkWrapper } from './Header.styled';
 
 const Header = (props) => {
   const { data: { isLoggedIn }, client } = useIsLoggedInQuery();
+  const { data: meData } = useQuery(GET_ME);
 
   const onLogOut = () => {
     client.query({ query: LOG_OUT }).then(() => {
@@ -17,6 +19,14 @@ const Header = (props) => {
       props.history.push('/');
     });
   };
+
+  const name = useMemo(() => {
+    if (meData) {
+      return meData.me.username.charAt(0).toUpperCase();
+    }
+    
+    return '';
+  }, [meData]);
 
   return (
     <StyledHeader background="dark-1">
@@ -34,11 +44,9 @@ const Header = (props) => {
       <Box direction="row" gap="medium">
         {
           isLoggedIn ? (
-            <AvatarDropButton onLogOut={onLogOut} />
+            <AvatarDropButton onLogOut={onLogOut} name={name} />
           ) : (
-            <Fragment>
-              <LinkText to="/sign-in">Log In</LinkText>
-            </Fragment>
+            <LinkText to="/sign-in">Log In</LinkText>
           )
         }
       </Box>
