@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Avatar, Box, Button, DropButton } from 'grommet';
 
 const renderItems = (onLogOut) => (
@@ -7,7 +7,7 @@ const renderItems = (onLogOut) => (
   </Box>
 );
 
-export const AvatarDropButton = ({ name, onLogOut }) => (
+const AvatarDropButtonComponent = ({ name, onLogOut }) => (
   <DropButton
     alignSelf="center"
     dropContent={renderItems(onLogOut)}
@@ -18,3 +18,5 @@ export const AvatarDropButton = ({ name, onLogOut }) => (
     </Box>
   </DropButton>
 );
+
+export const AvatarDropButton = memo(AvatarDropButtonComponent);
