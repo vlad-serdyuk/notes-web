@@ -10,6 +10,7 @@ import {
 
 import { Pages } from './pages';
 import { GET_ME } from '/gql/query';
+import { Loader } from '/components/Loader';
 import GlobalStyles from './styled/globalStyles';
 
 const uri = process.env.API_URI;
@@ -25,27 +26,37 @@ const client = new ApolloClient({
 });
 
 const data = {
+  loading: true,
   isLoggedIn: false,
 };
 
 client.query({ query: GET_ME }).then(({ data: userData }) => { 
   if (userData.me) {
-    cache.writeData({ data: { isLoggedIn: true } });
+    cache.writeData({ 
+      data: {
+        isLoggedIn: true,
+       },
+    });
   }
+}).finally(() => {  
+  cache.writeData({ 
+    data: {
+      ...data,
+      loading: false,
+     },
+  });
 });
 
 cache.writeData({ data });
 client.onResetStore(() => cache.writeData({ data }));
 
-const App = () => {
-  return (
-    <ApolloProvider client={client}>
-      <Grommet plain>
-        <GlobalStyles />
-        <Pages />
-      </Grommet>
-    </ApolloProvider>
-  );
-};
+const App = () => (
+  <ApolloProvider client={client}>
+    <Grommet plain>
+      <GlobalStyles />
+      <Pages />
+    </Grommet>
+  </ApolloProvider>
+);
 
 ReactDOM.render(<App />, document.getElementById('root'));
