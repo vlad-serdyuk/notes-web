@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Grommet } from 'grommet';
 import {
-  gql,
   ApolloClient,
   ApolloProvider,
   InMemoryCache,

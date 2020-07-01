@@ -1,8 +1,8 @@
 import React, { memo, useState } from 'react';
 import { Box, TextArea, Button } from 'grommet';
 
-const NoteFormComponent = ({ submitNote }) => {
-  const [note, setNote] = useState('');
+const NoteFormComponent = ({ content = '', submitNote }) => {
+  const [note, setNote] = useState(content);
 
   const onChangeNote = (event) => {
     setNote(event.target.value);
