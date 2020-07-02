@@ -6,6 +6,13 @@ export const IS_LOGGED_IN = gql`
   }
 `;
 
+export const GET_APP_METADATA = gql`
+  {
+    isLoggedIn @client
+    loading @client
+  }
+`;
+
 export const GET_ME = gql`
   query Me {
     me {

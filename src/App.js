@@ -9,8 +9,7 @@ import {
 } from '@apollo/client'; 
 
 import { Pages } from './pages';
-import { GET_ME } from '/gql/query';
-import { Loader } from '/components/Loader';
+import { GET_ME, GET_APP_METADATA } from '/gql/query';
 import GlobalStyles from './styled/globalStyles';
 
 const uri = process.env.API_URI;
@@ -38,10 +37,12 @@ client.query({ query: GET_ME }).then(({ data: userData }) => {
        },
     });
   }
-}).finally(() => {  
+}).finally(() => {
+  const prevData = cache.readQuery({ query: GET_APP_METADATA });
+
   cache.writeData({ 
     data: {
-      ...data,
+      ...prevData,
       loading: false,
      },
   });
