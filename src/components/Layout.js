@@ -4,7 +4,7 @@ import { Main, Box } from 'grommet';
 
 import { GET_APP_METADATA } from '/gql/query';
 import { Header } from './Header';
-import { Loader } from './Loader';
+import { Skeleton } from './Skeleton';
 import { Navigation } from './Navigation';
 
 export const Layout = ({ children }) => {
@@ -18,7 +18,7 @@ export const Layout = ({ children }) => {
         <Box pad="small" width="100%">
           {
             (data.loading || loading)
-            ? <Loader />
+            ? <Skeleton />
             : children
           }
         </Box>
