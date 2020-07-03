@@ -55,7 +55,7 @@ const LoaderComponent = () => {
 
 
   return (
-    <Box align="start" pad="large">
+    <Box align="center" pad="small">
       <Stack>
         <Box>
           <Box direction="row">
@@ -71,7 +71,7 @@ const LoaderComponent = () => {
         </Box>
         <Diagram connections={connections} />
       </Stack>
-  </Box>
+    </Box>
   );
 };
 
