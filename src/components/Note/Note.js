@@ -5,12 +5,18 @@ import { Avatar, Box } from 'grommet';
 
 const NoteComponent = ({ note }) => {
   return (
-    <Box align="center" direction="row-responsive" pad="small">
+    <Box
+      align="center"
+      direction="row-responsive"
+      gap="small"
+      pad="small"
+      border
+    >
       <Avatar size="large" src={note.author.avatar} />
       <Box>
         {note.author.username}
+        {' '}
         {format(note.createdAt, 'MMM do YYYY')}
-        {note.favoriteCount}
         {' '}
         <ReactMarkdown source={note.content} />
       </Box>
