@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 
 import { NoteForm } from '/components/NoteForm/NoteForm';
@@ -17,15 +17,19 @@ const EditNotePage = ({ history, match }) => {
     createNote({ variables: { content: note } });
   }, [createNote]);
 
+  if (loading || noteLoading) {
+    return <p>loading...</p>;
+  }
+
+  if (error || noteError) {
+    return <p>Error during saving the note</p>;
+  }
+  
   return (
-    <Fragment>
-      {(loading || noteLoading) && <p>loading...</p>}
-      {(error || noteError) && <p>Error during saving the note</p>}
-      <NoteForm
-        content={noteData.note}
-        submitNote={onCreateNote}
-      />
-    </Fragment>
+    <NoteForm
+      content={noteData.note.content}
+      submitNote={onCreateNote}
+    />
   );
 };
 

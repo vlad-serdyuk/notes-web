@@ -1,9 +1,14 @@
-import React, { memo } from 'react'
-import { format } from 'date-fns';
+import React, { memo, useCallback } from 'react'
 import ReactMarkdown from 'react-markdown';
+import { withRouter } from 'react-router-dom';
+import { format } from 'date-fns';
 import { Avatar, Box } from 'grommet';
 
-const NoteComponent = ({ note }) => {
+const NoteComponent = ({ note, history }) => {
+  const onNoteClick = useCallback(() => {
+    history.push(`/edit/${note.id}`);
+  }, [note, history]);
+
   return (
     <Box
       align="center"
@@ -11,6 +16,7 @@ const NoteComponent = ({ note }) => {
       gap="small"
       pad="small"
       border
+      onClick={onNoteClick}
     >
       <Avatar size="large" src={note.author.avatar} />
       <Box>
@@ -24,4 +30,4 @@ const NoteComponent = ({ note }) => {
   );
 };
 
-export const Note = memo(NoteComponent);
+export const Note = memo(withRouter(NoteComponent));
