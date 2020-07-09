@@ -12,6 +12,25 @@ export const SIGNUP_USER = gql`
   }
 `;
 
+export const CREATE_NOTE = gql`
+  mutation createNote($content: String!) {
+    createNote(content: $content) {
+      id
+      content
+      createdAt
+      favoriteCount
+      favoritedBy {
+        id
+        username
+      }
+      author {
+        username
+        id
+      }
+    }
+  }
+`;
+
 export const UPDATE_NOTE = gql`
   mutation updateNote($id: ID!, $content: String!) {
     updateNote(id: $id, content: $content) {

@@ -28,6 +28,7 @@ const EditNotePage = ({ history, match }) => {
   
   return (
     <NoteForm
+      btnLabel="Update"
       content={noteData.note.content}
       submitNote={onUpdateNote}
     />

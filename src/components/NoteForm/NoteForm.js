@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react';
 import { Box, TextArea, Button } from 'grommet';
 
-const NoteFormComponent = ({ content = '', submitNote }) => {
+const NoteFormComponent = ({ btnLabel = 'Create', content = '', submitNote }) => {
   const [note, setNote] = useState(content);
 
   const onChangeNote = (event) => {
@@ -19,7 +19,7 @@ const NoteFormComponent = ({ content = '', submitNote }) => {
         <Button
           primary
           disabled={!note}
-          label="Create"
+          label={btnLabel}
           onClick={onSubmit}
         />
       </Box>

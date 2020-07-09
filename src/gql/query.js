@@ -23,25 +23,6 @@ export const GET_ME = gql`
   }
 `
 
-export const CREATE_NOTE = gql`
-  mutation createNote($content: String!) {
-    createNote(content: $content) {
-      id
-      content
-      createdAt
-      favoriteCount
-      favoritedBy {
-        id
-        username
-      }
-      author {
-        username
-        id
-      }
-    }
-  }
-`;
-
 export const GET_NOTE = gql`
   query note($id: ID!) {
     note(id: $id) {
