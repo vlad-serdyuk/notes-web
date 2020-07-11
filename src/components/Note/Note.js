@@ -3,10 +3,16 @@ import ReactMarkdown from 'react-markdown';
 import { withRouter } from 'react-router-dom';
 import { format } from 'date-fns';
 import { Avatar, Box, Button } from 'grommet';
-import { Edit, Favorite } from 'grommet-icons';
+
+import { EditIcon, FavoriteIcon } from './Note.styled';
 
 const NoteComponent = ({ note, history }) => {
   const onNoteClick = useCallback(() => {
+    history.push(`/note/${note.id}`);
+  }, [note, history]);
+
+  const onNoteEditClick = useCallback((e) => {
+    e.stopPropagation();
     history.push(`/edit/${note.id}`);
   }, [note, history]);
 
@@ -27,8 +33,8 @@ const NoteComponent = ({ note, history }) => {
         {' '}
         <ReactMarkdown source={note.content} />
         <Box direction="row-responsive" gap="medium">
-          <Button plain icon={<Favorite />} onClick={onNoteClick} />
-          <Button plain icon={<Edit />} onClick={onNoteClick} />
+          <Button plain icon={<FavoriteIcon />} onClick={onNoteEditClick} />
+          <Button plain icon={<EditIcon />} onClick={onNoteEditClick} />
         </Box>
       </Box>
     </Box>
