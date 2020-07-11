@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { format } from 'date-fns';
 import { Avatar, Box } from 'grommet';
 
-import { ButtonContainer, IconButton, EditIcon, FavoriteIcon, DeleteIcon } from './Note.styled';
+import * as Styled from './Note.styled';
 
 const NoteComponent = ({ note, history }) => {
   const onNoteClick = useCallback(() => {
@@ -17,14 +17,7 @@ const NoteComponent = ({ note, history }) => {
   }, [note, history]);
 
   return (
-    <Box
-      align="center"
-      direction="row-responsive"
-      gap="small"
-      pad="small"
-      border
-      onClick={onNoteClick}
-    >
+    <Styled.NoteContainer onClick={onNoteClick}>
       <Avatar size="large" src={note.author.avatar} />
       <Box>
         {note.author.username}
@@ -32,13 +25,13 @@ const NoteComponent = ({ note, history }) => {
         {format(note.createdAt, 'MMM do YYYY')}
         {' '}
         <ReactMarkdown source={note.content} />
-        <ButtonContainer direction="row-responsive" gap="large">
-          <IconButton plain icon={<FavoriteIcon />} onClick={onNoteEditClick} />
-          <IconButton plain icon={<EditIcon />} onClick={onNoteEditClick} />
-          <IconButton plain icon={<DeleteIcon />} onClick={onNoteEditClick} />
-        </ButtonContainer>
+        <Styled.ButtonContainer direction="row-responsive" gap="large">
+          <Styled.IconButton plain icon={<Styled.FavoriteIcon />} onClick={onNoteEditClick} />
+          <Styled.IconButton plain icon={<Styled.EditIcon />} onClick={onNoteEditClick} />
+          <Styled.IconButton plain icon={<Styled.DeleteIcon />} onClick={onNoteEditClick} />
+        </Styled.ButtonContainer>
       </Box>
-    </Box>
+    </Styled.NoteContainer>
   );
 };
 

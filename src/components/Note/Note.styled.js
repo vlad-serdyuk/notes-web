@@ -1,10 +1,26 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { rgba } from 'polished';
 import { Button, Box } from 'grommet';
 import { Edit, Favorite, Trash } from 'grommet-icons';
 
+export const NoteContainer = styled(Box).attrs({
+  align: 'center',
+  direction: 'row-responsive',
+  gap: 'small',
+  pad: 'small',
+  align: 'start',
+  border: true,
+})`
+  border-top: none;
+
+  &:first-of-type {
+    border-top: 1px solid rgba(0,0,0,0.33);
+  }
+`;
+
 export const ButtonContainer = styled(Box)`
   margin-left: -8px;
+  margin-bottom: -8px;
 `;
 
 export const IconButton = styled(Button)`
@@ -24,29 +40,23 @@ export const IconButton = styled(Button)`
   }
 `;
 
-export const EditIcon = styled(Edit)`
+const iconStyles = css`
   width: 20px;
   height: 20px;
 
   path {
     stroke-width: 1.5;
   }
+`;
+
+export const EditIcon = styled(Edit)`
+  ${iconStyles}
 `;
 
 export const FavoriteIcon = styled(Favorite)`
-  width: 20px;
-  height: 20px;
-
-  path {
-    stroke-width: 1.5;
-  }
+  ${iconStyles}
 `;
 
 export const DeleteIcon = styled(Trash)`
-  width: 20px;
-  height: 20px;
-
-  path {
-    stroke-width: 1.5;
-  }
+  ${iconStyles}
 `;
