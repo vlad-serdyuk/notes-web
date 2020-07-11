@@ -2,9 +2,9 @@ import React, { memo, useCallback } from 'react'
 import ReactMarkdown from 'react-markdown';
 import { withRouter } from 'react-router-dom';
 import { format } from 'date-fns';
-import { Avatar, Box, Button } from 'grommet';
+import { Avatar, Box } from 'grommet';
 
-import { EditIcon, FavoriteIcon } from './Note.styled';
+import { ButtonContainer, IconButton, EditIcon, FavoriteIcon, DeleteIcon } from './Note.styled';
 
 const NoteComponent = ({ note, history }) => {
   const onNoteClick = useCallback(() => {
@@ -32,10 +32,11 @@ const NoteComponent = ({ note, history }) => {
         {format(note.createdAt, 'MMM do YYYY')}
         {' '}
         <ReactMarkdown source={note.content} />
-        <Box direction="row-responsive" gap="medium">
-          <Button plain icon={<FavoriteIcon />} onClick={onNoteEditClick} />
-          <Button plain icon={<EditIcon />} onClick={onNoteEditClick} />
-        </Box>
+        <ButtonContainer direction="row-responsive" gap="large">
+          <IconButton plain icon={<FavoriteIcon />} onClick={onNoteEditClick} />
+          <IconButton plain icon={<EditIcon />} onClick={onNoteEditClick} />
+          <IconButton plain icon={<DeleteIcon />} onClick={onNoteEditClick} />
+        </ButtonContainer>
       </Box>
     </Box>
   );
