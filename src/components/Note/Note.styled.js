@@ -3,12 +3,12 @@ import { Edit, Favorite } from 'grommet-icons';
 
 export const EditIcon = styled(Edit)`
   &:hover {
-    stroke: #7D4CDB;
+    stroke: ${({ theme }) => theme.global.colors.brand};
   }
 `;
 
 export const FavoriteIcon = styled(Favorite)`
   &:hover {
-    stroke: #7D4CDB;
+    stroke: ${({ theme }) => theme.global.colors.brand};
   }
 `;
