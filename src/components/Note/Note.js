@@ -2,12 +2,19 @@ import React, { memo, useState, useCallback } from 'react'
 import ReactMarkdown from 'react-markdown';
 import { withRouter } from 'react-router-dom';
 import { format } from 'date-fns';
-import { Avatar, Box, Layer } from 'grommet';
+import { Avatar, Box, Button, Layer, Heading, Text } from 'grommet';
 
 import * as Styled from './Note.styled';
 
 const NoteComponent = ({ note, history }) => {
-  const onNoteClick = useCallback(() => {
+  const [isDialogOpen, setDialogOpen] = useState(false);
+
+  const onDialogClose = (e) => {
+    e.stopPropagation();
+    setDialogOpen(false);
+  }
+
+  const onNoteClick = useCallback(() => {    
     history.push(`/note/${note.id}`);
   }, [note, history]);
 
@@ -18,8 +25,8 @@ const NoteComponent = ({ note, history }) => {
 
   const onNoteDeleteClick = useCallback((e) => {
     e.stopPropagation();
-    history.push(`/edit/${note.id}`);
-  }, [note, history]);
+    setDialogOpen(true);
+  }, [setDialogOpen]);
 
   return (
     <Styled.NoteContainer onClick={onNoteClick}>
@@ -36,8 +43,8 @@ const NoteComponent = ({ note, history }) => {
           <Styled.IconButton plain icon={<Styled.DeleteIcon />} onClick={onNoteDeleteClick} />
         </Styled.ButtonContainer>
       </Box>
-      {open && (
-        <Layer position="center" onClickOutside={onClose} onEsc={onClose}>
+      {isDialogOpen && (
+        <Layer position="center" onClickOutside={onDialogClose} onEsc={onDialogClose}>
           <Box pad="medium" gap="small" width="medium">
             <Heading level={3} margin="none">
               Confirm
@@ -51,14 +58,14 @@ const NoteComponent = ({ note, history }) => {
               justify="end"
               pad={{ top: "medium", bottom: "small" }}
             >
-              <Button label="Open 2" onClick={onOpen2} color="dark-3" />
+              <Button label="Open 2" onClick={onDialogClose} color="dark-3" />
               <Button
                 label={
                   <Text color="white">
                     <strong>Delete</strong>
                   </Text>
                 }
-                onClick={onClose}
+                onClick={onDialogClose}
                 primary
                 color="status-critical"
               />
