@@ -1,9 +1,12 @@
 import React, { memo, useState, useCallback } from 'react'
 import ReactMarkdown from 'react-markdown';
 import { withRouter } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
 import { format } from 'date-fns';
 import { Avatar, Box, Button, Layer, Heading, Text } from 'grommet';
 
+import { GET_NOTES, GET_MY_NOTES } from '/gql/query';
+import { DELETE_NOTE } from '/gql/mutation';
 import * as Styled from './Note.styled';
 
 const NoteComponent = ({ note, history }) => {
@@ -27,6 +30,14 @@ const NoteComponent = ({ note, history }) => {
     e.stopPropagation();
     setDialogOpen(true);
   }, [setDialogOpen]);
+
+  const [deleteNote, { loading, error }] = useMutation(DELETE_NOTE, {
+    refetchQueries: [{ query: GET_NOTES }, { query: GET_MY_NOTES }],
+  });
+
+  const onDeleteNote = useCallback(() => {
+    deleteNote({ variables: { id: note.id } });
+  }, [deleteNote, note]);
 
   return (
     <Styled.NoteContainer onClick={onNoteClick}>
@@ -58,14 +69,13 @@ const NoteComponent = ({ note, history }) => {
               justify="end"
               pad={{ top: "medium", bottom: "small" }}
             >
-              <Button label="Open 2" onClick={onDialogClose} color="dark-3" />
               <Button
                 label={
                   <Text color="white">
                     <strong>Delete</strong>
                   </Text>
                 }
-                onClick={onDialogClose}
+                onClick={onDeleteNote}
                 primary
                 color="status-critical"
               />
