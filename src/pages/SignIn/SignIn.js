@@ -54,7 +54,7 @@ const SignInComponent = (props) => {
       <Box pad="medium" gap="small" width="medium">
         <Box direction="row" align="center" justify="between">
           <Heading level={3} margin="none">
-            Sign In
+            Confirm
           </Heading>
           <Button icon={<Close />} onClick={onClose} />
         </Box>

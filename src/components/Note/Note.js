@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { format } from 'date-fns';
 import { Avatar, Box, Button, Layer, Heading, Text } from 'grommet';
+import { Close } from 'grommet-icons';
 
 import { GET_NOTES, GET_MY_NOTES } from '/gql/query';
 import { DELETE_NOTE } from '/gql/mutation';
@@ -35,7 +36,8 @@ const NoteComponent = ({ note, history }) => {
     refetchQueries: [{ query: GET_NOTES }, { query: GET_MY_NOTES }],
   });
 
-  const onDeleteNote = useCallback(() => {
+  const onDeleteNote = useCallback((e) => {
+    e.stopPropagation();
     deleteNote({ variables: { id: note.id } });
   }, [deleteNote, note]);
 
@@ -57,9 +59,12 @@ const NoteComponent = ({ note, history }) => {
       {isDialogOpen && (
         <Layer position="center" onClickOutside={onDialogClose} onEsc={onDialogClose}>
           <Box pad="medium" gap="small" width="medium">
-            <Heading level={3} margin="none">
-              Confirm
-            </Heading>
+            <Box direction="row" align="center" justify="between">
+              <Heading level={3} margin="none">
+                Sign In
+              </Heading>
+              <Button icon={<Close />} onClick={onDialogClose} />
+            </Box>
             <Text>Are you sure you want to delete?</Text>
             <Box
               as="footer"
