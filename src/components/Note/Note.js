@@ -3,11 +3,11 @@ import ReactMarkdown from 'react-markdown';
 import { withRouter } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { format } from 'date-fns';
-import { Avatar, Box, Button, Layer, Heading, Text } from 'grommet';
-import { Close } from 'grommet-icons';
+import { Avatar, Box } from 'grommet';
 
 import { GET_NOTES, GET_MY_NOTES } from '/gql/query';
 import { DELETE_NOTE } from '/gql/mutation';
+import { ConfirmDialog } from './components/ConfirmDialog';
 import * as Styled from './Note.styled';
 
 const NoteComponent = ({ note, history }) => {
@@ -56,38 +56,8 @@ const NoteComponent = ({ note, history }) => {
           <Styled.IconButton plain icon={<Styled.DeleteIcon />} onClick={onNoteDeleteClick} />
         </Styled.ButtonContainer>
       </Box>
-      {isDialogOpen && (
-        <Layer position="center" onClickOutside={onDialogClose} onEsc={onDialogClose}>
-          <Box pad="medium" gap="small" width="medium">
-            <Box direction="row" align="center" justify="between">
-              <Heading level={3} margin="none">
-                Sign In
-              </Heading>
-              <Button icon={<Close />} onClick={onDialogClose} />
-            </Box>
-            <Text>Are you sure you want to delete?</Text>
-            <Box
-              as="footer"
-              gap="small"
-              direction="row"
-              align="center"
-              justify="end"
-              pad={{ top: "medium", bottom: "small" }}
-            >
-              <Button
-                label={
-                  <Text color="white">
-                    <strong>Delete</strong>
-                  </Text>
-                }
-                onClick={onDeleteNote}
-                primary
-                color="status-critical"
-              />
-            </Box>
-          </Box>
-        </Layer>
-      )}
+      {isDialogOpen
+        && <ConfirmDialog onDeleteNote={onDeleteNote} onDialogClose={onDialogClose} />}
     </Styled.NoteContainer>
   );
 };
