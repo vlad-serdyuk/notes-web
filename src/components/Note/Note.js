@@ -32,7 +32,7 @@ const NoteComponent = ({ note, history }) => {
     setDialogOpen(true);
   }, [setDialogOpen]);
 
-  const [deleteNote, { loading, error }] = useMutation(DELETE_NOTE, {
+  const [deleteNote] = useMutation(DELETE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }, { query: GET_MY_NOTES }],
   });
 

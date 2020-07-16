@@ -10,7 +10,7 @@ const EditNotePage = ({ history, match }) => {
   const [updateNote, { loading, error }] = useMutation(UPDATE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }, { query: GET_MY_NOTES }],
     onCompleted: data => {
-      history.push(`note/${data.updateNote.id}`);
+      history.push(`/note/${data.updateNote.id}`);
     },
   });
 
