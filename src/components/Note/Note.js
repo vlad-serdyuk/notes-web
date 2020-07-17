@@ -6,12 +6,18 @@ import { format } from 'date-fns';
 import { Avatar, Box } from 'grommet';
 
 import { GET_NOTES, GET_MY_NOTES } from '/gql/query';
-import { DELETE_NOTE } from '/gql/mutation';
+import { TOGGLE_FAVORITE_NOTE, DELETE_NOTE } from '/gql/mutation';
 import { ConfirmDialog } from './components/ConfirmDialog';
 import * as Styled from './Note.styled';
 
 const NoteComponent = ({ note, history }) => {
   const [isDialogOpen, setDialogOpen] = useState(false);
+
+  const [toggleFavoriteMutation] = useMutation(TOGGLE_FAVORITE_NOTE);
+
+  const [deleteNoteMutation] = useMutation(DELETE_NOTE, {
+    refetchQueries: [{ query: GET_NOTES }, { query: GET_MY_NOTES }],
+  });
 
   const onDialogClose = (e) => {
     e.stopPropagation();
@@ -22,24 +28,25 @@ const NoteComponent = ({ note, history }) => {
     history.push(`/note/${note.id}`);
   }, [note, history]);
 
-  const onNoteEditClick = useCallback((e) => {
+  const toggleFavorite = useCallback((e) => {
+    e.stopPropagation();
+    toggleFavoriteMutation({ variables: { id: note.id } });
+  }, [toggleFavoriteMutation, note]);
+
+  const editNote = useCallback((e) => {
     e.stopPropagation();
     history.push(`/edit/${note.id}`);
   }, [note, history]);
 
-  const onNoteDeleteClick = useCallback((e) => {
+  const deleteNote = useCallback((e) => {
     e.stopPropagation();
     setDialogOpen(true);
   }, [setDialogOpen]);
 
-  const [deleteNote] = useMutation(DELETE_NOTE, {
-    refetchQueries: [{ query: GET_NOTES }, { query: GET_MY_NOTES }],
-  });
-
   const onDeleteNote = useCallback((e) => {
     e.stopPropagation();
-    deleteNote({ variables: { id: note.id } });
-  }, [deleteNote, note]);
+    deleteNoteMutation({ variables: { id: note.id } });
+  }, [deleteNoteMutation, note]);
 
   return (
     <Styled.NoteContainer onClick={onNoteClick}>
@@ -51,9 +58,9 @@ const NoteComponent = ({ note, history }) => {
         {' '}
         <ReactMarkdown source={note.content} />
         <Styled.ButtonContainer direction="row-responsive" gap="large">
-          <Styled.IconButton plain icon={<Styled.FavoriteIcon />} onClick={onNoteEditClick} />
-          <Styled.IconButton plain icon={<Styled.EditIcon />} onClick={onNoteEditClick} />
-          <Styled.IconButton plain icon={<Styled.DeleteIcon />} onClick={onNoteDeleteClick} />
+          <Styled.IconButton plain icon={<Styled.FavoriteIcon />} onClick={toggleFavorite} />
+          <Styled.IconButton plain icon={<Styled.EditIcon />} onClick={editNote} />
+          <Styled.IconButton plain icon={<Styled.DeleteIcon />} onClick={deleteNote} />
         </Styled.ButtonContainer>
       </Box>
       {isDialogOpen
