@@ -1,11 +1,11 @@
-import React, { memo, useState, useCallback } from 'react'
+import React, { memo, useMemo, useState, useCallback } from 'react'
 import ReactMarkdown from 'react-markdown';
 import { withRouter } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { format } from 'date-fns';
 import { Avatar, Box } from 'grommet';
 
-import { GET_NOTES, GET_MY_NOTES } from '/gql/query';
+import { GET_NOTES, GET_MY_NOTES, GET_ME } from '/gql/query';
 import { TOGGLE_FAVORITE_NOTE, DELETE_NOTE } from '/gql/mutation';
 import { ConfirmDialog } from './components/ConfirmDialog';
 import * as Styled from './Note.styled';
@@ -13,11 +13,17 @@ import * as Styled from './Note.styled';
 const NoteComponent = ({ note, history }) => {
   const [isDialogOpen, setDialogOpen] = useState(false);
 
+  const { data: { me } } = useQuery(GET_ME);
   const [toggleFavoriteMutation] = useMutation(TOGGLE_FAVORITE_NOTE);
 
   const [deleteNoteMutation] = useMutation(DELETE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }, { query: GET_MY_NOTES }],
   });
+
+  const isUserNote = useMemo(() => me.id === note.author.id, [note, me]);
+  const isUserFavorite = useMemo(() => {
+    return note.favoritedBy.find(({ id }) => me.id === id);
+  }, [note, me]);
 
   const onDialogClose = (e) => {
     e.stopPropagation();
@@ -58,9 +64,9 @@ const NoteComponent = ({ note, history }) => {
         {' '}
         <ReactMarkdown source={note.content} />
         <Styled.ButtonContainer direction="row-responsive" gap="large">
-          <Styled.IconButton plain icon={<Styled.FavoriteIcon />} onClick={toggleFavorite} />
-          <Styled.IconButton plain icon={<Styled.EditIcon />} onClick={editNote} />
-          <Styled.IconButton plain icon={<Styled.DeleteIcon />} onClick={deleteNote} />
+          <Styled.IconButton plain icon={<Styled.FavoriteIcon selected={isUserFavorite} />} onClick={toggleFavorite} />
+          {isUserNote && <Styled.IconButton plain icon={<Styled.EditIcon />} onClick={editNote} />}
+          {isUserNote && <Styled.IconButton plain icon={<Styled.DeleteIcon />} onClick={deleteNote} />}
         </Styled.ButtonContainer>
       </Box>
       {isDialogOpen
