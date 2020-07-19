@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import { withRouter } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { format } from 'date-fns';
-import { Avatar, Box } from 'grommet';
+import { Avatar, Box, Text } from 'grommet';
 
 import { GET_NOTES, GET_MY_NOTES, GET_ME } from '/gql/query';
 import { TOGGLE_FAVORITE_NOTE, DELETE_NOTE } from '/gql/mutation';
@@ -20,8 +20,18 @@ const NoteComponent = ({ note, history }) => {
     refetchQueries: [{ query: GET_NOTES }, { query: GET_MY_NOTES }],
   });
 
-  const isUserNote = useMemo(() => me.id === note.author.id, [note, me]);
+  const isUserNote = useMemo(() => {
+    if (!me) {
+      return false;
+    }
+    
+    return me.id === note.author.id;
+  }, [note, me]);
   const isUserFavorite = useMemo(() => {
+    if (!me) {
+      return false;
+    }
+
     return note.favoritedBy.find(({ id }) => me.id === id);
   }, [note, me]);
 
@@ -64,7 +74,10 @@ const NoteComponent = ({ note, history }) => {
         {' '}
         <ReactMarkdown source={note.content} />
         <Styled.ButtonContainer direction="row-responsive" gap="large">
-          <Styled.IconButton plain icon={<Styled.FavoriteIcon selected={isUserFavorite} />} onClick={toggleFavorite} />
+          <Box direction="row" align="center">
+            <Styled.IconButton plain icon={<Styled.FavoriteIcon selected={isUserFavorite} />} onClick={toggleFavorite} />
+            {(note.favoriteCount > 0) && <Text size="small" color={isUserFavorite ? 'brand' : null}>{note.favoriteCount}</Text>}
+          </Box>
           {isUserNote && <Styled.IconButton plain icon={<Styled.EditIcon />} onClick={editNote} />}
           {isUserNote && <Styled.IconButton plain icon={<Styled.DeleteIcon />} onClick={deleteNote} />}
         </Styled.ButtonContainer>

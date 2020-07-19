@@ -21,7 +21,7 @@ const Header = (props) => {
   };
 
   const name = useMemo(() => {
-    if (meData) {
+    if (meData && meData.me) {
       return meData.me.username.charAt(0).toUpperCase();
     }
     

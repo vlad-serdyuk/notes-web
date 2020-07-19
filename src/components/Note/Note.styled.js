@@ -13,6 +13,11 @@ export const NoteContainer = styled(Box).attrs({
 })`
   border-top: none;
 
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(120, 120, 120, 0.05);
+  }
+
   &:first-of-type {
     border-top: 1px solid rgba(0,0,0,0.33);
   }
