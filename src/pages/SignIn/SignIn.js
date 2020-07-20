@@ -5,6 +5,7 @@ import { Anchor, Layer, Box, Heading, TextInput, Text, MaskedInput, Button } fro
 import { MailOption, Close } from 'grommet-icons';
 
 import { emailMask } from '/utils/validation';
+import { GET_ME } from '/gql/query';
 import { SIGNIN_USER } from '/gql/mutation';
 
 const SignInComponent = (props) => {
@@ -15,7 +16,8 @@ const SignInComponent = (props) => {
   const client = useApolloClient();
 
   const [signIn, { loading, error }] = useMutation(SIGNIN_USER, {
-    onCompleted: data => {
+    refetchQueries: [{ query: GET_ME }],
+    onCompleted: () => {
       client.writeData({ data: { isLoggedIn: true } });
       props.history.push('/');
     }
