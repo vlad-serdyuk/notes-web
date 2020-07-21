@@ -31,7 +31,7 @@ class GQLService {
     };
 
     this.cache.writeData({ data });
-    this.client.onResetStore(() => this.cache.writeData({ data }));
+    this.client.onResetStore(() => this.cache.writeData({ data: { ...data, loading: false } }));
 
     this.client.query({ query: GET_ME })
       .then(({ data: userData }) => {
