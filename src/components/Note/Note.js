@@ -68,10 +68,10 @@ const NoteComponent = ({ note, history }) => {
     <Styled.NoteContainer onClick={onNoteClick}>
       <Avatar size="large" src={note.author.avatar} />
       <Box>
-        {note.author.username}
-        {' '}
-        {format(note.createdAt, 'MMM do YYYY')}
-        {' '}
+        <Box direction="row" gap="small" align="end">
+          <Text>{note.author.username}</Text>
+          <Text size="small" color="grey">{format(note.createdAt, 'MMM do YYYY')}</Text>
+        </Box>
         <ReactMarkdown source={note.content} />
         <Styled.ButtonContainer direction="row-responsive" gap="large">
           <Box direction="row" align="center">

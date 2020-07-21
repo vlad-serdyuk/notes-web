@@ -98,6 +98,20 @@ export const GET_USER_FAVORITES = gql`
   }
 `;
 
+export const GET_USER_NOTES = gql`
+  query UserFavorites($username: String!) {
+    user(username: $username) {
+      id
+      username
+      email
+      notes {
+        id
+        content
+      }
+    }
+  }
+`;
+
 export const LOG_OUT = gql`
   query SignOut {
     signOut 
