@@ -93,6 +93,13 @@ export const GET_USER_FAVORITES = gql`
       favorites {
         id
         content
+        createdAt
+        favoriteCount
+        author {
+          id
+          username
+          avatar
+        }
       }
     }
   }
@@ -107,6 +114,16 @@ export const GET_USER_NOTES = gql`
       notes {
         id
         content
+        createdAt
+        favoriteCount
+        favoritedBy {
+          id
+        }
+        author {
+          id
+          username
+          avatar
+        }
       }
     }
   }

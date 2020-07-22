@@ -27,12 +27,13 @@ const NoteComponent = ({ note, history }) => {
     
     return me.id === note.author.id;
   }, [note, me]);
+  
   const isUserFavorite = useMemo(() => {
     if (!me) {
       return false;
     }
 
-    return note.favoritedBy.find(({ id }) => me.id === id);
+    return (note.favoritedBy || []).find(({ id }) => me.id === id);
   }, [note, me]);
 
   const onDialogClose = (e) => {
