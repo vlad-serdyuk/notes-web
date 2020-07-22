@@ -88,8 +88,6 @@ export const GET_USER_FAVORITES = gql`
   query UserFavorites($username: String!) {
     user(username: $username) {
       id
-      username
-      email
       favorites {
         id
         content
@@ -109,8 +107,6 @@ export const GET_USER_NOTES = gql`
   query UserFavorites($username: String!) {
     user(username: $username) {
       id
-      username
-      email
       notes {
         id
         content
