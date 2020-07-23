@@ -5,7 +5,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import { format } from 'date-fns';
 import { Avatar, Box, Text } from 'grommet';
 
-import { GET_NOTES, GET_MY_NOTES, GET_ME } from '/gql/query';
+import { GET_NOTES, GET_ME } from '/gql/query';
 import { TOGGLE_FAVORITE_NOTE, DELETE_NOTE } from '/gql/mutation';
 import { ConfirmDialog } from './components/ConfirmDialog';
 import * as Styled from './Note.styled';
@@ -17,7 +17,7 @@ const NoteComponent = ({ note, history }) => {
   const [toggleFavoriteMutation] = useMutation(TOGGLE_FAVORITE_NOTE);
 
   const [deleteNoteMutation] = useMutation(DELETE_NOTE, {
-    refetchQueries: [{ query: GET_NOTES }, { query: GET_MY_NOTES }],
+    refetchQueries: [{ query: GET_NOTES }],
   });
 
   const isUserNote = useMemo(() => {

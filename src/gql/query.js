@@ -65,25 +65,6 @@ export const GET_NOTES = gql`
   }
 `;
 
-export const GET_MY_NOTES = gql`
-  query MyNotes {
-    notes {
-      id
-      createdAt
-      content
-      favoriteCount
-      favoritedBy {
-        id
-      }
-      author {
-        id
-        username
-        avatar
-      }
-    }
-  }
-`;
-
 export const GET_USER_FAVORITES = gql`
   query UserFavorites($username: String!) {
     user(username: $username) {
