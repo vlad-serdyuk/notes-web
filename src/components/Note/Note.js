@@ -41,6 +41,11 @@ const NoteComponent = ({ note, history }) => {
     setDialogOpen(false);
   }
 
+  const openAuthorNotes = (e) => {
+    e.stopPropagation();
+    
+  }
+
   const onNoteClick = useCallback(() => {    
     history.push(`/note/${note.id}`);
   }, [note, history]);
@@ -70,7 +75,7 @@ const NoteComponent = ({ note, history }) => {
       <Avatar size="large" src={note.author.avatar} />
       <Box>
         <Box direction="row" gap="small" align="end">
-          <Text>{note.author.username}</Text>
+          <Text onClick={openAuthorNotes}>{note.author.username}</Text>
           <Text size="small" color="grey">{format(note.createdAt, 'MMM do YYYY')}</Text>
         </Box>
         <ReactMarkdown source={note.content} />

@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { HomePage } from './Home';
-import { MyNotesPage } from './MyNotes';
+import { NotesPage } from './Notes';
 import { FavoritesPage } from './Favorites';
 import { NotePage } from './Note';
 import { SignUp } from './SignUp';
@@ -17,7 +17,7 @@ export const Pages = () => {
     <Router>
       <Layout>
         <Route exact path="/" component={HomePage} />
-        <PrivateRoute exact path="/my-notes" component={MyNotesPage} />
+        <PrivateRoute exact path="/notes/:author" component={NotesPage} />
         <PrivateRoute exact path="/favorites" component={FavoritesPage} />
         <PrivateRoute exact path="/new" component={CreateNotePage} />
         <PrivateRoute exact path="/edit/:id" component={EditNotePage} />

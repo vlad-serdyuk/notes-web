@@ -35,7 +35,7 @@ const Header = (props) => {
           <LinkText to="/">Home</LinkText>
         </LinkWrapper>
         <LinkWrapper>
-          <LinkText to="/my-notes">My notes</LinkText>
+          <LinkText to={`/notes/${meData && meData.me.username}`}>My notes</LinkText>
         </LinkWrapper>
         <LinkWrapper>
           <LinkText to="/favorites">Favorites</LinkText>
