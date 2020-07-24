@@ -10,7 +10,7 @@ import { StyledHeader, LinkText, LinkWrapper } from './Header.styled';
 
 const Header = (props) => {
   const { data: { isLoggedIn }, client } = useIsLoggedInQuery();
-  const { data: meData } = useQuery(GET_ME);
+  const { data: { me } = {} } = useQuery(GET_ME);
 
   const onLogOut = () => {
     client.query({ query: LOG_OUT }).then(() => {
@@ -21,12 +21,12 @@ const Header = (props) => {
   };
 
   const name = useMemo(() => {
-    if (meData && meData.me) {
-      return meData.me.username.charAt(0).toUpperCase();
+    if (me) {
+      return me.username.charAt(0).toUpperCase();
     }
     
     return '';
-  }, [meData]);
+  }, [me]);
 
   return (
     <StyledHeader background="dark-1">
@@ -34,12 +34,12 @@ const Header = (props) => {
         <LinkWrapper>
           <LinkText to="/">Home</LinkText>
         </LinkWrapper>
-        <LinkWrapper>
-          <LinkText to={`/notes/${meData && meData.me.username}`}>My notes</LinkText>
-        </LinkWrapper>
-        <LinkWrapper>
+        {me && <LinkWrapper>
+          <LinkText to={`/notes/${me.username}`}>My notes</LinkText>
+        </LinkWrapper>}
+        {me && <LinkWrapper>
           <LinkText to="/favorites">Favorites</LinkText>
-        </LinkWrapper>
+        </LinkWrapper>}
       </Box>
       <Box direction="row" gap="medium">
         {
