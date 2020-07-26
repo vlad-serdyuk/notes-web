@@ -43,7 +43,7 @@ const NoteComponent = ({ note, history }) => {
 
   const openAuthorNotes = (e) => {
     e.stopPropagation();
-    
+    history.push(`/notes/${note.author.username}`);
   }
 
   const onNoteClick = useCallback(() => {    
@@ -75,7 +75,7 @@ const NoteComponent = ({ note, history }) => {
       <Avatar size="large" src={note.author.avatar} />
       <Box>
         <Box direction="row" gap="small" align="end">
-          <Text onClick={openAuthorNotes}>{note.author.username}</Text>
+          <Styled.AuthorText onClick={openAuthorNotes}>{note.author.username}</Styled.AuthorText>
           <Text size="small" color="grey">{format(note.createdAt, 'MMM do YYYY')}</Text>
         </Box>
         <ReactMarkdown source={note.content} />
