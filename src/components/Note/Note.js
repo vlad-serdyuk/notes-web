@@ -72,7 +72,7 @@ const NoteComponent = ({ note, history }) => {
 
   return (
     <Styled.NoteContainer onClick={onNoteClick}>
-      <Avatar size="large" src={note.author.avatar} />
+      <Avatar size="large" src={note.author.avatar} onClick={openAuthorNotes} />
       <Box>
         <Box direction="row" gap="small" align="end">
           <Styled.AuthorText onClick={openAuthorNotes}>{note.author.username}</Styled.AuthorText>
