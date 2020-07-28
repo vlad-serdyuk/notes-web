@@ -1,16 +1,18 @@
 import React, { memo } from 'react';
-import { Avatar, Box, Button, DropButton } from 'grommet';
+import { Avatar, Box, Button, DropButton, Text } from 'grommet';
 
-const renderItems = (onLogOut) => (
-  <Box width="80px" background="dark-2" align="center">
+const renderItems = (username, onLogOut) => (
+  <Box width="120px" background="dark-2" pad="xsmall" align="start">
+    <Text>{username}</Text>
+    <Button onClick={onLogOut}>Profile</Button>
     <Button onClick={onLogOut}>Log out</Button>
   </Box>
 );
 
-const AvatarDropButtonComponent = ({ name, onLogOut }) => (
+const AvatarDropButtonComponent = ({ username, name, onLogOut }) => (
   <DropButton
     alignSelf="center"
-    dropContent={renderItems(onLogOut)}
+    dropContent={renderItems(username, onLogOut)}
     dropProps={{ align: { top: "bottom" } }}
   >
     <Box height="32px" width="32px" align="center">

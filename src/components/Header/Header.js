@@ -44,7 +44,7 @@ const Header = (props) => {
       <Box direction="row" gap="medium">
         {
           isLoggedIn ? (
-            <AvatarDropButton onLogOut={onLogOut} name={name} />
+            <AvatarDropButton onLogOut={onLogOut} name={name} username={me.username} />
           ) : (
             <LinkText to="/sign-in">Log In</LinkText>
           )
