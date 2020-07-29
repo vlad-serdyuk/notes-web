@@ -20,7 +20,7 @@ const Header = (props) => {
     });
   };
 
-  const name = useMemo(() => {
+  const initials = useMemo(() => {
     if (me) {
       return me.username.charAt(0).toUpperCase();
     }
@@ -44,7 +44,11 @@ const Header = (props) => {
       <Box direction="row" gap="medium">
         {
           isLoggedIn ? (
-            <AvatarDropButton onLogOut={onLogOut} name={name} username={me.username} />
+            <AvatarDropButton
+              initials={initials}
+              username={me.username}
+              onLogOut={onLogOut}
+            />
           ) : (
             <LinkText to="/sign-in">Log In</LinkText>
           )
