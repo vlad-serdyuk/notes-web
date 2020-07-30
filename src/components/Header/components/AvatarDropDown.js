@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 import { Avatar, Box, Button, DropButton, Text } from 'grommet';
 
+import { StyledButton } from './AvatarDropDown.styled';
+
 const renderItems = (email, initials, username, onLogOut) => (
   <Box width="160px" background="dark-2" pad="xsmall" align="start">
     <Box direction="row" align="center" gap="xsmall" border="bottom">
@@ -15,8 +17,8 @@ const renderItems = (email, initials, username, onLogOut) => (
         <Text size="small">{email}</Text>
       </Box>
     </Box>
-    <Button onClick={onLogOut}>Profile</Button>
-    <Button onClick={onLogOut}>Log out</Button>
+    <StyledButton onClick={onLogOut}>Profile</StyledButton>
+    <StyledButton onClick={onLogOut}>Log out</StyledButton>
   </Box>
 );
 
