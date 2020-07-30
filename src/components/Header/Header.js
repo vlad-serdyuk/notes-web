@@ -45,6 +45,7 @@ const Header = (props) => {
         {
           isLoggedIn ? (
             <AvatarDropButton
+              email={me.email}
               initials={initials}
               username={me.username}
               onLogOut={onLogOut}
