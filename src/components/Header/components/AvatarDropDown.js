@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Avatar, Box, Button, DropButton, Text } from 'grommet';
+import { Avatar, Box, DropButton, Text } from 'grommet';
 
 import { StyledButton } from './AvatarDropDown.styled';
 
