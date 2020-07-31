@@ -8,7 +8,7 @@ import { GET_ME, LOG_OUT } from '/gql/query';
 import { AvatarDropButton } from './components/AvatarDropDown';
 import { StyledHeader, LinkText, LinkWrapper } from './Header.styled';
 
-const Header = (props) => {
+const Header = ({ history }) => {
   const { data: { isLoggedIn }, client } = useIsLoggedInQuery();
   const { data: { me } = {} } = useQuery(GET_ME);
 
@@ -16,8 +16,12 @@ const Header = (props) => {
     client.query({ query: LOG_OUT }).then(() => {
       client.resetStore();
       client.writeData({ data: { isLoggedIn: false } });
-      props.history.push('/');
+      history.push('/');
     });
+  };
+
+  const openProfilePage = () => {
+    history.push('/profile');
   };
 
   const initials = useMemo(() => {
@@ -48,6 +52,7 @@ const Header = (props) => {
               email={me.email}
               initials={initials}
               username={me.username}
+              openProfilePage={openProfilePage}
               onLogOut={onLogOut}
             />
           ) : (
