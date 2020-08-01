@@ -10,7 +10,8 @@ const NavigationComponent = ({ history }) => {
 
   return (
     <Nav width="small" pad="small">
-      <Text>Your Notes:</Text>
+      <Text>Home</Text>
+      <Text>Trends</Text>
       <Button
         primary
         label="Create Note"

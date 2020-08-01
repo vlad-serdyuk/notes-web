@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 
-import { GET_NOTE } from '/gql/query';
+import { GET_ME } from '/gql/query';
 
 const ProfilePage = ({ match: { params: { id } } }) => {
-  // const { loading, error, data } = useQuery(GET_NOTE, { variables: { id } });
+  const { data: { me } = {} } = useQuery(GET_ME);
 
   return <p>Profile</p>;
 };
