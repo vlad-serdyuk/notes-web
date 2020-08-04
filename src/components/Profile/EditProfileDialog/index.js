@@ -1,18 +1,29 @@
-import React, { memo } from 'react'
-import { Box, Button, Layer, Heading, Text } from 'grommet';
+import React, { memo, useState } from 'react'
+import { Box, Button, Layer, Heading, Text, TextInput } from 'grommet';
 import { Close } from 'grommet-icons';
 
-const EditProfileDialogComponent = ({ onDialogClose, onDeleteNote }) => {
+const EditProfileDialogComponent = ({ username, onDialogClose, onUpdateProfile }) => {
+  const [newUsername, setUsername] = useState(username);
+
+  const onChangeUsername = (event) => {
+    setUsername(event.target.value);
+  };
+
   return (
     <Layer position="center" onClickOutside={onDialogClose} onEsc={onDialogClose}>
       <Box pad="medium" gap="small" width="medium">
         <Box direction="row" align="center" justify="between">
           <Heading level={3} margin="none">
-            Confirm
+            Edit profile
           </Heading>
           <Button icon={<Close />} onClick={onDialogClose} />
         </Box>
-        <Text>Are you sure you want to delete?</Text>
+        <TextInput
+          type="text"
+          placeholder="username"
+          value={newUsername}
+          onChange={onChangeUsername}
+        />
         <Box
           as="footer"
           gap="small"
@@ -24,10 +35,10 @@ const EditProfileDialogComponent = ({ onDialogClose, onDeleteNote }) => {
           <Button
             label={
               <Text color="white">
-                <strong>23</strong>
+                <strong>Save</strong>
               </Text>
             }
-            onClick={onDeleteNote}
+            onClick={onUpdateProfile}
             primary
             color="status-critical"
           />

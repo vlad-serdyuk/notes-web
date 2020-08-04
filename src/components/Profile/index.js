@@ -15,8 +15,8 @@ export const Profile = () => {
 
   return (
     <Box gap="small">
-      <Box direction="row-responsive" justify="between">
-        <Box height="40px" width="40px" align="center">
+      <Box direction="row-responsive" justify="between" align="center">
+        <Box height="48px" width="48px" align="center">
           <Avatar background="brand">{me.username.charAt(0).toUpperCase()}</Avatar>
         </Box>
         <Button
