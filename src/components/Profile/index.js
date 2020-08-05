@@ -29,7 +29,13 @@ export const Profile = () => {
       <Text size="small" color="grey">
         Joined {format(me.createdAt, 'MMM do YYYY')}
       </Text>
-      {isDialogOpen && <EditProfileDialog onDialogClose={closeEditProfileDialog} />}
+      {
+      isDialogOpen && 
+        <EditProfileDialog
+          username={me.username}
+          onDialogClose={closeEditProfileDialog}
+        />
+      }
     </Box>
   );
 };

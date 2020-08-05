@@ -1,13 +1,22 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useState, useEffect, useCallback } from 'react'
 import { Box, Button, Layer, Heading, Text, TextInput } from 'grommet';
 import { Close } from 'grommet-icons';
 
 const EditProfileDialogComponent = ({ username, onDialogClose, onUpdateProfile }) => {
   const [newUsername, setUsername] = useState(username);
+  const [disabled, setDisabled] = useState(true);
 
   const onChangeUsername = (event) => {
     setUsername(event.target.value);
   };
+
+  useEffect(() => {
+    setDisabled(newUsername === username);
+  }, [setDisabled, newUsername, username]);
+
+  const updateProfile = useCallback(() => {
+    onUpdateProfile(newUsername);
+  }, [onUpdateProfile]);
 
   return (
     <Layer position="center" onClickOutside={onDialogClose} onEsc={onDialogClose}>
@@ -30,17 +39,13 @@ const EditProfileDialogComponent = ({ username, onDialogClose, onUpdateProfile }
           direction="row"
           align="center"
           justify="end"
-          pad={{ top: "medium", bottom: "small" }}
+          pad="small"
         >
           <Button
-            label={
-              <Text color="white">
-                <strong>Save</strong>
-              </Text>
-            }
-            onClick={onUpdateProfile}
             primary
-            color="status-critical"
+            label="Save"
+            onClick={updateProfile}
+            disabled={disabled}
           />
         </Box>
       </Box>
