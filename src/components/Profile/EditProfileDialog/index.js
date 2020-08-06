@@ -14,9 +14,9 @@ const EditProfileDialogComponent = ({ username, onDialogClose, onUpdateProfile }
     setDisabled(newUsername === username);
   }, [setDisabled, newUsername, username]);
 
-  const updateProfile = useCallback(() => {
+  const updateProfile = useCallback(() => {    
     onUpdateProfile(newUsername);
-  }, [onUpdateProfile]);
+  }, [newUsername, onUpdateProfile]);
 
   return (
     <Layer position="center" onClickOutside={onDialogClose} onEsc={onDialogClose}>

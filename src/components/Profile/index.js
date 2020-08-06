@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { format } from 'date-fns';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { Avatar, Box, Button, Text } from 'grommet';
 
 import { GET_ME } from '/gql/query';
+import { UPDATE_USER } from '/gql/mutation';
 import { EditProfileDialog } from './EditProfileDialog';
 
 export const Profile = () => {
   const { data: { me } = {} } = useQuery(GET_ME);
+  const [updateProfileMutation] = useMutation(UPDATE_USER, {
+    refetchQueries: [{ query: GET_ME }],
+  });
   const [isDialogOpen, setDialogOpen] = useState(false);
 
   const openEditProfileDialog = () => setDialogOpen(true);
   const closeEditProfileDialog = () => setDialogOpen(false);
+
+  const updateProfile = useCallback((username) => {    
+    updateProfileMutation({ variables: { username } });
+    closeEditProfileDialog();
+  }, [updateProfileMutation, closeEditProfileDialog]);
 
   return (
     <Box gap="small">
@@ -33,6 +42,7 @@ export const Profile = () => {
       isDialogOpen && 
         <EditProfileDialog
           username={me.username}
+          onUpdateProfile={updateProfile}
           onDialogClose={closeEditProfileDialog}
         />
       }
