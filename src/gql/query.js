@@ -66,6 +66,27 @@ export const GET_NOTES = gql`
   }
 `;
 
+export const GET_TRENDS_NOTES = gql`
+  query trendsNotes() {
+    trendsNotes() {
+      notes {
+        id
+        createdAt
+        content
+        favoriteCount
+        favoritedBy {
+          id
+        }
+        author {
+          id
+          username
+          avatar
+        }
+      }
+    }
+  }
+`;
+
 export const GET_USER_FAVORITES = gql`
   query UserFavorites($username: String!) {
     user(username: $username) {
