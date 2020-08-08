@@ -67,21 +67,19 @@ export const GET_NOTES = gql`
 `;
 
 export const GET_TRENDS_NOTES = gql`
-  query trendsNotes() {
-    trendsNotes() {
-      notes {
+  query trendsNotes {
+    trendsNotes {
+      id
+      createdAt
+      content
+      favoriteCount
+      favoritedBy {
         id
-        createdAt
-        content
-        favoriteCount
-        favoritedBy {
-          id
-        }
-        author {
-          id
-          username
-          avatar
-        }
+      }
+      author {
+        id
+        username
+        avatar
       }
     }
   }
