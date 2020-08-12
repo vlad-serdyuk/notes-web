@@ -16,6 +16,9 @@ const NavigationComponent = ({ history }) => {
       <Link to="/trends">
         <Text>Trends</Text>
       </Link>
+      <Link to="/profile">
+        <Text>Profile</Text>
+      </Link>
       <Button
         primary
         label="Create Note"
