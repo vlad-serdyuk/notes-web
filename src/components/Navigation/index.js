@@ -1,6 +1,8 @@
 import React from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Nav, Text, Button } from 'grommet';
+
+import { LinkText } from './Navigation.styled';
 
 const NavigationComponent = ({ history }) => {
 
@@ -10,15 +12,15 @@ const NavigationComponent = ({ history }) => {
 
   return (
     <Nav width="small" pad="small">
-      <Link to="/">
+      <LinkText to="/">
         <Text>Home</Text>
-      </Link>
-      <Link to="/trends">
+      </LinkText>
+      <LinkText to="/trends">
         <Text>Trends</Text>
-      </Link>
-      <Link to="/profile">
+      </LinkText>
+      <LinkText to="/profile">
         <Text>Profile</Text>
-      </Link>
+      </LinkText>
       <Button
         primary
         label="Create Note"
