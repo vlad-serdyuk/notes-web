@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { rgba } from 'polished';
-import { Box } from 'grommet';
+import { Text } from 'grommet';
 
-export const LinkText = styled(Link)`
+export const LinkWrapper = styled(Link)`
   color: ${({ theme }) => theme.global.colors.brand};
   text-decoration: none;
   font-weight: 600;
+  padding: 8px;
+  border-radius: 18px;
 
   &:hover {
     background-color: ${({ theme }) => rgba(theme.global.colors.brand, 0.1)};
@@ -14,8 +16,6 @@ export const LinkText = styled(Link)`
   }
 `;
 
-export const LinkWrapper = styled(Box).attrs({
-  width: '65px',
-  justify: 'center',
-  align: 'center',
-})``;
+export const LinkText = styled(Text)`
+  margin-left: 8px;
+`;
