@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { format } from 'date-fns';
 import { Avatar, Box, Button, Text } from 'grommet';
 
@@ -10,6 +10,10 @@ export const Profile = ({ user, updateProfile }) => {
   const openEditProfileDialog = () => setDialogOpen(true);
   const closeEditProfileDialog = () => setDialogOpen(false);
 
+  const avatarLabel = useMemo(() => {
+    return user.username ? user.username.charAt(0).toUpperCase() : '';
+  }, [user]);
+
   const onUpdateProfile = useCallback((username) => {    
     updateProfile({ variables: { username } });
     closeEditProfileDialog();
@@ -19,7 +23,7 @@ export const Profile = ({ user, updateProfile }) => {
     <Box gap="small">
       <Box direction="row-responsive" justify="between" align="center">
         <Box height="48px" width="48px" align="center">
-          <Avatar background="brand">{user.username.charAt(0).toUpperCase()}</Avatar>
+          <Avatar background="brand">{avatarLabel}</Avatar>
         </Box>
         <Button
           label="Edit profile"
