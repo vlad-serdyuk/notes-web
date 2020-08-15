@@ -1,10 +1,13 @@
 import React, { useState, useCallback, useMemo } from 'react';
+import { useQuery } from '@apollo/client';
 import { format } from 'date-fns';
 import { Avatar, Box, Button, Text } from 'grommet';
 
+import { GET_ME } from '/gql/query';
 import { EditProfileDialog } from './EditProfileDialog';
 
 export const Profile = ({ user, updateProfile }) => {
+  const { data: { me } = {} } = useQuery(GET_ME);
   const [isDialogOpen, setDialogOpen] = useState(false);
 
   const openEditProfileDialog = () => setDialogOpen(true);
@@ -13,6 +16,10 @@ export const Profile = ({ user, updateProfile }) => {
   const avatarLabel = useMemo(() => {
     return user.username ? user.username.charAt(0).toUpperCase() : '';
   }, [user]);
+
+  const isUserMe = useMemo(() => {
+    return user.id === me.id;
+  }, [user, me]);
 
   const onUpdateProfile = useCallback((username) => {    
     updateProfile({ variables: { username } });
@@ -25,10 +32,10 @@ export const Profile = ({ user, updateProfile }) => {
         <Box height="48px" width="48px" align="center">
           <Avatar background="brand">{avatarLabel}</Avatar>
         </Box>
-        <Button
+        {isUserMe && <Button
           label="Edit profile"
           onClick={openEditProfileDialog}
-        />
+        />}
       </Box>
       <Text size="large">{user.username}</Text>
       <Text>{user.email}</Text>
