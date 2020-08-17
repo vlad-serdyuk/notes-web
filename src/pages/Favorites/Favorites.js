@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_ME, GET_USER_FAVORITES } from '/gql/query';
 import { NoteFeed } from '/components/NoteFeed';
@@ -16,14 +16,13 @@ const FavoritesPage = () => {
   }
 
   return (
-    <div>
-      <h1>Favorites</h1>
+    <Fragment>
       {
         data.user.favorites.length
         ? <NoteFeed notes={data.user.favorites} />
         : <p>No notes yet</p>
       }
-    </div>
+    </Fragment>
   );
 };
 
