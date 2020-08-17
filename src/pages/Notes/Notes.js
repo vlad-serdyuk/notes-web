@@ -5,6 +5,7 @@ import { GET_USER_NOTES, GET_ME } from '/gql/query';
 import { UPDATE_USER } from '/gql/mutation';
 import { NoteFeed } from '/components/NoteFeed';
 import { Profile } from '/components/Profile';
+import { NotesTabs } from '/components/NotesTabs';
 
 const NotesPage = ({ match }) => {
   const { loading, error, data } = useQuery(GET_USER_NOTES, { variables: { username: match.params.author } });
@@ -41,7 +42,10 @@ const NotesPage = ({ match }) => {
         user={user}
         updateProfile={updateProfile}
       />
-      <NoteFeed notes={data.user.notes} />
+      <NotesTabs 
+        notes={<NoteFeed notes={data.user.notes} />}
+        favorites={<NoteFeed notes={data.user.notes} />}
+      />
     </Fragment>
   );
 };
