@@ -5,12 +5,12 @@ import { Notes, Favorite } from 'grommet-icons';
 const NotesTabs = ({ notes, favorites }) => {
   return (
     <Tabs flex justify="around">
-      <Tab title="Notes" icon={<Notes />} plain>
+      <Tab title="Notes" icon={<Notes />}>
         <Box margin={{ vertical: 'small' }}>
            {notes}
         </Box>
       </Tab>
-      <Tab title="Favorites" icon={<Favorite />} plain>
+      <Tab title="Favorites" icon={<Favorite />} >
         <Box margin={{ vertical: 'small' }}>
           {favorites}
         </Box>

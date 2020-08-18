@@ -4,6 +4,7 @@ import { Grommet } from 'grommet';
 import { ApolloProvider } from '@apollo/client'; 
 
 import GQLService from '/services/GQLService';
+import { theme } from './utils/theme';
 import { Pages } from './pages';
 import GlobalStyles from './styled/globalStyles';
 
@@ -12,7 +13,7 @@ GQLService.bootstrap();
 
 const App = () => (
   <ApolloProvider client={client}>
-    <Grommet plain>
+    <Grommet theme={theme}>
       <GlobalStyles />
       <Pages />
     </Grommet>
