@@ -44,7 +44,7 @@ const NotesPage = ({ match }) => {
       />
       <NotesTabs 
         notes={<NoteFeed notes={data.user.notes} />}
-        favorites={<NoteFeed notes={data.user.notes} />}
+        favorites={<NoteFeed notes={data.user.favorites} />}
       />
     </Fragment>
   );

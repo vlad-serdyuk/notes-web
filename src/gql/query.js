@@ -125,6 +125,20 @@ export const GET_USER_NOTES = gql`
           avatar
         }
       }
+      favorites {
+        id
+        content
+        createdAt
+        favoriteCount
+        favoritedBy {
+          id
+        }
+        author {
+          id
+          username
+          avatar
+        }
+      }
     }
   }
 `;
