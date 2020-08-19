@@ -19,7 +19,7 @@ export const LinkText = styled(Link)`
 `;
 
 export const LinkWrapper = styled(Box).attrs({
-  width: '65px',
+  width: '75px',
   justify: 'center',
   align: 'center',
 })``;

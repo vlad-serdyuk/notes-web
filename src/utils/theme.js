@@ -1,7 +1,13 @@
 import { grommet } from 'grommet/themes';
 import { deepMerge } from 'grommet/utils';
+console.log(grommet);
 
 export const theme = deepMerge(grommet, {
+  global: {
+    font: {
+      size: '16px',
+    }
+  },
   tab: {
     color: 'text',
     active: {
