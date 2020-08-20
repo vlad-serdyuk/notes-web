@@ -1,5 +1,6 @@
 import React, { memo, useState, useEffect, useCallback } from 'react'
-import { Box, Button, Layer, Heading, Text, TextInput } from 'grommet';
+import PropTypes from 'prop-types';
+import { Box, Button, Layer, Heading, TextInput } from 'grommet';
 import { Close } from 'grommet-icons';
 
 const EditProfileDialogComponent = ({ username, onDialogClose, onUpdateProfile }) => {
@@ -51,6 +52,12 @@ const EditProfileDialogComponent = ({ username, onDialogClose, onUpdateProfile }
       </Box>
     </Layer>
   );
+};
+
+EditProfileDialogComponent.propTypes = {
+  username: PropTypes.string.isRequired,
+  onDialogClose: PropTypes.func.isRequired,
+  onUpdateProfile: PropTypes.func.isRequired,
 };
 
 export const EditProfileDialog = memo(EditProfileDialogComponent);

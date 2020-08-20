@@ -1,7 +1,8 @@
 import React, { memo, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Box, TextArea, Button } from 'grommet';
 
-const NoteFormComponent = ({ btnLabel = 'Create', content = '', submitNote }) => {
+const NoteFormComponent = ({ btnLabel, content, submitNote }) => {
   const [note, setNote] = useState(content);
 
   const onChangeNote = (event) => {
@@ -26,5 +27,16 @@ const NoteFormComponent = ({ btnLabel = 'Create', content = '', submitNote }) =>
     </Box>
   );
 }
+
+NoteFormComponent.propTypes = {
+  btnLabel: PropTypes.string,
+  content: PropTypes.string,
+  submitNote: PropTypes.func.isRequired,
+};
+
+NoteFormComponent.defaultProps = {
+  btnLabel: 'Create',
+  content: '',
+};
 
 export const NoteForm = memo(NoteFormComponent);
