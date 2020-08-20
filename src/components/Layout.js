@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/client';
 import { Main, Box } from 'grommet';
 
@@ -25,4 +26,8 @@ export const Layout = ({ children }) => {
       </Main>
     </Fragment>
   );
+};
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired
 };

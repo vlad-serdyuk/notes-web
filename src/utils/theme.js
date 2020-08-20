@@ -1,6 +1,5 @@
 import { grommet } from 'grommet/themes';
 import { deepMerge } from 'grommet/utils';
-console.log(grommet);
 
 export const theme = deepMerge(grommet, {
   global: {
