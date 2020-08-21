@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { useQuery, useMutation } from '@apollo/client';
 
 import { NoteForm } from '/components/NoteForm/NoteForm';
@@ -33,6 +34,17 @@ const EditNotePage = ({ history, match }) => {
       submitNote={onUpdateNote}
     />
   );
+};
+
+EditNotePage.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  }),
 };
 
 export default EditNotePage;

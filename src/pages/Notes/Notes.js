@@ -1,4 +1,5 @@
 import React, { useMemo, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { useQuery, useMutation } from '@apollo/client';
 
 import { GET_USER_NOTES, GET_ME } from '/gql/query';
@@ -48,6 +49,14 @@ const NotesPage = ({ match }) => {
       />
     </Fragment>
   );
+};
+
+NotesPage.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  }),
 };
 
 export default NotesPage;

@@ -1,5 +1,6 @@
 import React, { memo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { useMutation, useApolloClient } from '@apollo/client';
 import { Anchor, Layer, Box, Heading, TextInput, Text, MaskedInput, Button } from 'grommet';
 import { MailOption, Close } from 'grommet-icons';
@@ -8,7 +9,7 @@ import { emailMask } from '/utils/validation';
 import { GET_ME } from '/gql/query';
 import { SIGNIN_USER } from '/gql/mutation';
 
-const SignInComponent = (props) => {
+const SignInComponent = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
@@ -19,7 +20,7 @@ const SignInComponent = (props) => {
     refetchQueries: [{ query: GET_ME }],
     onCompleted: () => {
       client.writeData({ data: { isLoggedIn: true } });
-      props.history.push('/');
+      history.push('/');
     }
   });
 
@@ -36,7 +37,7 @@ const SignInComponent = (props) => {
   };
 
   const onClose = () => {
-    props.history.push('/');
+    history.push('/');
   }
 
   useEffect(() => {
@@ -89,6 +90,12 @@ const SignInComponent = (props) => {
       </Box>
     </Layer>
   );
+};
+
+SignInComponent.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
 };
 
 export default memo(SignInComponent);

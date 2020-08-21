@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/client';
 
 import { Note } from '/components/Note';
@@ -16,6 +17,14 @@ const NotePage = ({ match: { params: { id } } }) => {
   }
 
   return <Note note={data.note} />;
+};
+
+NotePage.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  }),
 };
 
 export default NotePage;

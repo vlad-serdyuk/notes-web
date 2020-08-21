@@ -1,4 +1,5 @@
 import React, { memo, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useMutation, useApolloClient } from '@apollo/client';
 import { Layer, Box, Heading, TextInput, MaskedInput, Button } from 'grommet';
 import { MailOption, Close } from 'grommet-icons';
@@ -6,7 +7,7 @@ import { MailOption, Close } from 'grommet-icons';
 import { emailMask } from '/utils/validation';
 import { SIGNUP_USER } from '/gql/mutation';
 
-const SignInComponent = (props) => {
+const SignUpComponent = ({ history }) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -15,9 +16,9 @@ const SignInComponent = (props) => {
   const client = useApolloClient();
 
   const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
-    onCompleted: data => {
+    onCompleted: () => {
       client.writeData({ data: { isLoggedIn: true } });
-      props.history.push('/');
+      history.push('/');
     }
   });
 
@@ -38,7 +39,7 @@ const SignInComponent = (props) => {
   };
 
   const onClose = () => {
-    props.history.push('/');
+    history.push('/');
   }
 
   useEffect(() => {
@@ -94,4 +95,10 @@ const SignInComponent = (props) => {
   );
 };
 
-export default memo(SignInComponent);
+SignUpComponent.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
+};
+
+export default memo(SignUpComponent);

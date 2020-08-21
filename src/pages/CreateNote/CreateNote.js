@@ -1,4 +1,5 @@
 import React, { Fragment, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/client';
 
 import { NoteForm } from '/components/NoteForm/NoteForm';
@@ -24,6 +25,12 @@ const CreateNotePage = ({ history }) => {
       <NoteForm submitNote={onCreateNote} />
     </Fragment>
   );
+};
+
+CreateNotePage.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
 };
 
 export default CreateNotePage;
