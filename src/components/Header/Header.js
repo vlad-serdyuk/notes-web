@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
-import { useQuery } from '@apollo/client';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { useQuery } from '@apollo/client';
 import { Box } from 'grommet';
 
 import { useIsLoggedInQuery } from '/common/queries/auth';
@@ -62,6 +63,12 @@ const Header = ({ history }) => {
       </Box>
     </StyledHeader>
   );
+};
+
+Header.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
 };
 
 export default withRouter(Header);

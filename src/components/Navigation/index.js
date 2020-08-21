@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Nav, Button } from 'grommet';
 
 import { LinkWrapper, LinkText } from './Navigation.styled';
@@ -28,6 +29,12 @@ const NavigationComponent = ({ history }) => {
       />
     </Nav>
   );
+};
+
+NavigationComponent.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
 };
 
 export const Navigation = withRouter(NavigationComponent);

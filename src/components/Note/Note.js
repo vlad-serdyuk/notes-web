@@ -1,6 +1,7 @@
 import React, { memo, useMemo, useState, useCallback } from 'react'
 import ReactMarkdown from 'react-markdown';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { useQuery, useMutation } from '@apollo/client';
 import { format } from 'date-fns';
 import { Avatar, Box, Text } from 'grommet';
@@ -92,6 +93,13 @@ const NoteComponent = ({ note, history }) => {
         && <ConfirmDialog onDeleteNote={onDeleteNote} onDialogClose={onDialogClose} />}
     </Styled.NoteContainer>
   );
+};
+
+
+NoteComponent.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
 };
 
 export const Note = memo(withRouter(NoteComponent));
