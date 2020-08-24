@@ -19,9 +19,6 @@ export const theme = deepMerge(grommet, {
   tab: {
     color: 'text',
     background: 'none',
-    active: {
-      background: 'background-back',
-    },
     hover: {
       background: 'background-back',
       color: 'control',
@@ -30,7 +27,7 @@ export const theme = deepMerge(grommet, {
       side: 'bottom',
       color: 'background-back',
       active: {
-        color: 'border',
+        color: 'control',
       },
       hover: {
         color: 'control',
