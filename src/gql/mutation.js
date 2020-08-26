@@ -83,3 +83,23 @@ export const TOGGLE_FAVORITE_NOTE = gql`
     }
   }
 `;
+
+export const TOGGLE_PRIVACY_NOTE = gql`
+  mutation togglePrivacyNote($id: ID!, $private: Boolean!) {
+    togglePrivacy(id: $id, private: $private) {
+      id
+      content
+      createdAt
+      private
+      favoriteCount
+      favoritedBy {
+        id
+        username
+      }
+      author {
+        username
+        id
+      }
+    }
+  }
+`;
