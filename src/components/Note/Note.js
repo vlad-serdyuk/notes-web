@@ -78,6 +78,7 @@ const NoteComponent = ({ note, history }) => {
         <Box direction="row" gap="small" align="end">
           <Styled.AuthorText onClick={openAuthorNotes}>{note.author.username}</Styled.AuthorText>
           <Text size="small" color="grey">{format(note.createdAt, 'MMM do YYYY')}</Text>
+          {isUserNote && <Styled.IconButton plain icon={<Styled.LockIcon />} onClick={deleteNote} />}
         </Box>
         <ReactMarkdown source={note.content} />
         <Styled.ButtonContainer direction="row-responsive" gap="large">
