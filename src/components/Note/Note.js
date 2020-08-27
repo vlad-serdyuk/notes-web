@@ -74,11 +74,11 @@ const NoteComponent = ({ note, history }) => {
   return (
     <Styled.NoteContainer onClick={onNoteClick}>
       <Avatar size="large" src={note.author.avatar} onClick={openAuthorNotes} />
-      <Box>
-        <Box direction="row" gap="small" align="end">
+      <Box width="100%">
+        <Box direction="row" gap="small" align="center">
           <Styled.AuthorText onClick={openAuthorNotes}>{note.author.username}</Styled.AuthorText>
-          <Text size="small" color="grey">{format(note.createdAt, 'MMM do YYYY')}</Text>
-          {isUserNote && <Styled.IconButton plain icon={<Styled.LockIcon />} onClick={deleteNote} />}
+          <Styled.DateText size="small" color="grey">{format(note.createdAt, 'MMM do YYYY')}</Styled.DateText>
+          {isUserNote && <Styled.LockButton plain icon={<Styled.LockIcon />} onClick={deleteNote} />}
         </Box>
         <ReactMarkdown source={note.content} />
         <Styled.ButtonContainer direction="row-responsive" gap="large">

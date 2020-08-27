@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { rgba } from 'polished';
 import { Button, Box, Text } from 'grommet';
-import { Edit, Favorite, Trash, Lock } from 'grommet-icons';
+import { Edit, Favorite, Trash, Lock, Unlock } from 'grommet-icons';
 
 export const NoteContainer = styled(Box).attrs({
   align: 'center',
@@ -27,6 +27,10 @@ export const AuthorText = styled(Text)`
   &:hover {
     text-decoration: underline;
   }
+`;
+
+export const DateText = styled(Text)`
+  margin-right: auto;
 `;
 
 export const ButtonContainer = styled(Box)`
@@ -78,6 +82,20 @@ export const DeleteIcon = styled(Trash)`
   ${iconStyles}
 `;
 
+const lockIconStyles = css`
+  width: 16px;
+  height: 16px;
+`;
+
+export const LockButton = styled(IconButton)`
+  width: 32px;
+  height: 32px;
+`;
+
 export const LockIcon = styled(Lock)`
-  ${iconStyles}
+  ${lockIconStyles}
+`;
+
+export const UnlockIcon = styled(Unlock)`
+  ${lockIconStyles}
 `;
