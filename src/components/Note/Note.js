@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 import { Avatar, Box, Text } from 'grommet';
 
 import { GET_NOTES, GET_ME } from '/gql/query';
-import { TOGGLE_FAVORITE_NOTE, DELETE_NOTE } from '/gql/mutation';
+import { TOGGLE_FAVORITE_NOTE, TOGGLE_PRIVACY_NOTE, DELETE_NOTE } from '/gql/mutation';
 import { ConfirmDialog } from './components/ConfirmDialog';
 import * as Styled from './Note.styled';
 
@@ -16,6 +16,7 @@ const NoteComponent = ({ note, history }) => {
 
   const { data: { me } } = useQuery(GET_ME);
   const [toggleFavoriteMutation] = useMutation(TOGGLE_FAVORITE_NOTE);
+  const [togglePrivacyMutation] = useMutation(TOGGLE_PRIVACY_NOTE);
 
   const [deleteNoteMutation] = useMutation(DELETE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }],
@@ -51,9 +52,14 @@ const NoteComponent = ({ note, history }) => {
     history.push(`/note/${note.id}`);
   }, [note, history]);
 
+  const togglePrivacy = useCallback((e) => {
+    e.stopPropagation();
+    togglePrivacyMutation({ variables: { id: note.id } });
+  }, [togglePrivacyMutation, note]);
+
   const toggleFavorite = useCallback((e) => {
     e.stopPropagation();
-    toggleFavoriteMutation({ variables: { id: note.id } });
+    toggleFavoriteMutation({ variables: { id: note.id, private: !note.private } });
   }, [toggleFavoriteMutation, note]);
 
   const editNote = useCallback((e) => {
@@ -78,7 +84,7 @@ const NoteComponent = ({ note, history }) => {
         <Box direction="row" gap="small" align="center">
           <Styled.AuthorText onClick={openAuthorNotes}>{note.author.username}</Styled.AuthorText>
           <Styled.DateText size="small" color="grey">{format(note.createdAt, 'MMM do YYYY')}</Styled.DateText>
-          {isUserNote && <Styled.LockButton plain icon={<Styled.LockIcon />} onClick={deleteNote} />}
+          {isUserNote && <Styled.LockButton plain icon={<Styled.LockIcon />} onClick={togglePrivacy} />}
         </Box>
         <ReactMarkdown source={note.content} />
         <Styled.ButtonContainer direction="row-responsive" gap="large">
