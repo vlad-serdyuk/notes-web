@@ -54,12 +54,16 @@ const NoteComponent = ({ note, history }) => {
 
   const togglePrivacy = useCallback((e) => {
     e.stopPropagation();
-    togglePrivacyMutation({ variables: { id: note.id } });
+    togglePrivacyMutation({ variables: { id: note.id, private: !note.private } });
   }, [togglePrivacyMutation, note]);
+
+  const PrivacyIcon = useMemo(() => {
+    return note.private ? Styled.LockIcon : Styled.UnlockIcon;
+  }, [note]);
 
   const toggleFavorite = useCallback((e) => {
     e.stopPropagation();
-    toggleFavoriteMutation({ variables: { id: note.id, private: !note.private } });
+    toggleFavoriteMutation({ variables: { id: note.id } });
   }, [toggleFavoriteMutation, note]);
 
   const editNote = useCallback((e) => {
@@ -84,7 +88,7 @@ const NoteComponent = ({ note, history }) => {
         <Box direction="row" gap="small" align="center">
           <Styled.AuthorText onClick={openAuthorNotes}>{note.author.username}</Styled.AuthorText>
           <Styled.DateText size="small" color="grey">{format(note.createdAt, 'MMM do YYYY')}</Styled.DateText>
-          {isUserNote && <Styled.LockButton plain icon={<Styled.LockIcon />} onClick={togglePrivacy} />}
+          {isUserNote && <Styled.LockButton plain icon={<PrivacyIcon />} onClick={togglePrivacy} />}
         </Box>
         <ReactMarkdown source={note.content} />
         <Styled.ButtonContainer direction="row-responsive" gap="large">
