@@ -8,6 +8,7 @@ import { FavoritesPage } from './Favorites';
 import { NotePage } from './Note';
 import { SignUp } from './SignUp';
 import { ProfilePage } from './Profile';
+import { SettingsPage } from './Settings';
 import { SignIn } from './SignIn';
 import { CreateNotePage } from './CreateNote';
 import { EditNotePage } from './EditNote';
@@ -28,6 +29,7 @@ export const Pages = () => {
         <Route exact path="/note/:id" component={NotePage} />
 
         <Route exact path="/profile" component={ProfilePage} />
+        <Route exact path="/settings" component={SettingsPage} />
         
         <Route exact path="/sign-in" component={SignIn} />
         <Route exact path="/sign-up" component={SignUp} />
