@@ -13,12 +13,14 @@ export const theme = deepMerge(grommet, {
       extend: () => css`
         margin-top: 16px;
         margin-bottom: -12px;
+        flex-wrap: nowrap;
       `,
     }
   },
   tab: {
     color: 'text',
     background: 'none',
+    width: '100%',
     hover: {
       background: 'background-back',
       color: 'control',
