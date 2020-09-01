@@ -22,6 +22,9 @@ const NavigationComponent = ({ history }) => {
       <LinkWrapper to="/profile">
         <LinkText>Profile</LinkText>
       </LinkWrapper>
+      <LinkWrapper to="/settings">
+        <LinkText>Settings</LinkText>
+      </LinkWrapper>
       <Button
         primary
         label="Create Note"
