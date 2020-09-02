@@ -14,6 +14,7 @@ export const theme = deepMerge(grommet, {
         margin-top: 16px;
         margin-bottom: -12px;
         flex-wrap: nowrap;
+        text-align: center;
       `,
     }
   },
@@ -35,7 +36,7 @@ export const theme = deepMerge(grommet, {
         color: 'control',
       },
     },
-    pad: 'none',
+    pad: '8px',
     margin: 'none',
   },
 });
