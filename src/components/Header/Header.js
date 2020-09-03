@@ -57,6 +57,7 @@ const Header = ({ history }) => {
               onLogOut={onLogOut}
             />
           ) : (
+            <LinkText to="/sign-up">Log In</LinkText>
             <LinkText to="/sign-in">Log In</LinkText>
           )
         }

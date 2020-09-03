@@ -2,10 +2,13 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Nav, Button } from 'grommet';
+import { useQuery } from '@apollo/client';
+import { GET_ME } from '/gql/query';
 
 import { LinkWrapper, LinkText } from './Navigation.styled';
 
 const NavigationComponent = ({ history }) => {
+  const { data: { me } = {} } = useQuery(GET_ME);
 
   const onCreateNoteClick = () => {
     history.push('/new');
@@ -19,12 +22,12 @@ const NavigationComponent = ({ history }) => {
       <LinkWrapper to="/trends">
         <LinkText>Trends</LinkText>
       </LinkWrapper>
-      <LinkWrapper to="/profile">
+      {me && <LinkWrapper to="/profile">
         <LinkText>Profile</LinkText>
-      </LinkWrapper>
-      <LinkWrapper to="/settings">
+      </LinkWrapper>}
+      {me && <LinkWrapper to="/settings">
         <LinkText>Settings</LinkText>
-      </LinkWrapper>
+      </LinkWrapper>}
       <Button
         primary
         label="Create Note"
