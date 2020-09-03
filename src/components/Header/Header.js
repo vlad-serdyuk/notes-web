@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/client';
@@ -57,8 +57,10 @@ const Header = ({ history }) => {
               onLogOut={onLogOut}
             />
           ) : (
-            <LinkText to="/sign-up">Log In</LinkText>
-            <LinkText to="/sign-in">Log In</LinkText>
+            <Fragment>
+              <LinkText to="/sign-up">Log In</LinkText>
+              <LinkText to="/sign-in">Log In</LinkText>
+            </Fragment>
           )
         }
       </Box>
