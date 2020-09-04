@@ -58,8 +58,12 @@ const Header = ({ history }) => {
             />
           ) : (
             <Fragment>
-              <LinkText to="/sign-up">Log In</LinkText>
-              <LinkText to="/sign-in">Log In</LinkText>
+              <LinkWrapper>
+                <LinkText to="/sign-up">Sign up</LinkText>
+              </LinkWrapper>
+              <LinkWrapper>
+                <LinkText to="/sign-in">Log In</LinkText>
+              </LinkWrapper>
             </Fragment>
           )
         }
