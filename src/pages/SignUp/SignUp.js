@@ -1,7 +1,8 @@
 import React, { memo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { useMutation, useApolloClient } from '@apollo/client';
-import { Layer, Box, Heading, TextInput, MaskedInput, Button } from 'grommet';
+import { Layer, Box, Heading, Text, TextInput, MaskedInput, Button } from 'grommet';
 import { MailOption, Close } from 'grommet-icons';
 
 import { emailMask } from '/utils/validation';
@@ -89,7 +90,13 @@ const SignUpComponent = ({ history }) => {
           label="Sign Up"
           onClick={onSubmit}
         />
-        {error && <p>Error signing in</p>}
+        {error && <p>Error signing up</p>}
+        <Box align="center">
+          <Text>
+            Already have an account?{' '}
+            <Link to="/sign-in"><Anchor label="Sign In" as="span" /></Link>
+          </Text>
+        </Box>
       </Box>
     </Layer>
   );
