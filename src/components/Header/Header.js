@@ -48,7 +48,7 @@ const Header = ({ history }) => {
       </Box>
       <Box direction="row" gap="medium">
         {
-          isLoggedIn ? (
+          (isLoggedIn && me) ? (
             <AvatarDropButton
               email={me.email}
               initials={initials}

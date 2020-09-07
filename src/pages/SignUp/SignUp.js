@@ -2,7 +2,7 @@ import React, { memo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useMutation, useApolloClient } from '@apollo/client';
-import { Layer, Box, Heading, Text, TextInput, MaskedInput, Button } from 'grommet';
+import { Anchor, Layer, Box, Heading, Text, TextInput, MaskedInput, Button } from 'grommet';
 import { MailOption, Close } from 'grommet-icons';
 
 import { emailMask } from '/utils/validation';
