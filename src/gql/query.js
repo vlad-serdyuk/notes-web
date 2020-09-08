@@ -34,6 +34,7 @@ export const GET_NOTE = gql`
       favoriteCount
       favoritedBy {
         id
+        username
       }
       author {
         username
@@ -57,6 +58,7 @@ export const GET_NOTES = gql`
         favoriteCount
         favoritedBy {
           id
+          username
         }
         author {
           id
@@ -77,6 +79,7 @@ export const GET_TRENDS_NOTES = gql`
       favoriteCount
       favoritedBy {
         id
+        username
       }
       author {
         id
@@ -121,6 +124,7 @@ export const GET_USER_NOTES = gql`
         favoriteCount
         favoritedBy {
           id
+          username
         }
         author {
           id
