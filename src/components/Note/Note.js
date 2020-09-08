@@ -1,10 +1,10 @@
-import React, { memo, useMemo, useState, useCallback } from 'react'
+import React, { memo, useMemo, useState, useCallback, useRef } from 'react'
 import ReactMarkdown from 'react-markdown';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useQuery, useMutation } from '@apollo/client';
 import { format } from 'date-fns';
-import { Avatar, Box, Text } from 'grommet';
+import { Avatar, Box, Text, Drop } from 'grommet';
 
 import { GET_NOTES, GET_ME } from '/gql/query';
 import { TOGGLE_FAVORITE_NOTE, TOGGLE_PRIVACY_NOTE, DELETE_NOTE } from '/gql/mutation';
@@ -13,6 +13,7 @@ import * as Styled from './Note.styled';
 
 const NoteComponent = ({ note, history }) => {
   const [isDialogOpen, setDialogOpen] = useState(false);
+  const favoritesRef = useRef();
 
   const { data: { me } } = useQuery(GET_ME);
   const [toggleFavoriteMutation] = useMutation(TOGGLE_FAVORITE_NOTE);
@@ -93,13 +94,30 @@ const NoteComponent = ({ note, history }) => {
         <ReactMarkdown source={note.content} />
         <Styled.ButtonContainer direction="row-responsive" gap="large">
           <Box direction="row" align="center">
-            <Styled.IconButton plain icon={<Styled.FavoriteIcon selected={isUserFavorite} />} onClick={toggleFavorite} />
+            <Styled.IconButton 
+              plain
+              ref={favoritesRef}
+              icon={<Styled.FavoriteIcon selected={isUserFavorite} />}
+              onClick={toggleFavorite}
+            />
             {(note.favoriteCount > 0) && <Text size="small" color={isUserFavorite ? 'brand' : null}>{note.favoriteCount}</Text>}
           </Box>
           {isUserNote && <Styled.IconButton plain icon={<Styled.EditIcon />} onClick={editNote} />}
           {isUserNote && <Styled.IconButton plain icon={<Styled.DeleteIcon />} onClick={deleteNote} />}
         </Styled.ButtonContainer>
       </Box>
+      {favoritesRef.current
+        && <Drop align={{ left: 'right' }} target={ref.current} plain>
+            <Box
+              margin="xsmall"
+              pad="small"
+              background="dark-3"
+              round={{ size: 'medium', corner: 'left' }}
+            >
+              tooltip contents
+            </Box>
+          </Drop>
+          }
       {isDialogOpen
         && <ConfirmDialog onDeleteNote={onDeleteNote} onDialogClose={onDialogClose} />}
     </Styled.NoteContainer>
