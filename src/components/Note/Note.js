@@ -107,14 +107,15 @@ const NoteComponent = ({ note, history }) => {
         </Styled.ButtonContainer>
       </Box>
       {favoritesRef.current
-        && <Drop align={{ left: 'right' }} target={ref.current} plain>
+        && <Drop align={{ left: 'right' }} target={favoritesRef.current} plain>
             <Box
               margin="xsmall"
               pad="small"
               background="dark-3"
               round={{ size: 'medium', corner: 'left' }}
             >
-              tooltip contents
+              {note.favoritedBy.map((item) => <span>{item.username}</span>)
+              }
             </Box>
           </Drop>
           }
