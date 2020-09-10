@@ -40,6 +40,10 @@ const NoteComponent = ({ note, history }) => {
     return (note.favoritedBy || []).find(({ id }) => me.id === id);
   }, [note, me]);
 
+  const isFavoritesTooltipShow = useMemo(() => {
+    return isTooltipOpen && !!note.favoritedBy.length && favoritesRef.current;
+  }, [note, isTooltipOpen, favoritesRef]);
+
   const onDialogClose = (e) => {
     e.stopPropagation();
     setDialogOpen(false);
@@ -109,7 +113,7 @@ const NoteComponent = ({ note, history }) => {
           {isUserNote && <Styled.IconButton plain icon={<Styled.DeleteIcon />} onClick={deleteNote} />}
         </Styled.ButtonContainer>
       </Box>
-      {favoritesRef.current && isTooltipOpen
+      {isFavoritesTooltipShow
         && <Drop align={{ left: 'right' }} target={favoritesRef.current} plain>
             <Box
               margin="xsmall"
