@@ -13,6 +13,7 @@ import * as Styled from './Note.styled';
 
 const NoteComponent = ({ note, history }) => {
   const [isDialogOpen, setDialogOpen] = useState(false);
+  const [isTooltipOpen, setTooltipOpen] = useState(false);
   const favoritesRef = useRef();
 
   const { data: { me } } = useQuery(GET_ME);
@@ -99,6 +100,8 @@ const NoteComponent = ({ note, history }) => {
               ref={favoritesRef}
               icon={<Styled.FavoriteIcon selected={isUserFavorite} />}
               onClick={toggleFavorite}
+              onMouseOver={() => setTooltipOpen(true)}
+              onMouseOut={() => setTooltipOpen(false)}
             />
             {(note.favoriteCount > 0) && <Text size="small" color={isUserFavorite ? 'brand' : null}>{note.favoriteCount}</Text>}
           </Box>
@@ -106,16 +109,15 @@ const NoteComponent = ({ note, history }) => {
           {isUserNote && <Styled.IconButton plain icon={<Styled.DeleteIcon />} onClick={deleteNote} />}
         </Styled.ButtonContainer>
       </Box>
-      {favoritesRef.current
+      {favoritesRef.current && isTooltipOpen
         && <Drop align={{ left: 'right' }} target={favoritesRef.current} plain>
             <Box
               margin="xsmall"
               pad="small"
               background="dark-3"
-              round={{ size: 'medium', corner: 'left' }}
+              round={{ size: 'xsmall' }}
             >
-              {note.favoritedBy.map((item) => <span>{item.username}</span>)
-              }
+              {note.favoritedBy.map((item) => <span key={item.username}>{item.username}</span>)}
             </Box>
           </Drop>
           }
