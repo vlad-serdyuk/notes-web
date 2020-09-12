@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useMemo } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 
 import { GET_USER_NOTES, GET_ME } from '/gql/query';
@@ -14,6 +14,10 @@ const ProfilePage = () => {
   const [updateProfile] = useMutation(UPDATE_USER, {
     refetchQueries: [{ query: GET_ME }],
   });
+
+  const privateNotes = useMemo(() => {
+    return user.notes.filter((note) => note.private);
+  }, [user]);
 
   if (loading) {
     return <p>loading...</p>;
@@ -32,6 +36,7 @@ const ProfilePage = () => {
       <NotesTabs 
         notes={<NoteFeed notes={user.notes} />}
         favorites={<NoteFeed notes={user.favorites} />}
+        privates={<NoteFeed notes={privateNotes} />}
       />
     </Fragment>
   );

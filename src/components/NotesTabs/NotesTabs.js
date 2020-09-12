@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Tab, Tabs } from 'grommet';
 
-const NotesTabs = ({ notes, favorites }) => {
+const NotesTabs = ({ notes, favorites, privates }) => {
   return (
     <Tabs flex>
       <Tab title="Notes" fill="horizontal">
@@ -12,6 +12,11 @@ const NotesTabs = ({ notes, favorites }) => {
       <Tab title="Favorites" fill="horizontal">
         <Box margin={{ vertical: 'small' }}>
           {favorites}
+        </Box>
+      </Tab>
+      <Tab title="Privates" fill="horizontal">
+        <Box margin={{ vertical: 'small' }}>
+          {privates}
         </Box>
       </Tab>
     </Tabs>
