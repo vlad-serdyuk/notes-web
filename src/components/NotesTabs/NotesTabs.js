@@ -14,11 +14,12 @@ const NotesTabs = ({ notes, favorites, privates }) => {
           {favorites}
         </Box>
       </Tab>
-      <Tab title="Privates" fill="horizontal">
-        <Box margin={{ vertical: 'small' }}>
-          {privates}
-        </Box>
-      </Tab>
+      {privates && <Tab title="Privates" fill="horizontal">
+          <Box margin={{ vertical: 'small' }}>
+            {privates}
+          </Box>
+        </Tab>
+      }
     </Tabs>
   );
 };
