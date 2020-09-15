@@ -16,6 +16,10 @@ const ProfilePage = () => {
   });
 
   const privateNotes = useMemo(() => {
+    if (loading || error) {
+      return [];
+    }
+
     return user.notes.filter((note) => note.private);
   }, [user]);
 
