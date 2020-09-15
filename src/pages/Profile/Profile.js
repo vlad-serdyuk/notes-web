@@ -21,7 +21,7 @@ const ProfilePage = () => {
     }
 
     return user.notes.filter((note) => note.private);
-  }, [user]);
+  }, [user, loading, error]);
 
   if (loading) {
     return <p>loading...</p>;

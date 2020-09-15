@@ -111,7 +111,7 @@ export const GET_USER_FAVORITES = gql`
 `;
 
 export const GET_USER_NOTES = gql`
-  query UserFavorites($username: String!) {
+  query UserNotes($username: String!) {
     user(username: $username) {
       id
       username
@@ -120,6 +120,7 @@ export const GET_USER_NOTES = gql`
       notes {
         id
         content
+        private
         createdAt
         favoriteCount
         favoritedBy {
@@ -136,6 +137,7 @@ export const GET_USER_NOTES = gql`
         id
         content
         createdAt
+        private
         favoriteCount
         favoritedBy {
           id
