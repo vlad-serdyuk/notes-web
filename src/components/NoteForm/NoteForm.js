@@ -15,14 +15,17 @@ const NoteFormComponent = ({ btnLabel, content, submitNote }) => {
 
   return (
     <Box align="center">
-      <Box gap="small" width="medium" align="center">
+      <Box gap="small" width="medium">
         <TextArea value={note} onChange={onChangeNote} />
-        <Button
-          primary
-          disabled={!note}
-          label={btnLabel}
-          onClick={onSubmit}
-        />
+        <Box justify="between" direction="row">
+          <Button
+            primary
+            disabled={!note}
+            label={btnLabel}
+            onClick={onSubmit}
+          />
+        </Box>
+
       </Box>
     </Box>
   );

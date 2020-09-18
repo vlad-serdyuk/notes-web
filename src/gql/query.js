@@ -100,6 +100,10 @@ export const GET_USER_FAVORITES = gql`
         private
         createdAt
         favoriteCount
+        favoritedBy {
+          id
+          username
+        }
         author {
           id
           username
