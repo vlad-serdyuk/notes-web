@@ -15,7 +15,7 @@ const CreateNotePage = ({ history }) => {
   });
 
   const onCreateNote = useCallback(({ note }) => {
-    createNote({ variables: { content: note } });
+    createNote({ variables: { content: note, private: false } });
   }, [createNote]);
 
   return (

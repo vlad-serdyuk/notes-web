@@ -22,8 +22,8 @@ export const UPDATE_USER = gql`
 `;
 
 export const CREATE_NOTE = gql`
-  mutation createNote($content: String!) {
-    createNote(content: $content) {
+  mutation createNote($content: String!, $private: Boolean!) {
+    createNote(content: $content, private: $private) {
       id
       content
       createdAt
