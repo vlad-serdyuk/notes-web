@@ -1,23 +1,29 @@
 import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, TextArea, Button } from 'grommet';
+import { Lock, Unlock } from 'grommet-icons';
 
 const NoteFormComponent = ({ btnLabel, content, submitNote }) => {
   const [note, setNote] = useState(content);
+  const [privacy, setPrivacy] = useState(false);
 
   const onChangeNote = (event) => {
     setNote(event.target.value);
   };
 
-  const onSubmit = () => {
-    submitNote({ note });
-  };
+  const onSubmit = () => submitNote({ note, privacy });
+  const togglePrivacy = () => setPrivacy(!privacy);
 
   return (
     <Box align="center">
       <Box gap="small" width="medium">
         <TextArea value={note} onChange={onChangeNote} />
         <Box justify="between" direction="row">
+          <Button
+            label={btnLabel}
+            icon={<Lock />}
+            onClick={togglePrivacy}
+          />
           <Button
             primary
             disabled={!note}
