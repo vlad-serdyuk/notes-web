@@ -8,6 +8,11 @@ export const theme = deepMerge(grommet, {
       size: '16px',
     }
   },
+  button: {
+    border: {
+      radius: '12px',
+    },
+  },
   tabs: {
     header: {
       extend: () => css`

@@ -20,8 +20,8 @@ const NoteFormComponent = ({ btnLabel, content, submitNote }) => {
         <TextArea value={note} onChange={onChangeNote} />
         <Box justify="between" direction="row">
           <Button
-            label={btnLabel}
-            icon={<Lock />}
+            label={privacy ? 'Private note' : 'Public note'}
+            icon={privacy ? <Lock /> : <Unlock />}
             onClick={togglePrivacy}
           />
           <Button
