@@ -41,8 +41,8 @@ export const CREATE_NOTE = gql`
 `;
 
 export const UPDATE_NOTE = gql`
-  mutation updateNote($id: ID!, $content: String!) {
-    updateNote(id: $id, content: $content) {
+  mutation updateNote($id: ID!, $content: String!, $private: Boolean!) {
+    updateNote(id: $id, content: $content, private: $private) {
       id
       content
       createdAt

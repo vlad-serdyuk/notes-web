@@ -15,8 +15,8 @@ const EditNotePage = ({ history, match }) => {
     },
   });
 
-  const onUpdateNote = useCallback(({ note }) => {
-    updateNote({ variables: { id: noteData.note.id, content: note } });
+  const onUpdateNote = useCallback(({ note, privacy }) => {
+    updateNote({ variables: { id: noteData.note.id, content: note, private: privacy } });
   }, [updateNote, noteData]);
 
   if (loading || noteLoading) {
