@@ -1,6 +1,6 @@
 import React, { memo, useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types';
-import { Box, Button, Layer, Heading, TextInput } from 'grommet';
+import { Box, Button, Layer, Heading, Text, TextInput } from 'grommet';
 import { Close } from 'grommet-icons';
 
 const EditProfileDialogComponent = ({ username, onDialogClose, onUpdateProfile }) => {
@@ -28,6 +28,7 @@ const EditProfileDialogComponent = ({ username, onDialogClose, onUpdateProfile }
           </Heading>
           <Button icon={<Close />} onClick={onDialogClose} />
         </Box>
+        <Text>Username:</Text>
         <TextInput
           type="text"
           placeholder="username"
