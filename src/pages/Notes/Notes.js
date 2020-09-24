@@ -10,6 +10,7 @@ import { NotesTabs } from '/components/NotesTabs';
 
 const NotesPage = ({ match }) => {
   const { loading, error, data } = useQuery(GET_USER_NOTES, { variables: { username: match.params.author } });
+  const { data: { me } = {} } = useQuery(GET_ME, { variables: { username: match.params.author } });
   const [updateProfile] = useMutation(UPDATE_USER, {
     refetchQueries: [{ query: GET_ME }],
   });
@@ -29,6 +30,14 @@ const NotesPage = ({ match }) => {
     };
   }, [data]);
 
+  const privateNotes = useMemo(() => {
+    if (loading || error) {
+      return [];
+    }
+
+    return data.user.notes.filter((note) => note.private);
+  }, [data, loading, error]);
+
   if (loading) {
     return <p>loading...</p>;
   }
@@ -46,6 +55,7 @@ const NotesPage = ({ match }) => {
       <NotesTabs 
         notes={<NoteFeed notes={data.user.notes} />}
         favorites={<NoteFeed notes={data.user.favorites} />}
+        privates={data.user.id === me.id ? <NoteFeed notes={privateNotes} /> : null}
       />
     </Fragment>
   );
