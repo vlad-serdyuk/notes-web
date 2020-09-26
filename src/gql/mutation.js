@@ -21,6 +21,12 @@ export const UPDATE_USER = gql`
   }
 `;
 
+export const RESET_PASSWORD = gql`
+  mutation resetPassword($oldPassword: String!, $newPassword: String!) {
+    resetPassword(oldPassword: $oldPassword, newPassword: $newPassword)
+  }
+`;
+
 export const CREATE_NOTE = gql`
   mutation createNote($content: String!, $private: Boolean!) {
     createNote(content: $content, private: $private) {
