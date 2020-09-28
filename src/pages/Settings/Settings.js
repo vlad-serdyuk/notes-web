@@ -12,11 +12,7 @@ export const SettingsPage = () => {
   const [confirmedNewPassword, setConfirmedNewPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
 
-  const [resetPasswordMutation, { loading, error }] = useMutation(RESET_PASSWORD, {
-    onCompleted: data => {
-      history.push(`note/${data.createNote.id}`);
-    },
-  });
+  const [resetPasswordMutation, { loading, error }] = useMutation(RESET_PASSWORD);
 
   const resetPassword = useCallback(() => {
     resetPasswordMutation({ variables: { oldPassword, newPassword } });
@@ -27,9 +23,9 @@ export const SettingsPage = () => {
   const onChangeConfirmPassword = (event) => setConfirmedNewPassword(event.target.value);
 
   useEffect(() => {
-    const arePasswordsEqual = !newPassword || newPassword !== confirmedNewPassword;
-    const isPasswordProperLength = newPassword.length > MIN_PASSWORD_LENGTH;
-    setDisabled(arePasswordsEqual && isPasswordProperLength);
+    const arePasswordsNotEqual = !newPassword || newPassword !== confirmedNewPassword;
+    const isPasswordProperLength = newPassword.length >= MIN_PASSWORD_LENGTH;
+    setDisabled(arePasswordsNotEqual || !isPasswordProperLength);
   }, [setDisabled, newPassword, confirmedNewPassword]);
 
   return (
