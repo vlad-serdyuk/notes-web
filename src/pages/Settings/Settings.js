@@ -4,6 +4,8 @@ import { Box, Button, Heading, Text, TextInput } from 'grommet';
 
 import { RESET_PASSWORD } from '/gql/mutation';
 
+const MIN_PASSWORD_LENGTH = 6;
+
 export const SettingsPage = () => {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -25,7 +27,9 @@ export const SettingsPage = () => {
   const onChangeConfirmPassword = (event) => setConfirmedNewPassword(event.target.value);
 
   useEffect(() => {
-    setDisabled(!newPassword || newPassword !== confirmedNewPassword);
+    const arePasswordsEqual = !newPassword || newPassword !== confirmedNewPassword;
+    const isPasswordProperLength = newPassword.length > MIN_PASSWORD_LENGTH;
+    setDisabled(arePasswordsEqual && isPasswordProperLength);
   }, [setDisabled, newPassword, confirmedNewPassword]);
 
   return (
