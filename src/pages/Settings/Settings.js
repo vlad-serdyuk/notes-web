@@ -12,7 +12,13 @@ export const SettingsPage = () => {
   const [confirmedNewPassword, setConfirmedNewPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
 
-  const [resetPasswordMutation, { loading, error }] = useMutation(RESET_PASSWORD);
+  const [resetPasswordMutation, { loading, error }] = useMutation(RESET_PASSWORD, {
+    onCompleted: () => {
+      setOldPassword('');
+      setNewPassword('');
+      setConfirmedNewPassword('');
+    },
+  });
 
   const resetPassword = useCallback(() => {
     resetPasswordMutation({ variables: { oldPassword, newPassword } });
