@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useApolloClient } from '@apollo/client';
 import { Box, Button, Layer, Text } from 'grommet';
 import { FormClose, StatusGood } from 'grommet-icons';
 
-export const NotificationBar = ({ text }) => {
+export const NotificationBar = ({ open, text }) => {
   const [isOpen, setOpen] = useState(false);
 
   const onClose = () => setOpen(false);
+
+  useEffect(() => {
+    if (open) {
+      setTimeout(setOpen(true), 3000);
+    }
+  }, [open, isOpen]);
+
+  if (!isOpen) {
+    return null;
+  }
   
   return (
     <Layer
