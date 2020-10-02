@@ -7,6 +7,8 @@ import { FormClose, StatusGood } from 'grommet-icons';
 
 import { SHOW_NOTIFIFCATION } from '/gql/query';
 
+const NOTIFICATION_BAR_SHOWING_TIME = 3000;
+
 export const NotificationBar = ({ text = 'aome text' }) => {
   const [isOpen, setOpen] = useState(false);
 
@@ -18,6 +20,7 @@ export const NotificationBar = ({ text = 'aome text' }) => {
   useEffect(() => {
     if (!isOpen && isNotificationShown) {
       setOpen(true);
+      window.setTimeout(() => setOpen(false), NOTIFICATION_BAR_SHOWING_TIME);
     }
   }, [isNotificationShown]);
 
