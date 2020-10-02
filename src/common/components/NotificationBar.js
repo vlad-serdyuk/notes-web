@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useQuery } from '@apollo/client';
 import { useApolloClient } from '@apollo/client';
 import { Box, Button, Layer, Text } from 'grommet';
 import { FormClose, StatusGood } from 'grommet-icons';
 
-export const NotificationBar = ({ open, text }) => {
+import { SHOW_NOTIFIFCATION } from '/gql/query';
+
+export const NotificationBar = ({ text = 'aome text' }) => {
   const [isOpen, setOpen] = useState(false);
+
+  const { data: { isNotificationShown } = {} } = useQuery(SHOW_NOTIFIFCATION);
+  const client = useApolloClient();
 
   const onClose = () => setOpen(false);
 
   useEffect(() => {
-    if (open) {
-      setTimeout(setOpen(true), 3000);
+    if (!isOpen && isNotificationShown) {
+      setOpen(true);
     }
-  }, [open, isOpen]);
+  }, [isNotificationShown]);
 
   if (!isOpen) {
     return null;
@@ -46,9 +52,5 @@ export const NotificationBar = ({ open, text }) => {
       </Box>
     </Layer>
   )
-};
-
-NotificationBar.propTypes = {
-  children: PropTypes.element.isRequired
 };
   

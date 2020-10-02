@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { useMutation } from '@apollo/client';
-import { Box, Button, Heading, Text, TextInput } from 'grommet';
+import { useMutation, useApolloClient } from '@apollo/client';
+import { Box, Button, Text, TextInput } from 'grommet';
 
 import { RESET_PASSWORD } from '/gql/mutation';
 
@@ -12,11 +12,15 @@ export const SettingsPage = () => {
   const [confirmedNewPassword, setConfirmedNewPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
 
+  const client = useApolloClient();
+
   const [resetPasswordMutation, { loading, error }] = useMutation(RESET_PASSWORD, {
     onCompleted: () => {
       setOldPassword('');
       setNewPassword('');
       setConfirmedNewPassword('');
+      // const g = client.readData();
+      client.writeData({ data: { isNotificationShown: true } });
     },
   });
 
