@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/client';
 import { useApolloClient } from '@apollo/client';
 import { Box, Button, Layer, Text } from 'grommet';
@@ -9,7 +8,7 @@ import { SHOW_NOTIFIFCATION } from '/gql/query';
 
 const NOTIFICATION_BAR_SHOWING_TIME = 3000;
 
-export const NotificationBar = ({ text = 'aome text' }) => {
+export const NotificationBar = ({ text = 'some text' }) => {
   const [isOpen, setOpen] = useState(false);
 
   const { data: { isNotificationShown } = {} } = useQuery(SHOW_NOTIFIFCATION);
