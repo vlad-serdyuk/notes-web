@@ -4,7 +4,6 @@ import { useQuery } from '@apollo/client';
 import { Main, Box } from 'grommet';
 
 import { GET_APP_METADATA } from '/gql/query';
-import { NotificationBar } from '/common/components/NotificationBar';
 import { Header } from './Header';
 import { Skeleton } from './Skeleton';
 import { Navigation } from './Navigation';
@@ -24,7 +23,6 @@ export const Layout = ({ children }) => {
             : children
           }
         </Box>
-        <NotificationBar />
       </Main>
     </Fragment>
   );

@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Grommet } from 'grommet';
 import { ApolloProvider } from '@apollo/client'; 
 
 import GQLService from '/services/GQLService';
 import { theme } from './utils/theme';
-import { Pages } from './pages';
+import { AppContainer } from '/components/AppContainer';
 import GlobalStyles from './styled/globalStyles';
 
 const client = GQLService.getInitialClient();
@@ -15,7 +16,7 @@ const App = () => (
   <ApolloProvider client={client}>
     <Grommet theme={theme}>
       <GlobalStyles />
-      <Pages />
+      <AppContainer />
     </Grommet>
   </ApolloProvider>
 );

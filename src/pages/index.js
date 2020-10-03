@@ -12,8 +12,8 @@ import { SettingsPage } from './Settings';
 import { SignIn } from './SignIn';
 import { CreateNotePage } from './CreateNote';
 import { EditNotePage } from './EditNote';
-import { Layout } from '../components/Layout';
-import { PrivateRoute } from '../common/components/PrivateRoute';
+import { Layout } from '/components/Layout';
+import { PrivateRoute } from '/common/components/PrivateRoute';
 
 export const Pages = () => {
   return (
