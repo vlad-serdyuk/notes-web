@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { useApolloClient } from '@apollo/client';
 import { Box, Button, Layer, Text } from 'grommet';
 import { FormClose, StatusGood } from 'grommet-icons';
 
@@ -11,17 +10,21 @@ const NOTIFICATION_BAR_SHOWING_TIME = 3000;
 export const NotificationBar = ({ text = 'some text' }) => {
   const [isOpen, setOpen] = useState(false);
 
-  const { data: { isNotificationShown } = {} } = useQuery(SHOW_NOTIFIFCATION);
-  const client = useApolloClient();
+  const { data: { isNotificationShown } = {}, client } = useQuery(SHOW_NOTIFIFCATION);
 
   const onClose = () => setOpen(false);
 
   useEffect(() => {
     if (!isOpen && isNotificationShown) {
       setOpen(true);
-      window.setTimeout(() => setOpen(false), NOTIFICATION_BAR_SHOWING_TIME);
+      window.setTimeout(() => closeNotificationBar(), NOTIFICATION_BAR_SHOWING_TIME);
     }
   }, [isNotificationShown]);
+
+  closeNotificationBar = () => {
+    setOpen(false);
+    client.writeData({ data: { isNotificationShown: false } });
+  };
 
   if (!isOpen) {
     return null;
