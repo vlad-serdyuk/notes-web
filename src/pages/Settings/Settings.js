@@ -19,7 +19,7 @@ export const SettingsPage = () => {
       setConfirmedNewPassword('');
     },
     update: (cache) => {
-      cache.writeData({ data: { isNotificationShown: true } });
+      cache.writeData({ data: { notificationBar: { show: true } } });
     }
   });
 

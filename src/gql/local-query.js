@@ -8,7 +8,10 @@ export const IS_LOGGED_IN = gql`
 
 export const SHOW_NOTIFIFCATION = gql`
   {
-    isNotificationShown @client
+    notificationBar @client {
+      show
+      text
+    }
   }
 `;
 
