@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/client';
 import { Main, Box } from 'grommet';
 
-import { GET_APP_METADATA } from '/gql/query';
+import { GET_APP_METADATA } from '/gql/local-query';
 import { Header } from './Header';
 import { Skeleton } from './Skeleton';
 import { Navigation } from './Navigation';

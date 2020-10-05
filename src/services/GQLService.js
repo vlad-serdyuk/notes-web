@@ -3,7 +3,8 @@ import {
   InMemoryCache,
   createHttpLink,
 } from '@apollo/client';
-import { GET_ME, GET_APP_METADATA } from '/gql/query';
+import { GET_ME } from '/gql/query';
+import { GET_APP_METADATA } from '/gql/local-query';
 
 const uri = process.env.API_URI;
 const httpLink = createHttpLink({ uri, credentials: 'include' });

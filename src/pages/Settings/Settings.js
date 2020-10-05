@@ -34,8 +34,8 @@ export const SettingsPage = () => {
   useEffect(() => {
     const arePasswordsNotEqual = !newPassword || newPassword !== confirmedNewPassword;
     const isPasswordProperLength = newPassword.length >= MIN_PASSWORD_LENGTH;
-    setDisabled(arePasswordsNotEqual || !isPasswordProperLength);
-  }, [setDisabled, newPassword, confirmedNewPassword]);
+    setDisabled(arePasswordsNotEqual || !isPasswordProperLength || loading);
+  }, [setDisabled, newPassword, confirmedNewPassword, loading]);
 
   return (
     <Box gap="small">
