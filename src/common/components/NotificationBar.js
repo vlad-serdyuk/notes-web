@@ -15,10 +15,8 @@ export const NotificationBar = () => {
 
   const onClose = () => setOpen(false);
 
-  useEffect(() => {
-    console.log(data);
-    
-    if (!isOpen && data.show) {
+  useEffect(() => {    
+    if (data.show) {
       setOpen(true);
       setText(data.text);
       window.setTimeout(() => closeNotificationBar(), NOTIFICATION_BAR_SHOWING_TIME);
