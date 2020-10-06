@@ -7,11 +7,9 @@ export const IS_LOGGED_IN = gql`
 `;
 
 export const SHOW_NOTIFIFCATION = gql`
-  {
-    notificationBar @client {
-      show
-      text
-    }
+  query notificationBar {
+    show @client
+    text @client
   }
 `;
 

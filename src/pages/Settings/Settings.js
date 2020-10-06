@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { Box, Button, Text, TextInput } from 'grommet';
 
+import { SHOW_NOTIFIFCATION } from '/gql/local-query';
 import { RESET_PASSWORD } from '/gql/mutation';
 
 const MIN_PASSWORD_LENGTH = 6;
@@ -19,7 +20,13 @@ export const SettingsPage = () => {
       setConfirmedNewPassword('');
     },
     update: (cache) => {
-      cache.writeData({ data: { notificationBar: { show: true } } });
+      cache.writeQuery({
+        query: SHOW_NOTIFIFCATION,
+        data: {
+          show: true,
+          text: 'abc',
+        },
+      });
     }
   });
 

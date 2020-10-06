@@ -7,26 +7,34 @@ import { SHOW_NOTIFIFCATION } from '/gql/local-query';
 
 const NOTIFICATION_BAR_SHOWING_TIME = 3000;
 
-export const NotificationBar = ({ text = 'some text' }) => {
+export const NotificationBar = () => {
   const [isOpen, setOpen] = useState(false);
+  const [text, setText] = useState('');
 
-  const { data: { notificationBar } = {}, client } = useQuery(SHOW_NOTIFIFCATION);
-  console.log(notificationBar);
+  const { data = {}, client } = useQuery(SHOW_NOTIFIFCATION);
 
   const onClose = () => setOpen(false);
 
   useEffect(() => {
-    console.log(notificationBar);
+    console.log(data);
     
-    if (!isOpen && notificationBar) {
+    if (!isOpen && data.show) {
       setOpen(true);
+      setText(data.text);
       window.setTimeout(() => closeNotificationBar(), NOTIFICATION_BAR_SHOWING_TIME);
     }
-  }, [notificationBar]);
+  }, [data, isOpen]);
 
   const closeNotificationBar = () => {
     setOpen(false);
-    client.writeData({ data: { notificationBar: { show: false } } });
+    setText('');
+    client.writeQuery({
+      query: SHOW_NOTIFIFCATION,
+      data: {
+        show: false,
+        text: '',
+      },
+    });
   };
 
   if (!isOpen) {
