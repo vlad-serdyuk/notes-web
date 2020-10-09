@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import { NOTE_AUTHOR_FRAGMENT } from '/gql/fragments';
 
 export const GET_ME = gql`
   query Me {
@@ -24,12 +25,11 @@ export const GET_NOTE = gql`
         username
       }
       author {
-        username
-        id
-        avatar
+        ...NoteAuthor
       }
     }
   }
+  ${NOTE_AUTHOR_FRAGMENT}
 `;
 
 export const GET_NOTES = gql`
