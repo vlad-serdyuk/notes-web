@@ -24,7 +24,7 @@ export const ResetPasswordForm = () => {
         query: SHOW_NOTIFIFCATION,
         data: {
           show: true,
-          text: 'abc',
+          text: 'Please, enter the correct password',
         },
       });
     }
@@ -68,7 +68,7 @@ export const ResetPasswordForm = () => {
         value={confirmedNewPassword}
         onChange={onChangeConfirmPassword}
       />
-      {error && <Text>The password is incorrect</Text>}
+      {error && <Text color="red">The password is incorrect</Text>}
       <Button
         primary
         label="Save"
