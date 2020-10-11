@@ -9,3 +9,12 @@ export const NOTE_AUTHOR_FRAGMENT = gql`
     }
   }
 `;
+
+export const NOTE_FAVORITED_BY_FRAGMENT = gql`
+  fragment NoteFavoritedBy on Note {
+    favoritedBy {
+      id
+      username
+    }
+  }
+`;

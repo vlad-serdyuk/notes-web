@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { NOTE_AUTHOR_FRAGMENT } from '/gql/fragments';
+import { NOTE_AUTHOR_FRAGMENT, NOTE_FAVORITED_BY_FRAGMENT } from '/gql/fragments';
 
 export const GET_ME = gql`
   query Me {
@@ -20,13 +20,11 @@ export const GET_NOTE = gql`
       content
       private
       favoriteCount
-      favoritedBy {
-        id
-        username
-      }
+      ...NoteFavoritedBy
       ...NoteAuthor
     }
   }
+  ${NOTE_FAVORITED_BY_FRAGMENT}
   ${NOTE_AUTHOR_FRAGMENT}
 `;
 
@@ -41,14 +39,12 @@ export const GET_NOTES = gql`
         content
         private
         favoriteCount
-        favoritedBy {
-          id
-          username
-        }
+        ...NoteFavoritedBy
         ...NoteAuthor
       }
     }
   }
+  ${NOTE_FAVORITED_BY_FRAGMENT}
   ${NOTE_AUTHOR_FRAGMENT}
 `;
 
@@ -59,13 +55,11 @@ export const GET_TRENDS_NOTES = gql`
       createdAt
       content
       favoriteCount
-      favoritedBy {
-        id
-        username
-      }
+      ...NoteFavoritedBy
       ...NoteAuthor
     }
   }
+  ${NOTE_FAVORITED_BY_FRAGMENT}
   ${NOTE_AUTHOR_FRAGMENT}
 `;
 
@@ -79,14 +73,12 @@ export const GET_USER_FAVORITES = gql`
         private
         createdAt
         favoriteCount
-        favoritedBy {
-          id
-          username
-        }
+        ...NoteFavoritedBy
         ...NoteAuthor
       }
     }
   }
+  ${NOTE_FAVORITED_BY_FRAGMENT}
   ${NOTE_AUTHOR_FRAGMENT}
 `;
 
@@ -103,10 +95,7 @@ export const GET_USER_NOTES = gql`
         private
         createdAt
         favoriteCount
-        favoritedBy {
-          id
-          username
-        }
+        ...NoteFavoritedBy
         ...NoteAuthor
       }
       favorites {
@@ -122,6 +111,7 @@ export const GET_USER_NOTES = gql`
       }
     }
   }
+  ${NOTE_FAVORITED_BY_FRAGMENT}
   ${NOTE_AUTHOR_FRAGMENT}
 `;
 
