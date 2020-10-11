@@ -24,9 +24,7 @@ export const GET_NOTE = gql`
         id
         username
       }
-      author {
-        ...NoteAuthor
-      }
+      ...NoteAuthor
     }
   }
   ${NOTE_AUTHOR_FRAGMENT}
@@ -47,14 +45,11 @@ export const GET_NOTES = gql`
           id
           username
         }
-        author {
-          id
-          username
-          avatar
-        }
+        ...NoteAuthor
       }
     }
   }
+  ${NOTE_AUTHOR_FRAGMENT}
 `;
 
 export const GET_TRENDS_NOTES = gql`
@@ -68,13 +63,10 @@ export const GET_TRENDS_NOTES = gql`
         id
         username
       }
-      author {
-        id
-        username
-        avatar
-      }
+      ...NoteAuthor
     }
   }
+  ${NOTE_AUTHOR_FRAGMENT}
 `;
 
 export const GET_USER_FAVORITES = gql`
@@ -91,14 +83,11 @@ export const GET_USER_FAVORITES = gql`
           id
           username
         }
-        author {
-          id
-          username
-          avatar
-        }
+        ...NoteAuthor
       }
     }
   }
+  ${NOTE_AUTHOR_FRAGMENT}
 `;
 
 export const GET_USER_NOTES = gql`
@@ -118,11 +107,7 @@ export const GET_USER_NOTES = gql`
           id
           username
         }
-        author {
-          id
-          username
-          avatar
-        }
+        ...NoteAuthor
       }
       favorites {
         id
@@ -133,14 +118,11 @@ export const GET_USER_NOTES = gql`
         favoritedBy {
           id
         }
-        author {
-          id
-          username
-          avatar
-        }
+        ...NoteAuthor
       }
     }
   }
+  ${NOTE_AUTHOR_FRAGMENT}
 `;
 
 export const LOG_OUT = gql`
