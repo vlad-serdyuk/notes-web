@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { NOTE_AUTHOR_FRAGMENT, NOTE_FAVORITED_BY_FRAGMENT } from '/gql/fragments';
+import { NOTE_FRAGMENT, NOTE_AUTHOR_FRAGMENT, NOTE_FAVORITED_BY_FRAGMENT } from '/gql/fragments';
 
 export const GET_ME = gql`
   query Me {
