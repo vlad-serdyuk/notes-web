@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { NOTE_FRAGMENT, NOTE_AUTHOR_FRAGMENT, NOTE_FAVORITED_BY_FRAGMENT } from '/gql/fragments';
+import { NOTE_FRAGMENT } from '/gql/fragments';
 
 export const GET_ME = gql`
   query Me {
@@ -15,17 +15,10 @@ export const GET_ME = gql`
 export const GET_NOTE = gql`
   query note($id: ID!) {
     note(id: $id) {
-      id
-      createdAt
-      content
-      private
-      favoriteCount
-      ...NoteFavoritedBy
-      ...NoteAuthor
+      ...NoteEntity
     }
   }
-  ${NOTE_FAVORITED_BY_FRAGMENT}
-  ${NOTE_AUTHOR_FRAGMENT}
+  ${NOTE_FRAGMENT}
 `;
 
 export const GET_NOTES = gql`
@@ -34,33 +27,20 @@ export const GET_NOTES = gql`
       cursor
       hasNextPage
       notes {
-        id
-        createdAt
-        content
-        private
-        favoriteCount
-        ...NoteFavoritedBy
-        ...NoteAuthor
+        ...NoteEntity
       }
     }
   }
-  ${NOTE_FAVORITED_BY_FRAGMENT}
-  ${NOTE_AUTHOR_FRAGMENT}
+  ${NOTE_FRAGMENT}
 `;
 
 export const GET_TRENDS_NOTES = gql`
   query trendsNotes {
     trendsNotes {
-      id
-      createdAt
-      content
-      favoriteCount
-      ...NoteFavoritedBy
-      ...NoteAuthor
+      ...NoteEntity
     }
   }
-  ${NOTE_FAVORITED_BY_FRAGMENT}
-  ${NOTE_AUTHOR_FRAGMENT}
+  ${NOTE_FRAGMENT}
 `;
 
 export const GET_USER_FAVORITES = gql`
@@ -68,18 +48,11 @@ export const GET_USER_FAVORITES = gql`
     user(username: $username) {
       id
       favorites {
-        id
-        content
-        private
-        createdAt
-        favoriteCount
-        ...NoteFavoritedBy
-        ...NoteAuthor
+        ...NoteEntity
       }
     }
   }
-  ${NOTE_FAVORITED_BY_FRAGMENT}
-  ${NOTE_AUTHOR_FRAGMENT}
+  ${NOTE_FRAGMENT}
 `;
 
 export const GET_USER_NOTES = gql`
@@ -90,29 +63,14 @@ export const GET_USER_NOTES = gql`
       email
       createdAt
       notes {
-        id
-        content
-        private
-        createdAt
-        favoriteCount
-        ...NoteFavoritedBy
-        ...NoteAuthor
+        ...NoteEntity
       }
       favorites {
-        id
-        content
-        createdAt
-        private
-        favoriteCount
-        favoritedBy {
-          id
-        }
-        ...NoteAuthor
+        ...NoteEntity
       }
     }
   }
-  ${NOTE_FAVORITED_BY_FRAGMENT}
-  ${NOTE_AUTHOR_FRAGMENT}
+  ${NOTE_FRAGMENT}
 `;
 
 export const LOG_OUT = gql`
