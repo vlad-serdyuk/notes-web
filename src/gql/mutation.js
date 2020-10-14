@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import { NOTE_FRAGMENT } from '/gql/fragments';
 
 export const SIGNIN_USER = gql`
   mutation signIn($email: String!, $password: String!) {
@@ -30,39 +31,19 @@ export const RESET_PASSWORD = gql`
 export const CREATE_NOTE = gql`
   mutation createNote($content: String!, $private: Boolean!) {
     createNote(content: $content, private: $private) {
-      id
-      content
-      createdAt
-      favoriteCount
-      favoritedBy {
-        id
-        username
-      }
-      author {
-        username
-        id
-      }
+      ...NoteEntity
     }
   }
+  ${NOTE_FRAGMENT}
 `;
 
 export const UPDATE_NOTE = gql`
   mutation updateNote($id: ID!, $content: String!, $private: Boolean!) {
     updateNote(id: $id, content: $content, private: $private) {
-      id
-      content
-      createdAt
-      favoriteCount
-      favoritedBy {
-        id
-        username
-      }
-      author {
-        username
-        id
-      }
+      ...NoteEntity
     }
   }
+  ${NOTE_FRAGMENT}
 `;
 
 export const DELETE_NOTE = gql`
@@ -74,38 +55,17 @@ export const DELETE_NOTE = gql`
 export const TOGGLE_FAVORITE_NOTE = gql`
   mutation toggleFavoriteNote($id: ID!) {
     toggleFavorite(id: $id) {
-      id
-      content
-      createdAt
-      favoriteCount
-      favoritedBy {
-        id
-        username
-      }
-      author {
-        username
-        id
-      }
+      ...NoteEntity
     }
   }
+  ${NOTE_FRAGMENT}
 `;
 
 export const TOGGLE_PRIVACY_NOTE = gql`
   mutation togglePrivacyNote($id: ID!, $private: Boolean!) {
     togglePrivacy(id: $id, private: $private) {
-      id
-      content
-      createdAt
-      private
-      favoriteCount
-      favoritedBy {
-        id
-        username
-      }
-      author {
-        username
-        id
-      }
+      ...NoteEntity
     }
   }
+  ${NOTE_FRAGMENT}
 `;
