@@ -5,7 +5,7 @@ import { Button } from 'grommet';
 import { NoteFeed } from '/components/NoteFeed';
 import { GET_NOTES } from '/gql/query';
 
-const HomePage = () => {
+export const HomePage = () => {
   const { data, loading, error, fetchMore } = useQuery(GET_NOTES);
 
   const onLoadMoreClick = () => {    
@@ -55,5 +55,3 @@ const HomePage = () => {
     </Fragment>
   );
 };
-
-export default HomePage;

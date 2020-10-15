@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { GET_ME, GET_USER_FAVORITES } from '/gql/query';
 import { NoteFeed } from '/components/NoteFeed';
 
-const FavoritesPage = () => {
+export const FavoritesPage = () => {
   const { data: meData } = useQuery(GET_ME);
   const { loading, error, data } = useQuery(GET_USER_FAVORITES, { variables: { username: meData.me.username } });
 
@@ -25,5 +25,3 @@ const FavoritesPage = () => {
     </Fragment>
   );
 };
-
-export default FavoritesPage;

@@ -6,7 +6,7 @@ import { NoteForm } from '/components/NoteForm';
 import { GET_NOTES } from '/gql/query';
 import { CREATE_NOTE } from '/gql/mutation';
 
-const CreateNotePage = ({ history }) => {
+export const CreateNotePage = ({ history }) => {
   const [createNote, { loading, error }] = useMutation(CREATE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }],
     onCompleted: data => {
@@ -32,5 +32,3 @@ CreateNotePage.propTypes = {
     push: PropTypes.func.isRequired
   }).isRequired,
 };
-
-export default CreateNotePage;

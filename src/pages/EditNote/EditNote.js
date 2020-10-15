@@ -6,7 +6,7 @@ import { NoteForm } from '/components/NoteForm';
 import { GET_NOTE, GET_NOTES } from '/gql/query';
 import { UPDATE_NOTE } from '/gql/mutation';
 
-const EditNotePage = ({ history, match }) => {
+export const EditNotePage = ({ history, match }) => {
   const { data: noteData, loading: noteLoading, error: noteError } = useQuery(GET_NOTE, { variables: { id: match.params.id } });
   const [updateNote, { loading, error }] = useMutation(UPDATE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }],
@@ -46,5 +46,3 @@ EditNotePage.propTypes = {
     })
   }),
 };
-
-export default EditNotePage;

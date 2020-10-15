@@ -9,7 +9,7 @@ import { GET_ME, LOG_OUT } from '/gql/query';
 import { AvatarDropButton } from './components/AvatarDropDown';
 import { StyledHeader, LinkText, LinkWrapper } from './Header.styled';
 
-const Header = ({ history }) => {
+const HeaderComponent = ({ history }) => {
   const { data: { isLoggedIn }, client } = useIsLoggedInQuery();
   const { data: { me } = {} } = useQuery(GET_ME);
 
@@ -72,10 +72,10 @@ const Header = ({ history }) => {
   );
 };
 
-Header.propTypes = {
+HeaderComponent.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
 };
 
-export default withRouter(Header);
+export const Header = withRouter(HeaderComponent);

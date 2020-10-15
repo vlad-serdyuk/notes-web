@@ -1,1 +1,1 @@
-export { default as NoteForm } from './NoteForm';
+export { NoteForm } from './NoteForm';

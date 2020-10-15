@@ -1,1 +1,1 @@
-export { default as EditNotePage } from './EditNote';
+export { EditNotePage } from './EditNote';

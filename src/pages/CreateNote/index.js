@@ -1,1 +1,1 @@
-export { default as CreateNotePage } from './CreateNote';
+export { CreateNotePage } from './CreateNote';

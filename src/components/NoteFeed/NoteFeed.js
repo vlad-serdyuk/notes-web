@@ -3,7 +3,7 @@ import { Box, Text } from 'grommet';
 
 import { Note } from '../Note';
 
-const NoteFeed = ({ notes }) => {
+export const NoteFeed = ({ notes }) => {
   return (
     <Fragment>
       {
@@ -17,5 +17,3 @@ const NoteFeed = ({ notes }) => {
     </Fragment>
   );
 };
-
-export default NoteFeed;

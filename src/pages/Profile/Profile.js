@@ -7,7 +7,7 @@ import { Profile } from '/components/Profile';
 import { NotesTabs } from '/components/NotesTabs';
 import { NoteFeed } from '/components/NoteFeed';
 
-const ProfilePage = () => {
+export const ProfilePage = () => {
   const { data: { me } = {} } = useQuery(GET_ME);
   const { data: { user } = {}, loading, error } = useQuery(GET_USER_NOTES, { variables: { username: me.username } });
   
@@ -45,5 +45,3 @@ const ProfilePage = () => {
     </Fragment>
   );
 };
-
-export default ProfilePage;

@@ -8,7 +8,7 @@ import { NoteFeed } from '/components/NoteFeed';
 import { Profile } from '/components/Profile';
 import { NotesTabs } from '/components/NotesTabs';
 
-const NotesPage = ({ match }) => {
+export const NotesPage = ({ match }) => {
   const { loading, error, data } = useQuery(GET_USER_NOTES, { variables: { username: match.params.author } });
   const { data: { me } = {} } = useQuery(GET_ME, { variables: { username: match.params.author } });
   const [updateProfile] = useMutation(UPDATE_USER, {
@@ -68,5 +68,3 @@ NotesPage.propTypes = {
     })
   }),
 };
-
-export default NotesPage;

@@ -1,1 +1,1 @@
-export { default as NoteFeed } from './NoteFeed';
+export { NoteFeed } from './NoteFeed';
