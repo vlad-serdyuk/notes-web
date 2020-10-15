@@ -1,1 +1,1 @@
-export { default as NotesTabs } from './NotesTabs';
+export { NotesTabs } from './NotesTabs';

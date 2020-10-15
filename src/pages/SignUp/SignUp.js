@@ -110,4 +110,4 @@ SignUpComponent.propTypes = {
   }).isRequired,
 };
 
-export default memo(SignUpComponent);
+export const SignUp = memo(SignUpComponent);

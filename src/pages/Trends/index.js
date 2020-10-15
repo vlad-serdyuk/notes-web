@@ -1,1 +1,1 @@
-export { default as TrendsPage } from './Trends';
+export { TrendsPage } from './Trends';

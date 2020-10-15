@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Tab, Tabs } from 'grommet';
 
-const NotesTabs = ({ notes, favorites, privates }) => {
+export const NotesTabs = ({ notes, favorites, privates }) => {
   return (
     <Tabs flex>
       <Tab title="Notes" fill="horizontal">
@@ -23,5 +23,3 @@ const NotesTabs = ({ notes, favorites, privates }) => {
     </Tabs>
   );
 };
-
-export default NotesTabs;

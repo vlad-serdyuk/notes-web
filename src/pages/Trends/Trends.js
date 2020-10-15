@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 import { GET_TRENDS_NOTES } from '/gql/query';
 import { NoteFeed } from '/components/NoteFeed';
 
-const TrendsPage = () => {
+export const TrendsPage = () => {
   const { loading, error, data } = useQuery(GET_TRENDS_NOTES);
 
   if (loading) {
@@ -17,5 +17,3 @@ const TrendsPage = () => {
 
   return <NoteFeed notes={data.trendsNotes} />;
 };
-
-export default TrendsPage;
