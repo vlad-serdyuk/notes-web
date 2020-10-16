@@ -23,6 +23,9 @@ export const Layout = ({ children }) => {
             : children
           }
         </Box>
+        <Box pad="small" width="350px">
+          box
+        </Box>
       </Main>
     </Fragment>
   );
