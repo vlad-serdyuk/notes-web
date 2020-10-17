@@ -46,7 +46,6 @@ export const ResetPasswordForm = () => {
 
   return (
     <Box gap="small">
-      <Text size="large">Reset password</Text>
       <Text>Old password</Text>
       <TextInput
         type="password"
