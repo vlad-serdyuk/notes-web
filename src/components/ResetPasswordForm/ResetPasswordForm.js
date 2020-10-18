@@ -4,6 +4,7 @@ import { Box, Button, Text, TextInput } from 'grommet';
 
 import { SHOW_NOTIFIFCATION } from '/gql/local-query';
 import { RESET_PASSWORD } from '/gql/mutation';
+import { SubmitButton } from './ResetPasswordForm.styled';
 
 const MIN_PASSWORD_LENGTH = 6;
 
@@ -68,12 +69,14 @@ export const ResetPasswordForm = () => {
         onChange={onChangeConfirmPassword}
       />
       {error && <Text color="red">The password is incorrect</Text>}
-      <Button
-        primary
-        label="Save"
-        disabled={disabled}
-        onClick={resetPassword}
-      />
+      <Box align="end">
+        <SubmitButton
+          primary
+          label="Save"
+          disabled={disabled}
+          onClick={resetPassword}
+        />
+      </Box>
     </Box>
   ); 
 };
