@@ -39,6 +39,20 @@ const SearchBarComponent = ({ history }) => {
 
   const boxRef = useRef();
 
+  const onChange = event => {
+    const { value: newValue } = event.target;
+    setValue(newValue);
+
+    if (!newValue.trim()) {
+      setSuggestedFolks([]);
+    } else {
+      // simulate an async call to the backend
+      setTimeout(() => setSuggestedFolks(folks), 300);
+    }
+  };
+
+  const onSelect = event => setValue(event.suggestion.value);
+
   const setOpen = useCallback(() => {
     setSuggestionOpen(true);
   }, [setSuggestionOpen]);
