@@ -108,4 +108,4 @@ SearchBarComponent.propTypes = {
   }).isRequired,
 };
 
-export const SearchBarComponent = withRouter(SearchBarComponent);
+export const SearchBar = withRouter(SearchBarComponent);

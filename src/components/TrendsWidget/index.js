@@ -1,0 +1,1 @@
+export { TrendsWidget } from './TrendsWidget';
