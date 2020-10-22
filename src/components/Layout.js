@@ -7,6 +7,7 @@ import { GET_APP_METADATA } from '/gql/local-query';
 import { Header } from './Header';
 import { Skeleton } from './Skeleton';
 import { Navigation } from './Navigation';
+import { TrendsWidget } from './TrendsWidget';
 
 export const Layout = ({ children }) => {
   const { data, loading } = useQuery(GET_APP_METADATA);
@@ -24,7 +25,7 @@ export const Layout = ({ children }) => {
           }
         </Box>
         <Box pad="small" width="350px">
-          box
+          <TrendsWidget />
         </Box>
       </Main>
     </Fragment>

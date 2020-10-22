@@ -1,13 +1,31 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/client';
-import { Avatar, Box, Button, Text } from 'grommet';
+import { Avatar, Box, Text } from 'grommet';
 
-import { GET_ME } from '/gql/query';
-import { EditProfileDialog } from './EditProfileDialog';
+import { GET_TRENDS_NOTES } from '/gql/query';
 
-export const TrendsWidgetComponent = ({ user, updateProfile }) => {
-  return null;
+const TrendsWidgetComponent = ({ history }) => {
+  const { loading, error, data } = useQuery(GET_TRENDS_NOTES);
+
+  if (loading) {
+    return <p>loading...</p>;
+  }
+
+  if (error) {
+    return <p>error</p>;
+  }
+
+  return (
+    <Box>
+      {
+        data.trendsNotes.map((note) => {
+          return <Text key={note.id}>{note.content}</Text>;
+        })
+      }
+    </Box>
+  );
 };
 
 TrendsWidgetComponent.propTypes = {
@@ -16,4 +34,4 @@ TrendsWidgetComponent.propTypes = {
   }).isRequired,
 };
 
-export const SearchBarComponent = withRouter(TrendsWidgetComponent);
+export const TrendsWidget = withRouter(TrendsWidgetComponent);
