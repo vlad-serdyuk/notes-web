@@ -2,9 +2,10 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/client';
-import { Avatar, Box, Text } from 'grommet';
+import { Avatar, Box, Heading, Text } from 'grommet';
 
 import { GET_TRENDS_NOTES } from '/gql/query';
+import { TrendsContainer, TrendsHeader } from './TrendsWidget.styled';
 
 const TrendsWidgetComponent = ({ history }) => {
   const { loading, error, data } = useQuery(GET_TRENDS_NOTES);
@@ -18,13 +19,14 @@ const TrendsWidgetComponent = ({ history }) => {
   }
 
   return (
-    <Box>
+    <TrendsContainer>
+      <TrendsHeader>Trends</TrendsHeader>
       {
         data.trendsNotes.map((note) => {
           return <Text key={note.id}>{note.content}</Text>;
         })
       }
-    </Box>
+    </TrendsContainer>
   );
 };
 
