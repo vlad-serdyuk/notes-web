@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/client';
-import { Avatar, Box, Heading, Text } from 'grommet';
+import { Text } from 'grommet';
 
 import { GET_TRENDS_NOTES } from '/gql/query';
 import { TrendsContainer, TrendsHeader, TrendBlock } from './TrendsWidget.styled';
 
 const TrendsWidgetComponent = ({ history }) => {
   const { loading, error, data } = useQuery(GET_TRENDS_NOTES);
+
+  const openNote = useCallback((e) => {    
+    history.push(`note/${e.target.id}`);
+  }, [history]);
 
   if (loading) {
     return <p>loading...</p>;
@@ -24,8 +28,8 @@ const TrendsWidgetComponent = ({ history }) => {
       {
         data.trendsNotes.map((note) => {
           return (
-            <TrendBlock key={note.id}>
-              <Text>{note.content}</Text>
+            <TrendBlock key={note.id} onClick={openNote}>
+              <Text id={note.id}>{note.content}</Text>
             </TrendBlock>
           );
         })

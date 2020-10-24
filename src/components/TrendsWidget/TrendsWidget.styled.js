@@ -12,7 +12,9 @@ export const TrendsContainer = styled(Box).attrs({
 export const TrendsHeader = styled(Heading).attrs({
   level: 3,
 })`
-  margin: 0 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.33);
+  padding: 0 8px;
+  margin: 0;
 `;
 
 export const TrendBlock = styled(Box).attrs({
