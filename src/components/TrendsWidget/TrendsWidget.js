@@ -31,6 +31,7 @@ const TrendsWidgetComponent = ({ history }) => {
             return (
               <TrendBlock key={note.id} onClick={openNote}>
                 <Text id={note.id}>{note.content}</Text>
+                <Text color="brand" size="xsmall">{note.favoriteCount} favorites</Text>
               </TrendBlock>
             );
           })
