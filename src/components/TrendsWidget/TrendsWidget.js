@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/client';
-import { Text } from 'grommet';
+import { Box, Text } from 'grommet';
 
 import { GET_TRENDS_NOTES } from '/gql/query';
 import { TrendsContainer, TrendsHeader, TrendBlock } from './TrendsWidget.styled';
@@ -23,18 +23,20 @@ const TrendsWidgetComponent = ({ history }) => {
   }
 
   return (
-    <TrendsContainer>
-      <TrendsHeader>Trends</TrendsHeader>
-      {
-        data.trendsNotes.map((note) => {
-          return (
-            <TrendBlock key={note.id} onClick={openNote}>
-              <Text id={note.id}>{note.content}</Text>
-            </TrendBlock>
-          );
-        })
-      }
-    </TrendsContainer>
+    <Box round="medium" border>
+      <TrendsContainer>
+        <TrendsHeader>Trends</TrendsHeader>
+        {
+          data.trendsNotes.map((note) => {
+            return (
+              <TrendBlock key={note.id} onClick={openNote}>
+                <Text id={note.id}>{note.content}</Text>
+              </TrendBlock>
+            );
+          })
+        }
+      </TrendsContainer>
+    </Box>
   );
 };
 
