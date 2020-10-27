@@ -24,7 +24,7 @@ export const Layout = ({ children }) => {
             : children
           }
         </Box>
-        <Box pad="small" width="350px">
+        <Box pad="small" width="420px">
           <TrendsWidget />
         </Box>
       </Main>

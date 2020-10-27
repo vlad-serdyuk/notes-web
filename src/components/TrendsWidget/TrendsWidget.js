@@ -14,6 +14,10 @@ const TrendsWidgetComponent = ({ history }) => {
     history.push(`note/${e.target.id}`);
   }, [history]);
 
+  const showMore = useCallback(() => {
+    history.push('trends');
+  }, [history]);
+
   if (loading) {
     return <p>loading...</p>;
   }
@@ -36,6 +40,9 @@ const TrendsWidgetComponent = ({ history }) => {
             );
           })
         }
+        <TrendBlock onClick={showMore}>
+          <Text color="brand">Show more</Text>
+        </TrendBlock>
       </TrendsContainer>
     </Box>
   );
