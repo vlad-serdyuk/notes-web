@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Search } from 'grommet-icons';
@@ -19,7 +19,7 @@ const SearchBarComponent = ({ history }) => {
       setSuggestedResults([]);
     } else {
       // simulate an async call to the backend
-      setTimeout(() => setSuggestedResults(folks), 300);
+      setTimeout(() => setSuggestedResults([{ name: 'abc' }]), 300);
     }
   };
 
@@ -62,7 +62,7 @@ const SearchBarComponent = ({ history }) => {
   }, [setSuggestionOpen]);
 
   return (
-    <Box background="dark-1" fill align="center" pad={{ top: 'large' }}>
+    <Fragment>
         <Box
           ref={boxRef}
           width="large"
@@ -98,7 +98,7 @@ const SearchBarComponent = ({ history }) => {
             onSuggestionsClose={setClose}
           />
         </Box>
-      </Box>
+      </Fragment>
   );
 };
 
