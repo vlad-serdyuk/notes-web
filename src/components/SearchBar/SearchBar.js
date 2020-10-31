@@ -1,14 +1,14 @@
 import React, { useState, useCallback, useRef, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { Search } from 'grommet-icons';
 import { Box, Image, Text, TextInput } from 'grommet';
 
 import { SEARCH_NOTES } from '/gql/query';
 
 const SearchBarComponent = ({ history }) => {
-  const { loading, error, data } = useQuery(GET_TRENDS_NOTES);
+  const [getNotes, { loading, data }] = useLazyQuery(SEARCH_NOTES, { variables: { text: '' } });
 
   const [value, setValue] = useState('');
   const [isSuggestionOpen, setSuggestionOpen] = useState(false);
@@ -17,14 +17,15 @@ const SearchBarComponent = ({ history }) => {
   const boxRef = useRef();
 
   const onChange = event => {
-    const { value: newValue } = event.target;
-    setValue(newValue);
+    const { value: text } = event.target;
+    setValue(text);
 
-    if (!newValue.trim()) {
+    if (!text.trim()) {
       setSuggestedResults([]);
     } else {
+      getNotes({ variables: { text } });
       // simulate an async call to the backend
-      setTimeout(() => setSuggestedResults([{ name: 'abc' }, { name: 'abcccc' }]), 300);
+      // setTimeout(() => setSuggestedResults([{ name: 'abc' }, { name: 'abcccc' }]), 300);
     }
   };
 
