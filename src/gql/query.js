@@ -73,6 +73,15 @@ export const GET_USER_NOTES = gql`
   ${NOTE_FRAGMENT}
 `;
 
+export const SEARCH_NOTES = gql`
+  query SearchNotes($text: String!) {
+    searchNotes(text: $text) {
+      ...NoteEntity
+    }
+  }
+  ${NOTE_FRAGMENT}
+`;
+
 export const LOG_OUT = gql`
   query SignOut {
     signOut 

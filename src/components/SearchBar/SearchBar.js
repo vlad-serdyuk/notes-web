@@ -1,10 +1,15 @@
 import React, { useState, useCallback, useRef, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useQuery } from '@apollo/client';
 import { Search } from 'grommet-icons';
 import { Box, Image, Text, TextInput } from 'grommet';
 
+import { SEARCH_NOTES } from '/gql/query';
+
 const SearchBarComponent = ({ history }) => {
+  const { loading, error, data } = useQuery(GET_TRENDS_NOTES);
+
   const [value, setValue] = useState('');
   const [isSuggestionOpen, setSuggestionOpen] = useState(false);
   const [suggestedResults, setSuggestedResults] = useState([]);
@@ -19,7 +24,7 @@ const SearchBarComponent = ({ history }) => {
       setSuggestedResults([]);
     } else {
       // simulate an async call to the backend
-      setTimeout(() => setSuggestedResults([{ name: 'abc' }]), 300);
+      setTimeout(() => setSuggestedResults([{ name: 'abc' }, { name: 'abcccc' }]), 300);
     }
   };
 
@@ -63,42 +68,42 @@ const SearchBarComponent = ({ history }) => {
 
   return (
     <Fragment>
-        <Box
-          ref={boxRef}
-          width="large"
-          direction="row"
-          align="center"
-          pad={{ horizontal: 'small', vertical: 'xsmall' }}
-          round="small"
-          elevation={isSuggestionOpen ? 'medium' : null}
-          border={{
-            side: 'all',
-            color: isSuggestionOpen ? 'transparent' : 'border',
-          }}
-          style={
-            isSuggestionOpen
-              ? {
-                  borderBottomLeftRadius: '0px',
-                  borderBottomRightRadius: '0px',
-                }
-              : null
-          }
-        >
-          <Search color="brand" />
-          <TextInput
-            type="search"
-            dropTarget={boxRef.current}
-            plain
-            value={value}
-            onChange={onChange}
-            onSelect={onSelect}
-            suggestions={renderSuggestions()}
-            placeholder="Search notedly"
-            onSuggestionsOpen={setOpen}
-            onSuggestionsClose={setClose}
-          />
-        </Box>
-      </Fragment>
+      <Box
+        ref={boxRef}
+        width="large"
+        direction="row"
+        align="center"
+        pad={{ horizontal: 'small', vertical: 'xsmall' }}
+        round="small"
+        elevation={isSuggestionOpen ? 'medium' : null}
+        border={{
+          side: 'all',
+          color: isSuggestionOpen ? 'transparent' : 'border',
+        }}
+        style={
+          isSuggestionOpen
+            ? {
+                borderBottomLeftRadius: '0px',
+                borderBottomRightRadius: '0px',
+              }
+            : null
+        }
+      >
+        <Search color="brand" />
+        <TextInput
+          type="search"
+          dropTarget={boxRef.current}
+          plain
+          value={value}
+          onChange={onChange}
+          onSelect={onSelect}
+          suggestions={renderSuggestions()}
+          placeholder="Search notes"
+          onSuggestionsOpen={setOpen}
+          onSuggestionsClose={setClose}
+        />
+      </Box>
+    </Fragment>
   );
 };
 
