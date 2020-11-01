@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, Fragment } from 'react';
+import React, { useCallback, useEffect, useState, useRef, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useLazyQuery } from '@apollo/client';
@@ -16,6 +16,12 @@ const SearchBarComponent = ({ history }) => {
 
   const boxRef = useRef();
 
+  useEffect(() => {
+    if (data) {
+      setSuggestedResults(data.searchNotes); 
+    }
+  }, [data]);
+
   const onChange = event => {
     const { value: text } = event.target;
     setValue(text);
@@ -24,19 +30,17 @@ const SearchBarComponent = ({ history }) => {
       setSuggestedResults([]);
     } else {
       getNotes({ variables: { text } });
-      // simulate an async call to the backend
-      // setTimeout(() => setSuggestedResults([{ name: 'abc' }, { name: 'abcccc' }]), 300);
     }
   };
 
-  const onSelect = event => setValue(event.suggestion.value);
+  const onSelect = event => {
+    // handle redirect to selected note    
+    // event.suggestion.value
+  }
 
   const renderSuggestions = () => {
     return suggestedResults
-      .filter(
-        ({ name }) => name.toLowerCase().indexOf(value.toLowerCase()) >= 0,
-      )
-      .map(({ name, imageUrl }, index, list) => ({
+      .map(({ content, imageUrl }, index, list) => ({
         label: (
           <Box
             direction="row"
@@ -51,7 +55,7 @@ const SearchBarComponent = ({ history }) => {
               style={{ borderRadius: '100%' }}
             />
             <Text>
-              <strong>{name}</strong>
+              <strong>{content}</strong>
             </Text>
           </Box>
         ),
