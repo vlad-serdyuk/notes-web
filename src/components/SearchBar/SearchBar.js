@@ -34,13 +34,12 @@ const SearchBarComponent = ({ history }) => {
   };
 
   const onSelect = event => {
-    // handle redirect to selected note    
-    // event.suggestion.value
+    history.push(`/note/${event.suggestion.value}`);
   }
 
   const renderSuggestions = () => {
     return suggestedResults
-      .map(({ content, imageUrl }, index, list) => ({
+      .map(({ id, content, imageUrl }, index, list) => ({
         label: (
           <Box
             direction="row"
@@ -59,7 +58,7 @@ const SearchBarComponent = ({ history }) => {
             </Text>
           </Box>
         ),
-        value: name,
+        value: id,
       }));
   };
 
