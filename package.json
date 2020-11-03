@@ -42,6 +42,8 @@
     "graphql-request": "^1.8.2",
     "parcel-bundler": "1.12.4",
     "prettier": "1.19.1",
-    "test-data-bot": "0.8.0"
+    "test-data-bot": "0.8.0",
+    "ts-loader": "^8.0.7",
+    "typescript": "^4.0.5"
   }
 }
