@@ -2,8 +2,9 @@ import React, { Fragment } from 'react';
 import { useQuery } from '@apollo/client';
 import { Button } from 'grommet';
 
-import { NoteFeed } from '/components/NoteFeed';
 import { GET_NOTES } from '/gql/query';
+import { NoteFeed } from '/components/NoteFeed';
+import { SearchBar } from '/components/SearchBar/SearchBar';
 
 export const HomePage = () => {
   const { data, loading, error, fetchMore } = useQuery(GET_NOTES);
@@ -40,7 +41,9 @@ export const HomePage = () => {
 
   return (
     <Fragment>
-      <NoteFeed notes={data.notesFeed.notes} />
+      <NoteFeed notes={data.notesFeed.notes}>
+        <SearchBar />
+      </NoteFeed>
       {
         data.notesFeed.hasNextButton 
           && (

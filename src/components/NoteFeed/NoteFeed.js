@@ -2,12 +2,11 @@ import React, { Fragment } from 'react';
 import { Box, Text } from 'grommet';
 
 import { Note } from '../Note';
-import { SearchBar } from '/components/SearchBar';
 
-export const NoteFeed = ({ notes }) => {
+export const NoteFeed = ({ notes, children }) => {
   return (
     <Fragment>
-      <SearchBar />
+      {children}
       {
         !!notes.length
         ? notes.map(note => <Note key={note.id} note={note} />)
