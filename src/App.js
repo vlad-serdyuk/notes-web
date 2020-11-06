@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { Grommet } from 'grommet';
 import { ApolloProvider } from '@apollo/client'; 
 
-import GQLService from '/services/GQLService';
+import GQLService from './services/GQLService';
 import { theme } from './utils/theme';
-import { AppContainer } from '/components/AppContainer';
+import { AppContainer } from './components/AppContainer';
 import GlobalStyles from './styled/globalStyles';
 
 const client = GQLService.getInitialClient();

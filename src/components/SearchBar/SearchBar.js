@@ -5,7 +5,7 @@ import { useLazyQuery } from '@apollo/client';
 import { Search } from 'grommet-icons';
 import { Box, Image, Text, TextInput } from 'grommet';
 
-import { SEARCH_NOTES } from '/gql/query';
+import { SEARCH_NOTES } from '../../gql/query';
 
 const SearchBarComponent = ({ history }) => {
   const [getNotes, { loading, data }] = useLazyQuery(SEARCH_NOTES, { variables: { text: '' } });

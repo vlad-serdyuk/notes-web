@@ -2,9 +2,9 @@ import React, { Fragment, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/client';
 
-import { NoteForm } from '/components/NoteForm';
-import { GET_NOTES } from '/gql/query';
-import { CREATE_NOTE } from '/gql/mutation';
+import { NoteForm } from '../../components/NoteForm';
+import { GET_NOTES } from '../../gql/query';
+import { CREATE_NOTE } from '../../gql/mutation';
 
 export const CreateNotePage = ({ history }) => {
   const [createNote, { loading, error }] = useMutation(CREATE_NOTE, {

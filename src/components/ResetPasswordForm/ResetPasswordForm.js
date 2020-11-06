@@ -2,8 +2,8 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { Box, Button, Text, TextInput } from 'grommet';
 
-import { SHOW_NOTIFIFCATION } from '/gql/local-query';
-import { RESET_PASSWORD } from '/gql/mutation';
+import { SHOW_NOTIFIFCATION } from '../../gql/local-query';
+import { RESET_PASSWORD } from '../../gql/mutation';
 import { SubmitButton } from './ResetPasswordForm.styled';
 
 const MIN_PASSWORD_LENGTH = 6;

@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { Box, Button, Layer, Text } from 'grommet';
 import { FormClose, StatusGood } from 'grommet-icons';
 
-import { SHOW_NOTIFIFCATION } from '/gql/local-query';
+import { SHOW_NOTIFIFCATION } from '../../gql/local-query';
 
 const NOTIFICATION_BAR_SHOWING_TIME = 3000;
 

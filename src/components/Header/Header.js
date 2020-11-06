@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/client';
 import { Box } from 'grommet';
 
-import { useIsLoggedInQuery } from '/common/queries/auth';
-import { GET_ME, LOG_OUT } from '/gql/query';
+import { useIsLoggedInQuery } from '../../common/queries/auth';
+import { GET_ME, LOG_OUT } from '../../gql/query'
 import { AvatarDropButton } from './components/AvatarDropDown';
 import { StyledHeader, LinkText, LinkWrapper } from './Header.styled';
 

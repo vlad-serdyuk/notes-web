@@ -2,9 +2,9 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useQuery, useMutation } from '@apollo/client';
 
-import { NoteForm } from '/components/NoteForm';
-import { GET_NOTE, GET_NOTES } from '/gql/query';
-import { UPDATE_NOTE } from '/gql/mutation';
+import { NoteForm } from '../../components/NoteForm';
+import { GET_NOTE, GET_NOTES } from '../../gql/query';
+import { UPDATE_NOTE } from '../../gql/mutation';
 
 export const EditNotePage = ({ history, match }) => {
   const { data: noteData, loading: noteLoading, error: noteError } = useQuery(GET_NOTE, { variables: { id: match.params.id } });

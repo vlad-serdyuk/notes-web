@@ -3,7 +3,8 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Nav, Button } from 'grommet';
 import { useQuery } from '@apollo/client';
-import { GET_ME } from '/gql/query';
+
+import { GET_ME } from '../../gql/query';
 
 import { LinkWrapper, LinkText } from './Navigation.styled';
 

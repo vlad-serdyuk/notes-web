@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { Skeleton } from '/components/Skeleton';
+import { Skeleton } from '../../components/Skeleton';
 import { useIsLoggedInQuery } from '../queries/auth';
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {

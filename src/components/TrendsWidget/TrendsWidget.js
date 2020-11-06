@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/client';
 import { Box, Text } from 'grommet';
 
-import { GET_TRENDS_NOTES } from '/gql/query';
+import { GET_TRENDS_NOTES } from '../../gql/query';
 import { TrendsContainer, TrendsHeader, TrendBlock } from './TrendsWidget.styled';
 
 const TrendsWidgetComponent = ({ history }) => {
