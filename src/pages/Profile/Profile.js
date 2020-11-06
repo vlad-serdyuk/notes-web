@@ -1,11 +1,11 @@
 import React, { Fragment, useMemo } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 
-import { GET_USER_NOTES, GET_ME } from '/gql/query';
-import { UPDATE_USER } from '/gql/mutation';
-import { Profile } from '/components/Profile';
-import { NotesTabs } from '/components/NotesTabs';
-import { NoteFeed } from '/components/NoteFeed';
+import { GET_USER_NOTES, GET_ME } from '../../gql/query';
+import { UPDATE_USER } from '../../gql/mutation';
+import { Profile } from '../../components/Profile';
+import { NotesTabs } from '../../components/NotesTabs';
+import { NoteFeed } from '../../components/NoteFeed';
 
 export const ProfilePage = () => {
   const { data: { me } = {} } = useQuery(GET_ME);

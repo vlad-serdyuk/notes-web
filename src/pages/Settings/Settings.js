@@ -1,6 +1,6 @@
 import React from 'react';
 import { Accordion, AccordionPanel, Box } from 'grommet';
-import { ResetPasswordForm } from '/components/ResetPasswordForm/ResetPasswordForm';
+import { ResetPasswordForm } from '../../components/ResetPasswordForm/ResetPasswordForm';
 
 export const SettingsPage = () => (
   <Accordion animate={{}}>

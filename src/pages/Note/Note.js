@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/client';
 
-import { Note } from '/components/Note';
-import { GET_NOTE } from '/gql/query';
+import { Note } from '../../components/Note';
+import { GET_NOTE } from '../../gql/query';
 
 export const NotePage = ({ match: { params: { id } } }) => {
   const { loading, error, data } = useQuery(GET_NOTE, { variables: { id } });

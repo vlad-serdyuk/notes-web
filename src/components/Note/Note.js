@@ -6,8 +6,8 @@ import { useQuery, useMutation } from '@apollo/client';
 import { format } from 'date-fns';
 import { Avatar, Box, Text, Drop } from 'grommet';
 
-import { GET_NOTES, GET_ME } from '/gql/query';
-import { TOGGLE_FAVORITE_NOTE, TOGGLE_PRIVACY_NOTE, DELETE_NOTE } from '/gql/mutation';
+import { GET_NOTES, GET_ME } from '../../gql/query';
+import { TOGGLE_FAVORITE_NOTE, TOGGLE_PRIVACY_NOTE, DELETE_NOTE } from '../../gql/mutation';
 import { ConfirmDialog } from './components/ConfirmDialog';
 import * as Styled from './Note.styled';
 

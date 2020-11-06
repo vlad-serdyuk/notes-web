@@ -5,9 +5,9 @@ import { useMutation, useApolloClient } from '@apollo/client';
 import { Anchor, Layer, Box, Heading, TextInput, Text, MaskedInput, Button } from 'grommet';
 import { MailOption, Close } from 'grommet-icons';
 
-import { emailMask } from '/utils/validation';
-import { GET_ME } from '/gql/query';
-import { SIGNIN_USER } from '/gql/mutation';
+import { emailMask } from '../../utils/validation';
+import { GET_ME } from '../../gql/query';
+import { SIGNIN_USER } from '../../gql/mutation';
 
 const SignInComponent = ({ history }) => {
   const [email, setEmail] = useState('');

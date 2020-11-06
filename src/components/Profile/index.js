@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { format } from 'date-fns';
 import { Avatar, Box, Button, Text } from 'grommet';
 
-import { GET_ME } from '/gql/query';
+import { GET_ME } from '../../gql/query';
 import { EditProfileDialog } from './EditProfileDialog';
 
 export const Profile = ({ user, updateProfile }) => {

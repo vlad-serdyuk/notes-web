@@ -2,11 +2,11 @@ import React, { useMemo, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { useQuery, useMutation } from '@apollo/client';
 
-import { GET_USER_NOTES, GET_ME } from '/gql/query';
-import { UPDATE_USER } from '/gql/mutation';
-import { NoteFeed } from '/components/NoteFeed';
-import { Profile } from '/components/Profile';
-import { NotesTabs } from '/components/NotesTabs';
+import { GET_USER_NOTES, GET_ME } from '../../gql/query';
+import { UPDATE_USER } from '../../gql/mutation';
+import { NoteFeed } from '../../components/NoteFeed';
+import { Profile } from '../../components/Profile';
+import { NotesTabs } from '../../components/NotesTabs';
 
 export const NotesPage = ({ match }) => {
   const { loading, error, data } = useQuery(GET_USER_NOTES, { variables: { username: match.params.author } });
