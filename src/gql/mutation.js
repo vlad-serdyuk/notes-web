@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { NOTE_FRAGMENT } from '/gql/fragments';
+import { NOTE_FRAGMENT } from './fragments';
 
 export const SIGNIN_USER = gql`
   mutation signIn($email: String!, $password: String!) {

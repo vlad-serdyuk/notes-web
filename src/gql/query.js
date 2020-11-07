@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { NOTE_FRAGMENT } from '/gql/fragments';
+import { NOTE_FRAGMENT } from './fragments';
 
 export const GET_ME = gql`
   query Me {

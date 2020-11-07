@@ -20,16 +20,19 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.js' ],
+    fallback: {
+      path: false,
+    },
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(process.cwd(), './dist'),
     filename: 'bundle.js'
   },
-  plugins: [
+  /*plugins: [
     new HtmlWebpackPlugin({
-        template: path.join(__dirname, 'src', 'index.html')
+      template: path.join(__dirname, 'src', 'index.html')
     })
-  ],
+  ],*/
   devServer: {
     contentBase: path.resolve(__dirname, './dist'),
   }
