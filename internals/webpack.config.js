@@ -28,12 +28,12 @@ module.exports = {
     path: path.resolve(process.cwd(), './dist'),
     filename: 'bundle.js'
   },
-  /*plugins: [
+  plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'index.html')
+      template: path.join(process.cwd(), 'src', 'index.html')
     })
-  ],*/
+  ],
   devServer: {
-    contentBase: path.resolve(__dirname, './dist'),
+    contentBase: path.resolve(process.cwd(), './dist'),
   }
 };
