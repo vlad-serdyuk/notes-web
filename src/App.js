@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Grommet } from 'grommet';
 import { ApolloProvider } from '@apollo/client'; 
 
@@ -11,7 +10,7 @@ import GlobalStyles from './styled/globalStyles';
 const client = GQLService.getInitialClient();
 GQLService.bootstrap();
 
-const App = () => (
+export const App = () => (
   <ApolloProvider client={client}>
     <Grommet theme={theme}>
       <GlobalStyles />
@@ -19,5 +18,3 @@ const App = () => (
     </Grommet>
   </ApolloProvider>
 );
-
-ReactDOM.render(<App />, document.getElementById('root'));
