@@ -7,8 +7,8 @@
     "dev": "parcel src/index.html",
     "final": "parcel final/index.html",
     "deploy:src": "parcel build src/index.html --public-url ./",
-    "build": "cross-env NODE_ENV=production webpack --config internals/webpack.config.js",
-    "start": "cross-env NODE_ENV=development webpack serve --config internals/webpack.config.js",
+    "build": "cross-env NODE_ENV=production webpack --config configs/webpack.prod.js",
+    "start": "cross-env NODE_ENV=development webpack serve --config configs/webpack.dev.js",
     "cy:run": "cypress run",
     "cy:open": "cypress open"
   },
