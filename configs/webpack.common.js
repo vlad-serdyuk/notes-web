@@ -1,6 +1,7 @@
-const paths = require('./paths');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const paths = require('./paths');
 
 module.exports = {
   entry: paths.src + '/index.js',
