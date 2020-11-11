@@ -1,9 +1,9 @@
-const path = require('path');
+const paths = require('./paths');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: path.resolve(process.cwd(), './src/index.js'),
-  devtool: 'inline-source-map',
+  entry: paths.src + '/index.js',
   module: {
     rules: [
       {
@@ -18,22 +18,19 @@ module.exports = {
       }, */
     ],
   },
-  resolve: {
-    extensions: ['.ts', '.js' ],
-    fallback: {
-      path: false,
-    },
-  },
   output: {
-    path: path.resolve(process.cwd(), './dist'),
-    filename: 'bundle.js'
+    path: paths.build,
+    filename: '[name].bundle.js',
+    publicPath: '/',
   },
   plugins: [
+    // Removes/cleans build folders and unused assets when rebuilding
+    new CleanWebpackPlugin(),
+    // Generates an HTML file from a template
     new HtmlWebpackPlugin({
-      template: path.join(process.cwd(), 'src', 'index.html')
+      title: 'Notedly',
+      // template: path.join(process.cwd(), 'src', 'index.html')
+      template: paths.src + '/index.html',
     })
   ],
-  devServer: {
-    contentBase: path.resolve(process.cwd(), './dist'),
-  }
 };
