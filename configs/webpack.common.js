@@ -10,13 +10,13 @@ module.exports = {
       {
         test: /\.js?$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: 'babel-loader',
       },
-      /* {
+      /*{
         test: /\.ts?$/,
-        use: 'ts-loader',
         exclude: /node_modules/,
-      }, */
+        use: 'ts-loader',
+      },*/
     ],
   },
   output: {
@@ -25,7 +25,7 @@ module.exports = {
     publicPath: '/',
   },
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.ts'],
     fallback: {
       path: false,
     },
