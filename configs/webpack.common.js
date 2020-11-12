@@ -9,8 +9,8 @@ module.exports = {
     rules: [
       {
         test: /\.js?$/,
-        use: 'babel-loader',
         exclude: /node_modules/,
+        use: ['babel-loader'],
       },
       /* {
         test: /\.ts?$/,
@@ -23,6 +23,12 @@ module.exports = {
     path: paths.build,
     filename: '[name].bundle.js',
     publicPath: '/',
+  },
+  resolve: {
+    extensions: ['.js'],
+    fallback: {
+      path: false,
+    },
   },
   plugins: [
     // Removes/cleans build folders and unused assets when rebuilding

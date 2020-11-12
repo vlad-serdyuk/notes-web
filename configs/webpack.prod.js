@@ -1,39 +1,29 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { merge } = require('webpack-merge');
 
-module.exports = {
-  entry: path.resolve(process.cwd(), './src/index.js'),
-  devtool: 'inline-source-map',
-  module: {
-    rules: [
-      {
-        test: /\.js?$/,
-        use: 'babel-loader',
-        exclude: /node_modules/,
-      },
-      /* {
-        test: /\.ts?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      }, */
-    ],
+const paths = require('./paths');
+const common = require('./webpack.common.js');
+
+module.exports = merge(common, {
+  mode: 'production',
+  devtool: false,
+  output: {
+    path: paths.build,
+    publicPath: '/',
+    filename: 'js/[name].[contenthash].bundle.js',
   },
-  resolve: {
-    extensions: ['.ts', '.js' ],
-    fallback: {
-      path: false,
+  optimization: {
+    minimize: true,
+    // minimizer: [new CssMinimizerPlugin(), "..."],
+    // Once your build outputs multiple chunks, this option will ensure they share the webpack runtime
+    // instead of having their own. This also helps with long-term caching, since the chunks will only
+    // change when actual code changes, not the webpack runtime.
+    runtimeChunk: {
+      name: 'runtime',
     },
   },
-  output: {
-    path: path.resolve(process.cwd(), './dist'),
-    filename: 'bundle.js'
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(process.cwd(), 'src', 'index.html')
-    })
-  ],
-  devServer: {
-    contentBase: path.resolve(process.cwd(), './dist'),
-  }
-};
+});
