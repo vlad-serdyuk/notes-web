@@ -12,7 +12,7 @@ module.exports = {
         exclude: /node_modules/,
         use: 'babel-loader',
       },
-      /*{
+      /*
         test: /\.ts?$/,
         exclude: /node_modules/,
         use: 'ts-loader',
@@ -40,4 +40,16 @@ module.exports = {
       template: paths.src + '/index.html',
     })
   ],
+  /*optimization: {
+    runtimeChunk: "single", // enable "runtime" chunk
+    splitChunks: {
+        cacheGroups: {
+            vendor: {
+                test: /[\\/]node_modules[\\/]/,
+                name: "vendor",
+                chunks: "all"
+            }
+        }
+    }
+  }*/
 };
