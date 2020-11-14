@@ -8,14 +8,28 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js?$/,
+        test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
         use: 'babel-loader',
       },
-      /*
+
+
+      /*{
         test: /\.ts?$/,
         exclude: /node_modules/,
-        use: 'ts-loader',
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.js?$/,
+        exclude: /node_modules/,
+        use: 'babel-loader',
       },*/
     ],
   },
