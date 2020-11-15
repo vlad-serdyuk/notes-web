@@ -10,7 +10,9 @@ module.exports = {
       {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
-        use: 'babel-loader',
+        use: {
+          loader: 'babel-loader',
+        },
       },
 
 
@@ -39,7 +41,7 @@ module.exports = {
     publicPath: '/',
   },
   resolve: {
-    extensions: ['.js', '.ts'],
+    extensions: ['.ts', '.js'],
     fallback: {
       path: false,
     },
