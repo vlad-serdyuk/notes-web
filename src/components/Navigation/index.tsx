@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Nav, Button } from 'grommet';
 import { useQuery } from '@apollo/client';
 
@@ -8,7 +7,7 @@ import { GET_ME } from '../../gql/query';
 
 import { LinkWrapper, LinkText } from './Navigation.styled';
 
-const NavigationComponent: FC = ({ history }) => {
+const NavigationComponent: FC<RouteComponentProps> = ({ history }) => {
   const { data: { me } = {} } = useQuery(GET_ME);
 
   const onCreateNoteClick = () => {
@@ -36,12 +35,6 @@ const NavigationComponent: FC = ({ history }) => {
       />
     </Nav>
   );
-};
-
-NavigationComponent.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
 };
 
 export const Navigation = withRouter(NavigationComponent);
