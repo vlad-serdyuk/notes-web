@@ -14,25 +14,6 @@ module.exports = {
           loader: 'babel-loader',
         },
       },
-
-
-      /*{
-        test: /\.ts?$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'ts-loader',
-            options: {
-              transpileOnly: true
-            }
-          }
-        ]
-      },
-      {
-        test: /\.js?$/,
-        exclude: /node_modules/,
-        use: 'babel-loader',
-      },*/
     ],
   },
   output: {

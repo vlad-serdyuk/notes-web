@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Nav, Button } from 'grommet';
@@ -8,7 +8,7 @@ import { GET_ME } from '../../gql/query';
 
 import { LinkWrapper, LinkText } from './Navigation.styled';
 
-const NavigationComponent = ({ history }) => {
+const NavigationComponent: FC = ({ history }) => {
   const { data: { me } = {} } = useQuery(GET_ME);
 
   const onCreateNoteClick = () => {
