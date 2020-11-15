@@ -8,7 +8,7 @@ import { GET_ME } from '../../gql/query';
 
 import { LinkWrapper, LinkText } from './Navigation.styled';
 
-const NavigationComponent: React.FC = ({ history }) => {
+const NavigationComponent = ({ history }) => {
   const { data: { me } = {} } = useQuery(GET_ME);
 
   const onCreateNoteClick = () => {
