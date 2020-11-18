@@ -1,8 +1,13 @@
-import React, { memo } from 'react'
+import React, { memo, FC } from 'react'
 import { Box, Button, Layer, Heading, Text } from 'grommet';
 import { Close } from 'grommet-icons';
 
-const ConfirmDialogComponent = ({ onDialogClose, onDeleteNote }) => {
+interface IConfirmDialogProps {
+  onDialogClose: () => null,
+  onDeleteNote: () => null,
+}
+
+const ConfirmDialogComponent: FC<IConfirmDialogProps> = ({ onDialogClose, onDeleteNote }) => {
   return (
     <Layer position="center" onClickOutside={onDialogClose} onEsc={onDialogClose}>
       <Box pad="medium" gap="small" width="medium">
