@@ -31,7 +31,6 @@ const NoteFormComponent = ({ btnLabel, content, submitNote }) => {
             onClick={onSubmit}
           />
         </Box>
-
       </Box>
     </Box>
   );
