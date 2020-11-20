@@ -1,13 +1,18 @@
-import React, { memo, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { memo, useState, FC, ChangeEvent } from 'react';
 import { Box, TextArea, Button } from 'grommet';
 import { Lock, Unlock } from 'grommet-icons';
 
-const NoteFormComponent = ({ btnLabel, content, submitNote }) => {
-  const [note, setNote] = useState(content);
-  const [privacy, setPrivacy] = useState(false);
+interface INoteFormProps {
+  btnLabel: string;
+  content: string;
+  submitNote: ({ note, privacy }: { note: any, privacy: boolean } ) => void;
+}
 
-  const onChangeNote = (event) => {
+const NoteFormComponent: FC<INoteFormProps> = ({ btnLabel = 'Create', content = '', submitNote }) => {
+  const [note, setNote] = useState<string>(content);
+  const [privacy, setPrivacy] = useState<boolean>(false);
+
+  const onChangeNote = (event: ChangeEvent<HTMLInputElement>) => {
     setNote(event.target.value);
   };
 
@@ -35,16 +40,5 @@ const NoteFormComponent = ({ btnLabel, content, submitNote }) => {
     </Box>
   );
 }
-
-NoteFormComponent.propTypes = {
-  btnLabel: PropTypes.string,
-  content: PropTypes.string,
-  submitNote: PropTypes.func.isRequired,
-};
-
-NoteFormComponent.defaultProps = {
-  btnLabel: 'Create',
-  content: '',
-};
 
 export const NoteForm = memo(NoteFormComponent);

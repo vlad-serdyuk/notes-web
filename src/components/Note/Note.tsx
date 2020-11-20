@@ -61,7 +61,7 @@ const NoteComponent: FC<INoteComponentProps> = ({ note, history }) => {
     history.push(`/note/${note.id}`);
   }, [note, history]);
 
-  const togglePrivacy = useCallback((e) => {
+  const togglePrivacy = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     togglePrivacyMutation({ variables: { id: note.id, private: !note.private } });
   }, [togglePrivacyMutation, note]);
@@ -70,22 +70,22 @@ const NoteComponent: FC<INoteComponentProps> = ({ note, history }) => {
     return note.private ? Styled.LockIcon : Styled.UnlockIcon;
   }, [note]);
 
-  const toggleFavorite = useCallback((e) => {
+  const toggleFavorite = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     toggleFavoriteMutation({ variables: { id: note.id } });
   }, [toggleFavoriteMutation, note]);
 
-  const editNote = useCallback((e) => {
+  const editNote = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     history.push(`/edit/${note.id}`);
   }, [note, history]);
 
-  const deleteNote = useCallback((e) => {
+  const deleteNote = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     setDialogOpen(true);
   }, [setDialogOpen]);
 
-  const onDeleteNote = useCallback((e) => {
+  const onDeleteNote = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     deleteNoteMutation({ variables: { id: note.id } });
   }, [deleteNoteMutation, note]);
