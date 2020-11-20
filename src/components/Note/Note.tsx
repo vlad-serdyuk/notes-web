@@ -1,7 +1,6 @@
-import React, { memo, useMemo, useState, useCallback, useRef } from 'react'
+import React, { memo, useMemo, useState, useCallback, useRef, FC, MouseEvent } from 'react'
 import ReactMarkdown from 'react-markdown';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { format } from 'date-fns';
 import { Avatar, Box, Text, Drop } from 'grommet';
@@ -11,9 +10,13 @@ import { TOGGLE_FAVORITE_NOTE, TOGGLE_PRIVACY_NOTE, DELETE_NOTE } from '../../gq
 import { ConfirmDialog } from './components/ConfirmDialog';
 import * as Styled from './Note.styled';
 
-const NoteComponent = ({ note, history }) => {
-  const [isDialogOpen, setDialogOpen] = useState(false);
-  const [isTooltipOpen, setTooltipOpen] = useState(false);
+interface INoteComponentProps extends RouteComponentProps {
+  note: any;
+}
+
+const NoteComponent: FC<INoteComponentProps> = ({ note, history }) => {
+  const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
+  const [isTooltipOpen, setTooltipOpen] = useState<boolean>(false);
   const favoritesRef = useRef();
 
   const { data: { me } } = useQuery(GET_ME);
@@ -44,12 +47,12 @@ const NoteComponent = ({ note, history }) => {
     return isTooltipOpen && !!note.favoritedBy.length && favoritesRef.current;
   }, [note, isTooltipOpen, favoritesRef]);
 
-  const onDialogClose = (e) => {
+  const onDialogClose = (e: MouseEvent) => {
     e.stopPropagation();
     setDialogOpen(false);
   }
 
-  const openAuthorNotes = (e) => {
+  const openAuthorNotes = (e: MouseEvent) => {
     e.stopPropagation();
     history.push(`/notes/${note.author.username}`);
   }
@@ -129,13 +132,6 @@ const NoteComponent = ({ note, history }) => {
         && <ConfirmDialog onDeleteNote={onDeleteNote} onDialogClose={onDialogClose} />}
     </Styled.NoteContainer>
   );
-};
-
-
-NoteComponent.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
 };
 
 export const Note = memo(withRouter(NoteComponent));
