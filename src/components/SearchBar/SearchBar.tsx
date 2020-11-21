@@ -9,11 +9,11 @@ import { SEARCH_NOTES } from '../../gql/query';
 const SearchBarComponent: FC<RouteComponentProps> = ({ history }) => {
   const [getNotes, { loading, data }] = useLazyQuery(SEARCH_NOTES, { variables: { text: '' } });
 
-  const [value, setValue] = useState('');
-  const [isSuggestionOpen, setSuggestionOpen] = useState(false);
-  const [suggestedResults, setSuggestedResults] = useState([]);
+  const [value, setValue] = useState<string>('');
+  const [isSuggestionOpen, setSuggestionOpen] = useState<boolean>(false);
+  const [suggestedResults, setSuggestedResults] = useState<Array<any>>([]);
 
-  const boxRef = useRef();
+  const boxRef = useRef<HTMLElement>();
 
   useEffect(() => {
     if (data) {
@@ -36,9 +36,9 @@ const SearchBarComponent: FC<RouteComponentProps> = ({ history }) => {
     history.push(`/note/${event.suggestion.value}`);
   }
 
-  const renderSuggestions = () => {
+  const renderSuggestions: () => Array<{ label: JSX.Element, value: string }> = () => {
     return suggestedResults
-      .map(({ id, content, imageUrl }, index, list) => ({
+      .map(({ id, content, imageUrl }, index: number, list: []) => ({
         label: (
           <Box
             direction="row"

@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
+import React, { memo, FC } from 'react';
 import { StyledBox } from './Skeleton.styled';
 
-const SkeletonComponent = () => (
+const SkeletonComponent: FC = () => (
   <StyledBox align="center" pad="small" />
 );
 

@@ -17,7 +17,7 @@ interface INoteComponentProps extends RouteComponentProps {
 const NoteComponent: FC<INoteComponentProps> = ({ note, history }) => {
   const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
   const [isTooltipOpen, setTooltipOpen] = useState<boolean>(false);
-  const favoritesRef = useRef();
+  const favoritesRef = useRef<HTMLElement>();
 
   const { data: { me } } = useQuery(GET_ME);
   const [toggleFavoriteMutation] = useMutation(TOGGLE_FAVORITE_NOTE);
