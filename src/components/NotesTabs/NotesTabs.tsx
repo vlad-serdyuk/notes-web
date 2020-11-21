@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Box, Tab, Tabs } from 'grommet';
 
-export const NotesTabs = ({ notes, favorites, privates }) => {
+interface NotesTabsProps {
+  notes: Array<any>;
+  favorites: Array<any>;
+  privates: Array<any>;
+}
+
+export const NotesTabs: FC<NotesTabsProps> = ({ notes, favorites, privates }) => {
   return (
     <Tabs flex>
       <Tab title="Notes" fill="horizontal">

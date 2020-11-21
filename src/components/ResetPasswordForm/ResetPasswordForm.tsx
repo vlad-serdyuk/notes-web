@@ -1,6 +1,6 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, FC, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/client';
-import { Box, Button, Text, TextInput } from 'grommet';
+import { Box, Text, TextInput } from 'grommet';
 
 import { SHOW_NOTIFIFCATION } from '../../gql/local-query';
 import { RESET_PASSWORD } from '../../gql/mutation';
@@ -8,11 +8,11 @@ import { SubmitButton } from './ResetPasswordForm.styled';
 
 const MIN_PASSWORD_LENGTH = 6;
 
-export const ResetPasswordForm = () => {
-  const [oldPassword, setOldPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmedNewPassword, setConfirmedNewPassword] = useState('');
-  const [disabled, setDisabled] = useState(true);
+export const ResetPasswordForm: FC = () => {
+  const [oldPassword, setOldPassword] = useState<string>('');
+  const [newPassword, setNewPassword] = useState<string>('');
+  const [confirmedNewPassword, setConfirmedNewPassword] = useState<string>('');
+  const [disabled, setDisabled] = useState<boolean>(true);
 
   const [resetPasswordMutation, { loading, error }] = useMutation(RESET_PASSWORD, {
     onCompleted: () => {
@@ -20,7 +20,7 @@ export const ResetPasswordForm = () => {
       setNewPassword('');
       setConfirmedNewPassword('');
     },
-    update: (cache) => {
+    update: (cache: any) => {
       cache.writeQuery({
         query: SHOW_NOTIFIFCATION,
         data: {
@@ -35,9 +35,9 @@ export const ResetPasswordForm = () => {
     resetPasswordMutation({ variables: { oldPassword, newPassword } });
   }, [oldPassword, newPassword, confirmedNewPassword]);
 
-  const onChangeOldPassword = (event) => setOldPassword(event.target.value);
-  const onChangeNewPassword = (event) => setNewPassword(event.target.value);
-  const onChangeConfirmPassword = (event) => setConfirmedNewPassword(event.target.value);
+  const onChangeOldPassword = (event: ChangeEvent<HTMLInputElement>) => setOldPassword(event.target.value);
+  const onChangeNewPassword = (event: ChangeEvent<HTMLInputElement>) => setNewPassword(event.target.value);
+  const onChangeConfirmPassword = (event: ChangeEvent<HTMLInputElement>) => setConfirmedNewPassword(event.target.value);
 
   useEffect(() => {
     const arePasswordsNotEqual = !newPassword || newPassword !== confirmedNewPassword;

@@ -1,13 +1,12 @@
-import React, { useCallback, useEffect, useState, useRef, Fragment } from 'react';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React, { useCallback, useEffect, useState, useRef, Fragment, FC, ChangeEvent } from 'react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { Search } from 'grommet-icons';
 import { Box, Image, Text, TextInput } from 'grommet';
 
 import { SEARCH_NOTES } from '../../gql/query';
 
-const SearchBarComponent = ({ history }) => {
+const SearchBarComponent: FC<RouteComponentProps> = ({ history }) => {
   const [getNotes, { loading, data }] = useLazyQuery(SEARCH_NOTES, { variables: { text: '' } });
 
   const [value, setValue] = useState('');
@@ -22,7 +21,7 @@ const SearchBarComponent = ({ history }) => {
     }
   }, [data]);
 
-  const onChange = event => {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value: text } = event.target;
     setValue(text);
 
@@ -33,7 +32,7 @@ const SearchBarComponent = ({ history }) => {
     }
   };
 
-  const onSelect = event => {
+  const onSelect = (event: ChangeEvent<HTMLInputElement>) => {
     history.push(`/note/${event.suggestion.value}`);
   }
 
@@ -109,12 +108,6 @@ const SearchBarComponent = ({ history }) => {
       </Box>
     </Fragment>
   );
-};
-
-SearchBarComponent.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
 };
 
 export const SearchBar = withRouter(SearchBarComponent);
