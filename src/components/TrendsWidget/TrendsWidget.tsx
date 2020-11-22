@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client';
 import { Box, Text } from 'grommet';
 
 import { GET_TRENDS_NOTES } from '../../gql/query';
+import { Note } from '../../gql/models';
 import { TrendsContainer, TrendsHeader, TrendBlock } from './TrendsWidget.styled';
 
 const TrendsWidgetComponent: FC<RouteComponentProps> = ({ history }) => {
@@ -30,7 +31,7 @@ const TrendsWidgetComponent: FC<RouteComponentProps> = ({ history }) => {
       <TrendsContainer>
         <TrendsHeader>Trends</TrendsHeader>
         {
-          data.trendsNotes.map((note) => {
+          data.trendsNotes.map((note: Note) => {
             return (
               <TrendBlock key={note.id} onClick={openNote}>
                 <Text id={note.id}>{note.content}</Text>
