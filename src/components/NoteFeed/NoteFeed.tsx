@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, FC } from 'react';
 import { Box, Text } from 'grommet';
 
-import { Note } from '../Note';
+import { Note } from '../Note/index';
 
-export const NoteFeed = ({ notes, children }) => {
+export const NoteFeed: FC = ({ notes, children }) => {
   return (
     <Fragment>
       {children}

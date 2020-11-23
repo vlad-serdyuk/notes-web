@@ -1,15 +1,14 @@
-import React, { useMemo, Fragment } from 'react';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React, { useMemo, Fragment, FC} from 'react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { Box } from 'grommet';
 
 import { useIsLoggedInQuery } from '../../common/queries/auth';
-import { GET_ME, LOG_OUT } from '../../gql/query'
+import { GET_ME, LOG_OUT } from '../../gql/query';
 import { AvatarDropButton } from './components/AvatarDropDown';
 import { StyledHeader, LinkText, LinkWrapper } from './Header.styled';
 
-const HeaderComponent = ({ history }) => {
+const HeaderComponent: FC<RouteComponentProps> = ({ history }) => {
   const { data: { isLoggedIn }, client } = useIsLoggedInQuery();
   const { data: { me } = {} } = useQuery(GET_ME);
 
@@ -70,12 +69,6 @@ const HeaderComponent = ({ history }) => {
       </Box>
     </StyledHeader>
   );
-};
-
-HeaderComponent.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
 };
 
 export const Header = withRouter(HeaderComponent);

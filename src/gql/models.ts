@@ -14,3 +14,10 @@ export interface Note {
     avatar: string;
   }
 }
+
+export interface Me {
+  id: string;
+  email: string;
+  username: string;
+  createdAt: string;
+}
