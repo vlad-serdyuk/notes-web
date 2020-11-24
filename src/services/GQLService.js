@@ -6,10 +6,6 @@ import {
 import { GET_ME } from '../gql/query';
 import { GET_APP_METADATA } from '../gql/local-query';
 
-console.log('-----1-------');
-console.log(process);
-
-
 const uri = process.env.API_URI;
 const httpLink = createHttpLink({ uri, credentials: 'include' });
 
