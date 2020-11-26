@@ -1,12 +1,17 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, FC } from 'react';
 import { useQuery } from '@apollo/client';
 import { format } from 'date-fns';
 import { Avatar, Box, Button, Text } from 'grommet';
 
 import { GET_ME } from '../../gql/query';
-import { EditProfileDialog } from './EditProfileDialog';
+import { EditProfileDialog } from './EditProfileDialog/index';
 
-export const Profile = ({ user, updateProfile }) => {
+interface ProfileProps {
+  user: any;
+  updateProfile: ({ variables: { username } }: { variables: { username: string } }) => void;
+}
+
+export const Profile: FC<ProfileProps> = ({ user, updateProfile }) => {
   const { data: { me } = {} } = useQuery(GET_ME);
   const [isDialogOpen, setDialogOpen] = useState(false);
 
