@@ -1,13 +1,18 @@
-import React, { memo, useState, useEffect, useCallback } from 'react'
-import PropTypes from 'prop-types';
+import React, { memo, useState, useEffect, useCallback, FC, ChangeEvent } from 'react'
 import { Box, Button, Layer, Heading, Text, TextInput } from 'grommet';
 import { Close } from 'grommet-icons';
 
-const EditProfileDialogComponent = ({ username, onDialogClose, onUpdateProfile }) => {
-  const [newUsername, setUsername] = useState(username);
-  const [disabled, setDisabled] = useState(true);
+interface EditProfileDialogProps {
+  username: string;
+  onDialogClose: () => void;
+  onUpdateProfile: (newUsername: string) => void;
+}
 
-  const onChangeUsername = (event) => {
+const EditProfileDialogComponent: FC<EditProfileDialogProps> = ({ username, onDialogClose, onUpdateProfile }) => {
+  const [newUsername, setUsername] = useState<string>(username);
+  const [disabled, setDisabled] = useState<boolean>(true);
+
+  const onChangeUsername = (event: ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
   };
 
@@ -53,12 +58,6 @@ const EditProfileDialogComponent = ({ username, onDialogClose, onUpdateProfile }
       </Box>
     </Layer>
   );
-};
-
-EditProfileDialogComponent.propTypes = {
-  username: PropTypes.string.isRequired,
-  onDialogClose: PropTypes.func.isRequired,
-  onUpdateProfile: PropTypes.func.isRequired,
 };
 
 export const EditProfileDialog = memo(EditProfileDialogComponent);
