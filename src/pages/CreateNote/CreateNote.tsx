@@ -1,12 +1,12 @@
-import React, { Fragment, useCallback } from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, Fragment, useCallback } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 import { NoteForm } from '../../components/NoteForm';
 import { GET_NOTES } from '../../gql/query';
 import { CREATE_NOTE } from '../../gql/mutation';
 
-export const CreateNotePage = ({ history }) => {
+export const CreateNotePage: FC<RouteComponentProps> = ({ history }) => {
   const [createNote, { loading, error }] = useMutation(CREATE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }],
     onCompleted: data => {
@@ -25,10 +25,4 @@ export const CreateNotePage = ({ history }) => {
       <NoteForm submitNote={onCreateNote} />
     </Fragment>
   );
-};
-
-CreateNotePage.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
 };
