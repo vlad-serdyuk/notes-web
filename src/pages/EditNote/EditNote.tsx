@@ -1,12 +1,12 @@
-import React, { useCallback } from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, useCallback } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 
 import { NoteForm } from '../../components/NoteForm';
 import { GET_NOTE, GET_NOTES } from '../../gql/query';
 import { UPDATE_NOTE } from '../../gql/mutation';
 
-export const EditNotePage = ({ history, match }) => {
+export const EditNotePage: FC<RouteComponentProps> = ({ history, match }) => {
   const { data: noteData, loading: noteLoading, error: noteError } = useQuery(GET_NOTE, { variables: { id: match.params.id } });
   const [updateNote, { loading, error }] = useMutation(UPDATE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }],
@@ -34,15 +34,4 @@ export const EditNotePage = ({ history, match }) => {
       submitNote={onUpdateNote}
     />
   );
-};
-
-EditNotePage.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    })
-  }),
 };
