@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { FC, Fragment } from 'react';
 import { useQuery } from '@apollo/client';
 import { Button } from 'grommet';
 
@@ -6,7 +6,7 @@ import { GET_NOTES } from '../../gql/query';
 import { NoteFeed } from '../../components/NoteFeed';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 
-export const HomePage = () => {
+export const HomePage: FC = () => {
   const { data, loading, error, fetchMore } = useQuery(GET_NOTES);
 
   const onLoadMoreClick = () => {    
