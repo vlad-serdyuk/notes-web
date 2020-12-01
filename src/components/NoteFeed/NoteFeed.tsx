@@ -1,9 +1,14 @@
 import React, { Fragment, FC } from 'react';
 import { Box, Text } from 'grommet';
 
-import { Note } from '../Note/index';
+import { Note } from '../Note';
+import { Note as NoteModel } from '../../gql/models';
 
-export const NoteFeed: FC = ({ notes, children }) => {
+interface NoteFeedProps {
+  notes: Array<NoteModel>;
+}
+
+export const NoteFeed: FC<NoteFeedProps> = ({ notes, children }) => {
   return (
     <Fragment>
       {children}

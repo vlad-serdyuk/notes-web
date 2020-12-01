@@ -2,10 +2,15 @@ import React, { memo, useState, FC, ChangeEvent } from 'react';
 import { Box, TextArea, Button } from 'grommet';
 import { Lock, Unlock } from 'grommet-icons';
 
+interface SubmitNoteArgs {
+  note: string,
+  privacy: boolean;
+}
+
 interface INoteFormProps {
   btnLabel: string;
   content: string;
-  submitNote: ({ note, privacy }: { note: any, privacy: boolean } ) => void;
+  submitNote: ({ note, privacy }: SubmitNoteArgs) => void;
 }
 
 const NoteFormComponent: FC<INoteFormProps> = ({ btnLabel = 'Create', content = '', submitNote }) => {

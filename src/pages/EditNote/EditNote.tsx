@@ -5,17 +5,18 @@ import { useQuery, useMutation } from '@apollo/client';
 import { NoteForm } from '../../components/NoteForm';
 import { GET_NOTE, GET_NOTES } from '../../gql/query';
 import { UPDATE_NOTE } from '../../gql/mutation';
+import { Note } from '../../gql/models';
 
 export const EditNotePage: FC<RouteComponentProps> = ({ history, match }) => {
   const { data: noteData, loading: noteLoading, error: noteError } = useQuery(GET_NOTE, { variables: { id: match.params.id } });
   const [updateNote, { loading, error }] = useMutation(UPDATE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }],
-    onCompleted: data => {
+    onCompleted: (data: { updateNote: Note }) => {
       history.push(`/note/${data.updateNote.id}`);
     },
   });
 
-  const onUpdateNote = useCallback(({ note, privacy }) => {
+  const onUpdateNote = useCallback(({ note, privacy }: { note: Note, privacy: boolean }) => {
     updateNote({ variables: { id: noteData.note.id, content: note, private: privacy } });
   }, [updateNote, noteData]);
 
