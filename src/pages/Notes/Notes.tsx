@@ -1,14 +1,15 @@
-import React, { useMemo, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { useMemo, FC, Fragment } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 
 import { GET_USER_NOTES, GET_ME } from '../../gql/query';
 import { UPDATE_USER } from '../../gql/mutation';
+import { Note as NoteModel } from '../../gql/models';
 import { NoteFeed } from '../../components/NoteFeed';
 import { Profile } from '../../components/Profile';
 import { NotesTabs } from '../../components/NotesTabs';
 
-export const NotesPage = ({ match }) => {
+export const NotesPage: FC<RouteComponentProps> = ({ match }) => {
   const { loading, error, data } = useQuery(GET_USER_NOTES, { variables: { username: match.params.author } });
   const { data: { me } = {} } = useQuery(GET_ME, { variables: { username: match.params.author } });
   const [updateProfile] = useMutation(UPDATE_USER, {
@@ -35,7 +36,7 @@ export const NotesPage = ({ match }) => {
       return [];
     }
 
-    return data.user.notes.filter((note) => note.private);
+    return data.user.notes.filter((note: NoteModel) => note.private);
   }, [data, loading, error]);
 
   if (loading) {
@@ -59,12 +60,4 @@ export const NotesPage = ({ match }) => {
       />
     </Fragment>
   );
-};
-
-NotesPage.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string,
-    })
-  }),
 };

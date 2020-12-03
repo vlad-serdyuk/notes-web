@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import { Box, Tab, Tabs } from 'grommet';
 
+
 interface NotesTabsProps {
-  notes: Array<any>;
-  favorites: Array<any>;
-  privates: Array<any>;
+  notes: JSX.Element;
+  favorites: JSX.Element;
+  privates: JSX.Element;
 }
 
 export const NotesTabs: FC<NotesTabsProps> = ({ notes, favorites, privates }) => {
