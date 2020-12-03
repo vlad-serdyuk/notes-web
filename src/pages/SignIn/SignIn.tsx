@@ -1,6 +1,5 @@
-import React, { memo, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React, { FC, ChangeEvent, memo, useState, useEffect } from 'react';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { useMutation, useApolloClient } from '@apollo/client';
 import { Anchor, Layer, Box, Heading, TextInput, Text, MaskedInput, Button } from 'grommet';
 import { MailOption, Close } from 'grommet-icons';
@@ -9,10 +8,10 @@ import { emailMask } from '../../utils/validation';
 import { GET_ME } from '../../gql/query';
 import { SIGNIN_USER } from '../../gql/mutation';
 
-const SignInComponent = ({ history }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [disabled, setDisabled] = useState(true);
+const SignInComponent: FC<RouteComponentProps> = ({ history }) => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [disabled, setDisabled] = useState<boolean>(true);
 
   const client = useApolloClient();
 
@@ -24,11 +23,11 @@ const SignInComponent = ({ history }) => {
     }
   });
 
-  const onChangeEmail = (event) => {
+  const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
 
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
 
@@ -90,12 +89,6 @@ const SignInComponent = ({ history }) => {
       </Box>
     </Layer>
   );
-};
-
-SignInComponent.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
 };
 
 export const SignIn = memo(SignInComponent);

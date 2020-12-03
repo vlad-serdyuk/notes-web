@@ -1,13 +1,14 @@
-import React, { Fragment, useMemo } from 'react';
+import React, { FC, Fragment, useMemo } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 
 import { GET_USER_NOTES, GET_ME } from '../../gql/query';
 import { UPDATE_USER } from '../../gql/mutation';
+import { Note as NoteModel } from '../../gql/models';
 import { Profile } from '../../components/Profile';
 import { NotesTabs } from '../../components/NotesTabs';
 import { NoteFeed } from '../../components/NoteFeed';
 
-export const ProfilePage = () => {
+export const ProfilePage: FC = () => {
   const { data: { me } = {} } = useQuery(GET_ME);
   const { data: { user } = {}, loading, error } = useQuery(GET_USER_NOTES, { variables: { username: me.username } });
   
@@ -20,7 +21,7 @@ export const ProfilePage = () => {
       return [];
     }
 
-    return user.notes.filter((note) => note.private);
+    return user.notes.filter((note: NoteModel) => note.private);
   }, [user, loading, error]);
 
   if (loading) {
