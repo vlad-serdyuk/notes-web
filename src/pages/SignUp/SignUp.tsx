@@ -1,6 +1,5 @@
-import React, { memo, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React, { FC, ChangeEvent, memo, useState, useEffect } from 'react';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { useMutation, useApolloClient } from '@apollo/client';
 import { Anchor, Layer, Box, Heading, Text, TextInput, MaskedInput, Button } from 'grommet';
 import { MailOption, Close } from 'grommet-icons';
@@ -9,11 +8,11 @@ import { emailMask } from '../../utils/validation';
 import { GET_ME } from '../../gql/query';
 import { SIGNUP_USER } from '../../gql/mutation';
 
-const SignUpComponent = ({ history }) => {
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [disabled, setDisabled] = useState(true);
+const SignUpComponent: FC<RouteComponentProps> = ({ history }) => {
+  const [email, setEmail] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [disabled, setDisabled] = useState<boolean>(true);
 
   const client = useApolloClient();
 
@@ -25,15 +24,15 @@ const SignUpComponent = ({ history }) => {
     }
   });
 
-  const onChangeEmail = (event) => {
+  const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
 
-  const onChangeUsername = (event) => {
+  const onChangeUsername = (event: ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
   };
 
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
 
@@ -102,12 +101,6 @@ const SignUpComponent = ({ history }) => {
       </Box>
     </Layer>
   );
-};
-
-SignUpComponent.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
 };
 
 export const SignUp = memo(SignUpComponent);
