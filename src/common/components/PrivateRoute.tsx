@@ -1,10 +1,14 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React, { FC } from 'react';
+import { Route, RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Skeleton } from '../../components/Skeleton';
 import { useIsLoggedInQuery } from '../queries/auth';
 
-export const PrivateRoute = ({ component: Component, ...rest }) => {
+interface PrivateRouteProps {
+  component: FC<RouteComponentProps>,
+}
+
+export const PrivateRoute: FC<PrivateRouteProps> = ({ component: Component, ...rest }) => {
     const { loading, error, data: { isLoggedIn } } = useIsLoggedInQuery();
     
     if (loading) return <Skeleton />;

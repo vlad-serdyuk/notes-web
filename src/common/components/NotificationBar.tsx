@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { Box, Button, Layer, Text } from 'grommet';
 import { FormClose, StatusGood } from 'grommet-icons';
@@ -7,9 +7,9 @@ import { SHOW_NOTIFIFCATION } from '../../gql/local-query';
 
 const NOTIFICATION_BAR_SHOWING_TIME = 3000;
 
-export const NotificationBar = () => {
-  const [isOpen, setOpen] = useState(false);
-  const [text, setText] = useState('');
+export const NotificationBar: FC = () => {
+  const [isOpen, setOpen] = useState<boolean>(false);
+  const [text, setText] = useState<string>('');
 
   const { data = {}, client } = useQuery(SHOW_NOTIFIFCATION);
 

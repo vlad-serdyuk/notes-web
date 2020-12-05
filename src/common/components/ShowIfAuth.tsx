@@ -1,10 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 
 import { Skeleton } from '../../components/Skeleton';
 import { useIsLoggedInQuery } from '../queries/auth';
 
-export const ShowIfAuth = ({ children }) => {
+interface ShowIfAuthProps {
+  children: JSX.Element,
+}
+
+export const ShowIfAuth: FC<ShowIfAuthProps> = ({ children }) => {
   const { loading, error, data: { isLoggedIn } } = useIsLoggedInQuery();
     
   if (loading) return <Skeleton />;
@@ -16,9 +19,5 @@ export const ShowIfAuth = ({ children }) => {
   }
     
   return children;
-};
-
-ShowIfAuth.propTypes = {
-  children: PropTypes.element.isRequired
 };
   
