@@ -1,9 +1,24 @@
-import React, { memo, useState, useCallback } from 'react';
+import React, { FC, memo, useState, useCallback } from 'react';
 import { Avatar, Box, DropButton, Text } from 'grommet';
 
 import { StyledButton } from './AvatarDropDown.styled';
 
-const renderItems = (email, initials, username, onProfileClick, onLogOut) => (
+interface BaseAvatarDropButtonProps {
+  email: string,
+  username: string,
+  initials: string,
+  onLogOut: () => void,
+}
+
+interface AvatarDropButtonProps extends BaseAvatarDropButtonProps {
+  openProfilePage: () => void,
+}
+
+interface RenderItemParams extends BaseAvatarDropButtonProps {
+  onProfileClick: () => void,
+}
+
+const renderItems = ({ email, initials, username, onProfileClick, onLogOut }: RenderItemParams): JSX.Element => (
   <Box width="160px" background="dark-2" pad="xsmall" align="start">
     <Box direction="row" align="center" gap="xsmall" border="bottom">
       <Avatar
@@ -22,8 +37,8 @@ const renderItems = (email, initials, username, onProfileClick, onLogOut) => (
   </Box>
 );
 
-const AvatarDropButtonComponent = ({ email, username, initials, openProfilePage, onLogOut }) => {
-  const [open, setOpen] = useState(false);
+const AvatarDropButtonComponent: FC<AvatarDropButtonProps> = ({ email, username, initials, openProfilePage, onLogOut }) => {
+  const [open, setOpen] = useState<boolean>(false);
 
   const onProfileClick = useCallback(() => {
     openProfilePage();
@@ -36,7 +51,7 @@ const AvatarDropButtonComponent = ({ email, username, initials, openProfilePage,
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       alignSelf="center"
-      dropContent={renderItems(email, initials, username, onProfileClick, onLogOut)}
+      dropContent={renderItems({ email, initials, username, onProfileClick, onLogOut })}
       dropProps={{ align: { top: "bottom" } }}
     >
       <Box height="32px" width="32px" align="center">
