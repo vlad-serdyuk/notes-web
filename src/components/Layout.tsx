@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, Fragment } from 'react';
 import { useQuery } from '@apollo/client';
 import { Main, Box } from 'grommet';
 
@@ -9,7 +8,7 @@ import { Skeleton } from './Skeleton';
 import { Navigation } from './Navigation';
 import { TrendsWidget } from './TrendsWidget';
 
-export const Layout = ({ children }) => {
+export const Layout: FC = ({ children }) => {
   const { data, loading } = useQuery(GET_APP_METADATA);
 
   return (
@@ -30,8 +29,4 @@ export const Layout = ({ children }) => {
       </Main>
     </Fragment>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired
 };
