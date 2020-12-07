@@ -13,6 +13,12 @@ export const SHOW_NOTIFIFCATION = gql`
   }
 `;
 
+export const SWITCH_THEME = gql`
+  query switchTheme {
+    theme @client
+  }
+`;
+
 export const GET_APP_METADATA = gql`
   {
     isLoggedIn @client

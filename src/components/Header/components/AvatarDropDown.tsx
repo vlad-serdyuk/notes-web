@@ -16,9 +16,10 @@ interface AvatarDropButtonProps extends BaseAvatarDropButtonProps {
 
 interface RenderItemParams extends BaseAvatarDropButtonProps {
   onProfileClick: () => void,
+  onSwitchTheme: () => void;
 }
 
-const renderItems = ({ email, initials, username, onProfileClick, onLogOut }: RenderItemParams): JSX.Element => (
+const renderItems = ({ email, initials, username, onSwitchTheme, onProfileClick, onLogOut }: RenderItemParams): JSX.Element => (
   <Box width="160px" background="dark-2" pad="xsmall" align="start">
     <Box direction="row" align="center" gap="xsmall" border="bottom">
       <Avatar
@@ -32,6 +33,7 @@ const renderItems = ({ email, initials, username, onProfileClick, onLogOut }: Re
         <Text size="small">{email}</Text>
       </Box>
     </Box>
+    <StyledButton onClick={onSwitchTheme}>Profile</StyledButton>
     <StyledButton onClick={onProfileClick}>Profile</StyledButton>
     <StyledButton onClick={onLogOut}>Log out</StyledButton>
   </Box>
@@ -45,13 +47,17 @@ const AvatarDropButtonComponent: FC<AvatarDropButtonProps> = ({ email, username,
     setOpen(false);
   }, [open, setOpen, openProfilePage]);
 
+  const onSwitchTheme = useCallback(() => {
+    
+  }, []);
+
   return (
     <DropButton
       open={open}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       alignSelf="center"
-      dropContent={renderItems({ email, initials, username, onProfileClick, onLogOut })}
+      dropContent={renderItems({ email, initials, username, onSwitchTheme, onProfileClick, onLogOut })}
       dropProps={{ align: { top: "bottom" } }}
     >
       <Box height="32px" width="32px" align="center">

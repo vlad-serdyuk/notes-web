@@ -2,6 +2,15 @@ import { grommet } from 'grommet/themes';
 import { deepMerge } from 'grommet/utils';
 import { css } from 'styled-components';
 
+const themes = {
+  light: {
+    body: '#E2E2E2',
+    text: '#363537',
+    toggleBorder: '#FFF',
+  },
+  dark: {},
+}
+
 export const theme = deepMerge(grommet, {
   global: {
     font: {
