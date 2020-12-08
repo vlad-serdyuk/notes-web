@@ -1,5 +1,4 @@
 import React, { memo, useMemo, useState, useCallback, useRef, FC, MouseEvent } from 'react'
-import ReactMarkdown from 'react-markdown';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { format } from 'date-fns';
@@ -99,7 +98,7 @@ const NoteComponent: FC<INoteComponentProps> = ({ note, history }) => {
           <Styled.DateText size="small" color="grey">{format(note.createdAt, 'MMM do YYYY')}</Styled.DateText>
           {isUserNote && <Styled.LockButton plain icon={<PrivacyIcon />} onClick={togglePrivacy} />}
         </Box>
-        <ReactMarkdown source={note.content} />
+        <Text>{note.content}</Text>
         <Styled.ButtonContainer direction="row-responsive" gap="large">
           <Box direction="row" align="center">
             <Styled.IconButton 

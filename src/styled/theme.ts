@@ -9,7 +9,7 @@ const themes = {
     toggleBorder: '#FFF',
   },
   dark: {},
-}
+};
 
 export const theme = deepMerge(grommet, {
   global: {
