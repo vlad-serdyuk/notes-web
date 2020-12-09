@@ -5,11 +5,12 @@ import { useMutation } from '@apollo/client';
 import { NoteForm } from '../../components/NoteForm';
 import { GET_NOTES } from '../../gql/query';
 import { CREATE_NOTE } from '../../gql/mutation';
+import { Note } from '../../gql/models';
 
 export const CreateNotePage: FC<RouteComponentProps> = ({ history }) => {
   const [createNote, { loading, error }] = useMutation(CREATE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }],
-    onCompleted: data => {
+    onCompleted: (data: { createNote: Note }) => {
       history.push(`note/${data.createNote.id}`);
     },
   });

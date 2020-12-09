@@ -2,13 +2,21 @@ import React, { FC, useCallback } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 
-import { NoteForm } from '../../components/NoteForm';
+import { NoteForm, ISubmitNoteArgs } from '../../components/NoteForm';
 import { GET_NOTE, GET_NOTES } from '../../gql/query';
 import { UPDATE_NOTE } from '../../gql/mutation';
 import { Note } from '../../gql/models';
 
+interface NoteData {
+  note: Note;
+}
+
+interface NoteVars {
+  id: any;
+}
+
 export const EditNotePage: FC<RouteComponentProps> = ({ history, match }) => {
-  const { data: noteData, loading: noteLoading, error: noteError } = useQuery(GET_NOTE, { variables: { id: match.params.id } });
+  const { data: noteData, loading: noteLoading, error: noteError } = useQuery<NoteData, NoteVars>(GET_NOTE, { variables: { id: match.params.id } });
   const [updateNote, { loading, error }] = useMutation(UPDATE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }],
     onCompleted: (data: { updateNote: Note }) => {
@@ -16,7 +24,7 @@ export const EditNotePage: FC<RouteComponentProps> = ({ history, match }) => {
     },
   });
 
-  const onUpdateNote = useCallback(({ note, privacy }: { note: Note, privacy: boolean }) => {
+  const onUpdateNote = useCallback(({ note, privacy }: ISubmitNoteArgs) => {
     updateNote({ variables: { id: noteData.note.id, content: note, private: privacy } });
   }, [updateNote, noteData]);
 
