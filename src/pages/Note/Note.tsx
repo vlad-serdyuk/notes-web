@@ -4,9 +4,14 @@ import { useQuery } from '@apollo/client';
 
 import { Note } from '../../components/Note';
 import { GET_NOTE } from '../../gql/query';
+import { Note as NoteModel } from '../../gql/models';
+
+interface IGetNoteData {
+  note: NoteModel;
+}
 
 export const NotePage: FC<RouteComponentProps> = ({ match: { params: { id } } }) => {
-  const { loading, error, data } = useQuery(GET_NOTE, { variables: { id } });
+  const { loading, error, data } = useQuery<IGetNoteData>(GET_NOTE, { variables: { id } });
 
   if (loading) {
     return <p>loading...</p>;
