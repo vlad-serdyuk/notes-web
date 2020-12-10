@@ -3,17 +3,13 @@ import { useQuery, useMutation } from '@apollo/client';
 
 import { GET_USER_NOTES, GET_ME } from '../../gql/query';
 import { UPDATE_USER } from '../../gql/mutation';
-import { Note as NoteModel, Me as UserModel } from '../../gql/models';
+import { Note as NoteModel, IGetMeData } from '../../gql/models';
 import { Profile } from '../../components/Profile';
 import { NotesTabs } from '../../components/NotesTabs';
 import { NoteFeed } from '../../components/NoteFeed';
 
-interface IGetMe {
-  me: UserModel;
-}
-
 export const ProfilePage: FC = () => {
-  const { data: { me } = {} } = useQuery<IGetMe>(GET_ME);
+  const { data: { me } = {} } = useQuery<IGetMeData>(GET_ME);
   const { data: { user } = {}, loading, error } = useQuery(GET_USER_NOTES, { variables: { username: me.username } });
   
   const [updateProfile] = useMutation(UPDATE_USER, {

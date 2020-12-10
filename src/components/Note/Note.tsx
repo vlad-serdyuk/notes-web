@@ -6,6 +6,7 @@ import { Avatar, Box, Text, Drop } from 'grommet';
 
 import { GET_NOTES, GET_ME } from '../../gql/query';
 import { TOGGLE_FAVORITE_NOTE, TOGGLE_PRIVACY_NOTE, DELETE_NOTE } from '../../gql/mutation';
+import { IGetMeData } from '../../gql/models';
 import { ConfirmDialog } from './components/ConfirmDialog';
 import * as Styled from './Note.styled';
 
@@ -18,7 +19,7 @@ const NoteComponent: FC<INoteComponentProps> = ({ note, history }) => {
   const [isTooltipOpen, setTooltipOpen] = useState<boolean>(false);
   const favoritesRef = useRef<HTMLElement>();
 
-  const { data: { me } } = useQuery(GET_ME);
+  const { data: { me } } = useQuery<IGetMeData>(GET_ME);
   const [toggleFavoriteMutation] = useMutation(TOGGLE_FAVORITE_NOTE);
   const [togglePrivacyMutation] = useMutation(TOGGLE_PRIVACY_NOTE);
 

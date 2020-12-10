@@ -4,27 +4,19 @@ import { useQuery, useMutation } from '@apollo/client';
 
 import { GET_USER_NOTES, GET_ME } from '../../gql/query';
 import { UPDATE_USER } from '../../gql/mutation';
-import { Note as NoteModel, Me as UserModel } from '../../gql/models';
+import { Note as NoteModel, IGetMeData, IUserWithNotes, UserModel } from '../../gql/models';
 import { NoteFeed } from '../../components/NoteFeed';
 import { Profile } from '../../components/Profile';
 import { NotesTabs } from '../../components/NotesTabs';
 
-interface UserWithNotes extends UserModel {
-  notes: NoteModel[];
-  favorites: NoteModel[];
-}
 
 interface IGetUserNoteData {
-  user: UserWithNotes;
-}
-
-interface IGetMe {
-  me: UserModel;
+  user: IUserWithNotes;
 }
 
 export const NotesPage: FC<RouteComponentProps> = ({ match }) => {
   const { loading, error, data } = useQuery<IGetUserNoteData>(GET_USER_NOTES, { variables: { username: match.params.author } });
-  const { data: { me } = {} } = useQuery<IGetMe>(GET_ME, { variables: { username: match.params.author } });
+  const { data: { me } = {} } = useQuery<IGetMeData>(GET_ME, { variables: { username: match.params.author } });
   const [updateProfile] = useMutation(UPDATE_USER, {
     refetchQueries: [{ query: GET_ME }],
   });

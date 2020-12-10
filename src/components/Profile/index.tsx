@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import { Avatar, Box, Button, Text } from 'grommet';
 
 import { GET_ME } from '../../gql/query';
+import { IGetMeData} from '../../gql/models';
 import { EditProfileDialog } from './EditProfileDialog/index';
 
 interface ProfileProps {
@@ -12,8 +13,8 @@ interface ProfileProps {
 }
 
 export const Profile: FC<ProfileProps> = ({ user, updateProfile }) => {
-  const { data: { me } = {} } = useQuery(GET_ME);
-  const [isDialogOpen, setDialogOpen] = useState(false);
+  const { data: { me } = {} } = useQuery<IGetMeData>(GET_ME);
+  const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
 
   const openEditProfileDialog = () => setDialogOpen(true);
   const closeEditProfileDialog = () => setDialogOpen(false);

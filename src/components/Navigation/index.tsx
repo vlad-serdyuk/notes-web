@@ -4,11 +4,12 @@ import { Nav, Button } from 'grommet';
 import { useQuery } from '@apollo/client';
 
 import { GET_ME } from '../../gql/query';
+import { IGetMeData } from '../../gql/models';
 
 import { LinkWrapper, LinkText } from './Navigation.styled';
 
 const NavigationComponent: FC<RouteComponentProps> = ({ history }) => {
-  const { data: { me } = {} } = useQuery(GET_ME);
+  const { data: { me } = {} } = useQuery<IGetMeData>(GET_ME);
 
   const onCreateNoteClick = () => {
     history.push('/new');

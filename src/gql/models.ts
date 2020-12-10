@@ -15,9 +15,18 @@ export interface Note {
   }
 }
 
-export interface Me {
+export interface UserModel {
   id: string;
   email: string;
   username: string;
   createdAt: string;
+}
+
+export interface IUserWithNotes extends UserModel {
+  notes: Note[];
+  favorites: Note[];
+}
+
+export interface IGetMeData {
+  me: UserModel
 }

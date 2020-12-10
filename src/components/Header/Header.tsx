@@ -5,12 +5,13 @@ import { Box } from 'grommet';
 
 import { useIsLoggedInQuery } from '../../common/queries/auth';
 import { GET_ME, LOG_OUT } from '../../gql/query';
+import { IGetMeData } from '../../gql/models';
 import { AvatarDropButton } from './components/AvatarDropDown';
 import { StyledHeader, LinkText, LinkWrapper } from './Header.styled';
 
 const HeaderComponent: FC<RouteComponentProps> = ({ history }) => {
   const { data: { isLoggedIn }, client } = useIsLoggedInQuery();
-  const { data: { me } = {} } = useQuery(GET_ME);
+  const { data: { me } = {} } = useQuery<IGetMeData>(GET_ME);
 
   const onLogOut = () => {
     client.query({ query: LOG_OUT }).then(() => {
