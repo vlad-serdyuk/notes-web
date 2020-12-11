@@ -6,6 +6,7 @@ import GQLService from './services/GQLService';
 import { theme } from './styled/theme';
 import { AppContainer } from './components/AppContainer';
 import GlobalStyles from './styled/globalStyles';
+import { GlobalContext } from './common/contexts/globalContext';
 
 const client = GQLService.getInitialClient();
 GQLService.bootstrap();
@@ -13,10 +14,12 @@ GQLService.bootstrap();
 export const App = () => {
   return (
     <ApolloProvider client={client}>
-      <Grommet theme={theme}>
-        <GlobalStyles />
-        <AppContainer />
-      </Grommet>
+      <GlobalContext.Provider>
+        <Grommet theme={theme}>
+          <GlobalStyles />
+          <AppContainer />
+        </Grommet>
+      </GlobalContext.Provider>
     </ApolloProvider>
   )
 };
