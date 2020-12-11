@@ -1,6 +1,7 @@
-import React, { FC, memo, useState, useCallback } from 'react';
+import React, { FC, memo, useContext, useState, useCallback } from 'react';
 import { Avatar, Box, DropButton, Text } from 'grommet';
 
+import GlobalContext from '../../../common/contexts/globalContext';
 import { StyledButton } from './AvatarDropDown.styled';
 
 interface BaseAvatarDropButtonProps {
@@ -41,6 +42,7 @@ const renderItems = ({ email, initials, username, onSwitchTheme, onProfileClick,
 
 const AvatarDropButtonComponent: FC<AvatarDropButtonProps> = ({ email, username, initials, openProfilePage, onLogOut }) => {
   const [open, setOpen] = useState<boolean>(false);
+  const { theme } = useContext(GlobalContext);
 
   const onProfileClick = useCallback(() => {
     openProfilePage();
