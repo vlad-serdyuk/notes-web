@@ -1,7 +1,7 @@
 import React, { FC, memo, useContext, useState, useCallback } from 'react';
-import { Avatar, Box, DropButton, Text } from 'grommet';
+import { Avatar, Box, DropButton, CheckBox, Text } from 'grommet';
 
-import GlobalContext from '../../../common/contexts/globalContext';
+import { GlobalContext } from '../../../common/contexts/globalContext';
 import { StyledButton } from './AvatarDropDown.styled';
 
 interface BaseAvatarDropButtonProps {
@@ -34,7 +34,12 @@ const renderItems = ({ email, initials, username, onSwitchTheme, onProfileClick,
         <Text size="small">{email}</Text>
       </Box>
     </Box>
-    <StyledButton onClick={onSwitchTheme}>Profile</StyledButton>
+    <CheckBox
+      label="Dark"
+      checked={false}
+      onChange={onSwitchTheme}
+      toggle
+    />
     <StyledButton onClick={onProfileClick}>Profile</StyledButton>
     <StyledButton onClick={onLogOut}>Log out</StyledButton>
   </Box>
