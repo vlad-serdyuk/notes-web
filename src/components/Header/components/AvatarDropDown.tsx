@@ -1,13 +1,15 @@
-import React, { FC, memo, useContext, useState, useCallback } from 'react';
+import React, { FC, memo, useContext, useState, useCallback, useEffect } from 'react';
 import { Avatar, Box, DropButton, CheckBox, Text } from 'grommet';
 
-import { GlobalContext } from '../../../common/contexts/globalContext';
 import { StyledButton } from './AvatarDropDown.styled';
+import { GlobalContext } from '../../../common/contexts/globalContext';
+import { Themes } from '../../../common/constants/global';
 
 interface BaseAvatarDropButtonProps {
   email: string,
   username: string,
   initials: string,
+  theme: string;
   onLogOut: () => void,
 }
 
@@ -20,7 +22,7 @@ interface RenderItemParams extends BaseAvatarDropButtonProps {
   onSwitchTheme: () => void;
 }
 
-const renderItems = ({ email, initials, username, onSwitchTheme, onProfileClick, onLogOut }: RenderItemParams): JSX.Element => (
+const renderItems = ({ email, initials, username, theme, onSwitchTheme, onProfileClick, onLogOut }: RenderItemParams): JSX.Element => (
   <Box width="160px" background="dark-2" pad="xsmall" align="start">
     <Box direction="row" align="center" gap="xsmall" border="bottom">
       <Avatar
@@ -36,7 +38,7 @@ const renderItems = ({ email, initials, username, onSwitchTheme, onProfileClick,
     </Box>
     <CheckBox
       label="Dark"
-      checked={false}
+      checked={theme === Themes.dark}
       onChange={onSwitchTheme}
       toggle
     />
@@ -64,7 +66,7 @@ const AvatarDropButtonComponent: FC<AvatarDropButtonProps> = ({ email, username,
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       alignSelf="center"
-      dropContent={renderItems({ email, initials, username, onSwitchTheme, onProfileClick, onLogOut })}
+      dropContent={renderItems({ email, initials, username, theme, onSwitchTheme, onProfileClick, onLogOut })}
       dropProps={{ align: { top: "bottom" } }}
     >
       <Box height="32px" width="32px" align="center">
