@@ -1,16 +1,27 @@
-import React, { FC, createContext, useState } from 'react';
+import React, { FC, createContext, useCallback, useState } from 'react';
 import { Themes } from '../constants/global';
 
-const contextState = {
+interface IContextState {
+  theme: Themes;
+  switchTheme: () => void;
+}
+
+const contextState: IContextState = {
   theme: Themes.light,
-  swithTheme: () => {},
+  switchTheme: () => null,
 };
 
 const GlobalContext = createContext(contextState);
 
 const GlobalContextProvider: FC = ({ children }) => {
+  const [theme, setTheme] = useState<Themes>(Themes.light);
+
+  const switchTheme = useCallback(() => {
+    setTheme(theme === Themes.light ? Themes.dark : Themes.light);
+  }, [theme, setTheme])
+
   return (
-    <GlobalContext.Provider value={contextState}>
+    <GlobalContext.Provider value={{ theme, switchTheme }}>
       {children}
     </GlobalContext.Provider>
   );

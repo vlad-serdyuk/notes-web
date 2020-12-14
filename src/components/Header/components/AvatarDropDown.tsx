@@ -36,12 +36,14 @@ const renderItems = ({ email, initials, username, theme, onSwitchTheme, onProfil
         <Text size="small">{email}</Text>
       </Box>
     </Box>
-    <CheckBox
-      label="Dark"
-      checked={theme === Themes.dark}
-      onChange={onSwitchTheme}
-      toggle
-    />
+    <Box pad={{ top: "small", bottom: "small" }}>
+      <CheckBox
+        label="Dark"
+        checked={theme === Themes.dark}
+        onChange={onSwitchTheme}
+        toggle
+      />
+    </Box>
     <StyledButton onClick={onProfileClick}>Profile</StyledButton>
     <StyledButton onClick={onLogOut}>Log out</StyledButton>
   </Box>
@@ -49,7 +51,7 @@ const renderItems = ({ email, initials, username, theme, onSwitchTheme, onProfil
 
 const AvatarDropButtonComponent: FC<AvatarDropButtonProps> = ({ email, username, initials, openProfilePage, onLogOut }) => {
   const [open, setOpen] = useState<boolean>(false);
-  const { theme } = useContext(GlobalContext);
+  const { theme, switchTheme } = useContext(GlobalContext);
 
   const onProfileClick = useCallback(() => {
     openProfilePage();
@@ -57,8 +59,8 @@ const AvatarDropButtonComponent: FC<AvatarDropButtonProps> = ({ email, username,
   }, [open, setOpen, openProfilePage]);
 
   const onSwitchTheme = useCallback(() => {
-    
-  }, []);
+    switchTheme();
+  }, [switchTheme]);
 
   return (
     <DropButton
