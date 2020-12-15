@@ -1,4 +1,4 @@
-import React, { FC, memo, useContext, useState, useCallback, useEffect } from 'react';
+import React, { FC, memo, useContext, useState, useCallback } from 'react';
 import { Avatar, Box, DropButton, CheckBox, Text } from 'grommet';
 
 import { StyledButton } from './AvatarDropDown.styled';
