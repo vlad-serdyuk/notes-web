@@ -1,5 +1,6 @@
-import React, { FC, createContext, useCallback, useState } from 'react';
-import { Themes } from '../constants/global';
+import React, { FC, createContext, useCallback, useEffect, useState } from 'react';
+import { Themes, THEME_STORAGE_KEY } from '../constants/global';
+import { getItem, saveItem } from '../services/ClientStorage';
 
 interface IContextState {
   theme: Themes;
@@ -16,9 +17,16 @@ const GlobalContext = createContext(contextState);
 const GlobalContextProvider: FC = ({ children }) => {
   const [theme, setTheme] = useState<Themes>(Themes.light);
 
+  useEffect(() => {
+    const savedTheme = getItem(THEME_STORAGE_KEY);
+    setTheme(savedTheme as Themes);
+  }, []);
+
   const switchTheme = useCallback(() => {
-    setTheme(theme === Themes.light ? Themes.dark : Themes.light);
-  }, [theme, setTheme])
+    const selectedTheme = Themes.light ? Themes.dark : Themes.light;
+    setTheme(selectedTheme);
+    saveItem(THEME_STORAGE_KEY, selectedTheme);
+  }, [theme, setTheme]);
 
   return (
     <GlobalContext.Provider value={{ theme, switchTheme }}>
