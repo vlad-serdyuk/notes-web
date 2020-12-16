@@ -13,4 +13,8 @@ export default createGlobalStyle`
   a:focus {
     text-decoration: none;
   }
+
+  #root {
+    height: 100vh;
+  }
 `;
