@@ -33,6 +33,12 @@ module.exports = {
     fallback: {
       path: false,
     },
+    alias: {
+      common: path.resolve(__dirname, '../src/common'),
+      components: path.resolve(__dirname, '../src/components'),
+      gql: path.resolve(__dirname, '../src/gql'),
+      pages: path.resolve(__dirname, '../src/pages'),
+    },
   },
   plugins: [
     // Add .env variables to process.env

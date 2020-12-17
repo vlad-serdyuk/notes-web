@@ -1,12 +1,12 @@
 import React, { FC, Fragment, useMemo } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 
-import { GET_USER_NOTES, GET_ME } from '../../gql/query';
-import { UPDATE_USER } from '../../gql/mutation';
-import { Note as NoteModel, IGetMeData } from '../../gql/models';
-import { Profile } from '../../components/Profile';
-import { NotesTabs } from '../../components/NotesTabs';
-import { NoteFeed } from '../../components/NoteFeed';
+import { UPDATE_USER } from 'gql/mutation';
+import { GET_USER_NOTES, GET_ME } from 'gql/query';
+import { Note as NoteModel, IGetMeData } from 'gql/models';
+import { Profile } from 'components/Profile';
+import { NoteFeed } from 'components/NoteFeed';
+import { NotesTabs } from 'components/NotesTabs';
 
 export const ProfilePage: FC = () => {
   const { data: { me } = {} } = useQuery<IGetMeData>(GET_ME);
