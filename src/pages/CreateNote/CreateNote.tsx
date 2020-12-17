@@ -2,10 +2,10 @@ import React, { FC, Fragment, useCallback } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { NoteForm } from '../../components/NoteForm';
-import { GET_NOTES } from '../../gql/query';
-import { CREATE_NOTE } from '../../gql/mutation';
-import { Note } from '../../gql/models';
+import { Note } from 'gql/models';
+import { GET_NOTES } from 'gql/query';
+import { CREATE_NOTE } from 'gql/mutation';
+import { NoteForm } from 'components/NoteForm';
 
 export const CreateNotePage: FC<RouteComponentProps> = ({ history }) => {
   const [createNote, { loading, error }] = useMutation(CREATE_NOTE, {

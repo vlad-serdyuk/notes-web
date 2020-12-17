@@ -1,9 +1,9 @@
 import React, { FC, Fragment } from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_ME, GET_USER_FAVORITES } from '../../gql/query';
-import { Note, IGetMeData } from '../../gql/models';
-import { NoteFeed } from '../../components/NoteFeed';
 
+import { Note, IGetMeData } from 'gql/models';
+import { GET_ME, GET_USER_FAVORITES } from 'gql/query';
+import { NoteFeed } from 'components/NoteFeed';
 
 interface FavoriesData {
   user: {

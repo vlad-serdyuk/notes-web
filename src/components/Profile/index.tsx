@@ -3,8 +3,8 @@ import { useQuery } from '@apollo/client';
 import { format } from 'date-fns';
 import { Avatar, Box, Button, Text } from 'grommet';
 
-import { GET_ME } from '../../gql/query';
-import { IGetMeData} from '../../gql/models';
+import { GET_ME } from 'gql/query';
+import { IGetMeData} from 'gql/models';
 import { EditProfileDialog } from './EditProfileDialog/index';
 
 interface ProfileProps {

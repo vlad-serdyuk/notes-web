@@ -2,13 +2,12 @@ import React, { useMemo, FC, Fragment } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 
-import { GET_USER_NOTES, GET_ME } from '../../gql/query';
-import { UPDATE_USER } from '../../gql/mutation';
-import { Note as NoteModel, IGetMeData, IUserWithNotes, UserModel } from '../../gql/models';
-import { NoteFeed } from '../../components/NoteFeed';
-import { Profile } from '../../components/Profile';
-import { NotesTabs } from '../../components/NotesTabs';
-
+import { UPDATE_USER } from 'gql/mutation';
+import { GET_USER_NOTES, GET_ME } from 'gql/query';
+import { Note as NoteModel, IGetMeData, IUserWithNotes } from 'gql/models';
+import { Profile } from 'components/Profile';
+import { NoteFeed } from 'components/NoteFeed';
+import { NotesTabs } from 'components/NotesTabs';
 
 interface IGetUserNoteData {
   user: IUserWithNotes;

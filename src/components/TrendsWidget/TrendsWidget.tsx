@@ -3,8 +3,8 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { Box, Text } from 'grommet';
 
-import { GET_TRENDS_NOTES } from '../../gql/query';
-import { Note } from '../../gql/models';
+import { Note } from 'gql/models';
+import { GET_TRENDS_NOTES } from 'gql/query';
 import { TrendsContainer, TrendsHeader, TrendBlock } from './TrendsWidget.styled';
 
 const TrendsWidgetComponent: FC<RouteComponentProps> = ({ history }) => {

@@ -1,8 +1,8 @@
 import React, { Fragment, FC } from 'react';
 import { Box, Text } from 'grommet';
 
+import { Note as NoteModel } from 'gql/models';
 import { Note } from '../Note';
-import { Note as NoteModel } from '../../gql/models';
 
 interface NoteFeedProps {
   notes: Array<NoteModel>;
