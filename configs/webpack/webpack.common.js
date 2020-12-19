@@ -1,14 +1,9 @@
 const path = require("path");
-const { DefinePlugin } = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
-const paths = require('./paths');
-
-const dotenv = require('dotenv').config({
-  path: path.resolve(process.cwd(), '.env'),
-});
+const paths = require('../paths');
 
 module.exports = {
   entry: paths.src + '/index.js',
@@ -45,7 +40,6 @@ module.exports = {
     new Dotenv({
       systemvars: true,
     }),
-    // new DefinePlugin({ 'process.env': JSON.stringify(dotenv.parsed) }),
     // Removes/cleans build folders and unused assets when rebuilding
     new CleanWebpackPlugin(),
     // Generates an HTML file from a template

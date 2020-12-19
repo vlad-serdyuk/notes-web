@@ -2,6 +2,7 @@ import {
   ApolloClient,
   InMemoryCache,
   createHttpLink,
+  NormalizedCacheObject,
 } from '@apollo/client';
 import { GET_ME } from '../gql/query';
 import { GET_APP_METADATA } from '../gql/local-query';
@@ -10,6 +11,9 @@ const uri = process.env.API_URI;
 const httpLink = createHttpLink({ uri, credentials: 'include' });
 
 class GQLService {
+  cache: InMemoryCache;
+  client: ApolloClient<NormalizedCacheObject>;
+
   constructor() {
     this.cache = new InMemoryCache();
     this.client = new ApolloClient({
