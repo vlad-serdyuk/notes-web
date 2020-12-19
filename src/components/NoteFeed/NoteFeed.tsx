@@ -13,7 +13,7 @@ export const NoteFeed: FC<NoteFeedProps> = ({ notes, children }) => {
     <Fragment>
       {children}
       {
-        !!notes.length
+        notes.length
         ? notes.map(note => <Note key={note.id} note={note} />)
         : <Box flex align="center" pad="medium">
             <Text>You don't have notes yet</Text>

@@ -12,7 +12,7 @@ interface IGetNoteData {
 }
 
 interface IGetNoteVars {
-  id: any;
+  id: string;
 }
 
 export const EditNotePage: FC<RouteComponentProps> = ({ history, match }) => {

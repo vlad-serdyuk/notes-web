@@ -34,10 +34,10 @@ module.exports = {
       path: false,
     },
     alias: {
-      common: path.resolve(__dirname, '../src/common'),
-      components: path.resolve(__dirname, '../src/components'),
-      gql: path.resolve(__dirname, '../src/gql'),
-      pages: path.resolve(__dirname, '../src/pages'),
+      common: paths.src + '/common',
+      components: paths.src + '/components',
+      gql: paths.src + '/gql',
+      pages: paths.src + '/pages',
     },
   },
   plugins: [
@@ -52,7 +52,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Notedly',
       // template: path.join(process.cwd(), 'src', 'index.html')
-      template: paths.src + '/index.html',
+      template: paths.public + '/index.html',
     }),
   ],
   /*optimization: {
