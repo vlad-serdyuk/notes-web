@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Route, RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Skeleton } from '../../components/Skeleton';
-import { useIsLoggedInQuery } from '../queries/auth';
+import { useIsLoggedInQuery } from '../hooks/auth';
 
 interface PrivateRouteProps {
   component: FC<RouteComponentProps>,

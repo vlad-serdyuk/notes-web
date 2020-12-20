@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import { Skeleton } from '../../components/Skeleton';
-import { useIsLoggedInQuery } from '../queries/auth';
+import { useIsLoggedInQuery } from '../hooks/auth';
 
 interface ShowIfAuthProps {
   children: JSX.Element,

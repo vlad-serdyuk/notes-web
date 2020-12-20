@@ -5,7 +5,7 @@ import { Box } from 'grommet';
 
 import { IGetMeData } from 'gql/models';
 import { GET_ME, LOG_OUT } from 'gql/query';
-import { useIsLoggedInQuery } from 'common/queries/auth';
+import { useIsLoggedInQuery } from 'common/hooks/auth';
 import { AvatarDropButton } from './components/AvatarDropDown';
 import { StyledHeader, LinkText, LinkWrapper } from './Header.styled';
 
