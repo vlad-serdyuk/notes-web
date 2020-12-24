@@ -74,7 +74,6 @@ const SearchBarComponent: FC<RouteComponentProps> = ({ history }) => {
     <Fragment>
       <Box
         ref={boxRef}
-        width="large"
         direction="row"
         align="center"
         pad={{ horizontal: 'small', vertical: 'xsmall' }}

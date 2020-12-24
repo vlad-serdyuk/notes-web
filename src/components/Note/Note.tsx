@@ -112,6 +112,7 @@ const NoteComponent: FC<INoteComponentProps> = ({ note, history }) => {
             />
             {(note.favoriteCount > 0) && <Text size="small" color={isUserFavorite ? 'brand' : null}>{note.favoriteCount}</Text>}
           </Box>
+          <Styled.IconButton plain icon={<Styled.CommentIcon />} onClick={editNote} />
           {isUserNote && <Styled.IconButton plain icon={<Styled.EditIcon />} onClick={editNote} />}
           {isUserNote && <Styled.IconButton plain icon={<Styled.DeleteIcon />} onClick={deleteNote} />}
         </Styled.ButtonContainer>

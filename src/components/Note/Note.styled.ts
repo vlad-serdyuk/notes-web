@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { rgba } from 'polished';
 import { Button, Box, Text } from 'grommet';
-import { Edit, Favorite, Trash, Lock, Unlock } from 'grommet-icons';
+import { Chat, Edit, Favorite, Trash, Lock, Unlock } from 'grommet-icons';
 
 export const NoteContainer = styled(Box).attrs({
   align: 'center',
@@ -79,6 +79,10 @@ export const FavoriteIcon = styled(Favorite)`
 `;
 
 export const DeleteIcon = styled(Trash)`
+  ${iconStyles}
+`;
+
+export const CommentIcon = styled(Chat)`
   ${iconStyles}
 `;
 
