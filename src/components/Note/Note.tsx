@@ -4,14 +4,14 @@ import { useQuery, useMutation } from '@apollo/client';
 import { format } from 'date-fns';
 import { Avatar, Box, Text, Drop } from 'grommet';
 
-import { IGetMeData } from 'gql/models';
+import { IGetMeData, Note as NoteModel } from 'gql/models';
 import { GET_NOTES, GET_ME } from 'gql/query';
 import { TOGGLE_FAVORITE_NOTE, TOGGLE_PRIVACY_NOTE, DELETE_NOTE } from 'gql/mutation';
 import { ConfirmDialog } from './components/ConfirmDialog';
 import * as Styled from './Note.styled';
 
 interface INoteComponentProps extends RouteComponentProps {
-  note: any;
+  note: NoteModel;
 }
 
 const NoteComponent: FC<INoteComponentProps> = ({ note, history }) => {
@@ -112,7 +112,10 @@ const NoteComponent: FC<INoteComponentProps> = ({ note, history }) => {
             />
             {(note.favoriteCount > 0) && <Text size="small" color={isUserFavorite ? 'brand' : null}>{note.favoriteCount}</Text>}
           </Box>
-          <Styled.IconButton plain icon={<Styled.CommentIcon />} onClick={editNote} />
+          <Box direction="row" align="center">
+            <Styled.IconButton plain icon={<Styled.CommentIcon />} onClick={editNote} />
+            {(note.comments.length > 0) && note.comments.length}
+          </Box>
           {isUserNote && <Styled.IconButton plain icon={<Styled.EditIcon />} onClick={editNote} />}
           {isUserNote && <Styled.IconButton plain icon={<Styled.DeleteIcon />} onClick={deleteNote} />}
         </Styled.ButtonContainer>
