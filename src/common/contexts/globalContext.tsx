@@ -23,7 +23,7 @@ const GlobalContextProvider: FC = ({ children }) => {
   }, []);
 
   const switchTheme = useCallback(() => {
-    const selectedTheme = Themes.light ? Themes.dark : Themes.light;
+    const selectedTheme = (theme === Themes.light) ? Themes.dark : Themes.light;
     setTheme(selectedTheme);
     saveItem(THEME_STORAGE_KEY, selectedTheme);
   }, [theme, setTheme]);

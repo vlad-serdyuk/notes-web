@@ -4,16 +4,8 @@ export interface Note {
   content: string;
   private: boolean;
   favoriteCount: number;
-  favoritedBy: Array<{
-    id: string;
-    username: string;
-    avatar: string;
-  }>
-  author: {
-    id: string;
-    username: string;
-    avatar: string;
-  }
+  favoritedBy: Array<Author>
+  author: Author;
   comments: Array<Comment>;
 }
 
@@ -28,18 +20,16 @@ export interface Comment {
   id: string;
   noteId: string;
   content: string;
-  author: {
-    id: string;
-    username: string;
-    avatar: string;
-  }
+  author: Author;
   favoriteCount: number;
-  favoritedBy: Array<{
-    id: string;
-    username: string;
-    avatar: string;
-  }>
+  favoritedBy: Array<Author>
   createdAt: string;
+}
+
+interface Author {
+  id: string;
+  username: string;
+  avatar: string;
 }
 
 export interface IUserWithNotes extends UserModel {

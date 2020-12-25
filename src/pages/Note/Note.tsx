@@ -1,10 +1,11 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import { GET_NOTE } from 'gql/query';
 import { Note as NoteModel } from 'gql/models';
 import { Note } from 'components/Note';
+import { Comments } from 'components/Comments';
 
 interface IGetNoteData {
   note: NoteModel;
@@ -21,5 +22,10 @@ export const NotePage: FC<RouteComponentProps> = ({ match: { params: { id } } })
     return <p>Error note not found</p>;
   }
 
-  return <Note note={data.note} />;
+  return (
+    <Fragment>
+      <Note note={data.note} />
+      <Comments comments={data.note.comments} />
+    </Fragment>
+  );
 };
