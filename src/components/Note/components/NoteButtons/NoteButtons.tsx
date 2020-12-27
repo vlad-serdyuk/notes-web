@@ -1,13 +1,13 @@
 import React, { FC, Fragment, MouseEvent, useCallback, useMemo, useRef, useState } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { Box, Drop, Text } from 'grommet';
+import { Box, Text } from 'grommet';
 
 import { GET_NOTES } from 'gql/query';
 import { Note as NoteModel } from 'gql/models';
 import { TOGGLE_FAVORITE_NOTE, DELETE_NOTE } from 'gql/mutation';
 import { IconButton } from 'common/styled/IconButton';
-import { ConfirmDialog } from './components/ConfirmDialog';
+import { NoteButtonsDialogs } from './components/NoteButtonsDialogs';
 import * as Styled from './NoteButtons.styled';
 
 interface NoteButtonsProps extends RouteComponentProps {
@@ -18,7 +18,7 @@ interface NoteButtonsProps extends RouteComponentProps {
 
 const NoteButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, history }) => {
   const favoritesRef = useRef<HTMLElement>();
-  const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
+  const [isDeleteConfirmDialogOpen, setDeleteConfirmDialogOpen] = useState<boolean>(false);
   const [isTooltipOpen, setTooltipOpen] = useState<boolean>(false);
 
   const [toggleFavoriteMutation] = useMutation(TOGGLE_FAVORITE_NOTE);
@@ -27,7 +27,7 @@ const NoteButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, hi
   });
 
   const isFavoritesTooltipShow = useMemo(() => {
-    return isTooltipOpen && !!note.favoritedBy.length && favoritesRef.current;
+    return isTooltipOpen && !!note.favoritedBy.length && !!favoritesRef.current;
   }, [note, isTooltipOpen, favoritesRef]);
 
   const isFavoriteByMe = useMemo(() => {
@@ -38,9 +38,13 @@ const NoteButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, hi
     return (note.favoritedBy || []).find(({ id }) => meId === id);
   }, [note, meId]);
 
-  const onDialogClose = (e: MouseEvent) => {
+  const favoritesList = useMemo(() => {
+    return note.favoritedBy.map((favorite) => favorite.username);
+  }, [note]);
+
+  const onDeleteConfirmDialogClose = (e: MouseEvent) => {
     e.stopPropagation();
-    setDialogOpen(false);
+    setDeleteConfirmDialogOpen(false);
   }
 
   const toggleFavorite = useCallback((e: MouseEvent) => {
@@ -55,8 +59,8 @@ const NoteButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, hi
 
   const deleteNote = useCallback((e: MouseEvent) => {
     e.stopPropagation();
-    setDialogOpen(true);
-  }, [setDialogOpen]);
+    setDeleteConfirmDialogOpen(true);
+  }, [isDeleteConfirmDialogOpen]);
 
   const onDeleteNote = useCallback((e: MouseEvent) => {
     e.stopPropagation();
@@ -67,7 +71,7 @@ const NoteButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, hi
     <Fragment>
       <Styled.ButtonContainer direction="row-responsive" gap="large">
         <Box direction="row" align="center">
-          <IconButton 
+          <IconButton
             plain
             ref={favoritesRef}
             icon={<Styled.FavoriteIcon selected={isFavoriteByMe} />}
@@ -84,20 +88,14 @@ const NoteButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, hi
         {isUserNote && <IconButton plain icon={<Styled.EditIcon />} onClick={editNote} />}
         {isUserNote && <IconButton plain icon={<Styled.DeleteIcon />} onClick={deleteNote} />}
       </Styled.ButtonContainer>
-      {isFavoritesTooltipShow
-        && <Drop align={{ left: 'right' }} target={favoritesRef.current} plain>
-            <Box
-              margin="xsmall"
-              pad="small"
-              background="dark-3"
-              round={{ size: 'xsmall' }}
-            >
-              {note.favoritedBy.map((item) => <span key={item.username}>{item.username}</span>)}
-            </Box>
-          </Drop>
-          }
-      {isDialogOpen
-        && <ConfirmDialog onDeleteNote={onDeleteNote} onDialogClose={onDialogClose} />}
+      <NoteButtonsDialogs
+        isDeleteConfirmDialogOpen={isDeleteConfirmDialogOpen}
+        isFavoritesTooltipShow={isFavoritesTooltipShow}
+        favoritesRefTarget={favoritesRef.current}
+        favoritesList={favoritesList}
+        onDeleteNote={onDeleteNote}
+        onDeleteConfirmDialogClose={onDeleteConfirmDialogClose}
+      />
     </Fragment>
   );
 };
