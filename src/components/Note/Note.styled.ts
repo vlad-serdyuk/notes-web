@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import { rgba } from 'polished';
-import { Button, Box, Text } from 'grommet';
-import { Chat, Edit, Favorite, Trash, Lock, Unlock } from 'grommet-icons';
+import { Box, Text } from 'grommet';
+import { Lock, Unlock } from 'grommet-icons';
+import { IconButton } from 'common/styled/IconButton';
 
 export const NoteContainer = styled(Box).attrs({
   align: 'center',
@@ -31,59 +31,6 @@ export const AuthorText = styled(Text)`
 
 export const DateText = styled(Text)`
   margin-right: auto;
-`;
-
-export const ButtonContainer = styled(Box)`
-  margin-left: -8px;
-  margin-bottom: -8px;
-`;
-
-export const IconButton = styled(Button)`
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-
-  &:hover {
-    background-color: ${({ theme }) => rgba(theme.global.colors.brand, 0.1)};
-
-    svg {
-      stroke: ${({ theme }) => theme.global.colors.brand};
-    }
-  }
-`;
-
-const iconStyles = css`
-  width: 20px;
-  height: 20px;
-
-  path {
-    stroke-width: 1.5;
-  }
-`;
-
-export const EditIcon = styled(Edit)`
-  ${iconStyles}
-`;
-
-export const FavoriteIcon = styled(Favorite)`
-  ${iconStyles}
-  && {
-    path {
-      fill: ${({ theme, selected }) => selected ? theme.global.colors.brand : 'none'};
-      stroke: ${({ theme, selected }) => selected ? theme.global.colors.brand : 'inherit'};
-    }
-  }
-`;
-
-export const DeleteIcon = styled(Trash)`
-  ${iconStyles}
-`;
-
-export const CommentIcon = styled(Chat)`
-  ${iconStyles}
 `;
 
 const lockIconStyles = css`
