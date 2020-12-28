@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { NOTE_FRAGMENT } from './fragments';
+import { NOTE_FRAGMENT, TREND_NOTE_FRAGMENT } from './fragments';
 
 export const GET_ME = gql`
   query Me {
@@ -37,10 +37,10 @@ export const GET_NOTES = gql`
 export const GET_TRENDS_NOTES = gql`
   query trendsNotes {
     trendsNotes {
-      ...NoteEntity
+      ...TrendNoteEntity
     }
   }
-  ${NOTE_FRAGMENT}
+  ${TREND_NOTE_FRAGMENT}
 `;
 
 export const GET_USER_FAVORITES = gql`

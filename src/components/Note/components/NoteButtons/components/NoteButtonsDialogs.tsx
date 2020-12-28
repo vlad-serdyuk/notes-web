@@ -2,10 +2,6 @@ import React, { FC, Fragment, MouseEvent } from 'react';
 import { Box, Drop } from 'grommet';
 import { ConfirmDialog } from './ConfirmDialog';
 
-interface Favorite {
-  username: string;
-}
-
 interface NoteButtonsDialogsProps {
   isDeleteConfirmDialogOpen: boolean;
   isFavoritesTooltipShow: boolean;

@@ -10,7 +10,7 @@ interface CommentsProps {
 export const Comments: FC<CommentsProps> = ({ comments }) => {
   return (
     <Fragment>
-      {comments.map(comment => <span key={comment.id}>{comment.content}</span>)}
+      {comments.map(comment => <Note key={comment.id} note={comment} />)}
     </Fragment>
   );
 };

@@ -83,7 +83,7 @@ const NoteButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, hi
         </Box>
         <Box direction="row" align="center">
           <IconButton plain icon={<Styled.CommentIcon />} onClick={editNote} />
-          {(note.comments.length > 0) && note.comments.length}
+          {((note.comments || []).length > 0) && note.comments.length}
         </Box>
         {isUserNote && <IconButton plain icon={<Styled.EditIcon />} onClick={editNote} />}
         {isUserNote && <IconButton plain icon={<Styled.DeleteIcon />} onClick={deleteNote} />}
