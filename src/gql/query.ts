@@ -73,6 +73,20 @@ export const GET_USER_NOTES = gql`
   ${NOTE_FRAGMENT}
 `;
 
+export const GET_USER_COMMENTS = gql`
+  query UserComments($username: String!) {
+    userComments(username: $username) {
+      id
+      content
+      favoriteCount
+      favoritedBy {
+        id
+        username
+      }
+    }
+  }
+`;
+
 export const SEARCH_NOTES = gql`
   query SearchNotes($text: String!) {
     searchNotes(text: $text) {

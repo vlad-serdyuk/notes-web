@@ -1,16 +1,37 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Box, Tab, Tabs } from 'grommet';
-
+import { useLazyQuery } from '@apollo/client';
+import { GET_USER_COMMENTS } from 'gql/query';
 
 interface NotesTabsProps {
   notes: JSX.Element;
   favorites: JSX.Element;
   privates: JSX.Element;
+  comments: JSX.Element;
 }
 
-export const NotesTabs: FC<NotesTabsProps> = ({ notes, favorites, privates }) => {
+enum TabsOptions {
+  Notes,
+  Favorites,
+  Privates,
+  Comments,
+}
+
+export const NotesTabs: FC<NotesTabsProps> = ({ notes, favorites, privates, comments }) => {
+  const [index, setIndex] = useState<TabsOptions>(TabsOptions.Notes);
+
+  const [getComments, { data }] = useLazyQuery(GET_USER_COMMENTS, { variables: { username: '' } });
+
+  const onActive = (nextIndex: TabsOptions) => {
+    getComments();
+    setIndex(nextIndex);
+  }
+
+  console.log(data);
+  
+
   return (
-    <Tabs flex>
+    <Tabs flex activeIndex={index} onActive={onActive}>
       <Tab title="Notes" fill="horizontal">
         <Box margin={{ vertical: 'small' }}>
            {notes}
@@ -27,6 +48,11 @@ export const NotesTabs: FC<NotesTabsProps> = ({ notes, favorites, privates }) =>
           </Box>
         </Tab>
       }
+      <Tab title="Comments" fill="horizontal">
+        <Box margin={{ vertical: 'small' }}>
+          {comments}
+        </Box>
+      </Tab>
     </Tabs>
   );
 };

@@ -42,6 +42,7 @@ export const ProfilePage: FC = () => {
         notes={<NoteFeed notes={user.notes} />}
         favorites={<NoteFeed notes={user.favorites} />}
         privates={<NoteFeed notes={privateNotes} />}
+        comments={<NoteFeed notes={privateNotes} />}
       />
     </Fragment>
   );
