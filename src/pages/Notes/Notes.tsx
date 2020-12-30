@@ -6,7 +6,7 @@ import { UPDATE_USER } from 'gql/mutation';
 import { GET_USER_NOTES, GET_ME } from 'gql/query';
 import { Note as NoteModel, IGetMeData, IUserWithNotes } from 'gql/models';
 import { Profile } from 'components/Profile';
-import { NoteFeed } from 'components/NoteFeed';
+import { NotesFeed } from 'components/NotesFeed';
 import { NotesTabs } from 'components/NotesTabs';
 
 interface IGetUserNoteData {
@@ -58,9 +58,9 @@ export const NotesPage: FC<RouteComponentProps> = ({ match }) => {
         updateProfile={updateProfile}
       />
       <NotesTabs 
-        notes={<NoteFeed notes={data.user.notes} />}
-        favorites={<NoteFeed notes={data.user.favorites} />}
-        privates={data.user.id === me.id ? <NoteFeed notes={privateNotes} /> : null}
+        notes={<NotesFeed notes={data.user.notes} />}
+        favorites={<NotesFeed notes={data.user.favorites} />}
+        privates={data.user.id === me.id ? <NotesFeed notes={privateNotes} /> : null}
       />
     </Fragment>
   );

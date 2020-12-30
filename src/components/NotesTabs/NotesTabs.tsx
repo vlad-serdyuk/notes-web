@@ -27,9 +27,6 @@ export const NotesTabs: FC<NotesTabsProps> = ({ notes, favorites, privates, comm
     setIndex(nextIndex);
   }
 
-  console.log(data);
-  
-
   return (
     <Tabs flex activeIndex={index} onActive={onActive}>
       <Tab title="Notes" fill="horizontal">

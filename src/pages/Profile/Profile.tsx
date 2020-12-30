@@ -5,7 +5,7 @@ import { UPDATE_USER } from 'gql/mutation';
 import { GET_USER_NOTES, GET_ME } from 'gql/query';
 import { Note as NoteModel, IGetMeData } from 'gql/models';
 import { Profile } from 'components/Profile';
-import { NoteFeed } from 'components/NoteFeed';
+import { NotesFeed } from 'components/NotesFeed';
 import { NotesTabs } from 'components/NotesTabs';
 
 export const ProfilePage: FC = () => {
@@ -39,10 +39,10 @@ export const ProfilePage: FC = () => {
         updateProfile={updateProfile}
       />
       <NotesTabs 
-        notes={<NoteFeed notes={user.notes} />}
-        favorites={<NoteFeed notes={user.favorites} />}
-        privates={<NoteFeed notes={privateNotes} />}
-        comments={<NoteFeed notes={privateNotes} />}
+        notes={<NotesFeed notes={user.notes} />}
+        favorites={<NotesFeed notes={user.favorites} />}
+        privates={<NotesFeed notes={privateNotes} />}
+        comments={<NotesFeed notes={privateNotes} />}
       />
     </Fragment>
   );

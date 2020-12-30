@@ -29,6 +29,7 @@ module.exports = {
       path: false,
     },
     alias: {
+      app: paths.src + '/app',
       common: paths.src + '/common',
       components: paths.src + '/components',
       gql: paths.src + '/gql',

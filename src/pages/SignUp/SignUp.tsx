@@ -6,7 +6,7 @@ import { MailOption, Close } from 'grommet-icons';
 
 import { GET_ME } from 'gql/query';
 import { SIGNUP_USER } from 'gql/mutation';
-import { emailMask } from '../../utils/validation';
+import { emailMask } from 'app/utils/validation';
 
 const SignUpComponent: FC<RouteComponentProps> = ({ history }) => {
   const [email, setEmail] = useState<string>('');

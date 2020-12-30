@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 
 import { Note, IGetMeData } from 'gql/models';
 import { GET_ME, GET_USER_FAVORITES } from 'gql/query';
-import { NoteFeed } from 'components/NoteFeed';
+import { NotesFeed } from 'components/NotesFeed';
 
 interface FavoriesData {
   user: {
@@ -31,7 +31,7 @@ export const FavoritesPage: FC = () => {
     <Fragment>
       {
         data.user.favorites.length
-        ? <NoteFeed notes={data.user.favorites} />
+        ? <NotesFeed notes={data.user.favorites} />
         : <p>No notes yet</p>
       }
     </Fragment>

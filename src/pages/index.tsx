@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+import { Layout } from 'components/Layout';
+import { PrivateRoute } from 'common/components/PrivateRoute';
 import { HomePage } from './Home';
 import { NotesPage } from './Notes';
 import { TrendsPage } from './Trends';
@@ -12,14 +14,13 @@ import { SettingsPage } from './Settings';
 import { SignIn } from './SignIn';
 import { CreateNotePage } from './CreateNote';
 import { EditNotePage } from './EditNote';
-import { Layout } from '../components/Layout';
-import { PrivateRoute } from '../common/components/PrivateRoute';
 
 export const Pages: FC = () => (
   <Router>
     <Layout>
       <Route exact path="/" component={HomePage} />
       <Route exact path="/trends" component={TrendsPage} />
+      
       <PrivateRoute exact path="/notes/:author" component={NotesPage} />
       <PrivateRoute exact path="/favorites" component={FavoritesPage} />
       <PrivateRoute exact path="/new" component={CreateNotePage} />

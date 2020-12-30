@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { Button } from 'grommet';
 
 import { GET_NOTES } from 'gql/query';
-import { NoteFeed } from 'components/NoteFeed';
+import { NotesFeed } from 'components/NotesFeed';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 
 export const HomePage: FC = () => {
@@ -41,9 +41,9 @@ export const HomePage: FC = () => {
 
   return (
     <Fragment>
-      <NoteFeed notes={data.notesFeed.notes}>
+      <NotesFeed notes={data.notesFeed.notes}>
         <SearchBar />
-      </NoteFeed>
+      </NotesFeed>
       {
         data.notesFeed.hasNextButton 
           && (
