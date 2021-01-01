@@ -6,6 +6,7 @@ import { Avatar, Box, Text } from 'grommet';
 import { IGetMeData, Note as NoteModel } from 'gql/models';
 import { GET_ME } from 'gql/query';
 import { TOGGLE_PRIVACY_NOTE } from 'gql/mutation';
+import { AuthorText } from 'common/components/AuthorText';
 import { DateText } from 'common/components/DateText';
 import { NoteButtons } from './components/NoteButtons';
 import * as Styled from './FeedNote.styled';
@@ -49,7 +50,7 @@ const FeedNoteComponent: FC<IFeedNoteComponentProps> = ({ note, history }) => {
       <Avatar size="large" src={note.author.avatar} onClick={openAuthorNotes} />
       <Box width="100%">
         <Box direction="row" gap="small" align="center">
-          <Styled.AuthorText onClick={openAuthorNotes}>{note.author.username}</Styled.AuthorText>
+          <AuthorText author={note.author.username} onClick={openAuthorNotes} />
           <DateText date={note.createdAt} />
           {isUserNote && <Styled.LockButton plain icon={<PrivacyIcon />} onClick={togglePrivacy} />}
         </Box>

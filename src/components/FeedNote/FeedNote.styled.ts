@@ -23,12 +23,6 @@ export const NoteContainer = styled(Box).attrs({
   }
 `;
 
-export const AuthorText = styled(Text)`
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
 const lockIconStyles = css`
   width: 16px;
   height: 16px;
