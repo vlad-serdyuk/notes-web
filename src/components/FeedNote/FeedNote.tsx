@@ -1,12 +1,12 @@
 import React, { memo, useMemo, useCallback, FC, MouseEvent } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
-import { format } from 'date-fns';
 import { Avatar, Box, Text } from 'grommet';
 
 import { IGetMeData, Note as NoteModel } from 'gql/models';
 import { GET_ME } from 'gql/query';
 import { TOGGLE_PRIVACY_NOTE } from 'gql/mutation';
+import { DateText } from 'common/components/DateText';
 import { NoteButtons } from './components/NoteButtons';
 import * as Styled from './FeedNote.styled';
 
@@ -50,7 +50,7 @@ const FeedNoteComponent: FC<IFeedNoteComponentProps> = ({ note, history }) => {
       <Box width="100%">
         <Box direction="row" gap="small" align="center">
           <Styled.AuthorText onClick={openAuthorNotes}>{note.author.username}</Styled.AuthorText>
-          <Styled.DateText size="small" color="grey">{format(note.createdAt, 'MMM do YYYY')}</Styled.DateText>
+          <DateText date={note.createdAt} />
           {isUserNote && <Styled.LockButton plain icon={<PrivacyIcon />} onClick={togglePrivacy} />}
         </Box>
         <Text>{note.content}</Text>

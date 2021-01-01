@@ -29,10 +29,6 @@ export const AuthorText = styled(Text)`
   }
 `;
 
-export const DateText = styled(Text)`
-  margin-right: auto;
-`;
-
 const lockIconStyles = css`
   width: 16px;
   height: 16px;
