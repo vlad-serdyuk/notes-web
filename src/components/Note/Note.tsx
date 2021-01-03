@@ -1,7 +1,7 @@
 import React, { memo, useMemo, useCallback, FC, MouseEvent } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { Avatar, Box, Text } from 'grommet';
 
 import { Note as NoteModel } from 'gql/models';
@@ -50,7 +50,7 @@ const NoteComponent: FC<INoteComponentProps> = ({ note, history }) => {
       <Box width="100%">
         <Box direction="row" gap="small" align="center">
           <Styled.AuthorText onClick={openAuthorNotes}>{note.author.username}</Styled.AuthorText>
-          <Styled.DateText size="small" color="grey">{format(note.createdAt, 'MMM do YYYY')}</Styled.DateText>
+          <Styled.DateText size="small" color="grey">{format(parseISO(note.createdAt), 'MMM do yyyy')}</Styled.DateText>
           {isUserNote && <Styled.LockButton plain icon={<PrivacyIcon />} onClick={togglePrivacy} />}
         </Box>
         <Text>{note.content}</Text>

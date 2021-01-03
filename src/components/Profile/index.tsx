@@ -44,7 +44,7 @@ export const Profile: FC<ProfileProps> = ({ user, updateProfile }) => {
       <Text size="large">{user.username}</Text>
       <Text>{user.email}</Text>
       <Text size="small" color="grey">
-        Joined {format(user.createdAt, 'MMM do YYYY')}
+        Joined {format(user.createdAt, 'MMM do yyyy')}
       </Text>
       {
       isDialogOpen && 
