@@ -4,7 +4,8 @@ import { useQuery, useMutation } from '@apollo/client';
 
 import { UPDATE_USER } from 'gql/mutation';
 import { GET_USER_NOTES, GET_ME } from 'gql/query';
-import { Note as NoteModel, IGetMeData, IUserWithNotes } from 'gql/models';
+import { Note as NoteModel, IUserWithNotes } from 'gql/models';
+import { useGetMeQuery } from 'common/hooks/queries';
 import { Profile } from 'components/Profile';
 import { NotesFeed } from 'components/NotesFeed';
 import { NotesTabs } from 'components/NotesTabs';
@@ -15,7 +16,7 @@ interface IGetUserNoteData {
 
 export const NotesPage: FC<RouteComponentProps> = ({ match }) => {
   const { loading, error, data } = useQuery<IGetUserNoteData>(GET_USER_NOTES, { variables: { username: match.params.author } });
-  const { data: { me } = {} } = useQuery<IGetMeData>(GET_ME, { variables: { username: match.params.author } });
+  const { data: { me } = {} } = useGetMeQuery();
   const [updateProfile] = useMutation(UPDATE_USER, {
     refetchQueries: [{ query: GET_ME }],
   });

@@ -21,7 +21,7 @@ const CommentComponent: FC<CommentProps> = ({ comment, history }) => {
       <Avatar size="large" src={comment.author.avatar} onClick={openAuthorPage} />
       <Box width="100%">
         <Box direction="row" gap="small" align="center">
-          <AuthorText onClick={openAuthorPage} author={comment.author.username} />
+          <AuthorText author={comment.author.username} onClick={openAuthorPage} />
           <DateText date={comment.createdAt} />
         </Box>
         <Text>{comment.content}</Text>

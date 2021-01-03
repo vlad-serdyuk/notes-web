@@ -1,10 +1,8 @@
 import React, { useState, useCallback, useMemo, FC } from 'react';
-import { useQuery } from '@apollo/client';
 import { format } from 'date-fns';
 import { Avatar, Box, Button, Text } from 'grommet';
 
-import { GET_ME } from 'gql/query';
-import { IGetMeData} from 'gql/models';
+import { useGetMeQuery } from 'common/hooks/queries';
 import { EditProfileDialog } from './EditProfileDialog/index';
 
 interface ProfileProps {
@@ -13,7 +11,7 @@ interface ProfileProps {
 }
 
 export const Profile: FC<ProfileProps> = ({ user, updateProfile }) => {
-  const { data: { me } = {} } = useQuery<IGetMeData>(GET_ME);
+  const { data: { me } = {} } = useGetMeQuery();
   const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
 
   const openEditProfileDialog = () => setDialogOpen(true);

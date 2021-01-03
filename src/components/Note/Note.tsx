@@ -1,12 +1,12 @@
 import React, { memo, useMemo, useCallback, FC, MouseEvent } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { useQuery, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { format } from 'date-fns';
 import { Avatar, Box, Text } from 'grommet';
 
-import { IGetMeData, Note as NoteModel } from 'gql/models';
-import { GET_ME } from 'gql/query';
+import { Note as NoteModel } from 'gql/models';
 import { TOGGLE_PRIVACY_NOTE } from 'gql/mutation';
+import { useGetMeQuery } from 'common/hooks/queries';
 import { NoteButtons } from './components/NoteButtons';
 import * as Styled from './Note.styled';
 
@@ -15,7 +15,7 @@ interface INoteComponentProps extends RouteComponentProps {
 }
 
 const NoteComponent: FC<INoteComponentProps> = ({ note, history }) => {
-  const { data: { me } } = useQuery<IGetMeData>(GET_ME);
+  const { data: { me } } = useGetMeQuery();
   const [togglePrivacyMutation] = useMutation(TOGGLE_PRIVACY_NOTE);
 
   const isUserNote = useMemo(() => {

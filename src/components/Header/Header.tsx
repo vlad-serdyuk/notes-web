@@ -1,17 +1,15 @@
 import React, { useMemo, Fragment, FC} from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
 import { Box } from 'grommet';
 
-import { IGetMeData } from 'gql/models';
-import { GET_ME, LOG_OUT } from 'gql/query';
-import { useIsLoggedInQuery } from 'common/hooks/auth';
+import { LOG_OUT } from 'gql/query';
+import { useIsLoggedInQuery, useGetMeQuery } from 'common/hooks/queries';
 import { AvatarDropButton } from './components/AvatarDropDown';
 import { StyledHeader, LinkText, LinkWrapper } from './Header.styled';
 
 const HeaderComponent: FC<RouteComponentProps> = ({ history }) => {
   const { data: { isLoggedIn }, client } = useIsLoggedInQuery();
-  const { data: { me } = {} } = useQuery<IGetMeData>(GET_ME);
+  const { data: { me } = {} } = useGetMeQuery();
 
   const onLogOut = () => {
     client.query({ query: LOG_OUT }).then(() => {
