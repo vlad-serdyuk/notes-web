@@ -36,7 +36,7 @@ const renderItems = ({ email, initials, username, theme, onSwitchTheme, onProfil
         <Text size="small">{email}</Text>
       </Box>
     </Box>
-    <Box pad={{ top: "small", bottom: "small" }}>
+    <Box pad={{ top: 'small', bottom: 'small' }}>
       <CheckBox
         label="Dark"
         checked={theme === Themes.dark}
@@ -56,7 +56,7 @@ const AvatarDropButtonComponent: FC<AvatarDropButtonProps> = ({ email, username,
   const onProfileClick = useCallback(() => {
     openProfilePage();
     setOpen(false);
-  }, [open, setOpen, openProfilePage]);
+  }, [setOpen, openProfilePage]);
 
   const onSwitchTheme = useCallback(() => {
     switchTheme();
@@ -69,7 +69,7 @@ const AvatarDropButtonComponent: FC<AvatarDropButtonProps> = ({ email, username,
       onOpen={() => setOpen(true)}
       alignSelf="center"
       dropContent={renderItems({ email, initials, username, theme, onSwitchTheme, onProfileClick, onLogOut })}
-      dropProps={{ align: { top: "bottom" } }}
+      dropProps={{ align: { top: 'bottom' } }}
     >
       <Box height="32px" width="32px" align="center">
         <Avatar background="brand">{initials}</Avatar>

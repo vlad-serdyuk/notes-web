@@ -53,8 +53,10 @@ const NoteComponent: FC<INoteComponentProps> = ({ note, history }) => {
           <Styled.DateText size="small" color="grey">{format(parseISO(note.createdAt), 'MMM do yyyy')}</Styled.DateText>
           {isUserNote && <Styled.LockButton plain icon={<PrivacyIcon />} onClick={togglePrivacy} />}
         </Box>
-        <Text>{note.content}</Text>
-        <NoteButtons isUserNote={isUserNote} note={note} />
+        <Text size="large">{note.content}</Text>
+        <Box border>
+          <NoteButtons isUserNote={isUserNote} note={note} />
+        </Box>
       </Box>
     </Styled.NoteContainer>
   );

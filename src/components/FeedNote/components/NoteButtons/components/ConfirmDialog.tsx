@@ -24,7 +24,7 @@ const ConfirmDialogComponent: FC<IConfirmDialogProps> = ({ onDialogClose, onDele
           direction="row"
           align="center"
           justify="end"
-          pad={{ top: "medium", bottom: "small" }}
+          pad={{ top: 'medium', bottom: 'small' }}
         >
           <Button
             label={

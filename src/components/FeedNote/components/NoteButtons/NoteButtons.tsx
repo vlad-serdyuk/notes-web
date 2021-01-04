@@ -60,7 +60,7 @@ const NoteButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, hi
   const deleteNote = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     setDeleteConfirmDialogOpen(true);
-  }, [isDeleteConfirmDialogOpen]);
+  }, []);
 
   const onDeleteNote = useCallback((e: MouseEvent) => {
     e.stopPropagation();

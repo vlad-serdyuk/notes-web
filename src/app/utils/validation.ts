@@ -1,16 +1,16 @@
 export const emailMask = [
     {
       regexp: /^[\w\-_.]+$/,
-      placeholder: "example"
+      placeholder: 'example',
     },
-    { fixed: "@" },
+    { fixed: '@' },
     {
       regexp: /^[\w]+$/,
-      placeholder: "my"
+      placeholder: 'my',
     },
-    { fixed: "." },
+    { fixed: '.' },
     {
       regexp: /^[\w]+$/,
-      placeholder: "com"
+      placeholder: 'com',
     }
   ];

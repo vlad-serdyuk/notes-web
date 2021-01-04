@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Box, Text } from 'grommet';
+import { Box } from 'grommet';
 import { Lock, Unlock } from 'grommet-icons';
 import { IconButton } from 'common/components/IconButton';
 

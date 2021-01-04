@@ -1,10 +1,11 @@
-import React, { FC, Fragment } from 'react';
+import React, { FC } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Avatar, Box, Text } from 'grommet';
 
 import { AuthorText } from 'common/components/AuthorText';
 import { DateText } from 'common/components/DateText';
-import { Comment as CommentModel } from 'gql/models'
+import { Comment as CommentModel } from 'gql/models';
+import { CommentContainer } from './Comment.styled';
 
 interface CommentProps extends RouteComponentProps {
   comment: CommentModel;
@@ -17,7 +18,7 @@ const CommentComponent: FC<CommentProps> = ({ comment, history }) => {
   }
 
   return (
-    <Fragment>
+    <CommentContainer>
       <Avatar size="large" src={comment.author.avatar} onClick={openAuthorPage} />
       <Box width="100%">
         <Box direction="row" gap="small" align="center">
@@ -26,8 +27,7 @@ const CommentComponent: FC<CommentProps> = ({ comment, history }) => {
         </Box>
         <Text>{comment.content}</Text>
       </Box>
-    </Fragment>
-
+    </CommentContainer>
   );
 };
 
