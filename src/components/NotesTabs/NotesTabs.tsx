@@ -7,7 +7,6 @@ interface NotesTabsProps {
   notes: JSX.Element;
   favorites: JSX.Element;
   privates: JSX.Element;
-  comments: JSX.Element;
 }
 
 enum TabsOptions {
@@ -17,10 +16,10 @@ enum TabsOptions {
   Comments,
 }
 
-export const NotesTabs: FC<NotesTabsProps> = ({ notes, favorites, privates, comments }) => {
+export const NotesTabs: FC<NotesTabsProps> = ({ notes, favorites, privates }) => {
   const [index, setIndex] = useState<TabsOptions>(TabsOptions.Notes);
 
-  const [getComments, { data }] = useLazyQuery(GET_USER_COMMENTS, { variables: { username: '' } });
+  const [getComments, { data = {} }] = useLazyQuery(GET_USER_COMMENTS, { variables: { username: 'vlad1' } });
 
   const onActive = (nextIndex: TabsOptions) => {
     getComments();
@@ -47,7 +46,7 @@ export const NotesTabs: FC<NotesTabsProps> = ({ notes, favorites, privates, comm
       }
       <Tab title="Comments" fill="horizontal">
         <Box margin={{ vertical: 'small' }}>
-          {comments}
+          {data.userComments}
         </Box>
       </Tab>
     </Tabs>

@@ -1,12 +1,12 @@
 import React, { memo, useMemo, useCallback, FC, MouseEvent } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { format, parseISO } from 'date-fns';
 import { Avatar, Box, Text } from 'grommet';
 
 import { Note as NoteModel } from 'gql/models';
 import { TOGGLE_PRIVACY_NOTE } from 'gql/mutation';
 import { useGetMeQuery } from 'common/hooks/queries';
+import { DateText } from 'common/components/DateText';
 import { NoteButtons } from './components/NoteButtons';
 import * as Styled from './Note.styled';
 
@@ -50,7 +50,7 @@ const NoteComponent: FC<INoteComponentProps> = ({ note, history }) => {
       <Box width="100%">
         <Box direction="row" gap="small" align="center">
           <Styled.AuthorText onClick={openAuthorNotes}>{note.author.username}</Styled.AuthorText>
-          <Styled.DateText size="small" color="grey">{format(parseISO(note.createdAt), 'MMM do yyyy')}</Styled.DateText>
+          <DateText date={note.createdAt} />
           {isUserNote && <Styled.LockButton plain icon={<PrivacyIcon />} onClick={togglePrivacy} />}
         </Box>
         <Text size="large">{note.content}</Text>

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useMemo, FC } from 'react';
-import { format } from 'date-fns';
 import { Avatar, Box, Button, Text } from 'grommet';
 
+import { formatDate } from 'app/utils/date';
 import { useGetMeQuery } from 'common/hooks/queries';
 import { EditProfileDialog } from './EditProfileDialog/index';
 
@@ -44,7 +44,7 @@ export const Profile: FC<ProfileProps> = ({ user, updateProfile }) => {
       <Text size="large">{user.username}</Text>
       <Text>{user.email}</Text>
       <Text size="small" color="grey">
-        Joined {format(user.createdAt, 'MMM do yyyy')}
+        Joined {formatDate(user.createdAt)}
       </Text>
       {
       isDialogOpen && 
