@@ -1,9 +1,9 @@
 import React, { useMemo, FC, Fragment } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
 
 import { UPDATE_USER } from 'gql/mutation';
-import { GET_USER_NOTES, GET_ME } from 'gql/query';
+import { GET_USER_NOTES, GET_ME, GET_USER_COMMENTS } from 'gql/query';
 import { Note as NoteModel, IUserWithNotes } from 'gql/models';
 import { useGetMeQuery } from 'common/hooks/queries';
 import { Profile } from 'components/Profile';
@@ -16,6 +16,7 @@ interface IGetUserNoteData {
 
 export const NotesPage: FC<RouteComponentProps> = ({ match }) => {
   const { loading, error, data } = useQuery<IGetUserNoteData>(GET_USER_NOTES, { variables: { username: match.params.author } });
+  const [getComments, { data: comments = {} }] = useLazyQuery(GET_USER_COMMENTS, { variables: { username: match.params.author } });
   const { data: { me } = {} } = useGetMeQuery();
   const [updateProfile] = useMutation(UPDATE_USER, {
     refetchQueries: [{ query: GET_ME }],
