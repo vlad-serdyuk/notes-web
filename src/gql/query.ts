@@ -79,9 +79,15 @@ export const GET_USER_COMMENTS = gql`
       id
       content
       favoriteCount
+      createdAt
       favoritedBy {
         id
         username
+      }
+      author {
+        id
+        username
+        avatar
       }
     }
   }

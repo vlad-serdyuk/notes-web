@@ -1,4 +1,4 @@
-import React, { useMemo, FC, Fragment } from 'react';
+import React, { FC, Fragment, useCallback, useMemo } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
 
@@ -8,7 +8,8 @@ import { Note as NoteModel, IUserWithNotes } from 'gql/models';
 import { useGetMeQuery } from 'common/hooks/queries';
 import { Profile } from 'components/Profile';
 import { NotesFeed } from 'components/NotesFeed';
-import { NotesTabs } from 'components/NotesTabs';
+import { NotesTabs, TabsOptions } from 'components/NotesTabs';
+import { Comments } from 'components/Comments';
 
 interface IGetUserNoteData {
   user: IUserWithNotes;
@@ -16,7 +17,7 @@ interface IGetUserNoteData {
 
 export const NotesPage: FC<RouteComponentProps> = ({ match }) => {
   const { loading, error, data } = useQuery<IGetUserNoteData>(GET_USER_NOTES, { variables: { username: match.params.author } });
-  const [getComments, { data: comments = {} }] = useLazyQuery(GET_USER_COMMENTS, { variables: { username: match.params.author } });
+  const [getComments, { data: comments = {}, loading: commentsLoading }] = useLazyQuery(GET_USER_COMMENTS, { variables: { username: match.params.author } });
   const { data: { me } = {} } = useGetMeQuery();
   const [updateProfile] = useMutation(UPDATE_USER, {
     refetchQueries: [{ query: GET_ME }],
@@ -45,7 +46,13 @@ export const NotesPage: FC<RouteComponentProps> = ({ match }) => {
     return data.user.notes.filter((note: NoteModel) => note.private);
   }, [data, loading, error]);
 
-  if (loading) {
+  const tabClickHandle = useCallback((tab) => {
+    if (tab === TabsOptions.Comments) {
+      getComments();
+    }
+  }, [getComments]);
+
+  if (loading || commentsLoading) {
     return <p>loading...</p>;
   }
 
@@ -63,6 +70,8 @@ export const NotesPage: FC<RouteComponentProps> = ({ match }) => {
         notes={<NotesFeed notes={data.user.notes} />}
         favorites={<NotesFeed notes={data.user.favorites} />}
         privates={data.user.id === me.id ? <NotesFeed notes={privateNotes} /> : null}
+        comments={<Comments comments={comments.userComments} />}
+        onTabClick={tabClickHandle}
       />
     </Fragment>
   );
