@@ -10,11 +10,12 @@ import { TrendsPage } from './Trends';
 import { FavoritesPage } from './Favorites';
 import { NotePage } from './Note';
 import { SignUp } from './SignUp';
-import { ProfilePage } from './Profile';
-import { SettingsPage } from './Settings';
 import { SignIn } from './SignIn';
 import { CreateNotePage } from './CreateNote';
 import { EditNotePage } from './EditNote';
+
+const ProfilePage = lazy(() => import('./Profile'));
+const SettingsPage = lazy(() => import('./Settings'));
 
 export const Pages: FC = () => (
   <Router>
