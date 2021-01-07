@@ -11,7 +11,7 @@ const TrendsWidgetComponent: FC<RouteComponentProps> = ({ history }) => {
   const { loading, error, data } = useQuery(GET_TRENDS_NOTES);
 
   const openNote = useCallback((e) => {    
-    history.push(`note/${e.target.id}`);
+    history.push(`/note/${e.target.id}`);
   }, [history]);
 
   const showMore = useCallback(() => {

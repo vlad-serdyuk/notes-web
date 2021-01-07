@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Skeleton } from '../../components/Skeleton';
+import { Skeleton } from './Skeleton';
 import { useIsLoggedInQuery } from 'common/hooks/queries';
 
 interface ShowIfAuthProps {

@@ -3,8 +3,8 @@ import { useQuery } from '@apollo/client';
 import { Box } from 'grommet';
 
 import { GET_APP_METADATA } from 'gql/local-query';
+import { Skeleton } from 'common/components/Skeleton';
 import { Header } from '../Header';
-import { Skeleton } from '../Skeleton';
 import { Navigation } from '../Navigation';
 import { TrendsWidget } from '../TrendsWidget';
 import { MainContainer } from './Layout.styles';
