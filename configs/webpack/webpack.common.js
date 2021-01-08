@@ -1,4 +1,3 @@
-const path = require("path");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
@@ -50,8 +49,8 @@ module.exports = {
       template: paths.public + '/index.html',
     }),
   ],
-  /*optimization: {
-    runtimeChunk: "single", // enable "runtime" chunk
+  optimization: {
+    /* runtimeChunk: "single", // enable "runtime" chunk
     splitChunks: {
         cacheGroups: {
             vendor: {
@@ -60,6 +59,10 @@ module.exports = {
                 chunks: "all"
             }
         }
-    }
-  }*/
+    } */
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
+
 };
