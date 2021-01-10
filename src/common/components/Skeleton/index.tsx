@@ -1,11 +1,8 @@
-import React, { FC, memo, useContext } from 'react';
-import { GlobalContext } from 'common/contexts/globalContext';
+import React, { FC, memo } from 'react';
 
 import { StyledBox } from './Skeleton.styled';
 
 const SkeletonComponent: FC = () => {
-  const { theme } = useContext(GlobalContext);
-
   return <StyledBox />;
 };
 
