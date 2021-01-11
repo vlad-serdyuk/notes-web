@@ -2,9 +2,11 @@ import React, { FC } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Avatar, Box, Text } from 'grommet';
 
+import { Comment as CommentModel } from 'gql/models';
 import { AuthorText } from 'common/components/AuthorText';
 import { DateText } from 'common/components/DateText';
-import { Comment as CommentModel } from 'gql/models';
+import { NoteButtons } from 'components/NoteButtons';
+
 import { CommentContainer } from './Comment.styled';
 
 interface CommentProps extends RouteComponentProps {

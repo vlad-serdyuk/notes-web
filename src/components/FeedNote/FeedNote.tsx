@@ -8,7 +8,7 @@ import { TOGGLE_PRIVACY_NOTE } from 'gql/mutation';
 import { AuthorText } from 'common/components/AuthorText';
 import { DateText } from 'common/components/DateText';
 import { useGetMeQuery } from 'common/hooks/queries';
-import { NoteButtons } from './components/NoteButtons';
+import { NoteButtons } from 'components/NoteButtons';
 import * as Styled from './FeedNote.styled';
 
 interface IFeedNoteComponentProps extends RouteComponentProps {

@@ -7,7 +7,7 @@ import { Note as NoteModel } from 'gql/models';
 import { TOGGLE_PRIVACY_NOTE } from 'gql/mutation';
 import { useGetMeQuery } from 'common/hooks/queries';
 import { DateText } from 'common/components/DateText';
-import { NoteButtons } from './components/NoteButtons';
+import { NoteButtons } from 'components/NoteButtons';
 import * as Styled from './Note.styled';
 
 interface INoteComponentProps extends RouteComponentProps {
