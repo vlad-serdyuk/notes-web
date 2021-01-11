@@ -5,7 +5,7 @@ import { Avatar, Box, Text } from 'grommet';
 import { Comment as CommentModel } from 'gql/models';
 import { AuthorText } from 'common/components/AuthorText';
 import { DateText } from 'common/components/DateText';
-import { NoteButtons } from 'components/NoteButtons';
+import { ActionButtons } from 'components/ActionButtons';
 
 import { CommentContainer } from './Comment.styled';
 

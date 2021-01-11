@@ -7,8 +7,8 @@ import { GET_NOTES } from 'gql/query';
 import { Note as NoteModel } from 'gql/models';
 import { TOGGLE_FAVORITE_NOTE, DELETE_NOTE } from 'gql/mutation';
 import { IconButton } from 'common/components/IconButton';
-import { NoteButtonsDialogs } from './components/NoteButtonsDialogs';
-import * as Styled from './NoteButtons.styled';
+import { NoteButtonsDialogs } from './components/ActionButtonsDialogs';
+import * as Styled from './ActionButtons.styled';
 
 interface NoteButtonsProps extends RouteComponentProps {
   isUserNote: boolean;
@@ -16,7 +16,7 @@ interface NoteButtonsProps extends RouteComponentProps {
   meId?: string;
 }
 
-const NoteButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, history }) => {
+const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, history }) => {
   const favoritesRef = useRef<HTMLElement>();
   const [isDeleteConfirmDialogOpen, setDeleteConfirmDialogOpen] = useState<boolean>(false);
   const [isTooltipOpen, setTooltipOpen] = useState<boolean>(false);
@@ -100,4 +100,4 @@ const NoteButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, hi
   );
 };
 
-export const NoteButtons = withRouter(NoteButtonsComponent);
+export const ActionButtons = withRouter(ActionButtonsComponent);

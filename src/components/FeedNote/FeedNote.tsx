@@ -8,7 +8,7 @@ import { TOGGLE_PRIVACY_NOTE } from 'gql/mutation';
 import { AuthorText } from 'common/components/AuthorText';
 import { DateText } from 'common/components/DateText';
 import { useGetMeQuery } from 'common/hooks/queries';
-import { NoteButtons } from 'components/NoteButtons';
+import { ActionButtons } from 'components/ActionButtons';
 import * as Styled from './FeedNote.styled';
 
 interface IFeedNoteComponentProps extends RouteComponentProps {
@@ -55,7 +55,7 @@ const FeedNoteComponent: FC<IFeedNoteComponentProps> = ({ note, history }) => {
           {isUserNote && <Styled.LockButton plain icon={<PrivacyIcon />} onClick={togglePrivacy} />}
         </Box>
         <Text>{note.content}</Text>
-        <NoteButtons isUserNote={isUserNote} note={note} />
+        <ActionButtons isUserNote={isUserNote} note={note} />
       </Box>
     </Styled.NoteContainer>
   );

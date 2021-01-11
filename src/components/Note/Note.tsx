@@ -7,7 +7,7 @@ import { Note as NoteModel } from 'gql/models';
 import { TOGGLE_PRIVACY_NOTE } from 'gql/mutation';
 import { useGetMeQuery } from 'common/hooks/queries';
 import { DateText } from 'common/components/DateText';
-import { NoteButtons } from 'components/NoteButtons';
+import { ActionButtons } from 'components/ActionButtons';
 import * as Styled from './Note.styled';
 
 interface INoteComponentProps extends RouteComponentProps {
@@ -55,7 +55,7 @@ const NoteComponent: FC<INoteComponentProps> = ({ note, history }) => {
         </Box>
         <Text size="large">{note.content}</Text>
         <Box border>
-          <NoteButtons isUserNote={isUserNote} note={note} />
+          <ActionButtons isUserNote={isUserNote} note={note} />
         </Box>
       </Box>
     </Styled.NoteContainer>
