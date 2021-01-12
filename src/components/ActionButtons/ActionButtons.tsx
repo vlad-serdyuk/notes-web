@@ -57,6 +57,11 @@ const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, 
     history.push(`/edit/${note.id}`);
   }, [note, history]);
 
+  const addComment = useCallback((e: MouseEvent) => {
+    e.stopPropagation();
+    history.push('/comment/new');
+  }, [note, history]);
+
   const deleteNote = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     setDeleteConfirmDialogOpen(true);
@@ -82,7 +87,7 @@ const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, 
           {(note.favoriteCount > 0) && <Text size="small" color={isFavoriteByMe ? 'brand' : null}>{note.favoriteCount}</Text>}
         </Box>
         <Box direction="row" align="center">
-          <IconButton plain icon={<Styled.CommentIcon />} onClick={editNote} />
+          <IconButton plain icon={<Styled.CommentIcon />} onClick={addComment} />
           {((note.comments || []).length > 0) && note.comments.length}
         </Box>
         {isUserNote && <IconButton plain icon={<Styled.EditIcon />} onClick={editNote} />}
