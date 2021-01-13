@@ -6,17 +6,17 @@ import { ISubmitNoteArgs } from './ISubmitNoteArgs';
 interface INoteFormProps {
   btnLabel?: string;
   content?: string;
-  submitNote: ({ note }: ISubmitNoteArgs) => void;
+  submitComment: ({ note }: ISubmitNoteArgs) => void;
 }
 
-const CommentFormComponent: FC<INoteFormProps> = ({ btnLabel = 'Create', content = '', submitNote }) => {
+const CommentFormComponent: FC<INoteFormProps> = ({ btnLabel = 'Create', content = '', submitComment }) => {
   const [note, setNote] = useState<string>(content);
 
   const onChangeNote = (event: ChangeEvent<HTMLInputElement>) => {
     setNote(event.target.value);
   };
 
-  const onSubmit = () => submitNote({ note });
+  const onSubmit = () => submitComment({ note });
 
   return (
     <Box align="center">
