@@ -1,1 +1,0 @@
-export { CreateCommentPage } from './CreateComment';

@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { NOTE_FRAGMENT } from './fragments';
+import { NOTE_FRAGMENT, COMMENT_ENTITY } from './fragments';
 
 export const SIGNIN_USER = gql`
   mutation signIn($email: String!, $password: String!) {
@@ -68,4 +68,13 @@ export const TOGGLE_PRIVACY_NOTE = gql`
     }
   }
   ${NOTE_FRAGMENT}
+`;
+
+export const ADD_COMMENT = gql`
+  mutation addComment($content: String!, $noteId: String!) {
+    addComment(content: $content, noteId: $noteId) {
+      ...CommentEntity
+    }
+  }
+  ${COMMENT_ENTITY}
 `;

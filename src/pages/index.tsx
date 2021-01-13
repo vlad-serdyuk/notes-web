@@ -13,7 +13,7 @@ import { SignUp } from './SignUp';
 import { SignIn } from './SignIn';
 import { CreateNotePage } from './CreateNote';
 import { EditNotePage } from './EditNote';
-import { CreateCommentPage } from './CreateComment';
+import { AddCommentPage } from './AddComment';
 
 const ProfilePage = lazy(() => import('./Profile'));
 const SettingsPage = lazy(() => import('./Settings'));
@@ -32,7 +32,7 @@ export const Pages: FC = () => (
         <PrivateRoute exact path="/new" component={CreateNotePage} />
         <PrivateRoute exact path="/edit/:id" component={EditNotePage} />
 
-        <PrivateRoute exact path="/comment/new" component={CreateCommentPage} />
+        <PrivateRoute exact path="/comment/new" component={AddCommentPage} />
 
         <Route exact path="/profile" component={ProfilePage} />
         <Route exact path="/settings" component={SettingsPage} />

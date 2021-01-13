@@ -19,6 +19,25 @@ const NOTE_FAVORITED_BY_FRAGMENT = gql`
   }
 `;
 
+const COMMENT_ENTITY = gql`
+  fragment CommentEntity on Comment {
+    id
+    noteId
+    content
+    createdAt
+    favoriteCount
+    favoritedBy {
+      id
+      username
+    }
+    author {
+      id
+      username
+      avatar
+    }
+  }
+`;
+
 const NOTE_COMMENTS_FRAGMENT = gql`
   fragment NoteComments on Note {
     comments {
