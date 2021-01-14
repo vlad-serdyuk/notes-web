@@ -23,16 +23,16 @@ export const Pages: FC = () => (
     <Layout>
       <Suspense fallback={<Skeleton />}>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/trends" component={TrendsPage} />
+        <Route exact path="/notes/trends" component={TrendsPage} />
 
         <Route exact path="/note/:id" component={NotePage} />
         
         <PrivateRoute exact path="/notes/:author" component={NotesPage} />
-        <PrivateRoute exact path="/favorites" component={FavoritesPage} />
-        <PrivateRoute exact path="/new" component={CreateNotePage} />
-        <PrivateRoute exact path="/edit/:id" component={EditNotePage} />
+        <PrivateRoute exact path="/notes/favorites" component={FavoritesPage} />
+        <PrivateRoute exact path="/note/new" component={CreateNotePage} />
+        <PrivateRoute exact path="/note/edit/:id" component={EditNotePage} />
 
-        <PrivateRoute exact path="/comment/new" component={AddCommentPage} />
+        <PrivateRoute exact path="/note/:id/comment/new" component={AddCommentPage} />
 
         <Route exact path="/profile" component={ProfilePage} />
         <Route exact path="/settings" component={SettingsPage} />

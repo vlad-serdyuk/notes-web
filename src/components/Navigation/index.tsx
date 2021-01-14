@@ -12,7 +12,7 @@ const NavigationComponent: FC<RouteComponentProps> = ({ history }) => {
   const { data: { me } = {} } = useQuery<IGetMeData>(GET_ME);
 
   const onCreateNoteClick = () => {
-    history.push('/new');
+    history.push('/note/new');
   };
 
   return (
@@ -20,7 +20,7 @@ const NavigationComponent: FC<RouteComponentProps> = ({ history }) => {
       <LinkWrapper to="/">
         <LinkText>Home</LinkText>
       </LinkWrapper>
-      <LinkWrapper to="/trends">
+      <LinkWrapper to="/notes/trends">
         <LinkText>Trends</LinkText>
       </LinkWrapper>
       {me && <LinkWrapper to="/profile">

@@ -41,7 +41,7 @@ const HeaderComponent: FC<RouteComponentProps> = ({ history }) => {
           <LinkText to={`/notes/${me.username}`}>My notes</LinkText>
         </LinkWrapper>}
         {me && <LinkWrapper>
-          <LinkText to="/favorites">Favorites</LinkText>
+          <LinkText to="/notes/favorites">Favorites</LinkText>
         </LinkWrapper>}
       </Box>
       <Box direction="row" gap="medium">

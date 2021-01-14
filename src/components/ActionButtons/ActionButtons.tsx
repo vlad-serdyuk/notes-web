@@ -54,12 +54,12 @@ const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, 
 
   const editNote = useCallback((e: MouseEvent) => {
     e.stopPropagation();
-    history.push(`/edit/${note.id}`);
+    history.push(`/note/edit/${note.id}`);
   }, [note, history]);
 
   const addComment = useCallback((e: MouseEvent) => {
     e.stopPropagation();
-    history.push('/comment/new');
+    history.push(`/note/${note.id}/comment/new`);
   }, [note, history]);
 
   const deleteNote = useCallback((e: MouseEvent) => {
