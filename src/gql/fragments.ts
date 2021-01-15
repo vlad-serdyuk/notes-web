@@ -19,7 +19,7 @@ const NOTE_FAVORITED_BY_FRAGMENT = gql`
   }
 `;
 
-const COMMENT_ENTITY = gql`
+export const COMMENT_ENTITY = gql`
   fragment CommentEntity on Comment {
     id
     noteId

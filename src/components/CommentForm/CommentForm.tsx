@@ -1,30 +1,28 @@
 import React, { memo, useState, FC, ChangeEvent } from 'react';
 import { Box, TextArea, Button } from 'grommet';
 
-import { ISubmitNoteArgs } from './ISubmitNoteArgs';
-
-interface INoteFormProps {
+interface ICommentFormProps {
   btnLabel?: string;
   content?: string;
-  submitComment: ({ note }: ISubmitNoteArgs) => void;
+  submitComment: ({ comment }: { comment: string }) => void;
 }
 
-const CommentFormComponent: FC<INoteFormProps> = ({ btnLabel = 'Create', content = '', submitComment }) => {
-  const [note, setNote] = useState<string>(content);
+const CommentFormComponent: FC<ICommentFormProps> = ({ btnLabel = 'Create', content = '', submitComment }) => {
+  const [comment, setComment] = useState<string>(content);
 
-  const onChangeNote = (event: ChangeEvent<HTMLInputElement>) => {
-    setNote(event.target.value);
+  const onChangeComment = (event: ChangeEvent<HTMLInputElement>) => {
+    setComment(event.target.value);
   };
 
-  const onSubmit = () => submitComment({ note });
+  const onSubmit = () => submitComment({ comment });
 
   return (
     <Box align="center">
       <Box gap="small" width="medium">
-        <TextArea value={note} onChange={onChangeNote} />
+        <TextArea value={comment} onChange={onChangeComment} />
         <Button
           primary
-          disabled={!note}
+          disabled={!comment}
           label={btnLabel}
           onClick={onSubmit}
         />

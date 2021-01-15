@@ -3,20 +3,20 @@ import { RouteComponentProps } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 import { Comment } from 'gql/models';
-import { GET_NOTES } from 'gql/query';
+import { GET_NOTE } from 'gql/query';
 import { ADD_COMMENT } from 'gql/mutation';
 import { CommentForm } from 'components/CommentForm';
 
-export const AddCommentPage: FC<RouteComponentProps> = ({ history }) => {
+export const AddCommentPage: FC<RouteComponentProps> = ({ history, match }) => {
   const [AddComment, { loading, error }] = useMutation(ADD_COMMENT, {
-    refetchQueries: [{ query: GET_NOTES }],
-    onCompleted: (data: { createComment: Comment }) => {
-      history.push(`comment/${data.createNote.id}`);
+    refetchQueries: [{ query: GET_NOTE, variables: { id: match.params.id } }],
+    onCompleted: (data: { addComment: Comment }) => {
+      history.push(`/note/${data.addComment.noteId}`);
     },
   });
 
-  const onAddComment = useCallback(({ comment, noteId }) => {
-    AddComment({ variables: { content: comment } });
+  const onAddComment = useCallback(({ comment }) => {
+    AddComment({ variables: { content: comment, noteId: match.params.id } });
   }, [AddComment]);
 
   return (
