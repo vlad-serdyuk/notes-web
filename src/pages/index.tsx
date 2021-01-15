@@ -9,11 +9,12 @@ import { NotesPage } from './Notes';
 import { TrendsPage } from './Trends';
 import { FavoritesPage } from './Favorites';
 import { NotePage } from './Note';
-import { SignUp } from './SignUp';
-import { SignIn } from './SignIn';
 import { CreateNotePage } from './CreateNote';
 import { EditNotePage } from './EditNote';
 import { AddCommentPage } from './AddComment';
+
+const SignInPage = lazy(() => import('./SignIn'));
+const SignUpPage = lazy(() => import('./SignUp'));
 
 const ProfilePage = lazy(() => import('./Profile'));
 const SettingsPage = lazy(() => import('./Settings'));
@@ -37,8 +38,8 @@ export const Pages: FC = () => (
         <Route exact path="/profile" component={ProfilePage} />
         <Route exact path="/settings" component={SettingsPage} />
 
-        <Route exact path="/sign-in" component={SignIn} />
-        <Route exact path="/sign-up" component={SignUp} />
+        <Route exact path="/sign-in" component={SignInPage} />
+        <Route exact path="/sign-up" component={SignUpPage} />
       </Suspense>
     </Layout>
   </Router>
