@@ -78,3 +78,9 @@ export const ADD_COMMENT = gql`
   }
   ${COMMENT_ENTITY}
 `;
+
+export const DELETE_COMMENT = gql`
+  mutation deleteomment($id: String!) {
+    deleteComment(id: $id) 
+  }
+`;

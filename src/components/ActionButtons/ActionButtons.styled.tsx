@@ -7,7 +7,7 @@ export const ButtonContainer = styled(Box)`
   margin-bottom: -8px;
 `;
 
-const iconStyles = css`
+export const iconStyles = css`
   width: 20px;
   height: 20px;
 

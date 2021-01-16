@@ -7,8 +7,14 @@ import { GET_NOTES } from 'gql/query';
 import { Note as NoteModel } from 'gql/models';
 import { TOGGLE_FAVORITE_NOTE, DELETE_NOTE } from 'gql/mutation';
 import { IconButton } from 'common/components/IconButton';
+import { CommentsActionButton } from './components/CommentsActionButton';
 import { NoteButtonsDialogs } from './components/ActionButtonsDialogs';
 import * as Styled from './ActionButtons.styled';
+
+export enum ActionButtonsType {
+  NOTE = 'note',
+  COMMENT = 'comment',
+}
 
 interface NoteButtonsProps extends RouteComponentProps {
   isUserNote: boolean;
@@ -86,10 +92,10 @@ const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, 
           />
           {(note.favoriteCount > 0) && <Text size="small" color={isFavoriteByMe ? 'brand' : null}>{note.favoriteCount}</Text>}
         </Box>
-        <Box direction="row" align="center">
-          <IconButton plain icon={<Styled.CommentIcon />} onClick={addComment} />
-          {((note.comments || []).length > 0) && note.comments.length}
-        </Box>
+        <CommentsActionButton
+          comments={note.comments}
+          addComment={addComment}
+        />
         {isUserNote && <IconButton plain icon={<Styled.EditIcon />} onClick={editNote} />}
         {isUserNote && <IconButton plain icon={<Styled.DeleteIcon />} onClick={deleteNote} />}
       </Styled.ButtonContainer>
