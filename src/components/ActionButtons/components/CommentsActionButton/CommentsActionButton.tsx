@@ -5,8 +5,8 @@ import { IconButton } from 'common/components/IconButton';
 import { CommentIcon } from './CommentActionButton.styled';
 
 interface CommentsActionButtonProps {
-  addComment: (e: MouseEvent) => void;
   comments: Array<any>;
+  addComment: (e: MouseEvent) => void;
 }
 
 const CommentsActionButtonComponent: FC<CommentsActionButtonProps> = ({ comments = [], addComment }) => (

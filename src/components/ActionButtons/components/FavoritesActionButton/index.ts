@@ -1,0 +1,1 @@
+export { FavoritesActionButton } from './FavoritesActionButton';

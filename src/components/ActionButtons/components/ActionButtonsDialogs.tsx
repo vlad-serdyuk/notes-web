@@ -21,18 +21,7 @@ export const NoteButtonsDialogs: FC<NoteButtonsDialogsProps> = ({
  }) => {
   return (
     <Fragment>
-      {isFavoritesTooltipShow
-        && <Drop align={{ left: 'right' }} target={favoritesRefTarget} plain>
-          <Box
-            margin="xsmall"
-            pad="small"
-            background="dark-3"
-            round={{ size: 'xsmall' }}
-          >
-            {favoritesList.map((favorite) => <span key={favorite}>{favorite}</span>)}
-          </Box>
-        </Drop>
-      }
+
       {isDeleteConfirmDialogOpen
         && <ConfirmDialog onDeleteNote={onDeleteNote} onDialogClose={onDeleteConfirmDialogClose} />}
     </Fragment>

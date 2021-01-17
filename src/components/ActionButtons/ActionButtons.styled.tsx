@@ -20,20 +20,6 @@ export const EditIcon = styled(Edit)`
   ${iconStyles}
 `;
 
-export const FavoriteIcon = styled(Favorite)`
-  ${iconStyles}
-  && {
-    path {
-      fill: ${({ theme, selected }) => selected ? theme.global.colors.brand : 'none'};
-      stroke: ${({ theme, selected }) => selected ? theme.global.colors.brand : 'inherit'};
-    }
-  }
-`;
-
 export const DeleteIcon = styled(Trash)`
-  ${iconStyles}
-`;
-
-export const CommentIcon = styled(Chat)`
   ${iconStyles}
 `;
