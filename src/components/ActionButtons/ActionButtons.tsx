@@ -1,4 +1,4 @@
-import React, { FC, Fragment, MouseEvent, useCallback, useMemo, useRef, useState } from 'react';
+import React, { FC, MouseEvent, useCallback, useMemo } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
@@ -9,7 +9,6 @@ import { IconButton } from 'common/components/IconButton';
 import { FavoritesActionButton } from './components/FavoritesActionButton';
 import { CommentsActionButton } from './components/CommentsActionButton';
 import { DeleteActionButton } from './components/DeleteActionButton';
-import { NoteButtonsDialogs } from './components/ActionButtonsDialogs';
 import * as Styled from './ActionButtons.styled';
 
 export enum ActionButtonsType {
@@ -51,11 +50,6 @@ const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, 
     history.push(`/note/edit/${note.id}`);
   }, [note, history]);
 
-  const addComment = useCallback((e: MouseEvent) => {
-    e.stopPropagation();
-    history.push(`/note/${note.id}/comment/new`);
-  }, [note, history]);
-
   const onDeleteNote = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     deleteNoteMutation({ variables: { id: note.id } });
@@ -70,8 +64,8 @@ const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, 
         toggleFavorite={toggleFavorite}
       />
       <CommentsActionButton
-        comments={note.comments}
-        addComment={addComment}
+        noteId={note.id}
+        commentsLength={note.comments.length}
       />
       {isUserNote && <IconButton plain icon={<Styled.EditIcon />} onClick={editNote} />}
       <DeleteActionButton
