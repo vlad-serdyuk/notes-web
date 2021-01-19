@@ -8,6 +8,7 @@ import { TOGGLE_FAVORITE_NOTE, DELETE_NOTE } from 'gql/mutation';
 import { IconButton } from 'common/components/IconButton';
 import { FavoritesActionButton } from './components/FavoritesActionButton';
 import { CommentsActionButton } from './components/CommentsActionButton';
+import { DeleteActionButton } from './components/DeleteActionButton';
 import { NoteButtonsDialogs } from './components/ActionButtonsDialogs';
 import * as Styled from './ActionButtons.styled';
 
@@ -23,8 +24,6 @@ interface NoteButtonsProps extends RouteComponentProps {
 }
 
 const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, history }) => {
-  const [isDeleteConfirmDialogOpen, setDeleteConfirmDialogOpen] = useState<boolean>(false);
-
   const [toggleFavoriteMutation] = useMutation(TOGGLE_FAVORITE_NOTE);
   const [deleteNoteMutation] = useMutation(DELETE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }],
@@ -42,11 +41,6 @@ const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, 
     return note.favoritedBy.map((favorite) => favorite.username);
   }, [note]);
 
-  const onDeleteConfirmDialogClose = (e: MouseEvent) => {
-    e.stopPropagation();
-    setDeleteConfirmDialogOpen(false);
-  }
-
   const toggleFavorite = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     toggleFavoriteMutation({ variables: { id: note.id } });
@@ -62,38 +56,29 @@ const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, 
     history.push(`/note/${note.id}/comment/new`);
   }, [note, history]);
 
-  const deleteNote = useCallback((e: MouseEvent) => {
-    e.stopPropagation();
-    setDeleteConfirmDialogOpen(true);
-  }, []);
-
   const onDeleteNote = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     deleteNoteMutation({ variables: { id: note.id } });
   }, [deleteNoteMutation, note]);
 
   return (
-    <Fragment>
-      <Styled.ButtonContainer direction="row-responsive" gap="large">
-        <FavoritesActionButton
-          isFavoriteByMe={isFavoriteByMe}
-          favoriteCount={note.favoriteCount}
-          favoritesList={favoritesList}
-          toggleFavorite={toggleFavorite}
-        />
-        <CommentsActionButton
-          comments={note.comments}
-          addComment={addComment}
-        />
-        {isUserNote && <IconButton plain icon={<Styled.EditIcon />} onClick={editNote} />}
-        {isUserNote && <IconButton plain icon={<Styled.DeleteIcon />} onClick={deleteNote} />}
-      </Styled.ButtonContainer>
-      <NoteButtonsDialogs
-        isDeleteConfirmDialogOpen={isDeleteConfirmDialogOpen}
-        onDeleteNote={onDeleteNote}
-        onDeleteConfirmDialogClose={onDeleteConfirmDialogClose}
+    <Styled.ButtonContainer direction="row-responsive" gap="large">
+      <FavoritesActionButton
+        isFavoriteByMe={isFavoriteByMe}
+        favoriteCount={note.favoriteCount}
+        favoritesList={favoritesList}
+        toggleFavorite={toggleFavorite}
       />
-    </Fragment>
+      <CommentsActionButton
+        comments={note.comments}
+        addComment={addComment}
+      />
+      {isUserNote && <IconButton plain icon={<Styled.EditIcon />} onClick={editNote} />}
+      <DeleteActionButton
+        isButtonShown={isUserNote}
+        onDeleteNote={onDeleteNote}
+      />
+    </Styled.ButtonContainer>
   );
 };
 

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Box } from 'grommet';
-import { Chat, Edit, Favorite, Trash } from 'grommet-icons';
+import { Edit } from 'grommet-icons';
 
 export const ButtonContainer = styled(Box)`
   margin-left: -8px;
@@ -17,9 +17,5 @@ export const iconStyles = css`
 `;
 
 export const EditIcon = styled(Edit)`
-  ${iconStyles}
-`;
-
-export const DeleteIcon = styled(Trash)`
   ${iconStyles}
 `;
