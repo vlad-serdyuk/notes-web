@@ -5,9 +5,9 @@ import { useMutation } from '@apollo/client';
 import { GET_NOTES } from 'gql/query';
 import { Note as NoteModel } from 'gql/models';
 import { TOGGLE_FAVORITE_NOTE, DELETE_NOTE } from 'gql/mutation';
-import { IconButton } from 'common/components/IconButton';
 import { FavoritesActionButton } from './components/FavoritesActionButton';
 import { CommentsActionButton } from './components/CommentsActionButton';
+import { EditActionButton } from './components/EditActionButton';
 import { DeleteActionButton } from './components/DeleteActionButton';
 import * as Styled from './ActionButtons.styled';
 
@@ -67,7 +67,10 @@ const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, 
         noteId={note.id}
         commentsLength={note.comments.length}
       />
-      {isUserNote && <IconButton plain icon={<Styled.EditIcon />} onClick={editNote} />}
+      <EditActionButton
+        isButtonShown={isUserNote}
+        editNote={editNote}
+      />
       <DeleteActionButton
         isButtonShown={isUserNote}
         onDeleteNote={onDeleteNote}

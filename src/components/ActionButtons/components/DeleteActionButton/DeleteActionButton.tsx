@@ -9,9 +9,8 @@ interface DeleteActionButtonProps {
   onDeleteNote: (e: MouseEvent) => void;
 }
 
-const DeleteActionButtonComponent: FC<DeleteActionButtonProps> = (isButtonShown, onDeleteNote) => {
+const DeleteActionButtonComponent: FC<DeleteActionButtonProps> = ({ isButtonShown, onDeleteNote }) => {
   const [isDeleteConfirmDialogOpen, setDeleteConfirmDialogOpen] = useState<boolean>(false);
-
 
   const showDeleteNoteDialog = useCallback((e: MouseEvent) => {
     e.stopPropagation();
