@@ -24,18 +24,15 @@ const NoteActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, me
     refetchQueries: [{ query: GET_NOTES }],
   });
 
-  const toggleFavorite = useCallback((e: MouseEvent) => {
-    e.stopPropagation();
+  const toggleFavorite = useCallback(() => {
     toggleFavoriteMutation({ variables: { id: note.id } });
   }, [toggleFavoriteMutation, note]);
 
-  const editNote = useCallback((e: MouseEvent) => {
-    e.stopPropagation();
+  const editNote = useCallback(() => {
     history.push(`/note/edit/${note.id}`);
   }, [note, history]);
 
-  const onDeleteNote = useCallback((e: MouseEvent) => {
-    e.stopPropagation();
+  const onDeleteNote = useCallback(() => {
     deleteNoteMutation({ variables: { id: note.id } });
   }, [deleteNoteMutation, note]);
 
@@ -43,8 +40,8 @@ const NoteActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, me
     <ActionButtons
       item={note}
       itemType={ActionButtonsType.NOTE}
-      onToogleItem={toggleFavoriteMutation}
-      onDeleteItem={deleteNoteMutation}
+      onToogleItem={toggleFavorite}
+      onDeleteItem={onDeleteNote}
     />
   );
 };

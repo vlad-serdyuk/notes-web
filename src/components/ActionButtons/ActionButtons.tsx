@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 
 import { GET_NOTES } from 'gql/query';
 import { Note as NoteModel, Comment as CommentModel } from 'gql/models';
-import { TOGGLE_FAVORITE_NOTE, DELETE_NOTE } from 'gql/mutation';
+import { useGetMeQuery } from 'common/hooks/queries';
 import { FavoritesActionButton } from './components/FavoritesActionButton';
 import { CommentsActionButton } from './components/CommentsActionButton';
 import { EditActionButton } from './components/EditActionButton';
@@ -19,22 +19,20 @@ export enum ActionButtonsType {
 interface NoteButtonsProps extends RouteComponentProps {
   isUserNote: boolean;
   note: NoteModel | CommentModel;
-  meId?: string;
+  onToogleItem: () => void;
+  onDeleteItem: () => void;
 }
 
-const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note: item, meId, history }) => {
-  const [toggleFavoriteMutation] = useMutation(TOGGLE_FAVORITE_NOTE);
-  const [deleteNoteMutation] = useMutation(DELETE_NOTE, {
-    refetchQueries: [{ query: GET_NOTES }],
-  });
+const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note: item, history, onToogleItem, onDeleteItem }) => {
+  const { data: { me } } = useGetMeQuery();
 
   const isFavoriteByMe = useMemo(() => {
-    if (!meId) {
+    if (!me.id) {
       return false;
     }
 
-    return Boolean((item.favoritedBy || []).find(({ id }) => meId === id));
-  }, [item, meId]);
+    return Boolean((item.favoritedBy || []).find(({ id }) => me.id === id));
+  }, [item, me]);
 
   const favoritesList = useMemo(() => {
     return item.favoritedBy.map((favorite) => favorite.username);
@@ -42,8 +40,8 @@ const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note: item, 
 
   const toggleFavorite = useCallback((e: MouseEvent) => {
     e.stopPropagation();
-    toggleFavoriteMutation({ variables: { id: item.id } });
-  }, [toggleFavoriteMutation, item]);
+    onToogleItem();
+  }, [onToogleItem]);
 
   const editNote = useCallback((e: MouseEvent) => {
     e.stopPropagation();
@@ -52,8 +50,8 @@ const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note: item, 
 
   const onDeleteNote = useCallback((e: MouseEvent) => {
     e.stopPropagation();
-    deleteNoteMutation({ variables: { id: item.id } });
-  }, [deleteNoteMutation, item]);
+    onDeleteItem();
+  }, [onDeleteItem]);
 
   return (
     <Styled.ButtonContainer direction="row-responsive" gap="large">
