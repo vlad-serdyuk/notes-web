@@ -3,7 +3,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 import { GET_NOTES } from 'gql/query';
-import { Note as NoteModel } from 'gql/models';
+import { Note as NoteModel, Comment as CommentModel } from 'gql/models';
 import { TOGGLE_FAVORITE_NOTE, DELETE_NOTE } from 'gql/mutation';
 import { FavoritesActionButton } from './components/FavoritesActionButton';
 import { CommentsActionButton } from './components/CommentsActionButton';
@@ -18,11 +18,11 @@ export enum ActionButtonsType {
 
 interface NoteButtonsProps extends RouteComponentProps {
   isUserNote: boolean;
-  note: NoteModel;
+  note: NoteModel | CommentModel;
   meId?: string;
 }
 
-const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, history }) => {
+const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note: item, meId, history }) => {
   const [toggleFavoriteMutation] = useMutation(TOGGLE_FAVORITE_NOTE);
   const [deleteNoteMutation] = useMutation(DELETE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }],
@@ -33,48 +33,46 @@ const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, 
       return false;
     }
 
-    return Boolean((note.favoritedBy || []).find(({ id }) => meId === id));
-  }, [note, meId]);
+    return Boolean((item.favoritedBy || []).find(({ id }) => meId === id));
+  }, [item, meId]);
 
   const favoritesList = useMemo(() => {
-    return note.favoritedBy.map((favorite) => favorite.username);
-  }, [note]);
+    return item.favoritedBy.map((favorite) => favorite.username);
+  }, [item]);
 
   const toggleFavorite = useCallback((e: MouseEvent) => {
     e.stopPropagation();
-    toggleFavoriteMutation({ variables: { id: note.id } });
-  }, [toggleFavoriteMutation, note]);
+    toggleFavoriteMutation({ variables: { id: item.id } });
+  }, [toggleFavoriteMutation, item]);
 
   const editNote = useCallback((e: MouseEvent) => {
     e.stopPropagation();
-    history.push(`/note/edit/${note.id}`);
-  }, [note, history]);
+    history.push(`/note/edit/${item.id}`);
+  }, [item, history]);
 
   const onDeleteNote = useCallback((e: MouseEvent) => {
     e.stopPropagation();
-    deleteNoteMutation({ variables: { id: note.id } });
-  }, [deleteNoteMutation, note]);
+    deleteNoteMutation({ variables: { id: item.id } });
+  }, [deleteNoteMutation, item]);
 
   return (
     <Styled.ButtonContainer direction="row-responsive" gap="large">
       <FavoritesActionButton
         isFavoriteByMe={isFavoriteByMe}
-        favoriteCount={note.favoriteCount}
+        favoriteCount={item.favoriteCount}
         favoritesList={favoritesList}
         toggleFavorite={toggleFavorite}
       />
       <CommentsActionButton
-        noteId={note.id}
-        commentsLength={note.comments.length}
+        noteId={item.id}
+        commentsLength={item.comments.length}
       />
-      <EditActionButton
-        isButtonShown={isUserNote}
-        editNote={editNote}
-      />
-      <DeleteActionButton
-        isButtonShown={isUserNote}
-        onDeleteNote={onDeleteNote}
-      />
+      {isUserNote && 
+        <EditActionButton onEditNote={editNote} />
+      }
+      {isUserNote &&
+        <DeleteActionButton onDeleteNote={onDeleteNote} />
+      }
     </Styled.ButtonContainer>
   );
 };
