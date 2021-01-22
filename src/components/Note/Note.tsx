@@ -1,5 +1,5 @@
 import React, { memo, useMemo, useCallback, FC, MouseEvent } from 'react'
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { Avatar, Box, Text } from 'grommet';
 
@@ -10,11 +10,13 @@ import { DateText } from 'common/components/DateText';
 import { ActionButtons } from 'components/ActionButtons';
 import * as Styled from './Note.styled';
 
-interface INoteComponentProps extends RouteComponentProps {
+interface INoteComponentProps {
   note: NoteModel;
 }
 
-const NoteComponent: FC<INoteComponentProps> = ({ note, history }) => {
+const NoteComponent: FC<INoteComponentProps> = ({ note }) => {
+  const history = useHistory();
+
   const { data: { me } } = useGetMeQuery();
   const [togglePrivacyMutation] = useMutation(TOGGLE_PRIVACY_NOTE);
 
@@ -62,4 +64,4 @@ const NoteComponent: FC<INoteComponentProps> = ({ note, history }) => {
   );
 };
 
-export const Note = memo(withRouter(NoteComponent));
+export const Note = memo(NoteComponent);

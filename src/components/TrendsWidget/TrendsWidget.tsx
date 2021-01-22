@@ -1,5 +1,5 @@
 import React, { useCallback, FC } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { Box, Text } from 'grommet';
 
@@ -7,7 +7,9 @@ import { Note } from 'gql/models';
 import { GET_TRENDS_NOTES } from 'gql/query';
 import { TrendsContainer, TrendsHeader, TrendBlock } from './TrendsWidget.styled';
 
-const TrendsWidgetComponent: FC<RouteComponentProps> = ({ history }) => {
+export const TrendsWidget: FC = () => {
+  const history = useHistory();
+
   const { loading, error, data } = useQuery(GET_TRENDS_NOTES);
 
   const openNote = useCallback((e) => {    
@@ -47,5 +49,3 @@ const TrendsWidgetComponent: FC<RouteComponentProps> = ({ history }) => {
     </Box>
   );
 };
-
-export const TrendsWidget = withRouter(TrendsWidgetComponent);

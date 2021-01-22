@@ -1,8 +1,6 @@
 import React, { FC, MouseEvent, useCallback, useMemo } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import { useHistory } from 'react-router-dom';
 
-import { GET_NOTES } from 'gql/query';
 import { Note as NoteModel, Comment as CommentModel } from 'gql/models';
 import { useGetMeQuery } from 'common/hooks/queries';
 import { FavoritesActionButton } from './components/FavoritesActionButton';
@@ -16,14 +14,15 @@ export enum ActionButtonsType {
   COMMENT = 'comment',
 }
 
-interface NoteButtonsProps extends RouteComponentProps {
+interface NoteButtonsProps {
   isUserNote: boolean;
   note: NoteModel | CommentModel;
   onToogleItem: () => void;
   onDeleteItem: () => void;
 }
 
-const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note: item, history, onToogleItem, onDeleteItem }) => {
+export const ActionButtons: FC<NoteButtonsProps> = ({ isUserNote, note: item, onToogleItem, onDeleteItem }) => {
+  const history = useHistory();
   const { data: { me } } = useGetMeQuery();
 
   const isFavoriteByMe = useMemo(() => {
@@ -74,5 +73,3 @@ const ActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note: item, 
     </Styled.ButtonContainer>
   );
 };
-
-export const ActionButtons = withRouter(ActionButtonsComponent);

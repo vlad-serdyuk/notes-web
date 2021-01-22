@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Avatar, Box, Text } from 'grommet';
 
 import { Comment as CommentModel } from 'gql/models';
@@ -9,11 +9,13 @@ import { ActionButtons } from 'components/ActionButtons';
 
 import { CommentContainer } from './Comment.styled';
 
-interface CommentProps extends RouteComponentProps {
+interface CommentProps {
   comment: CommentModel;
 }
 
-const CommentComponent: FC<CommentProps> = ({ comment, history }) => {
+export const Comment: FC<CommentProps> = ({ comment }) => {
+  const history = useHistory();
+
   const openAuthorPage = (e: MouseEvent) => {
     e.stopPropagation();
     history.push(`/notes/${comment.author.username}`);
@@ -32,5 +34,3 @@ const CommentComponent: FC<CommentProps> = ({ comment, history }) => {
     </CommentContainer>
   );
 };
-
-export const Comment = withRouter(CommentComponent);

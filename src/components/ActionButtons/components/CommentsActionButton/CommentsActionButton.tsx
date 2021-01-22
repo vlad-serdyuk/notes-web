@@ -1,16 +1,18 @@
 import React, { FC, memo, MouseEvent, useCallback } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Box } from 'grommet';
 import { IconButton } from 'common/components/IconButton';
 
 import { CommentIcon } from './CommentActionButton.styled';
 
-interface CommentsActionButtonProps extends RouteComponentProps {
+interface CommentsActionButtonProps {
   noteId: string;
   commentsLength: number;
 }
 
-const CommentsActionButtonComponent: FC<CommentsActionButtonProps> = ({ noteId, commentsLength, history }) => {
+const CommentsActionButtonComponent: FC<CommentsActionButtonProps> = ({ noteId, commentsLength }) => {
+  const history = useHistory();
+
   const addComment = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     history.push(`/note/${noteId}/comment/new`);
@@ -24,4 +26,4 @@ const CommentsActionButtonComponent: FC<CommentsActionButtonProps> = ({ noteId, 
   );
 };
 
-export const CommentsActionButton = memo(withRouter(CommentsActionButtonComponent));
+export const CommentsActionButton = memo(CommentsActionButtonComponent);

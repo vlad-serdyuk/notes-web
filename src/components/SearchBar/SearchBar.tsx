@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState, useRef, Fragment, FC, ChangeEvent } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { Search } from 'grommet-icons';
 import { Box, Image, Text, TextInput } from 'grommet';
@@ -7,7 +7,9 @@ import { Box, Image, Text, TextInput } from 'grommet';
 import { Note } from 'gql/models';
 import { SEARCH_NOTES } from 'gql/query';
 
-const SearchBarComponent: FC<RouteComponentProps> = ({ history }) => {
+export const SearchBar: FC = () => {
+  const history = useHistory();
+
   const [getNotes, { data }] = useLazyQuery(SEARCH_NOTES, { variables: { text: '' } });
 
   const [value, setValue] = useState<string>('');
@@ -109,5 +111,3 @@ const SearchBarComponent: FC<RouteComponentProps> = ({ history }) => {
     </Fragment>
   );
 };
-
-export const SearchBar = withRouter(SearchBarComponent);

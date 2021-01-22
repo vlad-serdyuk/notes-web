@@ -1,5 +1,5 @@
 import React, { memo, useMemo, useCallback, FC, MouseEvent } from 'react'
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { Avatar, Box, Text } from 'grommet';
 
@@ -11,11 +11,12 @@ import { useGetMeQuery } from 'common/hooks/queries';
 import { NoteActionButtons } from 'components/NoteActionButtons';
 import * as Styled from './FeedNote.styled';
 
-interface IFeedNoteComponentProps extends RouteComponentProps {
+interface IFeedNoteComponentProps {
   note: NoteModel;
 }
 
-const FeedNoteComponent: FC<IFeedNoteComponentProps> = ({ note, history }) => {
+const FeedNoteComponent: FC<IFeedNoteComponentProps> = ({ note }) => {
+  const history = useHistory();
   const { data: { me } } = useGetMeQuery();
   const [togglePrivacyMutation] = useMutation(TOGGLE_PRIVACY_NOTE);
 
@@ -61,4 +62,4 @@ const FeedNoteComponent: FC<IFeedNoteComponentProps> = ({ note, history }) => {
   );
 };
 
-export const FeedNote = memo(withRouter(FeedNoteComponent));
+export const FeedNote = memo(FeedNoteComponent);

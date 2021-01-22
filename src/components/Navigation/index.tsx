@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Nav, Button } from 'grommet';
 import { useQuery } from '@apollo/client';
 
@@ -8,7 +8,8 @@ import { IGetMeData } from 'gql/models';
 
 import { LinkWrapper, LinkText } from './Navigation.styled';
 
-const NavigationComponent: FC<RouteComponentProps> = ({ history }) => {
+export const Navigation: FC = () => {
+  const history = useHistory();
   const { data: { me } = {} } = useQuery<IGetMeData>(GET_ME);
 
   const onCreateNoteClick = () => {
@@ -37,5 +38,3 @@ const NavigationComponent: FC<RouteComponentProps> = ({ history }) => {
     </Nav>
   );
 };
-
-export const Navigation = withRouter(NavigationComponent);

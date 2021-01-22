@@ -1,5 +1,5 @@
-import React, { FC, MouseEvent, useCallback, useMemo } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import React, { FC, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 import { GET_NOTES } from 'gql/query';
@@ -12,13 +12,15 @@ export enum ActionButtonsType {
   COMMENT = 'comment',
 }
 
-interface NoteButtonsProps extends RouteComponentProps {
+interface NoteButtonsProps {
   isUserNote: boolean;
   note: NoteModel;
   meId?: string;
 }
 
-const NoteActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, meId, history }) => {
+export const NoteActionButtons: FC<NoteButtonsProps> = ({ isUserNote, note, meId }) => {
+  const history = useHistory();
+
   const [toggleFavoriteMutation] = useMutation(TOGGLE_FAVORITE_NOTE);
   const [deleteNoteMutation] = useMutation(DELETE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }],
@@ -45,5 +47,3 @@ const NoteActionButtonsComponent: FC<NoteButtonsProps> = ({ isUserNote, note, me
     />
   );
 };
-
-export const NoteActionButtons = withRouter(NoteActionButtonsComponent);

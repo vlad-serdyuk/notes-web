@@ -1,5 +1,5 @@
 import React, { useMemo, Fragment, FC} from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Box } from 'grommet';
 
 import { LOG_OUT } from 'gql/query';
@@ -7,7 +7,9 @@ import { useIsLoggedInQuery, useGetMeQuery } from 'common/hooks/queries';
 import { AvatarDropButton } from './components/AvatarDropDown';
 import { StyledHeader, LinkText, LinkWrapper } from './Header.styled';
 
-const HeaderComponent: FC<RouteComponentProps> = ({ history }) => {
+export const Header: FC = () => {
+  const history = useHistory();
+  
   const { data: { isLoggedIn }, client } = useIsLoggedInQuery();
   const { data: { me } = {} } = useGetMeQuery();
 
@@ -69,5 +71,3 @@ const HeaderComponent: FC<RouteComponentProps> = ({ history }) => {
     </StyledHeader>
   );
 };
-
-export const Header = withRouter(HeaderComponent);
