@@ -41,6 +41,7 @@ export const NoteActionButtons: FC<NoteButtonsProps> = ({ isUserNote, note, meId
   return (
     <ActionButtons
       item={note}
+      isUserNote={isUserNote}
       itemType={ActionButtonsType.NOTE}
       onToogleItem={toggleFavorite}
       onDeleteItem={onDeleteNote}

@@ -16,12 +16,12 @@ export enum ActionButtonsType {
 
 interface NoteButtonsProps {
   isUserNote: boolean;
-  note: NoteModel | CommentModel;
+  item: NoteModel | CommentModel;
   onToogleItem: () => void;
   onDeleteItem: () => void;
 }
 
-export const ActionButtons: FC<NoteButtonsProps> = ({ isUserNote, note: item, onToogleItem, onDeleteItem }) => {
+export const ActionButtons: FC<NoteButtonsProps> = ({ isUserNote, item, onToogleItem, onDeleteItem }) => {
   const history = useHistory();
   const { data: { me } } = useGetMeQuery();
 
