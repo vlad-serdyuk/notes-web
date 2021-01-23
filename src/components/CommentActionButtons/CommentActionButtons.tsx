@@ -3,41 +3,37 @@ import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 import { GET_NOTES } from 'gql/query';
-import { Note as NoteModel } from 'gql/models';
-import { TOGGLE_FAVORITE_NOTE, DELETE_NOTE } from 'gql/mutation';
+import { Comment as CommentModel } from 'gql/models';
+import { TOGGLE_FAVORITE_NOTE, DELETE_COMMENT } from 'gql/mutation';
 import { ActionButtons, ActionButtonsType } from 'components/ActionButtons';
 
-interface NoteButtonsProps {
+interface CommentButtonsProps {
   isUserItem: boolean;
-  note: NoteModel;
+  comment: CommentModel;
   meId?: string;
 }
 
-export const NoteActionButtons: FC<NoteButtonsProps> = ({ isUserItem, note, meId }) => {
+export const CommentActionButtons: FC<CommentButtonsProps> = ({ isUserItem, comment, meId }) => {
   const history = useHistory();
 
   const [toggleFavoriteMutation] = useMutation(TOGGLE_FAVORITE_NOTE);
-  const [deleteNoteMutation] = useMutation(DELETE_NOTE, {
+  const [deleteCommentMutation] = useMutation(DELETE_COMMENT, {
     refetchQueries: [{ query: GET_NOTES }],
   });
 
   const toggleFavorite = useCallback(() => {
-    toggleFavoriteMutation({ variables: { id: note.id } });
-  }, [toggleFavoriteMutation, note]);
-
-  const editNote = useCallback(() => {
-    history.push(`/note/edit/${note.id}`);
-  }, [note, history]);
+    toggleFavoriteMutation({ variables: { id: comment.id } });
+  }, [toggleFavoriteMutation, comment]);
 
   const onDeleteNote = useCallback(() => {
-    deleteNoteMutation({ variables: { id: note.id } });
-  }, [deleteNoteMutation, note]);
+    deleteCommentMutation({ variables: { id: comment.id } });
+  }, [deleteCommentMutation, comment]);
 
   return (
     <ActionButtons
-      item={note}
+      item={comment}
       isUserItem={isUserItem}
-      itemType={ActionButtonsType.NOTE}
+      itemType={ActionButtonsType.COMMENT}
       onToogleItem={toggleFavorite}
       onDeleteItem={onDeleteNote}
     />
