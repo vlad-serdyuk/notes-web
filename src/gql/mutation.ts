@@ -84,3 +84,12 @@ export const DELETE_COMMENT = gql`
     deleteComment(id: $id) 
   }
 `;
+
+export const TOGGLE_FAVORITE_COMMENT = gql`
+  mutation toggleFavoriteComment($id: ID!) {
+    toggleFavoriteComment(id: $id) {
+      ...CommentEntity
+    }
+  }
+  ${COMMENT_ENTITY}
+`;
