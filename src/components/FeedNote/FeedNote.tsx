@@ -56,7 +56,7 @@ const FeedNoteComponent: FC<IFeedNoteComponentProps> = ({ note }) => {
           {isUserNote && <Styled.LockButton plain icon={<PrivacyIcon />} onClick={togglePrivacy} />}
         </Box>
         <Text>{note.content}</Text>
-        <NoteActionButtons isUserNote={isUserNote} note={note} />
+        <NoteActionButtons isUserItem={isUserNote} note={note} />
       </Box>
     </Styled.NoteContainer>
   );
