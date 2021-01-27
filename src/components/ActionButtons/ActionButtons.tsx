@@ -9,20 +9,14 @@ import { EditActionButton } from './components/EditActionButton';
 import { DeleteActionButton } from './components/DeleteActionButton';
 import * as Styled from './ActionButtons.styled';
 
-export enum ActionButtonsType {
-  NOTE = 'note',
-  COMMENT = 'comment',
-}
-
-interface NoteButtonsProps {
+interface ActionButtonsProps {
   item: NoteModel | CommentModel;
-  itemType: ActionButtonsType;
   isUserItem: boolean;
   onToogleItem: () => void;
   onDeleteItem: () => void;
 }
 
-export const ActionButtons: FC<NoteButtonsProps> = ({ isUserItem, item, onToogleItem, onDeleteItem }) => {
+export const ActionButtons: FC<ActionButtonsProps> = ({ isUserItem, item, onToogleItem, onDeleteItem }) => {
   const history = useHistory();
   const { data: { me } } = useGetMeQuery();
 
@@ -63,7 +57,7 @@ export const ActionButtons: FC<NoteButtonsProps> = ({ isUserItem, item, onToogle
       />
       <CommentsActionButton
         noteId={item.id}
-        commentsLength={item.comments.length}
+        commentsLength={(item.comments || []).length}
       />
       {isUserItem && 
         <EditActionButton onEditNote={editNote} />

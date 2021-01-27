@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { GET_NOTES } from 'gql/query';
 import { Comment as CommentModel } from 'gql/models';
 import { TOGGLE_FAVORITE_COMMENT, DELETE_COMMENT } from 'gql/mutation';
-import { ActionButtons, ActionButtonsType } from 'components/ActionButtons';
+import { ActionButtons } from 'components/ActionButtons';
 
 interface CommentButtonsProps {
   isUserItem: boolean;
@@ -30,7 +30,6 @@ export const CommentActionButtons: FC<CommentButtonsProps> = ({ isUserItem, comm
     <ActionButtons
       item={comment}
       isUserItem={isUserItem}
-      itemType={ActionButtonsType.COMMENT}
       onToogleItem={toggleFavorite}
       onDeleteItem={onDeleteNote}
     />
