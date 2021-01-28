@@ -11,20 +11,15 @@ import * as Styled from './ActionButtons.styled';
 
 interface ActionButtonsProps {
   item: NoteModel | CommentModel;
-  isCommentBtnShown: boolean;
-  isEditBtnShown: boolean;
-  isDeleteBtnShown: boolean;
+  isUserItem: boolean;
   onToogleItem: () => void;
-  onDeleteItem: () => void;
 }
 
 export const ActionButtons: FC<ActionButtonsProps> = ({ 
   item,
-  isCommentBtnShown,
-  isEditBtnShown,
-  isDeleteBtnShown,
+  children,
+  isUserItem,
   onToogleItem,
-  onDeleteItem,
  }) => {
   const history = useHistory();
   const { data: { me } } = useGetMeQuery();
