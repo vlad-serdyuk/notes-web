@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import { Box } from 'grommet';
-import { Edit } from 'grommet-icons';
 
 export const ButtonContainer = styled(Box)`
   margin-left: -8px;
@@ -14,8 +13,4 @@ export const iconStyles = css`
   path {
     stroke-width: 1.5;
   }
-`;
-
-export const EditIcon = styled(Edit)`
-  ${iconStyles}
 `;

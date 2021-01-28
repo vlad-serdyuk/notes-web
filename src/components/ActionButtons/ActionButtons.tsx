@@ -11,12 +11,21 @@ import * as Styled from './ActionButtons.styled';
 
 interface ActionButtonsProps {
   item: NoteModel | CommentModel;
-  isUserItem: boolean;
+  isCommentBtnShown: boolean;
+  isEditBtnShown: boolean;
+  isDeleteBtnShown: boolean;
   onToogleItem: () => void;
   onDeleteItem: () => void;
 }
 
-export const ActionButtons: FC<ActionButtonsProps> = ({ isUserItem, item, onToogleItem, onDeleteItem }) => {
+export const ActionButtons: FC<ActionButtonsProps> = ({ 
+  item,
+  isCommentBtnShown,
+  isEditBtnShown,
+  isDeleteBtnShown,
+  onToogleItem,
+  onDeleteItem,
+ }) => {
   const history = useHistory();
   const { data: { me } } = useGetMeQuery();
 
@@ -37,12 +46,12 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ isUserItem, item, onToog
     onToogleItem();
   }, [onToogleItem]);
 
-  const editNote = useCallback((e: MouseEvent) => {
+  const editItem = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     history.push(`/note/edit/${item.id}`);
   }, [item, history]);
 
-  const onDeleteNote = useCallback((e: MouseEvent) => {
+  const deleteItem = useCallback((e: MouseEvent) => {
     e.stopPropagation();
     onDeleteItem();
   }, [onDeleteItem]);
@@ -55,15 +64,17 @@ export const ActionButtons: FC<ActionButtonsProps> = ({ isUserItem, item, onToog
         favoritesList={favoritesList}
         toggleFavorite={toggleFavorite}
       />
-      <CommentsActionButton
-        noteId={item.id}
-        commentsLength={(item.comments || []).length}
-      />
-      {isUserItem && 
-        <EditActionButton onEditNote={editNote} />
+      {isCommentBtnShown && 
+        <CommentsActionButton
+          noteId={item.id}
+          commentsLength={(item.comments || []).length}
+        />
       }
-      {isUserItem &&
-        <DeleteActionButton onDeleteNote={onDeleteNote} />
+      {isEditBtnShown && 
+        <EditActionButton onEditItem={editItem} />
+      }
+      {isDeleteBtnShown &&
+        <DeleteActionButton onDeleteItem={deleteItem} />
       }
     </Styled.ButtonContainer>
   );
