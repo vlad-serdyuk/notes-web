@@ -4,9 +4,9 @@ import { Box } from 'grommet';
 
 import { GET_APP_METADATA } from 'gql/local-query';
 import { Skeleton } from 'common/components/Skeleton';
-import { Header } from '../Header';
-import { Navigation } from '../Navigation';
-import { TrendsWidget } from '../TrendsWidget';
+import { Header } from 'app/components/Header';
+import { Navigation } from 'app/components/Navigation';
+import { TrendsWidget } from 'components/TrendsWidget';
 import { MainContainer } from './Layout.styles';
 
 export const Layout: FC = ({ children }) => {

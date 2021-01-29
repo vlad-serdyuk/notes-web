@@ -1,7 +1,7 @@
 import React, { FC, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import { Layout } from 'components/Layout';
+import { Layout } from 'app/components/Layout';
 import { Skeleton } from 'common/components/Skeleton';
 import { PrivateRoute } from 'common/components/PrivateRoute';
 import { HomePage } from './Home';

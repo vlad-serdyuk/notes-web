@@ -1,9 +1,9 @@
 import React, { FC, memo, useContext, useState, useCallback } from 'react';
 import { Avatar, Box, DropButton, CheckBox, Text } from 'grommet';
 
+import { GlobalContext } from 'common/contexts/globalContext';
+import { Themes } from 'common/constants/global';
 import { StyledButton } from './AvatarDropDown.styled';
-import { GlobalContext } from '../../../common/contexts/globalContext';
-import { Themes } from '../../../common/constants/global';
 
 interface BaseAvatarDropButtonProps {
   email: string,
