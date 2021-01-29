@@ -5,7 +5,12 @@ import { useMutation } from '@apollo/client';
 import { GET_NOTES } from 'gql/query';
 import { Note as NoteModel } from 'gql/models';
 import { TOGGLE_FAVORITE_NOTE, DELETE_NOTE } from 'gql/mutation';
-import { ActionButtons } from 'components/ActionButtons';
+import { 
+  ActionButtons,
+  CommentsActionButton,
+  EditActionButton,
+  DeleteActionButton,
+ } from 'components/ActionButtons';
 
 interface NoteButtonsProps {
   isUserItem: boolean;
@@ -38,7 +43,17 @@ export const NoteActionButtons: FC<NoteButtonsProps> = ({ isUserItem, note, meId
       item={note}
       isUserItem={isUserItem}
       onToogleItem={toggleFavorite}
-      onDeleteItem={onDeleteNote}
-    />
+    >
+      <CommentsActionButton
+        noteId={note.id}
+        commentsLength={(note.comments || []).length}
+      />
+      {isUserItem && 
+        <EditActionButton onEditItem={editNote} />
+      }
+      {isUserItem &&
+        <DeleteActionButton onDeleteItem={onDeleteNote} />
+      }
+    </ActionButtons>
   );
 };

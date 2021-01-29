@@ -32,9 +32,6 @@ export const CommentActionButtons: FC<CommentButtonsProps> = ({ isUserItem, comm
       isUserItem={isUserItem}
       onToogleItem={toggleFavorite}
     >
-      {isUserItem && 
-        <EditActionButton onEditItem={editItem} />
-      }
       {isUserItem &&
         <DeleteActionButton onDeleteItem={onDeleteComment} />
       }
