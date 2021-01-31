@@ -57,7 +57,7 @@ const NoteComponent: FC<INoteComponentProps> = ({ note }) => {
         </Box>
         <Text size="large">{note.content}</Text>
         <Box border>
-          <NoteActionButtons isUserNote={isUserNote} note={note} />
+          <NoteActionButtons isUserItem={isUserNote} note={note} />
         </Box>
       </Box>
     </Styled.NoteContainer>

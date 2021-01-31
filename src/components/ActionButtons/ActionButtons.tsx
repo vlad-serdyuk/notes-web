@@ -27,7 +27,7 @@ export const ActionButtons: FC<ActionButtonsProps> = ({
   }, [item, me]);
 
   const favoritesList = useMemo(() => {
-    return item.favoritedBy.map((favorite) => favorite.username);
+    return (item.favoritedBy || []).map((favorite) => favorite.username);
   }, [item]);
 
   const toggleFavorite = useCallback((e: MouseEvent) => {
