@@ -5,6 +5,7 @@ import { UPDATE_USER } from 'gql/mutation';
 import { GET_USER_NOTES, GET_USER_COMMENTS, GET_ME } from 'gql/query';
 import { Note as NoteModel } from 'gql/models';
 import { useGetMeQuery } from 'common/hooks/queries';
+import { Skeleton } from 'common/components/Skeleton';
 import { Comments } from 'components/Comments';
 import { Profile } from 'components/Profile';
 import { NotesFeed } from 'components/NotesFeed';
@@ -33,10 +34,6 @@ export const ProfilePage: FC = () => {
     }
   }, [getComments]);
 
-  if (loading || commentsLoading) {
-    return <p>loading...</p>;
-  }
-
   if (error) {
     return <p>error</p>;
   }
@@ -48,10 +45,10 @@ export const ProfilePage: FC = () => {
         updateProfile={updateProfile}
       />
       <NotesTabs 
-        notes={<NotesFeed notes={user.notes} />}
-        favorites={<NotesFeed notes={user.favorites} />}
-        privates={<NotesFeed notes={privateNotes} />}
-        comments={<Comments comments={data.userComments} />}
+        notes={loading ? <Skeleton /> : <NotesFeed notes={user.notes} />}
+        favorites={loading ? <Skeleton /> : <NotesFeed notes={user.favorites} />}
+        privates={loading ? <Skeleton /> : <NotesFeed notes={privateNotes} />}
+        comments={commentsLoading ? <Skeleton /> : <Comments comments={data.userComments} />}
         onTabClick={tabClickHandle}
       />
     </Fragment>
