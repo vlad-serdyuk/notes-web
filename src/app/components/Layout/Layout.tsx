@@ -4,9 +4,10 @@ import { Box } from 'grommet';
 
 import { GET_APP_METADATA } from 'gql/local-query';
 import { Skeleton } from 'common/components/Skeleton';
+import { TrendsWidget } from 'common/components/TrendsWidget';
 import { Header } from 'app/components/Header';
 import { Navigation } from 'app/components/Navigation';
-import { TrendsWidget } from 'components/TrendsWidget';
+
 import { MainContainer } from './Layout.styles';
 
 export const Layout: FC = ({ children }) => {
