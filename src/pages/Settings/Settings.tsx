@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Accordion, AccordionPanel, Box } from 'grommet';
-import { DisplaySettings } from 'components/DisplaySettings';
-import { ResetPasswordForm } from 'components/ResetPasswordForm';
+import { DisplaySettings } from 'pages/Settings/components/DisplaySettings';
+import { ResetPasswordForm } from 'pages/Settings/components/ResetPasswordForm';
 
 export const SettingsPage: FC = () => (
   <Accordion animate={false}>

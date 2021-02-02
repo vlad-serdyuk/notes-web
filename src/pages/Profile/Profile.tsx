@@ -6,8 +6,8 @@ import { GET_USER_NOTES, GET_USER_COMMENTS, GET_ME } from 'gql/query';
 import { Note as NoteModel } from 'gql/models';
 import { useGetMeQuery } from 'common/hooks/queries';
 import { Skeleton } from 'common/components/Skeleton';
+import { Profile } from 'common/components/Profile';
 import { Comments } from 'components/Comments';
-import { Profile } from 'components/Profile';
 import { NotesFeed } from 'components/NotesFeed';
 import { NotesTabs, TabsOptions } from 'components/NotesTabs';
 
