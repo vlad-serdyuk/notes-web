@@ -6,11 +6,13 @@ import { Box, Image, Text, TextInput } from 'grommet';
 
 import { Note } from 'gql/models';
 import { SEARCH_NOTES } from 'gql/query';
+import { useDebounce } from 'common/hooks/debounce';
 
 export const SearchBar: FC = () => {
   const history = useHistory();
 
   const [getNotes, { data }] = useLazyQuery(SEARCH_NOTES, { variables: { text: '' } });
+  const debouncedSearch = useDebounce(getNotes, 300);
 
   const [value, setValue] = useState<string>('');
   const [isSuggestionOpen, setSuggestionOpen] = useState<boolean>(false);
@@ -31,7 +33,7 @@ export const SearchBar: FC = () => {
     if (!text.trim()) {
       setSuggestedResults([]);
     } else {
-      getNotes({ variables: { text } });
+      debouncedSearch({ variables: { text } });
     }
   };
 

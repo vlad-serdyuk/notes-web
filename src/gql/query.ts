@@ -102,6 +102,17 @@ export const SEARCH_NOTES = gql`
   ${NOTE_FRAGMENT}
 `;
 
+const Entity = gql`union Entity = Note | Comment | User`;
+
+export const SEARCH_ALL = gql`
+  query SearchAll($text: String!) {
+    search(text: $text) {
+      ...NoteEntity
+    }
+  }
+  ${NOTE_FRAGMENT}
+`;
+
 export const LOG_OUT = gql`
   query SignOut {
     signOut 
