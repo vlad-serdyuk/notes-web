@@ -20,7 +20,7 @@ export const SearchBar: FC = () => {
 
   useEffect(() => {
     if (data) {
-      setSuggestedResults(data.searchNotes); 
+      setSuggestedResults(data.searchNotes);
     }
   }, [data]);
 
@@ -73,41 +73,39 @@ export const SearchBar: FC = () => {
   }, [setSuggestionOpen]);
 
   return (
-    <Fragment>
-      <Box
-        ref={boxRef}
-        direction="row"
-        align="center"
-        pad={{ horizontal: 'small', vertical: 'xsmall' }}
-        round="small"
-        elevation={isSuggestionOpen ? 'medium' : null}
-        border={{
-          side: 'all',
-          color: isSuggestionOpen ? 'transparent' : 'border',
-        }}
-        style={
-          isSuggestionOpen
-            ? {
-                borderBottomLeftRadius: '0px',
-                borderBottomRightRadius: '0px',
-              }
-            : null
-        }
-      >
-        <Search color="brand" />
-        <TextInput
-          type="search"
-          dropTarget={boxRef.current}
-          plain
-          value={value}
-          onChange={onChange}
-          onSelect={onSelect}
-          suggestions={renderSuggestions()}
-          placeholder="Search notes"
-          onSuggestionsOpen={setOpen}
-          onSuggestionsClose={setClose}
-        />
-      </Box>
-    </Fragment>
+    <Box
+      ref={boxRef}
+      direction="row"
+      align="center"
+      pad={{ horizontal: 'small', vertical: 'xsmall' }}
+      round="small"
+      elevation={isSuggestionOpen ? 'medium' : null}
+      border={{
+        side: 'all',
+        color: isSuggestionOpen ? 'transparent' : 'border',
+      }}
+      style={
+        isSuggestionOpen
+          ? {
+            borderBottomLeftRadius: '0px',
+            borderBottomRightRadius: '0px',
+          }
+          : null
+      }
+    >
+      <Search color="brand" />
+      <TextInput
+        type="search"
+        dropTarget={boxRef.current}
+        plain
+        value={value}
+        onChange={onChange}
+        onSelect={onSelect}
+        suggestions={renderSuggestions()}
+        placeholder="Search notes"
+        onSuggestionsOpen={setOpen}
+        onSuggestionsClose={setClose}
+      />
+    </Box>
   );
 };
