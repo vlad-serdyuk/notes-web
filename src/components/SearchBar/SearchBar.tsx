@@ -11,12 +11,12 @@ import { useDebounce } from 'common/hooks/debounce';
 export const SearchBar: FC = () => {
   const history = useHistory();
 
-  const [getNotes, { data }] = useLazyQuery(SEARCH_ALL, { variables: { text: '' } });
-  const debouncedSearch = useDebounce(getNotes, 300);
-
   const [value, setValue] = useState<string>('');
   const [isSuggestionOpen, setSuggestionOpen] = useState<boolean>(false);
   const [suggestedResults, setSuggestedResults] = useState<Array<Note>>([]);
+
+  const [search, { data }] = useLazyQuery(SEARCH_ALL);
+  const debouncedSearchTerm = useDebounce(value, 300);
 
   const boxRef = useRef<HTMLElement>();
 
@@ -32,8 +32,8 @@ export const SearchBar: FC = () => {
 
     if (!text.trim()) {
       setSuggestedResults([]);
-    } else {
-      debouncedSearch({ variables: { text } });
+    } else if (debouncedSearchTerm) {
+      search({ variables: { text } });
     }
   };
 
