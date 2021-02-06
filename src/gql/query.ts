@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { NOTE_FRAGMENT, TREND_NOTE_FRAGMENT } from './fragments';
+import { NOTE_FRAGMENT, TREND_NOTE_FRAGMENT, COMMENT_ENTITY } from './fragments';
 
 export const GET_ME = gql`
   query Me {
@@ -107,10 +107,20 @@ const Entity = gql`union Entity = Note | Comment | User`;
 export const SEARCH_ALL = gql`
   query SearchAll($text: String!) {
     search(text: $text) {
-      ...NoteEntity
+      ... on Note {
+        ...NoteEntity
+      }
+      ... on Comment {
+        ...CommentEntity
+      }
+      ... on User {
+        id
+        username
+      }
     }
   }
   ${NOTE_FRAGMENT}
+  ${COMMENT_ENTITY}
 `;
 
 export const LOG_OUT = gql`

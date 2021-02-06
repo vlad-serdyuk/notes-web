@@ -1,17 +1,17 @@
-import React, { useCallback, useEffect, useState, useRef, Fragment, FC, ChangeEvent } from 'react';
+import React, { useCallback, useEffect, useState, useRef, FC, ChangeEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { Search } from 'grommet-icons';
 import { Box, Image, Text, TextInput } from 'grommet';
 
 import { Note } from 'gql/models';
-import { SEARCH_NOTES } from 'gql/query';
+import { SEARCH_ALL } from 'gql/query';
 import { useDebounce } from 'common/hooks/debounce';
 
 export const SearchBar: FC = () => {
   const history = useHistory();
 
-  const [getNotes, { data }] = useLazyQuery(SEARCH_NOTES, { variables: { text: '' } });
+  const [getNotes, { data }] = useLazyQuery(SEARCH_ALL, { variables: { text: '' } });
   const debouncedSearch = useDebounce(getNotes, 300);
 
   const [value, setValue] = useState<string>('');
