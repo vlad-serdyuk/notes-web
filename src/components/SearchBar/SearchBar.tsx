@@ -22,7 +22,7 @@ export const SearchBar: FC = () => {
 
   useEffect(() => {
     if (data) {
-      setSuggestedResults(data.searchNotes);
+      setSuggestedResults(data.search);
     }
   }, [data]);
 
