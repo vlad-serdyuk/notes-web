@@ -28,7 +28,7 @@ export const Pages: FC = () => (
 
         <Route exact path="/note/:id" component={NotePage} />
         
-        <PrivateRoute exact path="/notes/:author" component={NotesPage} />
+        <PrivateRoute exact path="/user/:user" component={NotesPage} />
         <PrivateRoute exact path="/notes/favorites" component={FavoritesPage} />
         <PrivateRoute exact path="/note/new" component={CreateNotePage} />
         <PrivateRoute exact path="/note/edit/:id" component={EditNotePage} />

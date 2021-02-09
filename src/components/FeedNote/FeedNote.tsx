@@ -30,7 +30,7 @@ const FeedNoteComponent: FC<IFeedNoteComponentProps> = ({ note }) => {
 
   const openAuthorNotes = (e: MouseEvent) => {
     e.stopPropagation();
-    history.push(`/notes/${note.author.username}`);
+    history.push(`/user/${note.author.username}`);
   }
 
   const onNoteClick = useCallback(() => {    
