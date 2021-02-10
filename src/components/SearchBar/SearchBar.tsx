@@ -1,12 +1,24 @@
 import React, { useCallback, useEffect, useState, useRef, FC, ChangeEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
-import { Search } from 'grommet-icons';
-import { Box, Image, Text, TextInput } from 'grommet';
+import { DocumentText, Chat, Search, User } from 'grommet-icons';
+import { Box, Button, Text, TextInput } from 'grommet';
 
 import { Note } from 'gql/models';
 import { SEARCH_ALL } from 'gql/query';
 import { useDebounce } from 'common/hooks/debounce';
+
+enum Typename {
+  NOTE = 'Note',
+  COMMENT = 'Comment',
+  USER = 'User',
+}
+
+const TYPE_IMAGE = {
+  [Typename.NOTE]: DocumentText,
+  [Typename.COMMENT]: Chat,
+  [Typename.USER]: User,
+}
 
 export const SearchBar: FC = () => {
   const history = useHistory();
@@ -43,27 +55,28 @@ export const SearchBar: FC = () => {
 
   const renderSuggestions: () => Array<{ label: JSX.Element, value: string }> = () => {
     return suggestedResults
-      .map(({ id, content, imageUrl }, index: number, list: []) => ({
-        label: (
-          <Box
-            direction="row"
-            align="center"
-            gap="small"
-            border={index < list.length - 1 ? 'bottom' : undefined}
-            pad="small"
-          >
-            <Image
-              width="48px"
-              src={imageUrl}
-              style={{ borderRadius: '100%' }}
-            />
-            <Text>
-              <strong>{content}</strong>
-            </Text>
-          </Box>
-        ),
-        value: id,
-      }));
+      .map(({ id, content, __typename }, index: number, list: []) => {
+
+        const Icon = TYPE_IMAGE[__typename];
+
+        return {
+          label: (
+            <Box
+              direction="row"
+              align="center"
+              gap="small"
+              border={index < list.length - 1 ? 'bottom' : undefined}
+              pad="small"
+            >
+              <Button icon={<Icon />} />
+              <Text>
+                <strong>{content}</strong>
+              </Text>
+            </Box>
+          ),
+          value: id,
+        }
+      });
   };
 
   const setOpen = useCallback(() => {

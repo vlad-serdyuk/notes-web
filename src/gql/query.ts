@@ -109,13 +109,16 @@ export const SEARCH_ALL = gql`
     search(text: $text) {
       ... on Note {
         ...NoteEntity
+        __typename
       }
       ... on Comment {
         ...CommentEntity
+        __typename
       }
       ... on User {
         id
         username
+        __typename
       }
     }
   }
