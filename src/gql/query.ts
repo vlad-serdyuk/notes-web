@@ -108,11 +108,13 @@ export const SEARCH_ALL = gql`
   query SearchAll($text: String!) {
     search(text: $text) {
       ... on Note {
-        ...NoteEntity
+        id
+        content
         __typename
       }
       ... on Comment {
-        ...CommentEntity
+        id
+        content
         __typename
       }
       ... on User {
@@ -122,8 +124,6 @@ export const SEARCH_ALL = gql`
       }
     }
   }
-  ${NOTE_FRAGMENT}
-  ${COMMENT_ENTITY}
 `;
 
 export const LOG_OUT = gql`

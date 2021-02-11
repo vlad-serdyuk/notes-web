@@ -32,6 +32,8 @@ interface Author {
   avatar: string;
 }
 
+export type Entity = Note | Comment | UserModel;
+
 export interface IUserWithNotes extends UserModel {
   notes: Note[];
   favorites: Note[];

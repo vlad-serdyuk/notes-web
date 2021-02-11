@@ -4,9 +4,16 @@ import { useLazyQuery } from '@apollo/client';
 import { DocumentText, Chat, Search, User } from 'grommet-icons';
 import { Box, Button, Text, TextInput } from 'grommet';
 
-import { Note } from 'gql/models';
+import { Entity } from 'gql/models';
 import { SEARCH_ALL } from 'gql/query';
 import { useDebounce } from 'common/hooks/debounce';
+import { encodeSearchData } from './utils';
+
+export interface ISearchDataItem {
+  id: string;
+  type: Typename;
+  content: string;
+}
 
 enum Typename {
   NOTE = 'Note',
@@ -25,7 +32,7 @@ export const SearchBar: FC = () => {
 
   const [value, setValue] = useState<string>('');
   const [isSuggestionOpen, setSuggestionOpen] = useState<boolean>(false);
-  const [suggestedResults, setSuggestedResults] = useState<Array<Note>>([]);
+  const [suggestedResults, setSuggestedResults] = useState<Array<ISearchDataItem>>([]);
 
   const [search, { data }] = useLazyQuery(SEARCH_ALL);
   const debouncedSearchTerm = useDebounce(value, 300);
@@ -34,7 +41,8 @@ export const SearchBar: FC = () => {
 
   useEffect(() => {
     if (data) {
-      setSuggestedResults(data.search);
+      const encodedData = encodeSearchData(data.search);
+      setSuggestedResults(encodedData);
     }
   }, [data]);
 
@@ -55,9 +63,9 @@ export const SearchBar: FC = () => {
 
   const renderSuggestions: () => Array<{ label: JSX.Element, value: string }> = () => {
     return suggestedResults
-      .map(({ id, content, __typename }, index: number, list: []) => {
+      .map(({ id, content, type }, index: number, list: []) => {
 
-        const Icon = TYPE_IMAGE[__typename];
+        const Icon = TYPE_IMAGE[type];
 
         return {
           label: (
