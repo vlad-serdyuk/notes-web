@@ -56,8 +56,8 @@ export const GET_USER_FAVORITES = gql`
 `;
 
 export const GET_USER_NOTES = gql`
-  query UserNotes($username: String!) {
-    user(username: $username) {
+  query UserNotes($usermatch: String!) {
+    user(usermatch: $usermatch) {
       id
       username
       email

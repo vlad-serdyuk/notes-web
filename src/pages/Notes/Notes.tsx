@@ -16,7 +16,7 @@ interface IGetUserNoteData {
 }
 
 export const NotesPage: FC<RouteComponentProps> = ({ match }) => {
-  const { loading, error, data } = useQuery<IGetUserNoteData>(GET_USER_NOTES, { variables: { username: match.params.user } });
+  const { loading, error, data } = useQuery<IGetUserNoteData>(GET_USER_NOTES, { variables: { usermatch: match.params.usermatch } });
   const [getComments, { data: comments = {}, loading: commentsLoading }] = useLazyQuery(GET_USER_COMMENTS, { variables: { username: match.params.author } });
   const { data: { me } = {} } = useGetMeQuery();
   const [updateProfile] = useMutation(UPDATE_USER, {

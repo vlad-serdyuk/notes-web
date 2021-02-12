@@ -13,7 +13,7 @@ import { NotesTabs, TabsOptions } from 'components/NotesTabs';
 
 export const ProfilePage: FC = () => {
   const { data: { me } = {} } = useGetMeQuery();
-  const { data: { user } = {}, loading, error } = useQuery(GET_USER_NOTES, { variables: { username: me.username } });
+  const { data: { user } = {}, loading, error } = useQuery(GET_USER_NOTES, { variables: { usermatch: me.username } });
   const [getComments, { data = {}, loading: commentsLoading }] = useLazyQuery(GET_USER_COMMENTS, { variables: { username: me.username } });
   
   const [updateProfile] = useMutation(UPDATE_USER, {
