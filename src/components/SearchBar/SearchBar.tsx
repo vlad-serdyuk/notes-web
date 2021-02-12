@@ -4,10 +4,10 @@ import { useLazyQuery } from '@apollo/client';
 import { DocumentText, Chat, Search, User } from 'grommet-icons';
 import { Box, Button, Text, TextInput } from 'grommet';
 
-import { Entity } from 'gql/models';
 import { SEARCH_ALL } from 'gql/query';
 import { useDebounce } from 'common/hooks/debounce';
 import { encodeSearchData } from './utils';
+import { SearchBarContainer } from './SearchBar.styled';
 
 export interface ISearchDataItem {
   id: string;
@@ -57,17 +57,19 @@ export const SearchBar: FC = () => {
     }
   };
 
-  const onSelect = (event: ChangeEvent<HTMLInputElement>) => {
-    history.push(`/note/${event.suggestion.value}`);
+  const onSelect = ({ suggestion: { type, id } }: ChangeEvent<HTMLInputElement>) => {
+    history.push(`/${type.toLowerCase()}/${id}`);
   }
 
-  const renderSuggestions: () => Array<{ label: JSX.Element, value: string }> = () => {
+  const renderSuggestions: () => Array<{ label: JSX.Element, id: string, type: string }> = () => {
     return suggestedResults
       .map(({ id, content, type }, index: number, list: []) => {
 
         const Icon = TYPE_IMAGE[type];
 
         return {
+          id,
+          type,
           label: (
             <Box
               direction="row"
@@ -82,7 +84,6 @@ export const SearchBar: FC = () => {
               </Text>
             </Box>
           ),
-          value: id,
         }
       });
   };
@@ -96,12 +97,8 @@ export const SearchBar: FC = () => {
   }, [setSuggestionOpen]);
 
   return (
-    <Box
+    <SearchBarContainer
       ref={boxRef}
-      direction="row"
-      align="center"
-      pad={{ horizontal: 'small', vertical: 'xsmall' }}
-      round="small"
       elevation={isSuggestionOpen ? 'medium' : null}
       border={{
         side: 'all',
@@ -129,6 +126,6 @@ export const SearchBar: FC = () => {
         onSuggestionsOpen={setOpen}
         onSuggestionsClose={setClose}
       />
-    </Box>
+    </SearchBarContainer>
   );
 };
