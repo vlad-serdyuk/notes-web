@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useContext } from 'react';
 import { Box, CheckBox, Text } from 'grommet';
 
-import { Themes } from 'common/constants/global';
+import { Themes } from 'app/constants/global';
 import { GlobalContext } from 'common/contexts/globalContext';
 
 export const DisplaySettings: FC = () => {

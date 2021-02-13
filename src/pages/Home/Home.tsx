@@ -4,7 +4,7 @@ import { Button } from 'grommet';
 
 import { GET_NOTES } from 'gql/query';
 import { NotesFeed } from 'components/NotesFeed';
-import { SearchBar } from 'components/SearchBar/SearchBar';
+import { SearchBar } from 'common/components/SearchBar/SearchBar';
 
 export const HomePage: FC = () => {
   const { data, loading, error, fetchMore } = useQuery(GET_NOTES);

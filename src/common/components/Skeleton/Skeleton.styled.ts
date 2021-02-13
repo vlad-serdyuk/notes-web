@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { Box } from 'grommet';
-import { Themes } from 'common/constants/global';
+import { Themes } from 'app/constants/global';
 
 const backgroundAnimation = keyframes`
   0% {

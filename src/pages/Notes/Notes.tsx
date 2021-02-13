@@ -52,7 +52,7 @@ export const NotesPage: FC<RouteComponentProps> = ({ match }) => {
     }
   }, [getComments]);
 
-  if (loading || commentsLoading) {
+  if (loading) {
     return <p>loading...</p>;
   }
 

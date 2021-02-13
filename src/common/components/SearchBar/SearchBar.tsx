@@ -35,7 +35,7 @@ export const SearchBar: FC = () => {
   const [suggestedResults, setSuggestedResults] = useState<Array<ISearchDataItem>>([]);
 
   const [search, { data }] = useLazyQuery(SEARCH_ALL);
-  const debouncedSearchTerm = useDebounce(value, 300);
+  const debouncedSearchTerm = useDebounce(value, 250);
 
   const boxRef = useRef<HTMLElement>();
 
@@ -78,10 +78,8 @@ export const SearchBar: FC = () => {
               border={index < list.length - 1 ? 'bottom' : undefined}
               pad="small"
             >
-              <Button icon={<Icon />} />
-              <Text>
-                <strong>{content}</strong>
-              </Text>
+              <Icon />
+              <Text>{content}</Text>
             </Box>
           ),
         }

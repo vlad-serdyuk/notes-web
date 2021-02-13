@@ -1,5 +1,5 @@
 import React, { FC, createContext, useCallback, useEffect, useState } from 'react';
-import { Themes, THEME_STORAGE_KEY } from '../constants/global';
+import { Themes, THEME_STORAGE_KEY } from 'app/constants/global';
 import { getItem, saveItem } from '../services/ClientStorage';
 
 interface IContextState {
