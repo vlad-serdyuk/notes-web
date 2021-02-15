@@ -11,13 +11,14 @@ import { FavoritesPage } from './Favorites';
 import { NotePage } from './Note';
 import { CreateNotePage } from './CreateNote';
 import { EditNotePage } from './EditNote';
-import { AddCommentPage } from './AddComment';
 
 const SignInPage = lazy(() => import('./SignIn'));
 const SignUpPage = lazy(() => import('./SignUp'));
 
 const ProfilePage = lazy(() => import('./Profile'));
 const SettingsPage = lazy(() => import('./Settings'));
+
+const AddCommentPage = lazy(() => import('./AddCommentPage'));
 
 export const Pages: FC = () => (
   <Router>

@@ -5,7 +5,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import { Note } from 'gql/models';
 import { UPDATE_NOTE } from 'gql/mutation';
 import { GET_NOTE, GET_NOTES } from 'gql/query';
-import { NoteForm, ISubmitNoteArgs } from 'components/NoteForm';
+import { NoteForm, ISubmitNoteArgs } from 'common/components/NoteForm';
 
 interface IGetNoteData {
   note: Note;

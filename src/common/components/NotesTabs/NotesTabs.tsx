@@ -1,8 +1,5 @@
 import React, { FC, useState } from 'react';
 import { Box, Tab, Tabs } from 'grommet';
-import { useLazyQuery } from '@apollo/client';
-import { GET_USER_COMMENTS } from 'gql/query';
-import { Comments } from 'components/Comments';
 
 interface NotesTabsProps {
   notes: JSX.Element;

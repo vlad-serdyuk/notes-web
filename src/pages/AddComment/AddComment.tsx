@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client';
 import { Comment } from 'gql/models';
 import { GET_NOTE } from 'gql/query';
 import { ADD_COMMENT } from 'gql/mutation';
-import { CommentForm } from 'components/CommentForm';
+import { CommentForm } from 'pages/AddComment/components/CommentForm';
 
 export const AddCommentPage: FC<RouteComponentProps> = ({ history, match }) => {
   const [AddComment, { loading, error }] = useMutation(ADD_COMMENT, {

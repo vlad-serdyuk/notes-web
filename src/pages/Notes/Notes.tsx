@@ -7,8 +7,8 @@ import { GET_USER_NOTES, GET_ME, GET_USER_COMMENTS } from 'gql/query';
 import { Note as NoteModel, IUserWithNotes } from 'gql/models';
 import { useGetMeQuery } from 'common/hooks/queries';
 import { Profile } from 'common/components/Profile';
+import { NotesTabs, TabsOptions } from 'common/components/NotesTabs';
 import { NotesFeed } from 'components/NotesFeed';
-import { NotesTabs, TabsOptions } from 'components/NotesTabs';
 import { Comments } from 'components/Comments';
 
 interface IGetUserNoteData {

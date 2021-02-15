@@ -7,9 +7,9 @@ import { Note as NoteModel } from 'gql/models';
 import { useGetMeQuery } from 'common/hooks/queries';
 import { Skeleton } from 'common/components/Skeleton';
 import { Profile } from 'common/components/Profile';
+import { NotesTabs, TabsOptions } from 'common/components/NotesTabs';
 import { Comments } from 'components/Comments';
 import { NotesFeed } from 'components/NotesFeed';
-import { NotesTabs, TabsOptions } from 'components/NotesTabs';
 
 export const ProfilePage: FC = () => {
   const { data: { me } = {} } = useGetMeQuery();

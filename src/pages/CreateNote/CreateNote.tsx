@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client';
 import { Note } from 'gql/models';
 import { GET_NOTES } from 'gql/query';
 import { CREATE_NOTE } from 'gql/mutation';
-import { NoteForm } from 'components/NoteForm';
+import { NoteForm } from 'common/components/NoteForm';
 
 export const CreateNotePage: FC<RouteComponentProps> = ({ history }) => {
   const [createNote, { loading, error }] = useMutation(CREATE_NOTE, {

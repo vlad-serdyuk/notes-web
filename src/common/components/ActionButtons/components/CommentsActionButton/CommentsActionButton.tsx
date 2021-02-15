@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Box } from 'grommet';
 import { IconButton } from 'common/components/IconButton';
 
-import { CommentIcon } from './CommentActionButton.styled';
+import { CommentIcon } from './CommentsActionButton.styled';
 
 interface CommentsActionButtonProps {
   noteId: string;

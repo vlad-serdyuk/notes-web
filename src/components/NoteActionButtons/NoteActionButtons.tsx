@@ -10,7 +10,7 @@ import {
   CommentsActionButton,
   EditActionButton,
   DeleteActionButton,
- } from 'components/ActionButtons';
+ } from 'common/components/ActionButtons';
 
 interface NoteButtonsProps {
   isUserItem: boolean;
