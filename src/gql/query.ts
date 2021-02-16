@@ -115,6 +115,7 @@ export const SEARCH_ALL = gql`
       ... on Comment {
         id
         content
+        noteId
         __typename
       }
       ... on User {

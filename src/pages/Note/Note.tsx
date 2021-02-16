@@ -6,7 +6,6 @@ import { GET_NOTE } from 'gql/query';
 import { Note as NoteModel } from 'gql/models';
 import { Note } from 'components/Note';
 import { Comments } from 'components/Comments';
-import { withQuery } from 'common/components/withQuery';
 
 interface IGetNoteData {
   note: NoteModel;

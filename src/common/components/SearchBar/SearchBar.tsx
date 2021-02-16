@@ -13,6 +13,7 @@ export interface ISearchDataItem {
   id: string;
   type: Typename;
   content: string;
+  noteId: string;
 }
 
 enum Typename {
@@ -25,6 +26,12 @@ const TYPE_IMAGE = {
   [Typename.NOTE]: DocumentText,
   [Typename.COMMENT]: Chat,
   [Typename.USER]: User,
+}
+
+const REDIRECT_URL_TYPE = {
+  [Typename.NOTE]: (id: string) => `/note/${id}`,
+  [Typename.COMMENT]: (id: string, noteId: string) => `/note/${noteId}#${id}`,
+  [Typename.USER]: (id: string) => `/user/${id}`,
 }
 
 export const SearchBar: FC = () => {
@@ -57,19 +64,21 @@ export const SearchBar: FC = () => {
     }
   };
 
-  const onSelect = ({ suggestion: { type, id } }: ChangeEvent<HTMLInputElement>) => {
-    history.push(`/${type.toLowerCase()}/${id}`);
+  const onSelect = ({ suggestion: { type, id, noteId } }: ChangeEvent<HTMLInputElement>) => {
+    const url = REDIRECT_URL_TYPE[type](id, noteId);
+    history.push(url);
   }
 
-  const renderSuggestions: () => Array<{ label: JSX.Element, id: string, type: string }> = () => {
+  const renderSuggestions: () => Array<{ label: JSX.Element, id: string, type: string, noteId: string }> = () => {
     return suggestedResults
-      .map(({ id, content, type }, index: number, list: []) => {
+      .map(({ id, content, type, noteId }, index: number, list: []) => {
 
         const Icon = TYPE_IMAGE[type];
 
         return {
           id,
           type,
+          noteId,
           label: (
             <Box
               direction="row"

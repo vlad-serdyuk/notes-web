@@ -32,7 +32,7 @@ export const Comment: FC<CommentProps> = ({ comment }) => {
   }
 
   return (
-    <CommentContainer>
+    <CommentContainer id={comment.id}>
       <Avatar size="large" src={comment.author.avatar} onClick={openAuthorPage} />
       <Box width="100%">
         <Box direction="row" gap="small" align="center">

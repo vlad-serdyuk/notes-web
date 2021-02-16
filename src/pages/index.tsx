@@ -18,7 +18,7 @@ const SignUpPage = lazy(() => import('./SignUp'));
 const ProfilePage = lazy(() => import('./Profile'));
 const SettingsPage = lazy(() => import('./Settings'));
 
-const AddCommentPage = lazy(() => import('./AddCommentPage'));
+const AddCommentPage = lazy(() => import('./AddComment'));
 
 export const Pages: FC = () => (
   <Router>

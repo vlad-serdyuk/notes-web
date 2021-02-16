@@ -20,3 +20,8 @@ yarn start
 ## Related Repositories
 
 - [API 🗄️ ](https://github.com/vlad-serdyuk/notes-api)
+
+## Design system
+
+- [storybook](https://storybook.grommet.io/?path=/story/controls-tabs--states)
+
