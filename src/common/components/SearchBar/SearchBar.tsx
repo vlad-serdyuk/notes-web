@@ -5,7 +5,7 @@ import { DocumentText, Chat, Search, User } from 'grommet-icons';
 import { Box, Button, Text, TextInput } from 'grommet';
 
 import { SEARCH_ALL } from 'gql/query';
-import { useDebounce } from 'common/hooks/debounce';
+import { useDebounce } from 'common/hooks/useDebounce';
 import { encodeSearchData } from './utils';
 import { SearchBarContainer } from './SearchBar.styled';
 
