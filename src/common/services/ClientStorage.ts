@@ -1,11 +1,27 @@
-export function getItem(key: string): string {
-  return localStorage.getItem(key);
+interface IStorage {
+  getItem: (key: string) => unknown;
+  setItem: (key: string, value: unknown) => void;
+  removeItem: (key: string) => void;
 }
 
-export function saveItem(key: string, item: string): void {
-  localStorage.setItem(key, item);
+let storage: IStorage;
+
+async function getItem(key: string) {     
+  return storage.getItem(key);
+} 
+
+async function setItem(key: string, value: unknown) {     
+  storage.setItem(key, value);
+} 
+
+async function removeItem(key: string) {     
+  storage.removeItem(key);
+} 
+
+const setStorage = (instance: IStorage) => {
+  console.log(instance);
+  
+  storage = instance;
 }
 
-export function removeItem(key: string): void {
-  localStorage.removeItem(key);
-}
+export { getItem, setItem, removeItem, setStorage };
