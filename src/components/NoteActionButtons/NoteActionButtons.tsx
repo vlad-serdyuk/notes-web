@@ -1,10 +1,11 @@
 import React, { FC, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import { useMutation} from '@apollo/client';
 
 import { GET_NOTES } from 'gql/query';
 import { Note as NoteModel } from 'gql/models';
 import { TOGGLE_FAVORITE_NOTE, DELETE_NOTE } from 'gql/mutation';
+import { useFallbackMutation } from 'common/hooks/useFallbackMutation';
 import { 
   ActionButtons,
   CommentsActionButton,
@@ -21,7 +22,7 @@ interface NoteButtonsProps {
 export const NoteActionButtons: FC<NoteButtonsProps> = ({ isUserItem, note, meId }) => {
   const history = useHistory();
 
-  const [toggleFavoriteMutation] = useMutation(TOGGLE_FAVORITE_NOTE);
+  const [toggleFavoriteMutation] = useFallbackMutation(TOGGLE_FAVORITE_NOTE);
   const [deleteNoteMutation] = useMutation(DELETE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }],
   });
