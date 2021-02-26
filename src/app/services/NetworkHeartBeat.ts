@@ -1,9 +1,12 @@
-document.addEventListener('online', () => {
-    // todo execute all queiries
-});
+import { traverseMutationQueue } from 'app/services/MutationQueueHandler';
 
-document.addEventListener('offline', () => {
-    // todo 
-});
+  window.addEventListener('online', async() => {
+    traverseMutationQueue();
+  });
+  
+  window.addEventListener('offline', () => {
+      console.log('offline');
+  });
+
 
 export const isNetoworkOnline = window.navigator.onLine;

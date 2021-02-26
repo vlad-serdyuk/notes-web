@@ -5,3 +5,4 @@ export enum Themes {
 
 export const THEME_STORAGE_KEY = 'theme';
 
+export const MUTATION_QUEUE = 'mutation_queue';

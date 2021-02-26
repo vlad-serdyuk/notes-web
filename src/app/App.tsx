@@ -6,6 +6,7 @@ import { ThemeProvider } from 'app/components/ThemeProvider';
 import GlobalStyles from 'app/styled/globalStyles';
 import { GlobalContextProvider } from 'common/contexts/globalContext';
 import GQLService from 'common/services/GQLService';
+import 'app/services/NetworkHeartBeat';
 
 const client = GQLService.getInitialClient();
 GQLService.bootstrap();

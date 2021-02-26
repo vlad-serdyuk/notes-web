@@ -1,5 +1,4 @@
-import { gql, useMutation, DocumentNode, MutationResult } from '@apollo/client';
-import { isNetoworkOnline } from 'app/services/NetworkHeartBeat';
+import { useMutation, DocumentNode, MutationResult } from '@apollo/client';
 import { getItem, setItem } from 'common/services/ClientStorage';
 
 export const useFallbackMutation = (query: DocumentNode, params?: unknown) => {
@@ -9,7 +8,7 @@ export const useFallbackMutation = (query: DocumentNode, params?: unknown) => {
 
   if (error && error.networkError && !error.graphQLErrors.length) {
     (async () => {
-      await setItem('12345_query', JSON.stringify(query.loc.source.body));
+      await setItem('12345_query', query.definitions[0].name.value);
       const bb = await getItem('12345_query');
       const nn = await getItem('12345_vars');
 
