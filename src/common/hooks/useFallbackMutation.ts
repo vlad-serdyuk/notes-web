@@ -1,4 +1,5 @@
 import { gql, useMutation, DocumentNode, MutationResult } from '@apollo/client';
+import { isNetoworkOnline } from 'app/services/NetworkHeartBeat';
 import { getItem, setItem } from 'common/services/ClientStorage';
 
 export const useFallbackMutation = (query: DocumentNode, params?: unknown) => {
