@@ -9,4 +9,4 @@ import { traverseMutationQueue } from 'app/services/MutationQueueHandler';
   });
 
 
-export const isNetoworkOnline = window.navigator.onLine;
+export const isNetoworkOnline = (): boolean => window.navigator.onLine;

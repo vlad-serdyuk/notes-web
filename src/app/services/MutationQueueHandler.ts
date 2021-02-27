@@ -8,7 +8,7 @@ import GQLService from 'common/services/GQLService';
 export async function traverseMutationQueue() {
   const mutationQueueStr = await getItem(MUTATION_QUEUE);
 
-  //if (mutationQueueStr) {
+  // if (mutationQueueStr) {
     // const mutationQueue = JSON.parse(mutationQueueStr as string);
     const bb = await getItem('12345_query');
     const nn = await getItem('12345_vars');
@@ -26,5 +26,5 @@ export async function traverseMutationQueue() {
 
     await removeItem('12345_query');
     await removeItem('12345_vars');
-  //}
+  // }
 };

@@ -1,5 +1,9 @@
-import { useMutation, DocumentNode, MutationResult } from '@apollo/client';
+import { useMutation, DocumentNode, ExecutionResult } from '@apollo/client';
+import { ExecutionResultDataDefault } from 'graphql/execution/execute';
+import { MUTATION_QUEUE } from 'app/constants/global';
 import { getItem, setItem } from 'common/services/ClientStorage';
+import { isNetoworkOnline } from 'app/services/NetworkHeartBeat';
+
 
 export const useFallbackMutation = (query: DocumentNode, params?: unknown) => {
   const result = useMutation(query, params);
@@ -8,7 +12,7 @@ export const useFallbackMutation = (query: DocumentNode, params?: unknown) => {
 
   if (error && error.networkError && !error.graphQLErrors.length) {
     (async () => {
-      await setItem('12345_query', query.definitions[0].name.value);
+      // await setItem('12345_query', query.definitions[0].name.value);
       const bb = await getItem('12345_query');
       const nn = await getItem('12345_vars');
 
@@ -16,11 +20,15 @@ export const useFallbackMutation = (query: DocumentNode, params?: unknown) => {
     })();    
   }
 
-  const g = result[0];
-  const h = async(arg: any): MutationResult => {
-    await setItem('12345_vars', JSON.stringify(arg.variables));
-    return g(arg);
+  const mutation = result[0];
+  const mutationProxy = async(arg: any): Promise<ExecutionResult<ExecutionResultDataDefault>> => {
+    if (!isNetoworkOnline()) {
+      await setItem('12345_vars', JSON.stringify(arg.variables));
+      await setItem('12345_query', query.definitions[0].name.value);
+    }
+
+    return mutation(arg);
   }
 
-  return [h, result[1]];
+  return [mutationProxy, result[1]];
 };
