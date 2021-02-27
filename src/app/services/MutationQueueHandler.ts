@@ -2,7 +2,7 @@ import { DocumentNode } from 'graphql';
 import * as Mutations from 'gql/mutation';
 import { MUTATION_QUEUE } from 'app/constants/global';
 import { camelToSnakeCase } from 'app/utils/stringConvertion';
-import { getItem, removeItem } from 'common/services/ClientStorage';
+import { getItem, setItem, removeItem } from 'common/services/ClientStorage';
 import GQLService from 'common/services/GQLService';
 
 export async function traverseMutationQueue() {
@@ -28,3 +28,7 @@ export async function traverseMutationQueue() {
     await removeItem('12345_vars');
   // }
 };
+
+export async function initMutationQueueStorage() {
+  setItem(MUTATION_QUEUE, [].toString());
+}
