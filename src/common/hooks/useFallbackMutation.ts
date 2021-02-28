@@ -2,7 +2,7 @@ import { useMutation, DocumentNode, ExecutionResult } from '@apollo/client';
 import { ExecutionResultDataDefault } from 'graphql/execution/execute';
 import { MUTATION_QUEUE } from 'app/constants/global';
 import { generateId } from 'app/utils/idGenerator';
-import { getItem, setItem } from 'common/services/ClientStorage';
+import { setItem, putItem } from 'common/services/ClientStorage';
 import { isNetoworkOnline } from 'app/services/NetworkHeartBeat';
 
 
@@ -19,9 +19,10 @@ export const useFallbackMutation = (query: DocumentNode, params?: unknown) => {
   const mutationProxy = async(arg: any): Promise<ExecutionResult<ExecutionResultDataDefault>> => {
     if (!isNetoworkOnline()) {
       const id = generateId();
-      // cosnt await getItem(MUTATION_QUEUE);
-      await setItem('12345_vars', JSON.stringify(arg.variables));
-      await setItem('12345_query', query.definitions[0].name.value);
+      await putItem(MUTATION_QUEUE, id);
+
+      const mutationDTO = { name: query.definitions[0].name.value, vars: arg.variables };
+      await setItem(id, JSON.stringify(mutationDTO));
     }
 
     return mutation(arg);

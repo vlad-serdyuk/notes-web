@@ -1,7 +1,7 @@
 interface IStorage {
   getItem: (key: string) => unknown;
   setItem: (key: string, value: unknown) => void;
-  putValue: (key: string, value: unknown) => void;
+  putItem: (key: string, value: unknown) => void;
   removeItem: (key: string) => void;
 }
 
@@ -19,11 +19,13 @@ async function removeItem(key: string) {
   storage.removeItem(key);
 }
 
-async function putValue(key: string, value: unknown) {
-  const prevValue = await getItem(key);
-  let updatedValue;
+async function putItem(key: string, value: unknown) {
+  const prevRawValue = await getItem(key) as string;
+  const prevValue = JSON.parse(prevRawValue);
+
+  let updatedValue = prevValue;
   if (Array.isArray(prevValue)) {
-    prevValue.push(value);
+    updatedValue.push(value);
   } else if (typeof prevValue === 'object') {
     updatedValue = { ...prevValue, ...(value as object) };
   }
@@ -35,4 +37,4 @@ const setStorage = (instance: IStorage) => {
   storage = instance;
 }
 
-export { getItem, setItem, removeItem, setStorage };
+export { getItem, setItem, putItem, removeItem, setStorage };

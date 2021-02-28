@@ -6,29 +6,30 @@ import { getItem, setItem, removeItem } from 'common/services/ClientStorage';
 import GQLService from 'common/services/GQLService';
 
 export async function traverseMutationQueue() {
-  const mutationQueueStr = await getItem(MUTATION_QUEUE);
+  const rawMutationQueue = await getItem(MUTATION_QUEUE);
 
-  // if (mutationQueueStr) {
-    // const mutationQueue = JSON.parse(mutationQueueStr as string);
-    const bb = await getItem('12345_query');
-    const nn = await getItem('12345_vars');
-
-    const mutationName = camelToSnakeCase(bb as string).toUpperCase();
-
+  if (!rawMutationQueue) {
+    return;
+  }
+  
+  const client = GQLService.getInitialClient();
+  const mutationQueue = JSON.parse(rawMutationQueue as string);
+  
+  mutationQueue.forEach(async (key: string) => {
+    const mutationDTOString = await getItem(key);
+    const { name, vars } = JSON.parse(mutationDTOString as string);
+    
+    const mutationName = camelToSnakeCase(name as string).toUpperCase();
     const mutation: DocumentNode = Mutations[mutationName];
-  
-    const variables = JSON.parse(nn as string);
-  
-  
-    const client = GQLService.getInitialClient();
-    const gg = await client.mutate({ mutation, variables });
-    console.log(gg);
 
-    await removeItem('12345_query');
-    await removeItem('12345_vars');
-  // }
+    await client.mutate({ mutation, variables: vars });
+
+    await removeItem(key);
+  });
+
+  await initMutationQueueStorage();
 };
 
 export async function initMutationQueueStorage() {
-  setItem(MUTATION_QUEUE, [].toString());
+  setItem(MUTATION_QUEUE, JSON.stringify([]));
 }
