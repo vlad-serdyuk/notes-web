@@ -4,6 +4,7 @@ import { Box, Button, Layer, Text } from 'grommet';
 import { FormClose, StatusGood } from 'grommet-icons';
 
 import { SHOW_NOTIFIFCATION } from 'gql/local-query';
+import { closeNotification } from 'app/services/Notification';
 
 const NOTIFICATION_BAR_SHOWING_TIME = 3000;
 
@@ -26,13 +27,7 @@ export const NotificationBar: FC = () => {
   const closeNotificationBar = () => {
     setOpen(false);
     setText('');
-    client.writeQuery({
-      query: SHOW_NOTIFIFCATION,
-      data: {
-        show: false,
-        text: '',
-      },
-    });
+    closeNotification();
   };
 
   if (!isOpen) {

@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { Box, Text, TextInput } from 'grommet';
 
 import { RESET_PASSWORD } from 'gql/mutation';
-import { SHOW_NOTIFIFCATION } from 'gql/local-query';
+import { showNotification } from 'app/services/Notification';
 import { SubmitButton } from './ResetPasswordForm.styled';
 
 const MIN_PASSWORD_LENGTH = 6;
@@ -20,15 +20,9 @@ export const ResetPasswordForm: FC = () => {
       setNewPassword('');
       setConfirmedNewPassword('');
     },
-    update: (cache: any) => {
-      cache.writeQuery({
-        query: SHOW_NOTIFIFCATION,
-        data: {
-          show: true,
-          text: 'Please, enter the correct password',
-        },
-      });
-    }
+    update: () => {
+      showNotification('Your password had been successfully reset');
+    },
   });
 
   const resetPassword = useCallback(() => {
