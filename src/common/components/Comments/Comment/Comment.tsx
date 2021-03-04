@@ -6,7 +6,7 @@ import { Comment as CommentModel } from 'gql/models';
 import { useGetMeQuery } from 'common/hooks/queries';
 import { AuthorText } from 'common/components/AuthorText';
 import { DateText } from 'common/components/DateText';
-import { CommentActionButtons } from 'components/CommentActionButtons';
+import { CommentActionButtons } from 'common/components/Comments/Comment/CommentActionButtons';
 
 import { CommentContainer } from './Comment.styled';
 

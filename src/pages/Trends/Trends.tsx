@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useQuery } from '@apollo/client';
 
 import { GET_TRENDS_NOTES } from 'gql/query';
-import { NotesFeed } from 'components/NotesFeed';
+import { NotesFeed } from 'common/components/NotesFeed';
 
 export const TrendsPage: FC = () => {
   const { loading, error, data } = useQuery(GET_TRENDS_NOTES);

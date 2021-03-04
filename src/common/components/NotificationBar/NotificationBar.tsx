@@ -12,7 +12,7 @@ export const NotificationBar: FC = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [text, setText] = useState<string>('');
 
-  const { data = {}, client } = useQuery(SHOW_NOTIFIFCATION);
+  const { data = {} } = useQuery(SHOW_NOTIFIFCATION);
 
   const onClose = () => setOpen(false);
 

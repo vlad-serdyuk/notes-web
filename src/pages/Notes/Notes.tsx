@@ -8,8 +8,8 @@ import { Note as NoteModel, IUserWithNotes } from 'gql/models';
 import { useGetMeQuery } from 'common/hooks/queries';
 import { Profile } from 'common/components/Profile';
 import { NotesTabs, TabsOptions } from 'common/components/NotesTabs';
-import { NotesFeed } from 'components/NotesFeed';
-import { Comments } from 'components/Comments';
+import { NotesFeed } from 'common/components/NotesFeed';
+import { Comments } from 'common/components/Comments';
 
 interface IGetUserNoteData {
   user: IUserWithNotes;

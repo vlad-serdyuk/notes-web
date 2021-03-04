@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 
 import { Note, IGetMeData } from 'gql/models';
 import { GET_ME, GET_USER_FAVORITES } from 'gql/query';
-import { NotesFeed } from 'components/NotesFeed';
+import { NotesFeed } from 'common/components/NotesFeed';
 
 interface FavoriesData {
   user: {

@@ -5,18 +5,18 @@ import { Avatar, Box, Text } from 'grommet';
 
 import { Note as NoteModel } from 'gql/models';
 import { TOGGLE_PRIVACY_NOTE } from 'gql/mutation';
-import { AuthorText } from 'common/components/AuthorText';
-import { DateText } from 'common/components/DateText';
 import { useGetMeQuery } from 'common/hooks/queries';
-import { NoteActionButtons } from 'components/NoteActionButtons';
-import * as Styled from './FeedNote.styled';
+import { DateText } from 'common/components/DateText';
+import { NoteActionButtons } from 'common/components/NoteActionButtons';
+import * as Styled from './Note.styled';
 
-interface IFeedNoteComponentProps {
+interface INoteComponentProps {
   note: NoteModel;
 }
 
-const FeedNoteComponent: FC<IFeedNoteComponentProps> = ({ note }) => {
+const NoteComponent: FC<INoteComponentProps> = ({ note }) => {
   const history = useHistory();
+
   const { data: { me } } = useGetMeQuery();
   const [togglePrivacyMutation] = useMutation(TOGGLE_PRIVACY_NOTE);
 
@@ -51,15 +51,17 @@ const FeedNoteComponent: FC<IFeedNoteComponentProps> = ({ note }) => {
       <Avatar size="large" src={note.author.avatar} onClick={openAuthorNotes} />
       <Box width="100%">
         <Box direction="row" gap="small" align="center">
-          <AuthorText author={note.author.username} onClick={openAuthorNotes} />
+          <Styled.AuthorText onClick={openAuthorNotes}>{note.author.username}</Styled.AuthorText>
           <DateText date={note.createdAt} />
           {isUserNote && <Styled.LockButton plain icon={<PrivacyIcon />} onClick={togglePrivacy} />}
         </Box>
-        <Text>{note.content}</Text>
-        <NoteActionButtons isUserItem={isUserNote} note={note} />
+        <Text size="large">{note.content}</Text>
+        <Box border>
+          <NoteActionButtons isUserItem={isUserNote} note={note} />
+        </Box>
       </Box>
     </Styled.NoteContainer>
   );
 };
 
-export const FeedNote = memo(FeedNoteComponent);
+export const Note = memo(NoteComponent);

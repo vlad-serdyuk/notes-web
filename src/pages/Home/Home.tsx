@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { Button } from 'grommet';
 
 import { GET_NOTES } from 'gql/query';
-import { NotesFeed } from 'components/NotesFeed';
+import { NotesFeed } from 'common/components/NotesFeed';
 import { SearchBar } from 'common/components/SearchBar/SearchBar';
 
 export const HomePage: FC = () => {

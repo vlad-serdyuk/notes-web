@@ -1,7 +1,7 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/client'; 
 
-import { AppContainer } from 'components/AppContainer';
+import { AppContainer } from 'app/AppContainer';
 import { ThemeProvider } from 'app/components/ThemeProvider';
 import GlobalStyles from 'app/styled/globalStyles';
 import { initMutationQueueStorage } from 'app/services/MutationQueueHandler';
