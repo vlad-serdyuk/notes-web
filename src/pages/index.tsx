@@ -1,5 +1,5 @@
 import React, { FC, Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { Layout } from 'app/components/Layout';
 import { Skeleton } from 'common/components/Skeleton';
@@ -24,23 +24,25 @@ export const Pages: FC = () => (
   <Router>
     <Layout>
       <Suspense fallback={<Skeleton />}>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/notes/trends" component={TrendsPage} />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/notes/trends" component={TrendsPage} />
+          
+          <PrivateRoute exact path="/user/:usermatch" component={NotesPage} />
+          <PrivateRoute exact path="/notes/favorites" component={FavoritesPage} />
+          <PrivateRoute exact path="/note/new" component={CreateNotePage} />
+          <PrivateRoute exact path="/note/edit/:id" component={EditNotePage} />
 
-        <Route exact path="/note/:id" component={NotePage} />
-        
-        <PrivateRoute exact path="/user/:usermatch" component={NotesPage} />
-        <PrivateRoute exact path="/notes/favorites" component={FavoritesPage} />
-        <PrivateRoute exact path="/note/new" component={CreateNotePage} />
-        <PrivateRoute exact path="/note/edit/:id" component={EditNotePage} />
+          <PrivateRoute exact path="/note/:id/comment/new" component={AddCommentPage} />
 
-        <PrivateRoute exact path="/note/:id/comment/new" component={AddCommentPage} />
+          <Route path="/note/:id" component={NotePage} />
 
-        <Route exact path="/profile" component={ProfilePage} />
-        <Route exact path="/settings" component={SettingsPage} />
+          <Route exact path="/profile" component={ProfilePage} />
+          <Route exact path="/settings" component={SettingsPage} />
 
-        <Route exact path="/sign-in" component={SignInPage} />
-        <Route exact path="/sign-up" component={SignUpPage} />
+          <Route exact path="/sign-in" component={SignInPage} />
+          <Route exact path="/sign-up" component={SignUpPage} />
+        </Switch>
       </Suspense>
     </Layout>
   </Router>
