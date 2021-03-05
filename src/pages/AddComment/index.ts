@@ -1,1 +1,1 @@
-export { AddCommentPage } from './AddComment';
+export { AddCommentPage as default } from './AddComment';

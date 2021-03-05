@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { Route, RouteComponentProps, Redirect } from 'react-router-dom';
+import { Route, RouteComponentProps, RouteProps, Redirect } from 'react-router-dom';
 
 import { useIsLoggedInQuery } from 'common/hooks/queries';
 import { Skeleton } from 'common/components/Skeleton';
 
-interface PrivateRouteProps {
+interface PrivateRouteProps extends RouteProps {
   component: FC<RouteComponentProps>,
 }
 

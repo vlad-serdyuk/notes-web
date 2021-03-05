@@ -4,8 +4,8 @@ import { useQuery } from '@apollo/client';
 
 import { GET_NOTE } from 'gql/query';
 import { Note as NoteModel } from 'gql/models';
-import { Note } from 'common/components/Note';
 import { Comments } from 'common/components/Comments';
+import { Note } from 'pages/Note/components/Note';
 
 interface IGetNoteData {
   note: NoteModel;
