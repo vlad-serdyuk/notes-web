@@ -31,11 +31,11 @@ export const Pages: FC = () => (
           <PrivateRoute exact path="/user/:usermatch" component={NotesPage} />
           <PrivateRoute exact path="/notes/favorites" component={FavoritesPage} />
           <PrivateRoute exact path="/note/new" component={CreateNotePage} />
-          <PrivateRoute exact path="/note/edit/:id" component={EditNotePage} />
+          <PrivateRoute exact path="/note/:id/edit" component={EditNotePage} />
 
           <PrivateRoute exact path="/note/:id/comment/new" component={AddCommentPage} />
 
-          <Route path="/note/:id" component={NotePage} />
+          <Route exact path="/note/:id" component={NotePage} />
 
           <Route exact path="/profile" component={ProfilePage} />
           <Route exact path="/settings" component={SettingsPage} />

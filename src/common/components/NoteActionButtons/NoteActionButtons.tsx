@@ -32,7 +32,7 @@ export const NoteActionButtons: FC<NoteButtonsProps> = ({ isUserItem, note, meId
   }, [toggleFavoriteMutation, note]);
 
   const editNote = useCallback(() => {
-    history.push(`/note/edit/${note.id}`);
+    history.push(`/note/${note.id}/edit`);
   }, [note, history]);
 
   const onDeleteNote = useCallback(() => {
