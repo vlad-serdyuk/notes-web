@@ -5,7 +5,7 @@ import { ConfirmDialog } from './components/ConfirmDialog';
 import { DeleteIcon } from './DeleteActionButton.styled';
 
 interface DeleteActionButtonProps {
-  onDeleteItem: (e: MouseEvent) => void;
+  onDeleteItem: () => void;
 }
 
 const DeleteActionButtonComponent: FC<DeleteActionButtonProps> = ({ onDeleteItem }) => {
@@ -21,11 +21,16 @@ const DeleteActionButtonComponent: FC<DeleteActionButtonProps> = ({ onDeleteItem
     setDeleteConfirmDialogOpen(false);
   };
 
+  const onDeleteNote = useCallback((e: MouseEvent) => {
+    e.stopPropagation();
+    onDeleteItem();
+  }, [onDeleteItem]);
+
   return (
     <Fragment>
         <IconButton plain icon={<DeleteIcon />} onClick={showDeleteNoteDialog} />
         {isDeleteConfirmDialogOpen
-          && <ConfirmDialog onDeleteNote={onDeleteItem} onDialogClose={deleteConfirmDialogClose} />}
+          && <ConfirmDialog onDeleteNote={onDeleteNote} onDialogClose={deleteConfirmDialogClose} />}
     </Fragment>
   );
 };

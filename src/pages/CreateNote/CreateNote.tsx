@@ -11,7 +11,7 @@ export const CreateNotePage: FC<RouteComponentProps> = ({ history }) => {
   const [createNote, { loading, error }] = useMutation(CREATE_NOTE, {
     refetchQueries: [{ query: GET_NOTES }],
     onCompleted: (data: { createNote: Note }) => {
-      history.push(`note/${data.createNote.id}`);
+      history.push(`/note/${data.createNote.id}`);
     },
   });
 

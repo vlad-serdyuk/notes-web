@@ -8,7 +8,7 @@ export const ThemeProvider: FC = ({ children }) => {
   const { theme: themeMode } = useContext(GlobalContext);
 
   return (
-    <Grommet theme={theme} themeMode={themeMode} style={{ height: '100%' }}>
+    <Grommet theme={theme} themeMode={themeMode}>
       {children}
     </Grommet>
   );
