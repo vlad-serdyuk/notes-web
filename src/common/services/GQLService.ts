@@ -4,11 +4,25 @@ import {
   createHttpLink,
   NormalizedCacheObject,
 } from '@apollo/client';
+// import { WebSocketLink } from '@apollo/client/link/ws';
 import { GET_ME } from 'gql/query';
 import { GET_APP_METADATA } from 'gql/local-query';
 
-const uri = process.env.API_URI;
-const httpLink = createHttpLink({ uri, credentials: 'include' });
+const apiUri = process.env.API_URI;
+const websocketUri = process.env.WEBSOCKET_URI;
+const httpLink = createHttpLink({ uri: apiUri, credentials: 'include' });
+
+/*onst wsLink = new WebSocketLink({
+  uri: websocketUri,
+  options: {
+    reconnect: true,
+  },
+}); */
+
+interface InitialStateTypes {
+  loading: boolean;
+  isLoggedIn: boolean,
+}
 
 class GQLService {
   cache: InMemoryCache;
@@ -17,7 +31,7 @@ class GQLService {
   constructor() {
     this.cache = new InMemoryCache();
     this.client = new ApolloClient({
-      uri,
+      uri: apiUri,
       cache: this.cache,
       resolvers: {},
       link: httpLink,
@@ -30,27 +44,32 @@ class GQLService {
   }
 
   bootstrap() {
-    const data = {
+    const data: InitialStateTypes = {
       loading: true,
       isLoggedIn: false,
     };
 
-    this.cache.writeData({ data });
-    this.client.onResetStore(() => this.cache.writeData({ data: { ...data, loading: false } }));
+    this.cache.writeQuery({ 
+      query: GET_APP_METADATA,
+      data,
+    });
+    this.client.onResetStore(() => this.cache.writeQuery({ query: GET_APP_METADATA, data: { ...data, loading: false } }));
 
     this.client.query({ query: GET_ME })
       .then(({ data: userData }) => {
         if (userData.me) {
-          this.cache.writeData({ 
+          this.cache.writeQuery({
+            query: GET_APP_METADATA,
             data: {
               isLoggedIn: true,
             },
           });
         }
       }).finally(() => {
-        const prevData = this.cache.readQuery({ query: GET_APP_METADATA });
+        const prevData = this.cache.readQuery<InitialStateTypes>({ query: GET_APP_METADATA });
 
-        this.cache.writeData({ 
+        this.cache.writeQuery({ 
+          query: GET_APP_METADATA,
           data: {
             ...prevData,
             loading: false,
