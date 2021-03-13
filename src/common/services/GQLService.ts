@@ -53,7 +53,7 @@ class GQLService {
       query: GET_APP_METADATA,
       data,
     });
-    this.client.onResetStore(() => this.cache.writeQuery({ query: GET_APP_METADATA, data: { ...data, loading: false } }));
+    this.client.onResetStore(async () => this.cache.writeQuery({ query: GET_APP_METADATA, data: { ...data, loading: false } }));
 
     this.client.query({ query: GET_ME })
       .then(({ data: userData }) => {

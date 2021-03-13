@@ -10,8 +10,7 @@
     "lint-fix": "yarn lint --fix"
   },
   "dependencies": {
-    "@apollo/client": "3.3.11",
-    "apollo-link-context": "1.0.19",
+    "@apollo/client": "^3.3.11",
     "date-fns": "^2.16.1",
     "graphql": "15.5.0",
     "grommet": "^2.13.0",
@@ -20,7 +19,8 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-router-dom": "5.1.2",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "subscriptions-transport-ws": "^0.9.18"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",

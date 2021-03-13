@@ -25,7 +25,7 @@ export const NotesFeed: FC<NotesFeedProps> = ({ notes, children }) => {
             <FeedNote 
               key={note.id}
               note={note}
-              ref={idx === notes.length - 1 ? lastEl : undefined}
+              innerRef={idx === notes.length - 1 ? lastEl : undefined}
             />
             )
           )
