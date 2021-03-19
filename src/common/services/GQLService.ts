@@ -2,22 +2,36 @@ import {
   ApolloClient,
   InMemoryCache,
   createHttpLink,
+  split,
   NormalizedCacheObject,
 } from '@apollo/client';
-// import { WebSocketLink } from '@apollo/client/link/ws';
+import { WebSocketLink } from '@apollo/client/link/ws';
+import { getMainDefinition } from '@apollo/client/utilities';
 import { GET_ME } from 'gql/query';
 import { GET_APP_METADATA } from 'gql/local-query';
 
 const apiUri = process.env.API_URI;
 const websocketUri = process.env.WEBSOCKET_URI;
-const httpLink = createHttpLink({ uri: apiUri, credentials: 'include' });
 
-/*onst wsLink = new WebSocketLink({
+const httpLink = createHttpLink({ uri: apiUri, credentials: 'include' });
+const wsLink = new WebSocketLink({
   uri: websocketUri,
   options: {
     reconnect: true,
   },
-}); */
+});
+
+const link = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
+  wsLink,
+  httpLink,
+);
 
 interface InitialStateTypes {
   loading: boolean;
@@ -34,7 +48,7 @@ class GQLService {
       uri: apiUri,
       cache: this.cache,
       resolvers: {},
-      link: httpLink,
+      link,
       connectToDevTools: true,
     });
   }
