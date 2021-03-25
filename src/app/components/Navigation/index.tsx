@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Nav, Button } from 'grommet';
-import { useQuery, useSubscription } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import { GET_ME } from 'gql/query';
 import { IGetMeData } from 'gql/models';
